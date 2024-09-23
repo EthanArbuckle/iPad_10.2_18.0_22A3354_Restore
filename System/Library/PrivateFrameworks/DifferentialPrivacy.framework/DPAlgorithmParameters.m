@@ -1,0 +1,27 @@
+@implementation DPAlgorithmParameters
+
+void __45___DPAlgorithmParameters_parametersFromFile___block_invoke(uint64_t a1)
+{
+  void *v2;
+  uint64_t v3;
+  void *v4;
+  id v5;
+
+  objc_msgSend(MEMORY[0x1E0CB34D0], "bundleForClass:", objc_opt_class());
+  v2 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(v2, "pathForResource:ofType:", CFSTR("override.algorithmparameters"), CFSTR("plist"));
+  v5 = (id)objc_claimAutoreleasedReturnValue();
+
+  +[_DPPListHelper loadPropertyListFromPath:overridePath:usingBlock:](_DPPListHelper, "loadPropertyListFromPath:overridePath:usingBlock:", *(_QWORD *)(a1 + 32), v5, &__block_literal_global_8);
+  v3 = objc_claimAutoreleasedReturnValue();
+  v4 = (void *)allParameters;
+  allParameters = v3;
+
+}
+
+id __45___DPAlgorithmParameters_parametersFromFile___block_invoke_2()
+{
+  return +[_DPAlgorithmParameters algorithmParametersFromDictionary:](_DPAlgorithmParameters, "algorithmParametersFromDictionary:");
+}
+
+@end

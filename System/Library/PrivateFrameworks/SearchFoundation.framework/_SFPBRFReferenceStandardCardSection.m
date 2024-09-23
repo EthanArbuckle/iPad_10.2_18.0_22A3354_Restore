@@ -1,0 +1,266 @@
+@implementation _SFPBRFReferenceStandardCardSection
+
+- (_SFPBRFReferenceStandardCardSection)initWithFacade:(id)a3
+{
+  id v4;
+  _SFPBRFReferenceStandardCardSection *v5;
+  void *v6;
+  _SFPBRFTextProperty *v7;
+  void *v8;
+  _SFPBRFTextProperty *v9;
+  _SFPBRFReferenceStandardCardSection *v10;
+
+  v4 = a3;
+  v5 = -[_SFPBRFReferenceStandardCardSection init](self, "init");
+  if (v5)
+  {
+    objc_msgSend(v4, "text");
+    v6 = (void *)objc_claimAutoreleasedReturnValue();
+
+    if (v6)
+    {
+      v7 = [_SFPBRFTextProperty alloc];
+      objc_msgSend(v4, "text");
+      v8 = (void *)objc_claimAutoreleasedReturnValue();
+      v9 = -[_SFPBRFTextProperty initWithFacade:](v7, "initWithFacade:", v8);
+      -[_SFPBRFReferenceStandardCardSection setText_1:](v5, "setText_1:", v9);
+
+    }
+    if (objc_msgSend(v4, "hasAddTint"))
+      -[_SFPBRFReferenceStandardCardSection setAddTint:](v5, "setAddTint:", objc_msgSend(v4, "addTint"));
+    v10 = v5;
+  }
+
+  return v5;
+}
+
+- (void)setText_1:(id)a3
+{
+  objc_storeStrong((id *)&self->_text_1, a3);
+}
+
+- (void)setAddTint:(BOOL)a3
+{
+  self->_addTint = a3;
+}
+
+- (BOOL)readFrom:(id)a3
+{
+  return _SFPBRFReferenceStandardCardSectionReadFrom(self, (uint64_t)a3);
+}
+
+- (void)writeTo:(id)a3
+{
+  void *v4;
+  id v5;
+
+  v5 = a3;
+  -[_SFPBRFReferenceStandardCardSection text](self, "text");
+  v4 = (void *)objc_claimAutoreleasedReturnValue();
+  if (v4)
+    PBDataWriterWriteSubmessage();
+
+  if (-[_SFPBRFReferenceStandardCardSection addTint](self, "addTint"))
+    PBDataWriterWriteBOOLField();
+
+}
+
+- (BOOL)isEqual:(id)a3
+{
+  id v4;
+  void *v5;
+  void *v6;
+  void *v7;
+  uint64_t v8;
+  void *v9;
+  void *v10;
+  void *v11;
+  int v12;
+  BOOL v13;
+  int addTint;
+
+  v4 = a3;
+  if (objc_msgSend(v4, "isMemberOfClass:", objc_opt_class()))
+  {
+    -[_SFPBRFReferenceStandardCardSection text](self, "text");
+    v5 = (void *)objc_claimAutoreleasedReturnValue();
+    objc_msgSend(v4, "text");
+    v6 = (void *)objc_claimAutoreleasedReturnValue();
+    v7 = v6;
+    if ((v5 == 0) != (v6 != 0))
+    {
+      -[_SFPBRFReferenceStandardCardSection text](self, "text");
+      v8 = objc_claimAutoreleasedReturnValue();
+      if (!v8)
+      {
+
+LABEL_10:
+        addTint = self->_addTint;
+        v13 = addTint == objc_msgSend(v4, "addTint");
+        goto LABEL_8;
+      }
+      v9 = (void *)v8;
+      -[_SFPBRFReferenceStandardCardSection text](self, "text");
+      v10 = (void *)objc_claimAutoreleasedReturnValue();
+      objc_msgSend(v4, "text");
+      v11 = (void *)objc_claimAutoreleasedReturnValue();
+      v12 = objc_msgSend(v10, "isEqual:", v11);
+
+      if (v12)
+        goto LABEL_10;
+    }
+    else
+    {
+
+    }
+  }
+  v13 = 0;
+LABEL_8:
+
+  return v13;
+}
+
+- (unint64_t)hash
+{
+  unint64_t v3;
+  uint64_t v4;
+
+  v3 = -[_SFPBRFTextProperty hash](self->_text_1, "hash");
+  v4 = 2654435761;
+  if (!self->_addTint)
+    v4 = 0;
+  return v4 ^ v3;
+}
+
+- (id)dictionaryRepresentation
+{
+  void *v3;
+  void *v4;
+  void *v5;
+  void *v6;
+  void *v7;
+
+  objc_msgSend(MEMORY[0x1E0C99E08], "dictionary");
+  v3 = (void *)objc_claimAutoreleasedReturnValue();
+  if (self->_addTint)
+  {
+    objc_msgSend(MEMORY[0x1E0CB37E8], "numberWithBool:", -[_SFPBRFReferenceStandardCardSection addTint](self, "addTint"));
+    v4 = (void *)objc_claimAutoreleasedReturnValue();
+    objc_msgSend(v3, "setObject:forKeyedSubscript:", v4, CFSTR("addTint"));
+
+  }
+  if (self->_text_1)
+  {
+    -[_SFPBRFReferenceStandardCardSection text](self, "text");
+    v5 = (void *)objc_claimAutoreleasedReturnValue();
+    objc_msgSend(v5, "dictionaryRepresentation");
+    v6 = (void *)objc_claimAutoreleasedReturnValue();
+    if (v6)
+    {
+      objc_msgSend(v3, "setObject:forKeyedSubscript:", v6, CFSTR("text1"));
+    }
+    else
+    {
+      objc_msgSend(MEMORY[0x1E0C99E38], "null");
+      v7 = (void *)objc_claimAutoreleasedReturnValue();
+      objc_msgSend(v3, "setObject:forKeyedSubscript:", v7, CFSTR("text1"));
+
+    }
+  }
+  return v3;
+}
+
+- (NSData)jsonData
+{
+  void *v2;
+  void *v3;
+
+  -[_SFPBRFReferenceStandardCardSection dictionaryRepresentation](self, "dictionaryRepresentation");
+  v2 = (void *)objc_claimAutoreleasedReturnValue();
+  if (objc_msgSend(MEMORY[0x1E0CB36D8], "isValidJSONObject:", v2))
+  {
+    objc_msgSend(MEMORY[0x1E0CB36D8], "dataWithJSONObject:options:error:", v2, 0, 0);
+    v3 = (void *)objc_claimAutoreleasedReturnValue();
+  }
+  else
+  {
+    v3 = 0;
+  }
+
+  return (NSData *)v3;
+}
+
+- (_SFPBRFReferenceStandardCardSection)initWithJSON:(id)a3
+{
+  void *v4;
+  _SFPBRFReferenceStandardCardSection *v5;
+  uint64_t v7;
+
+  v7 = 0;
+  objc_msgSend(MEMORY[0x1E0CB36D8], "JSONObjectWithData:options:error:", a3, 0, &v7);
+  v4 = (void *)objc_claimAutoreleasedReturnValue();
+  if (v7 || (objc_opt_class(), (objc_opt_isKindOfClass() & 1) == 0))
+  {
+    v5 = 0;
+  }
+  else
+  {
+    self = -[_SFPBRFReferenceStandardCardSection initWithDictionary:](self, "initWithDictionary:", v4);
+    v5 = self;
+  }
+
+  return v5;
+}
+
+- (_SFPBRFReferenceStandardCardSection)initWithDictionary:(id)a3
+{
+  id v4;
+  _SFPBRFReferenceStandardCardSection *v5;
+  void *v6;
+  _SFPBRFTextProperty *v7;
+  void *v8;
+  _SFPBRFReferenceStandardCardSection *v9;
+  objc_super v11;
+
+  v4 = a3;
+  v11.receiver = self;
+  v11.super_class = (Class)_SFPBRFReferenceStandardCardSection;
+  v5 = -[_SFPBRFReferenceStandardCardSection init](&v11, sel_init);
+  if (v5)
+  {
+    objc_msgSend(v4, "objectForKeyedSubscript:", CFSTR("text1"));
+    v6 = (void *)objc_claimAutoreleasedReturnValue();
+    objc_opt_class();
+    if ((objc_opt_isKindOfClass() & 1) != 0)
+    {
+      v7 = -[_SFPBRFTextProperty initWithDictionary:]([_SFPBRFTextProperty alloc], "initWithDictionary:", v6);
+      -[_SFPBRFReferenceStandardCardSection setText_1:](v5, "setText_1:", v7);
+
+    }
+    objc_msgSend(v4, "objectForKeyedSubscript:", CFSTR("addTint"));
+    v8 = (void *)objc_claimAutoreleasedReturnValue();
+    objc_opt_class();
+    if ((objc_opt_isKindOfClass() & 1) != 0)
+      -[_SFPBRFReferenceStandardCardSection setAddTint:](v5, "setAddTint:", objc_msgSend(v8, "BOOLValue"));
+    v9 = v5;
+
+  }
+  return v5;
+}
+
+- (_SFPBRFTextProperty)text_1
+{
+  return self->_text_1;
+}
+
+- (BOOL)addTint
+{
+  return self->_addTint;
+}
+
+- (void).cxx_destruct
+{
+  objc_storeStrong((id *)&self->_text_1, 0);
+}
+
+@end

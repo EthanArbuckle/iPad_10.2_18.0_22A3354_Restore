@@ -1,0 +1,8 @@
+@implementation VSUserInfoForErrorRecoveryOptions
+
+uint64_t __VSUserInfoForErrorRecoveryOptions_block_invoke(uint64_t a1, void *a2)
+{
+  return objc_msgSend(a2, "isDestructive");
+}
+
+@end

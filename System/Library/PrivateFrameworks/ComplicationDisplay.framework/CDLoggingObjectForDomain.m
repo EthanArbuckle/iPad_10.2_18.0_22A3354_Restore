@@ -1,0 +1,25 @@
+@implementation CDLoggingObjectForDomain
+
+void ___CDLoggingObjectForDomain_block_invoke(uint64_t a1)
+{
+  void *v2;
+  void *v3;
+  os_log_t v4;
+  uint64_t v5;
+  void *v6;
+  id v7;
+
+  objc_msgSend(MEMORY[0x24BDD17C8], "stringWithCString:encoding:", *(_QWORD *)(a1 + 40), 4);
+  v2 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(v2, "substringFromIndex:", objc_msgSend(CFSTR("CDLoggingDomain"), "length"));
+  v3 = (void *)objc_claimAutoreleasedReturnValue();
+
+  v7 = objc_retainAutorelease(v3);
+  v4 = os_log_create("com.apple.NanoTimeKit", (const char *)objc_msgSend(v7, "cStringUsingEncoding:", 4));
+  v5 = *(_QWORD *)(a1 + 32);
+  v6 = (void *)_CDLoggingObjectForDomain___logObjects[v5];
+  _CDLoggingObjectForDomain___logObjects[v5] = v4;
+
+}
+
+@end

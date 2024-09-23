@@ -1,0 +1,532 @@
+@implementation SUUIReviewListTitleView
+
+- (SUUIReviewListTitleView)initWithFrame:(CGRect)a3
+{
+  SUUIReviewListTitleView *v3;
+  SUUIReviewListTitleView *v4;
+  objc_super v6;
+
+  v6.receiver = self;
+  v6.super_class = (Class)SUUIReviewListTitleView;
+  v3 = -[SUUIViewReuseView initWithFrame:](&v6, sel_initWithFrame_, a3.origin.x, a3.origin.y, a3.size.width, a3.size.height);
+  v4 = v3;
+  if (v3)
+    -[SUUIReviewListTitleView setContentMode:](v3, "setContentMode:", 3);
+  return v4;
+}
+
++ (BOOL)prefetchResourcesForViewElement:(id)a3 reason:(int64_t)a4 context:(id)a5
+{
+  return 0;
+}
+
++ (CGSize)preferredSizeForViewElement:(id)a3 context:(id)a4
+{
+  double v4;
+  double v5;
+  CGSize result;
+
+  v4 = *MEMORY[0x24BDBF148];
+  v5 = *(double *)(MEMORY[0x24BDBF148] + 8);
+  result.height = v5;
+  result.width = v4;
+  return result;
+}
+
++ (void)requestLayoutForViewElement:(id)a3 width:(double)a4 context:(id)a5
+{
+  id v8;
+  void *v9;
+  void *v10;
+  void *v11;
+  double v12;
+  void *v13;
+  void *v14;
+  void *v15;
+  id v16;
+
+  v16 = a3;
+  v8 = a5;
+  objc_msgSend(a1, "_dateLabelForViewElement:", v16);
+  v9 = (void *)objc_claimAutoreleasedReturnValue();
+  if (v9)
+  {
+    objc_msgSend(a1, "_attributedStringForDateLabel:context:", v9, v8);
+    v10 = (void *)objc_claimAutoreleasedReturnValue();
+    objc_msgSend(v8, "labelLayoutCache");
+    v11 = (void *)objc_claimAutoreleasedReturnValue();
+    objc_msgSend(v11, "requestLayoutForLabel:attributedString:width:", v9, v10, (uint64_t)a4);
+
+    if (objc_msgSend(v10, "length"))
+    {
+      objc_msgSend(v10, "boundingRectWithSize:options:context:", 1, 0, a4, 1.79769313e308);
+      a4 = a4 - v12;
+    }
+
+  }
+  objc_msgSend(a1, "_textLabelForViewElement:", v16);
+  v13 = (void *)objc_claimAutoreleasedReturnValue();
+  if (v13)
+  {
+    objc_msgSend(a1, "_attributedStringForTitleLabel:context:", v13, v8);
+    v14 = (void *)objc_claimAutoreleasedReturnValue();
+    objc_msgSend(v8, "labelLayoutCache");
+    v15 = (void *)objc_claimAutoreleasedReturnValue();
+    objc_msgSend(v15, "requestLayoutForLabel:attributedString:width:", v13, v14, (uint64_t)a4);
+
+  }
+}
+
++ (CGSize)sizeThatFitsWidth:(double)a3 viewElement:(id)a4 context:(id)a5
+{
+  id v7;
+  void *v8;
+  double v9;
+  double v10;
+  double v11;
+  void *v12;
+  double v13;
+  double v14;
+  CGSize result;
+
+  v7 = a5;
+  objc_msgSend(a4, "firstChildForElementType:", 138);
+  v8 = (void *)objc_claimAutoreleasedReturnValue();
+  v9 = *(double *)(MEMORY[0x24BDBF148] + 8);
+  objc_msgSend(v7, "sizeForViewElement:width:", v8, a3);
+  v11 = v9 + v10;
+  objc_msgSend(v7, "textPropertiesForViewElement:width:", v8, a3);
+  v12 = (void *)objc_claimAutoreleasedReturnValue();
+
+  objc_msgSend(v12, "baselineOffsetFromBottom");
+  v13 = a3;
+  v14 = v11;
+  result.height = v14;
+  result.width = v13;
+  return result;
+}
+
+- (void)reloadWithViewElement:(id)a3 width:(double)a4 context:(id)a5
+{
+  id v8;
+  id v9;
+  id v10;
+  id v11;
+  _QWORD v12[5];
+  id v13;
+  id v14;
+  double v15;
+
+  v8 = a3;
+  v9 = a5;
+  v12[0] = MEMORY[0x24BDAC760];
+  v12[1] = 3221225472;
+  v12[2] = __63__SUUIReviewListTitleView_reloadWithViewElement_width_context___block_invoke;
+  v12[3] = &unk_2511F4AC8;
+  v15 = a4;
+  v12[4] = self;
+  v13 = v8;
+  v14 = v9;
+  v10 = v9;
+  v11 = v8;
+  -[SUUIViewReuseView modifyUsingBlock:](self, "modifyUsingBlock:", v12);
+
+}
+
+void __63__SUUIReviewListTitleView_reloadWithViewElement_width_context___block_invoke(uint64_t a1, void *a2)
+{
+  double v3;
+  void *v4;
+  void *v5;
+  void *v6;
+  void *v7;
+  void *v8;
+  double v9;
+  double v10;
+  void *v11;
+  void *v12;
+  void *v13;
+  void *v14;
+  id v15;
+
+  v15 = a2;
+  v3 = *(double *)(a1 + 56);
+  objc_msgSend((id)objc_opt_class(), "_dateLabelForViewElement:", *(_QWORD *)(a1 + 40));
+  v4 = (void *)objc_claimAutoreleasedReturnValue();
+  if (v4)
+  {
+    objc_msgSend(v15, "addLabelViewWithElement:width:context:", v4, *(_QWORD *)(a1 + 48), *(double *)(a1 + 56));
+    v5 = (void *)objc_claimAutoreleasedReturnValue();
+    objc_msgSend(*(id *)(a1 + 32), "setDateView:", v5);
+
+    objc_msgSend(*(id *)(a1 + 48), "textPropertiesForViewElement:width:", v4, *(double *)(a1 + 56));
+    v6 = (void *)objc_claimAutoreleasedReturnValue();
+    objc_msgSend(*(id *)(a1 + 32), "dateView");
+    v7 = (void *)objc_claimAutoreleasedReturnValue();
+    objc_msgSend(v15, "setTextProperties:forView:", v6, v7);
+
+    objc_msgSend(*(id *)(a1 + 32), "dateView");
+    v8 = (void *)objc_claimAutoreleasedReturnValue();
+    objc_msgSend(v8, "sizeThatFits:", *(double *)(a1 + 56), 1.79769313e308);
+    v10 = v9;
+
+    v3 = v3 - v10;
+  }
+  else
+  {
+    objc_msgSend(*(id *)(a1 + 32), "setDateView:", 0);
+  }
+  objc_msgSend((id)objc_opt_class(), "_textLabelForViewElement:", *(_QWORD *)(a1 + 40));
+  v11 = (void *)objc_claimAutoreleasedReturnValue();
+  if (v11)
+  {
+    objc_msgSend(v15, "addLabelViewWithElement:width:context:", v11, *(_QWORD *)(a1 + 48), v3);
+    v12 = (void *)objc_claimAutoreleasedReturnValue();
+    objc_msgSend(*(id *)(a1 + 32), "setTitleView:", v12);
+
+    objc_msgSend(*(id *)(a1 + 48), "textPropertiesForViewElement:width:", v11, v3);
+    v13 = (void *)objc_claimAutoreleasedReturnValue();
+    objc_msgSend(*(id *)(a1 + 32), "titleView");
+    v14 = (void *)objc_claimAutoreleasedReturnValue();
+    objc_msgSend(v15, "setTextProperties:forView:", v13, v14);
+
+  }
+  else
+  {
+    objc_msgSend(*(id *)(a1 + 32), "setTitleView:", 0);
+  }
+
+}
+
+- (void)setContentInset:(UIEdgeInsets)a3
+{
+  if (self->_contentInset.left != a3.left
+    || self->_contentInset.top != a3.top
+    || self->_contentInset.right != a3.right
+    || self->_contentInset.bottom != a3.bottom)
+  {
+    self->_contentInset = a3;
+    -[SUUIReviewListTitleView setNeedsDisplay](self, "setNeedsDisplay");
+  }
+}
+
+- (BOOL)setImage:(id)a3 forArtworkRequest:(id)a4 context:(id)a5
+{
+  return 0;
+}
+
+- (BOOL)updateWithItemState:(id)a3 context:(id)a4 animated:(BOOL)a5
+{
+  return 0;
+}
+
+- (id)viewForElementIdentifier:(id)a3
+{
+  return 0;
+}
+
+- (void)layoutSubviews
+{
+  double v3;
+  CGFloat v4;
+  double v5;
+  CGFloat v6;
+  double v7;
+  double v8;
+  double v9;
+  double v10;
+  double v11;
+  double v12;
+  double v13;
+  double v14;
+  void *v15;
+  void *v16;
+  void *v17;
+  double v18;
+  CGFloat v19;
+  double v20;
+  CGFloat v21;
+  void *v22;
+  double v23;
+  double v24;
+  void *v25;
+  double v26;
+  double v27;
+  double v28;
+  double v29;
+  double v30;
+  double Width;
+  double v32;
+  double v33;
+  double v34;
+  void *v35;
+  double v36;
+  double v37;
+  uint64_t v38;
+  uint64_t v39;
+  double v40;
+  double v41;
+  double v42;
+  uint64_t v43;
+  CGFloat rect;
+  double v45;
+  double v46;
+  objc_super v47;
+  CGRect v48;
+  CGRect v49;
+  CGRect v50;
+  CGRect v51;
+  CGRect v52;
+  CGRect v53;
+  CGRect v54;
+
+  v47.receiver = self;
+  v47.super_class = (Class)SUUIReviewListTitleView;
+  -[SUUIReviewListTitleView layoutSubviews](&v47, sel_layoutSubviews);
+  -[SUUIReviewListTitleView bounds](self, "bounds");
+  v4 = v3;
+  v6 = v5;
+  v8 = v7;
+  rect = v9;
+  -[SUUIReviewListTitleView contentInset](self, "contentInset");
+  v11 = v10;
+  v45 = v12;
+  v14 = v13;
+  -[SUUIReviewListTitleView titleView](self, "titleView");
+  v15 = (void *)objc_claimAutoreleasedReturnValue();
+  -[SUUIReviewListTitleView dateView](self, "dateView");
+  v16 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(v16, "layout");
+  v17 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(v17, "boundingSize");
+  v19 = v18;
+  v21 = v20;
+
+  objc_msgSend(v15, "layout");
+  v22 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(v22, "baselineOffset");
+  v24 = v23;
+  objc_msgSend(v16, "layout");
+  v25 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(v25, "baselineOffset");
+  v27 = v24 - v26;
+
+  v46 = v11;
+  v28 = v11 + v27;
+  v29 = v14;
+  v30 = round(v28);
+  v48.origin.x = v4;
+  v48.origin.y = v6;
+  v48.size.width = v8;
+  v48.size.height = rect;
+  Width = CGRectGetWidth(v48);
+  v49.origin.x = 0.0;
+  v49.origin.y = v30;
+  v49.size.width = v19;
+  v49.size.height = v21;
+  v32 = Width - CGRectGetWidth(v49) - v29;
+  v50.origin.x = v32;
+  v50.origin.y = v30;
+  v50.size.width = v19;
+  v50.size.height = v21;
+  v51 = CGRectIntegral(v50);
+  objc_msgSend(v16, "setFrame:", v51.origin.x, v51.origin.y, v51.size.width, v51.size.height);
+  v52.origin.x = v32;
+  v52.origin.y = v30;
+  v52.size.width = v19;
+  v52.size.height = v21;
+  if (CGRectGetWidth(v52) <= 2.22044605e-16)
+  {
+    v33 = v45;
+    v34 = v8 - v45 - v29;
+  }
+  else
+  {
+    v53.origin.x = v32;
+    v53.origin.y = v30;
+    v53.size.width = v19;
+    v53.size.height = v21;
+    v33 = v45;
+    v34 = CGRectGetMinX(v53) - v45 + -10.0;
+  }
+  objc_msgSend(v15, "layout");
+  v35 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(v35, "boundingSize");
+  v37 = v36;
+  v39 = v38;
+
+  if (v37 >= v34)
+    v40 = v34;
+  else
+    v40 = v37;
+  v41 = v33;
+  v42 = v46;
+  v43 = v39;
+  v54 = CGRectIntegral(*(CGRect *)(&v40 - 2));
+  objc_msgSend(v15, "setFrame:", v54.origin.x, v54.origin.y, v54.size.width, v54.size.height);
+
+}
+
+- (CGSize)sizeThatFits:(CGSize)a3
+{
+  double width;
+  double v5;
+  double v6;
+  void *v7;
+  double v8;
+  double v9;
+  double v10;
+  double v11;
+  CGSize result;
+
+  width = a3.width;
+  -[SUUIReviewListTitleView contentInset](self, "contentInset", a3.width, a3.height);
+  v6 = v5;
+  -[SUUIReviewListTitleView titleView](self, "titleView");
+  v7 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(v7, "sizeThatFits:", width, 1.79769313e308);
+  v9 = v8;
+
+  v10 = v6 + v9;
+  v11 = width;
+  result.height = v10;
+  result.width = v11;
+  return result;
+}
+
++ (id)_dateLabelForViewElement:(id)a3
+{
+  return (id)objc_msgSend(a3, "firstChildForElementName:", CFSTR("subtitle"));
+}
+
++ (id)_textLabelForViewElement:(id)a3
+{
+  return (id)objc_msgSend(a3, "firstChildForElementName:", CFSTR("text"));
+}
+
++ (id)_attributedStringForTitleLabel:(id)a3 context:(id)a4
+{
+  id v5;
+  id v6;
+  void *v7;
+  void *v8;
+  void *v9;
+  void *v10;
+  void *v11;
+  void *v12;
+
+  v5 = a3;
+  v6 = a4;
+  objc_msgSend(v5, "style");
+  v7 = (void *)objc_claimAutoreleasedReturnValue();
+  SUUIViewElementFontWithStyle(v7);
+  v8 = (void *)objc_claimAutoreleasedReturnValue();
+  if (!v8)
+  {
+    SUUIFontPreferredFontForTextStyle(1);
+    v8 = (void *)objc_claimAutoreleasedReturnValue();
+  }
+  objc_msgSend(v6, "tintColor");
+  v9 = (void *)objc_claimAutoreleasedReturnValue();
+  SUUIViewElementPlainColorWithStyle(v7, v9);
+  v10 = (void *)objc_claimAutoreleasedReturnValue();
+
+  if (!v10)
+  {
+    objc_msgSend(MEMORY[0x24BEBD4B8], "blackColor");
+    v10 = (void *)objc_claimAutoreleasedReturnValue();
+  }
+  objc_msgSend(v5, "text");
+  v11 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(v11, "attributedStringWithDefaultFont:foregroundColor:style:", v8, v10, v7);
+  v12 = (void *)objc_claimAutoreleasedReturnValue();
+
+  return v12;
+}
+
++ (id)_attributedStringForDateLabel:(id)a3 context:(id)a4
+{
+  id v5;
+  id v6;
+  void *v7;
+  void *v8;
+  void *v9;
+  void *v10;
+  void *v11;
+  void *v12;
+
+  v5 = a3;
+  v6 = a4;
+  objc_msgSend(v5, "style");
+  v7 = (void *)objc_claimAutoreleasedReturnValue();
+  SUUIViewElementFontWithStyle(v7);
+  v8 = (void *)objc_claimAutoreleasedReturnValue();
+  if (!v8)
+  {
+    SUUIFontPreferredFontForTextStyle(21);
+    v8 = (void *)objc_claimAutoreleasedReturnValue();
+  }
+  objc_msgSend(v6, "tintColor");
+  v9 = (void *)objc_claimAutoreleasedReturnValue();
+  SUUIViewElementPlainColorWithStyle(v7, v9);
+  v10 = (void *)objc_claimAutoreleasedReturnValue();
+
+  if (!v10)
+  {
+    objc_msgSend(MEMORY[0x24BEBD4B8], "colorWithWhite:alpha:", 0.0, 0.3);
+    v10 = (void *)objc_claimAutoreleasedReturnValue();
+  }
+  objc_msgSend(v5, "text");
+  v11 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(v11, "attributedStringWithDefaultFont:foregroundColor:style:", v8, v10, v7);
+  v12 = (void *)objc_claimAutoreleasedReturnValue();
+
+  return v12;
+}
+
+- (UIEdgeInsets)contentInset
+{
+  double top;
+  double left;
+  double bottom;
+  double right;
+  UIEdgeInsets result;
+
+  top = self->_contentInset.top;
+  left = self->_contentInset.left;
+  bottom = self->_contentInset.bottom;
+  right = self->_contentInset.right;
+  result.right = right;
+  result.bottom = bottom;
+  result.left = left;
+  result.top = top;
+  return result;
+}
+
+- (SUUIAttributedStringView)titleView
+{
+  return self->_titleView;
+}
+
+- (void)setTitleView:(id)a3
+{
+  objc_storeStrong((id *)&self->_titleView, a3);
+}
+
+- (SUUIAttributedStringView)dateView
+{
+  return self->_dateView;
+}
+
+- (void)setDateView:(id)a3
+{
+  objc_storeStrong((id *)&self->_dateView, a3);
+}
+
+- (void).cxx_destruct
+{
+  objc_storeStrong((id *)&self->_dateView, 0);
+  objc_storeStrong((id *)&self->_titleView, 0);
+}
+
+@end

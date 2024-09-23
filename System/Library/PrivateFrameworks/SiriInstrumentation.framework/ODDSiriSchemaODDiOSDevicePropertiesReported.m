@@ -1,0 +1,701 @@
+@implementation ODDSiriSchemaODDiOSDevicePropertiesReported
+
+- (id)suppressMessageUnderConditions
+{
+  SISensitiveConditionsSet *v2;
+
+  v2 = objc_alloc_init(SISensitiveConditionsSet);
+  -[SISensitiveConditionsSet addCondition:](v2, "addCondition:", 1);
+  return v2;
+}
+
+- (id)applySensitiveConditionsPolicy:(id)a3
+{
+  id v4;
+  void *v5;
+  void *v6;
+  void *v7;
+  int v8;
+  void *v9;
+  void *v10;
+  int v11;
+  void *v12;
+  void *v13;
+  int v14;
+  void *v15;
+  void *v16;
+  int v17;
+  void *v18;
+  void *v19;
+  int v20;
+  objc_super v22;
+
+  v4 = a3;
+  v22.receiver = self;
+  v22.super_class = (Class)ODDSiriSchemaODDiOSDevicePropertiesReported;
+  -[SISchemaInstrumentationMessage applySensitiveConditionsPolicy:](&v22, sel_applySensitiveConditionsPolicy_, v4);
+  v5 = (void *)objc_claimAutoreleasedReturnValue();
+  -[ODDSiriSchemaODDiOSDevicePropertiesReported general](self, "general");
+  v6 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(v6, "applySensitiveConditionsPolicy:", v4);
+  v7 = (void *)objc_claimAutoreleasedReturnValue();
+  v8 = objc_msgSend(v7, "suppressMessage");
+
+  if (v8)
+    -[ODDSiriSchemaODDiOSDevicePropertiesReported deleteGeneral](self, "deleteGeneral");
+  -[ODDSiriSchemaODDiOSDevicePropertiesReported assistant](self, "assistant");
+  v9 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(v9, "applySensitiveConditionsPolicy:", v4);
+  v10 = (void *)objc_claimAutoreleasedReturnValue();
+  v11 = objc_msgSend(v10, "suppressMessage");
+
+  if (v11)
+    -[ODDSiriSchemaODDiOSDevicePropertiesReported deleteAssistant](self, "deleteAssistant");
+  -[ODDSiriSchemaODDiOSDevicePropertiesReported dictation](self, "dictation");
+  v12 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(v12, "applySensitiveConditionsPolicy:", v4);
+  v13 = (void *)objc_claimAutoreleasedReturnValue();
+  v14 = objc_msgSend(v13, "suppressMessage");
+
+  if (v14)
+    -[ODDSiriSchemaODDiOSDevicePropertiesReported deleteDictation](self, "deleteDictation");
+  -[ODDSiriSchemaODDiOSDevicePropertiesReported iOSAssistant](self, "iOSAssistant");
+  v15 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(v15, "applySensitiveConditionsPolicy:", v4);
+  v16 = (void *)objc_claimAutoreleasedReturnValue();
+  v17 = objc_msgSend(v16, "suppressMessage");
+
+  if (v17)
+    -[ODDSiriSchemaODDiOSDevicePropertiesReported deleteIOSAssistant](self, "deleteIOSAssistant");
+  -[ODDSiriSchemaODDiOSDevicePropertiesReported iOSGeneral](self, "iOSGeneral");
+  v18 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(v18, "applySensitiveConditionsPolicy:", v4);
+  v19 = (void *)objc_claimAutoreleasedReturnValue();
+  v20 = objc_msgSend(v19, "suppressMessage");
+
+  if (v20)
+    -[ODDSiriSchemaODDiOSDevicePropertiesReported deleteIOSGeneral](self, "deleteIOSGeneral");
+
+  return v5;
+}
+
+- (BOOL)hasGeneral
+{
+  return self->_general != 0;
+}
+
+- (void)deleteGeneral
+{
+  -[ODDSiriSchemaODDiOSDevicePropertiesReported setGeneral:](self, "setGeneral:", 0);
+}
+
+- (BOOL)hasAssistant
+{
+  return self->_assistant != 0;
+}
+
+- (void)deleteAssistant
+{
+  -[ODDSiriSchemaODDiOSDevicePropertiesReported setAssistant:](self, "setAssistant:", 0);
+}
+
+- (BOOL)hasDictation
+{
+  return self->_dictation != 0;
+}
+
+- (void)deleteDictation
+{
+  -[ODDSiriSchemaODDiOSDevicePropertiesReported setDictation:](self, "setDictation:", 0);
+}
+
+- (BOOL)hasIOSAssistant
+{
+  return self->_iOSAssistant != 0;
+}
+
+- (void)deleteIOSAssistant
+{
+  -[ODDSiriSchemaODDiOSDevicePropertiesReported setIOSAssistant:](self, "setIOSAssistant:", 0);
+}
+
+- (BOOL)hasIOSGeneral
+{
+  return self->_iOSGeneral != 0;
+}
+
+- (void)deleteIOSGeneral
+{
+  -[ODDSiriSchemaODDiOSDevicePropertiesReported setIOSGeneral:](self, "setIOSGeneral:", 0);
+}
+
+- (BOOL)readFrom:(id)a3
+{
+  return ODDSiriSchemaODDiOSDevicePropertiesReportedReadFrom(self, (uint64_t)a3);
+}
+
+- (void)writeTo:(id)a3
+{
+  void *v4;
+  void *v5;
+  void *v6;
+  void *v7;
+  void *v8;
+  void *v9;
+  void *v10;
+  void *v11;
+  void *v12;
+  void *v13;
+  id v14;
+
+  v14 = a3;
+  -[ODDSiriSchemaODDiOSDevicePropertiesReported general](self, "general");
+  v4 = (void *)objc_claimAutoreleasedReturnValue();
+
+  if (v4)
+  {
+    -[ODDSiriSchemaODDiOSDevicePropertiesReported general](self, "general");
+    v5 = (void *)objc_claimAutoreleasedReturnValue();
+    PBDataWriterWriteSubmessage();
+
+  }
+  -[ODDSiriSchemaODDiOSDevicePropertiesReported assistant](self, "assistant");
+  v6 = (void *)objc_claimAutoreleasedReturnValue();
+
+  if (v6)
+  {
+    -[ODDSiriSchemaODDiOSDevicePropertiesReported assistant](self, "assistant");
+    v7 = (void *)objc_claimAutoreleasedReturnValue();
+    PBDataWriterWriteSubmessage();
+
+  }
+  -[ODDSiriSchemaODDiOSDevicePropertiesReported dictation](self, "dictation");
+  v8 = (void *)objc_claimAutoreleasedReturnValue();
+
+  if (v8)
+  {
+    -[ODDSiriSchemaODDiOSDevicePropertiesReported dictation](self, "dictation");
+    v9 = (void *)objc_claimAutoreleasedReturnValue();
+    PBDataWriterWriteSubmessage();
+
+  }
+  -[ODDSiriSchemaODDiOSDevicePropertiesReported iOSAssistant](self, "iOSAssistant");
+  v10 = (void *)objc_claimAutoreleasedReturnValue();
+
+  if (v10)
+  {
+    -[ODDSiriSchemaODDiOSDevicePropertiesReported iOSAssistant](self, "iOSAssistant");
+    v11 = (void *)objc_claimAutoreleasedReturnValue();
+    PBDataWriterWriteSubmessage();
+
+  }
+  -[ODDSiriSchemaODDiOSDevicePropertiesReported iOSGeneral](self, "iOSGeneral");
+  v12 = (void *)objc_claimAutoreleasedReturnValue();
+
+  if (v12)
+  {
+    -[ODDSiriSchemaODDiOSDevicePropertiesReported iOSGeneral](self, "iOSGeneral");
+    v13 = (void *)objc_claimAutoreleasedReturnValue();
+    PBDataWriterWriteSubmessage();
+
+  }
+}
+
+- (BOOL)isEqual:(id)a3
+{
+  id v4;
+  void *v5;
+  void *v6;
+  uint64_t v7;
+  void *v8;
+  void *v9;
+  void *v10;
+  int v11;
+  uint64_t v12;
+  void *v13;
+  void *v14;
+  void *v15;
+  int v16;
+  uint64_t v17;
+  void *v18;
+  void *v19;
+  void *v20;
+  int v21;
+  uint64_t v22;
+  void *v23;
+  void *v24;
+  void *v25;
+  int v26;
+  uint64_t v27;
+  void *v28;
+  void *v29;
+  void *v30;
+  char v31;
+  BOOL v32;
+
+  v4 = a3;
+  if (!objc_msgSend(v4, "isMemberOfClass:", objc_opt_class()))
+    goto LABEL_27;
+  -[ODDSiriSchemaODDiOSDevicePropertiesReported general](self, "general");
+  v5 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(v4, "general");
+  v6 = (void *)objc_claimAutoreleasedReturnValue();
+  if ((v5 == 0) == (v6 != 0))
+    goto LABEL_26;
+  -[ODDSiriSchemaODDiOSDevicePropertiesReported general](self, "general");
+  v7 = objc_claimAutoreleasedReturnValue();
+  if (v7)
+  {
+    v8 = (void *)v7;
+    -[ODDSiriSchemaODDiOSDevicePropertiesReported general](self, "general");
+    v9 = (void *)objc_claimAutoreleasedReturnValue();
+    objc_msgSend(v4, "general");
+    v10 = (void *)objc_claimAutoreleasedReturnValue();
+    v11 = objc_msgSend(v9, "isEqual:", v10);
+
+    if (!v11)
+      goto LABEL_27;
+  }
+  else
+  {
+
+  }
+  -[ODDSiriSchemaODDiOSDevicePropertiesReported assistant](self, "assistant");
+  v5 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(v4, "assistant");
+  v6 = (void *)objc_claimAutoreleasedReturnValue();
+  if ((v5 == 0) == (v6 != 0))
+    goto LABEL_26;
+  -[ODDSiriSchemaODDiOSDevicePropertiesReported assistant](self, "assistant");
+  v12 = objc_claimAutoreleasedReturnValue();
+  if (v12)
+  {
+    v13 = (void *)v12;
+    -[ODDSiriSchemaODDiOSDevicePropertiesReported assistant](self, "assistant");
+    v14 = (void *)objc_claimAutoreleasedReturnValue();
+    objc_msgSend(v4, "assistant");
+    v15 = (void *)objc_claimAutoreleasedReturnValue();
+    v16 = objc_msgSend(v14, "isEqual:", v15);
+
+    if (!v16)
+      goto LABEL_27;
+  }
+  else
+  {
+
+  }
+  -[ODDSiriSchemaODDiOSDevicePropertiesReported dictation](self, "dictation");
+  v5 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(v4, "dictation");
+  v6 = (void *)objc_claimAutoreleasedReturnValue();
+  if ((v5 == 0) == (v6 != 0))
+    goto LABEL_26;
+  -[ODDSiriSchemaODDiOSDevicePropertiesReported dictation](self, "dictation");
+  v17 = objc_claimAutoreleasedReturnValue();
+  if (v17)
+  {
+    v18 = (void *)v17;
+    -[ODDSiriSchemaODDiOSDevicePropertiesReported dictation](self, "dictation");
+    v19 = (void *)objc_claimAutoreleasedReturnValue();
+    objc_msgSend(v4, "dictation");
+    v20 = (void *)objc_claimAutoreleasedReturnValue();
+    v21 = objc_msgSend(v19, "isEqual:", v20);
+
+    if (!v21)
+      goto LABEL_27;
+  }
+  else
+  {
+
+  }
+  -[ODDSiriSchemaODDiOSDevicePropertiesReported iOSAssistant](self, "iOSAssistant");
+  v5 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(v4, "iOSAssistant");
+  v6 = (void *)objc_claimAutoreleasedReturnValue();
+  if ((v5 == 0) == (v6 != 0))
+    goto LABEL_26;
+  -[ODDSiriSchemaODDiOSDevicePropertiesReported iOSAssistant](self, "iOSAssistant");
+  v22 = objc_claimAutoreleasedReturnValue();
+  if (v22)
+  {
+    v23 = (void *)v22;
+    -[ODDSiriSchemaODDiOSDevicePropertiesReported iOSAssistant](self, "iOSAssistant");
+    v24 = (void *)objc_claimAutoreleasedReturnValue();
+    objc_msgSend(v4, "iOSAssistant");
+    v25 = (void *)objc_claimAutoreleasedReturnValue();
+    v26 = objc_msgSend(v24, "isEqual:", v25);
+
+    if (!v26)
+      goto LABEL_27;
+  }
+  else
+  {
+
+  }
+  -[ODDSiriSchemaODDiOSDevicePropertiesReported iOSGeneral](self, "iOSGeneral");
+  v5 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(v4, "iOSGeneral");
+  v6 = (void *)objc_claimAutoreleasedReturnValue();
+  if ((v5 == 0) != (v6 != 0))
+  {
+    -[ODDSiriSchemaODDiOSDevicePropertiesReported iOSGeneral](self, "iOSGeneral");
+    v27 = objc_claimAutoreleasedReturnValue();
+    if (!v27)
+    {
+
+LABEL_30:
+      v32 = 1;
+      goto LABEL_28;
+    }
+    v28 = (void *)v27;
+    -[ODDSiriSchemaODDiOSDevicePropertiesReported iOSGeneral](self, "iOSGeneral");
+    v29 = (void *)objc_claimAutoreleasedReturnValue();
+    objc_msgSend(v4, "iOSGeneral");
+    v30 = (void *)objc_claimAutoreleasedReturnValue();
+    v31 = objc_msgSend(v29, "isEqual:", v30);
+
+    if ((v31 & 1) != 0)
+      goto LABEL_30;
+  }
+  else
+  {
+LABEL_26:
+
+  }
+LABEL_27:
+  v32 = 0;
+LABEL_28:
+
+  return v32;
+}
+
+- (unint64_t)hash
+{
+  unint64_t v3;
+  unint64_t v4;
+  unint64_t v5;
+  unint64_t v6;
+
+  v3 = -[ODDSiriSchemaODDGeneralProperties hash](self->_general, "hash");
+  v4 = -[ODDSiriSchemaODDAssistantProperties hash](self->_assistant, "hash") ^ v3;
+  v5 = -[ODDSiriSchemaODDDictationProperties hash](self->_dictation, "hash");
+  v6 = v4 ^ v5 ^ -[ODDSiriSchemaODDiOSAssistantProperties hash](self->_iOSAssistant, "hash");
+  return v6 ^ -[ODDSiriSchemaODDiOSGeneralProperties hash](self->_iOSGeneral, "hash");
+}
+
+- (id)dictionaryRepresentation
+{
+  void *v3;
+  void *v4;
+  void *v5;
+  void *v6;
+  void *v7;
+  void *v8;
+  void *v9;
+  void *v10;
+  void *v11;
+  void *v12;
+  void *v13;
+  void *v14;
+  void *v15;
+  void *v16;
+  void *v17;
+  void *v18;
+
+  objc_msgSend(MEMORY[0x1E0C99E08], "dictionary");
+  v3 = (void *)objc_claimAutoreleasedReturnValue();
+  if (self->_assistant)
+  {
+    -[ODDSiriSchemaODDiOSDevicePropertiesReported assistant](self, "assistant");
+    v4 = (void *)objc_claimAutoreleasedReturnValue();
+    objc_msgSend(v4, "dictionaryRepresentation");
+    v5 = (void *)objc_claimAutoreleasedReturnValue();
+    if (v5)
+    {
+      objc_msgSend(v3, "setObject:forKeyedSubscript:", v5, CFSTR("assistant"));
+    }
+    else
+    {
+      objc_msgSend(MEMORY[0x1E0C99E38], "null");
+      v6 = (void *)objc_claimAutoreleasedReturnValue();
+      objc_msgSend(v3, "setObject:forKeyedSubscript:", v6, CFSTR("assistant"));
+
+    }
+  }
+  if (self->_dictation)
+  {
+    -[ODDSiriSchemaODDiOSDevicePropertiesReported dictation](self, "dictation");
+    v7 = (void *)objc_claimAutoreleasedReturnValue();
+    objc_msgSend(v7, "dictionaryRepresentation");
+    v8 = (void *)objc_claimAutoreleasedReturnValue();
+    if (v8)
+    {
+      objc_msgSend(v3, "setObject:forKeyedSubscript:", v8, CFSTR("dictation"));
+    }
+    else
+    {
+      objc_msgSend(MEMORY[0x1E0C99E38], "null");
+      v9 = (void *)objc_claimAutoreleasedReturnValue();
+      objc_msgSend(v3, "setObject:forKeyedSubscript:", v9, CFSTR("dictation"));
+
+    }
+  }
+  if (self->_general)
+  {
+    -[ODDSiriSchemaODDiOSDevicePropertiesReported general](self, "general");
+    v10 = (void *)objc_claimAutoreleasedReturnValue();
+    objc_msgSend(v10, "dictionaryRepresentation");
+    v11 = (void *)objc_claimAutoreleasedReturnValue();
+    if (v11)
+    {
+      objc_msgSend(v3, "setObject:forKeyedSubscript:", v11, CFSTR("general"));
+    }
+    else
+    {
+      objc_msgSend(MEMORY[0x1E0C99E38], "null");
+      v12 = (void *)objc_claimAutoreleasedReturnValue();
+      objc_msgSend(v3, "setObject:forKeyedSubscript:", v12, CFSTR("general"));
+
+    }
+  }
+  if (self->_iOSAssistant)
+  {
+    -[ODDSiriSchemaODDiOSDevicePropertiesReported iOSAssistant](self, "iOSAssistant");
+    v13 = (void *)objc_claimAutoreleasedReturnValue();
+    objc_msgSend(v13, "dictionaryRepresentation");
+    v14 = (void *)objc_claimAutoreleasedReturnValue();
+    if (v14)
+    {
+      objc_msgSend(v3, "setObject:forKeyedSubscript:", v14, CFSTR("iOSAssistant"));
+    }
+    else
+    {
+      objc_msgSend(MEMORY[0x1E0C99E38], "null");
+      v15 = (void *)objc_claimAutoreleasedReturnValue();
+      objc_msgSend(v3, "setObject:forKeyedSubscript:", v15, CFSTR("iOSAssistant"));
+
+    }
+  }
+  if (self->_iOSGeneral)
+  {
+    -[ODDSiriSchemaODDiOSDevicePropertiesReported iOSGeneral](self, "iOSGeneral");
+    v16 = (void *)objc_claimAutoreleasedReturnValue();
+    objc_msgSend(v16, "dictionaryRepresentation");
+    v17 = (void *)objc_claimAutoreleasedReturnValue();
+    if (v17)
+    {
+      objc_msgSend(v3, "setObject:forKeyedSubscript:", v17, CFSTR("iOSGeneral"));
+    }
+    else
+    {
+      objc_msgSend(MEMORY[0x1E0C99E38], "null");
+      v18 = (void *)objc_claimAutoreleasedReturnValue();
+      objc_msgSend(v3, "setObject:forKeyedSubscript:", v18, CFSTR("iOSGeneral"));
+
+    }
+  }
+  -[SISchemaInstrumentationMessage willProduceDictionaryRepresentation:](self, "willProduceDictionaryRepresentation:", v3);
+  return v3;
+}
+
+- (NSData)jsonData
+{
+  void *v2;
+  void *v3;
+
+  -[ODDSiriSchemaODDiOSDevicePropertiesReported dictionaryRepresentation](self, "dictionaryRepresentation");
+  v2 = (void *)objc_claimAutoreleasedReturnValue();
+  if (objc_msgSend(MEMORY[0x1E0CB36D8], "isValidJSONObject:", v2))
+  {
+    objc_msgSend(MEMORY[0x1E0CB36D8], "dataWithJSONObject:options:error:", v2, 0, 0);
+    v3 = (void *)objc_claimAutoreleasedReturnValue();
+  }
+  else
+  {
+    v3 = 0;
+  }
+
+  return (NSData *)v3;
+}
+
+- (ODDSiriSchemaODDiOSDevicePropertiesReported)initWithJSON:(id)a3
+{
+  void *v4;
+  ODDSiriSchemaODDiOSDevicePropertiesReported *v5;
+  uint64_t v7;
+
+  v7 = 0;
+  objc_msgSend(MEMORY[0x1E0CB36D8], "JSONObjectWithData:options:error:", a3, 0, &v7);
+  v4 = (void *)objc_claimAutoreleasedReturnValue();
+  if (v7 || (objc_opt_class(), (objc_opt_isKindOfClass() & 1) == 0))
+  {
+    v5 = 0;
+  }
+  else
+  {
+    self = -[ODDSiriSchemaODDiOSDevicePropertiesReported initWithDictionary:](self, "initWithDictionary:", v4);
+    v5 = self;
+  }
+
+  return v5;
+}
+
+- (ODDSiriSchemaODDiOSDevicePropertiesReported)initWithDictionary:(id)a3
+{
+  id v4;
+  ODDSiriSchemaODDiOSDevicePropertiesReported *v5;
+  void *v6;
+  ODDSiriSchemaODDGeneralProperties *v7;
+  void *v8;
+  ODDSiriSchemaODDAssistantProperties *v9;
+  void *v10;
+  ODDSiriSchemaODDDictationProperties *v11;
+  void *v12;
+  ODDSiriSchemaODDiOSAssistantProperties *v13;
+  void *v14;
+  ODDSiriSchemaODDiOSGeneralProperties *v15;
+  ODDSiriSchemaODDiOSDevicePropertiesReported *v16;
+  objc_super v18;
+
+  v4 = a3;
+  v18.receiver = self;
+  v18.super_class = (Class)ODDSiriSchemaODDiOSDevicePropertiesReported;
+  v5 = -[ODDSiriSchemaODDiOSDevicePropertiesReported init](&v18, sel_init);
+  if (v5)
+  {
+    objc_msgSend(v4, "objectForKeyedSubscript:", CFSTR("general"));
+    v6 = (void *)objc_claimAutoreleasedReturnValue();
+    objc_opt_class();
+    if ((objc_opt_isKindOfClass() & 1) != 0)
+    {
+      v7 = -[ODDSiriSchemaODDGeneralProperties initWithDictionary:]([ODDSiriSchemaODDGeneralProperties alloc], "initWithDictionary:", v6);
+      -[ODDSiriSchemaODDiOSDevicePropertiesReported setGeneral:](v5, "setGeneral:", v7);
+
+    }
+    objc_msgSend(v4, "objectForKeyedSubscript:", CFSTR("assistant"));
+    v8 = (void *)objc_claimAutoreleasedReturnValue();
+    objc_opt_class();
+    if ((objc_opt_isKindOfClass() & 1) != 0)
+    {
+      v9 = -[ODDSiriSchemaODDAssistantProperties initWithDictionary:]([ODDSiriSchemaODDAssistantProperties alloc], "initWithDictionary:", v8);
+      -[ODDSiriSchemaODDiOSDevicePropertiesReported setAssistant:](v5, "setAssistant:", v9);
+
+    }
+    objc_msgSend(v4, "objectForKeyedSubscript:", CFSTR("dictation"));
+    v10 = (void *)objc_claimAutoreleasedReturnValue();
+    objc_opt_class();
+    if ((objc_opt_isKindOfClass() & 1) != 0)
+    {
+      v11 = -[ODDSiriSchemaODDDictationProperties initWithDictionary:]([ODDSiriSchemaODDDictationProperties alloc], "initWithDictionary:", v10);
+      -[ODDSiriSchemaODDiOSDevicePropertiesReported setDictation:](v5, "setDictation:", v11);
+
+    }
+    objc_msgSend(v4, "objectForKeyedSubscript:", CFSTR("iOSAssistant"));
+    v12 = (void *)objc_claimAutoreleasedReturnValue();
+    objc_opt_class();
+    if ((objc_opt_isKindOfClass() & 1) != 0)
+    {
+      v13 = -[ODDSiriSchemaODDiOSAssistantProperties initWithDictionary:]([ODDSiriSchemaODDiOSAssistantProperties alloc], "initWithDictionary:", v12);
+      -[ODDSiriSchemaODDiOSDevicePropertiesReported setIOSAssistant:](v5, "setIOSAssistant:", v13);
+
+    }
+    objc_msgSend(v4, "objectForKeyedSubscript:", CFSTR("iOSGeneral"));
+    v14 = (void *)objc_claimAutoreleasedReturnValue();
+    objc_opt_class();
+    if ((objc_opt_isKindOfClass() & 1) != 0)
+    {
+      v15 = -[ODDSiriSchemaODDiOSGeneralProperties initWithDictionary:]([ODDSiriSchemaODDiOSGeneralProperties alloc], "initWithDictionary:", v14);
+      -[ODDSiriSchemaODDiOSDevicePropertiesReported setIOSGeneral:](v5, "setIOSGeneral:", v15);
+
+    }
+    v16 = v5;
+
+  }
+  return v5;
+}
+
+- (ODDSiriSchemaODDGeneralProperties)general
+{
+  return self->_general;
+}
+
+- (void)setGeneral:(id)a3
+{
+  objc_storeStrong((id *)&self->_general, a3);
+}
+
+- (ODDSiriSchemaODDAssistantProperties)assistant
+{
+  return self->_assistant;
+}
+
+- (void)setAssistant:(id)a3
+{
+  objc_storeStrong((id *)&self->_assistant, a3);
+}
+
+- (ODDSiriSchemaODDDictationProperties)dictation
+{
+  return self->_dictation;
+}
+
+- (void)setDictation:(id)a3
+{
+  objc_storeStrong((id *)&self->_dictation, a3);
+}
+
+- (ODDSiriSchemaODDiOSAssistantProperties)iOSAssistant
+{
+  return self->_iOSAssistant;
+}
+
+- (void)setIOSAssistant:(id)a3
+{
+  objc_storeStrong((id *)&self->_iOSAssistant, a3);
+}
+
+- (ODDSiriSchemaODDiOSGeneralProperties)iOSGeneral
+{
+  return self->_iOSGeneral;
+}
+
+- (void)setIOSGeneral:(id)a3
+{
+  objc_storeStrong((id *)&self->_iOSGeneral, a3);
+}
+
+- (void)setHasGeneral:(BOOL)a3
+{
+  self->_hasGeneral = a3;
+}
+
+- (void)setHasAssistant:(BOOL)a3
+{
+  self->_hasAssistant = a3;
+}
+
+- (void)setHasDictation:(BOOL)a3
+{
+  self->_hasDictation = a3;
+}
+
+- (void)setHasIOSAssistant:(BOOL)a3
+{
+  self->_hasIOSAssistant = a3;
+}
+
+- (void)setHasIOSGeneral:(BOOL)a3
+{
+  self->_hasIOSGeneral = a3;
+}
+
+- (void).cxx_destruct
+{
+  objc_storeStrong((id *)&self->_iOSGeneral, 0);
+  objc_storeStrong((id *)&self->_iOSAssistant, 0);
+  objc_storeStrong((id *)&self->_dictation, 0);
+  objc_storeStrong((id *)&self->_assistant, 0);
+  objc_storeStrong((id *)&self->_general, 0);
+}
+
+@end

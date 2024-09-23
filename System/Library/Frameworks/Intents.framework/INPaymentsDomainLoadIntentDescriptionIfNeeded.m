@@ -1,0 +1,253 @@
+@implementation INPaymentsDomainLoadIntentDescriptionIfNeeded
+
+void ___INPaymentsDomainLoadIntentDescriptionIfNeeded_block_invoke()
+{
+  INIntentDescription *v0;
+  uint64_t v1;
+  uint64_t v2;
+  INIntentDescription *v3;
+  uint64_t v4;
+  uint64_t v5;
+  INIntentDescription *v6;
+  uint64_t v7;
+  uint64_t v8;
+  INIntentDescription *v9;
+  uint64_t v10;
+  uint64_t v11;
+  INIntentDescription *v12;
+  uint64_t v13;
+  uint64_t v14;
+  INIntentDescription *v15;
+  INIntentSlotDescription *v16;
+  INIntentSlotDescription *v17;
+  INIntentSlotDescription *v18;
+  INIntentSlotDescription *v19;
+  INIntentSlotDescription *v20;
+  void *v21;
+  void *v22;
+  INIntentDescription *v23;
+  void *v24;
+  uint64_t v25;
+  void *v26;
+  void *v27;
+  id v28;
+  uint64_t v29;
+  uint64_t v30;
+  uint64_t v31;
+  uint64_t i;
+  void *v33;
+  void *v34;
+  void *v35;
+  uint64_t v36;
+  void *v37;
+  uint64_t v38;
+  void *v39;
+  uint64_t v40;
+  uint64_t v41;
+  INIntentDescription *v42;
+  void *v43;
+  void *v44;
+  INIntentSlotDescription *v45;
+  INIntentSlotDescription *v46;
+  INIntentSlotDescription *v47;
+  INIntentDescription *v48;
+  void *v49;
+  void *v50;
+  INIntentSlotDescription *v51;
+  INIntentSlotDescription *v52;
+  INIntentSlotDescription *v53;
+  INIntentSlotDescription *v54;
+  INIntentSlotDescription *v55;
+  INIntentDescription *v56;
+  void *v57;
+  void *v58;
+  INIntentSlotDescription *v59;
+  INIntentSlotDescription *v60;
+  INIntentSlotDescription *v61;
+  INIntentSlotDescription *v62;
+  INIntentDescription *v63;
+  void *v64;
+  void *v65;
+  INIntentSlotDescription *v66;
+  INIntentSlotDescription *v67;
+  INIntentSlotDescription *v68;
+  INIntentDescription *v69;
+  void *v70;
+  void *v71;
+  INIntentSlotDescription *v72;
+  INIntentSlotDescription *v73;
+  INIntentSlotDescription *v74;
+  INIntentSlotDescription *v75;
+  INIntentSlotDescription *v76;
+  INIntentSlotDescription *v77;
+  INIntentSlotDescription *v78;
+  __int128 v79;
+  __int128 v80;
+  __int128 v81;
+  __int128 v82;
+  _BYTE v83[128];
+  _QWORD v84[5];
+  _QWORD v85[3];
+  _QWORD v86[5];
+  _QWORD v87[4];
+  _QWORD v88[3];
+  _QWORD v89[7];
+  _QWORD v90[8];
+
+  v90[6] = *MEMORY[0x1E0C80C00];
+  v0 = [INIntentDescription alloc];
+  v1 = objc_opt_class();
+  v2 = objc_opt_class();
+  v78 = -[INIntentSlotDescription initWithName:tag:facadePropertyName:dataPropertyName:isExtended:isPrivate:valueType:valueStyle:defaultValueSelectorStrings:provideOptionsSelectorStrings:resolutionResultClass:resolveSelectors:]([INIntentSlotDescription alloc], "initWithName:tag:facadePropertyName:dataPropertyName:isExtended:isPrivate:valueType:valueStyle:defaultValueSelectorStrings:provideOptionsSelectorStrings:resolutionResultClass:resolveSelectors:", CFSTR("billPayee"), 2, CFSTR("billPayee"), CFSTR("billPayee"), 0, 0, 59, 1, &unk_1E23F8178, &unk_1E23F8190, objc_opt_class(), sel_resolveBillPayeeForPayBill_withCompletion_, sel_resolveBillPayeeForPayBill_completion_, 0);
+  v89[0] = v78;
+  v77 = -[INIntentSlotDescription initWithName:tag:facadePropertyName:dataPropertyName:isExtended:isPrivate:valueType:valueStyle:defaultValueSelectorStrings:provideOptionsSelectorStrings:resolutionResultClass:resolveSelectors:]([INIntentSlotDescription alloc], "initWithName:tag:facadePropertyName:dataPropertyName:isExtended:isPrivate:valueType:valueStyle:defaultValueSelectorStrings:provideOptionsSelectorStrings:resolutionResultClass:resolveSelectors:", CFSTR("fromAccount"), 4, CFSTR("fromAccount"), CFSTR("fromAccount"), 0, 0, 61, 1, &unk_1E23F81A8, &unk_1E23F81C0, objc_opt_class(), sel_resolveFromAccountForPayBill_withCompletion_, sel_resolveFromAccountForPayBill_completion_, 0);
+  v89[1] = v77;
+  v76 = -[INIntentSlotDescription initWithName:tag:facadePropertyName:dataPropertyName:isExtended:isPrivate:valueType:valueStyle:defaultValueSelectorStrings:provideOptionsSelectorStrings:resolutionResultClass:resolveSelectors:]([INIntentSlotDescription alloc], "initWithName:tag:facadePropertyName:dataPropertyName:isExtended:isPrivate:valueType:valueStyle:defaultValueSelectorStrings:provideOptionsSelectorStrings:resolutionResultClass:resolveSelectors:", CFSTR("transactionAmount"), 5, CFSTR("transactionAmount"), CFSTR("transactionAmount"), 0, 0, 62, 1, &unk_1E23F81D8, &unk_1E23F81F0, objc_opt_class(), sel_resolveTransactionAmountForPayBill_withCompletion_, sel_resolveTransactionAmountForPayBill_completion_, 0);
+  v89[2] = v76;
+  v75 = -[INIntentSlotDescription initWithName:tag:facadePropertyName:dataPropertyName:isExtended:isPrivate:valueType:valueStyle:defaultValueSelectorStrings:provideOptionsSelectorStrings:resolutionResultClass:resolveSelectors:]([INIntentSlotDescription alloc], "initWithName:tag:facadePropertyName:dataPropertyName:isExtended:isPrivate:valueType:valueStyle:defaultValueSelectorStrings:provideOptionsSelectorStrings:resolutionResultClass:resolveSelectors:", CFSTR("transactionScheduledDate"), 6, CFSTR("transactionScheduledDate"), CFSTR("transactionScheduledDate"), 0, 0, 16, 1, &unk_1E23F8208, &unk_1E23F8220, objc_opt_class(), sel_resolveTransactionScheduledDateForPayBill_withCompletion_, sel_resolveTransactionScheduledDateForPayBill_completion_, 0);
+  v89[3] = v75;
+  v74 = -[INIntentSlotDescription initWithName:tag:facadePropertyName:dataPropertyName:isExtended:isPrivate:valueType:valueStyle:defaultValueSelectorStrings:provideOptionsSelectorStrings:resolutionResultClass:resolveSelectors:]([INIntentSlotDescription alloc], "initWithName:tag:facadePropertyName:dataPropertyName:isExtended:isPrivate:valueType:valueStyle:defaultValueSelectorStrings:provideOptionsSelectorStrings:resolutionResultClass:resolveSelectors:", CFSTR("transactionNote"), 7, CFSTR("transactionNote"), CFSTR("transactionNote"), 0, 0, 30, 1, &unk_1E23F8238, &unk_1E23F8250, objc_opt_class(), sel_resolveTransactionNoteForPayBill_withCompletion_, sel_resolveTransactionNoteForPayBill_completion_, 0);
+  v89[4] = v74;
+  v73 = -[INIntentSlotDescription initWithName:tag:facadePropertyName:dataPropertyName:isExtended:isPrivate:valueType:valueStyle:defaultValueSelectorStrings:provideOptionsSelectorStrings:resolutionResultClass:resolveSelectors:]([INIntentSlotDescription alloc], "initWithName:tag:facadePropertyName:dataPropertyName:isExtended:isPrivate:valueType:valueStyle:defaultValueSelectorStrings:provideOptionsSelectorStrings:resolutionResultClass:resolveSelectors:", CFSTR("billType"), 8, CFSTR("billType"), CFSTR("billType"), 0, 0, 57, 1, &unk_1E23F8268, &unk_1E23F8280, objc_opt_class(), sel_resolveBillTypeForPayBill_withCompletion_, sel_resolveBillTypeForPayBill_completion_, 0);
+  v89[5] = v73;
+  v72 = -[INIntentSlotDescription initWithName:tag:facadePropertyName:dataPropertyName:isExtended:isPrivate:valueType:valueStyle:defaultValueSelectorStrings:provideOptionsSelectorStrings:resolutionResultClass:resolveSelectors:]([INIntentSlotDescription alloc], "initWithName:tag:facadePropertyName:dataPropertyName:isExtended:isPrivate:valueType:valueStyle:defaultValueSelectorStrings:provideOptionsSelectorStrings:resolutionResultClass:resolveSelectors:", CFSTR("dueDate"), 9, CFSTR("dueDate"), CFSTR("dueDate"), 0, 0, 16, 1, &unk_1E23F8298, &unk_1E23F82B0, objc_opt_class(), sel_resolveDueDateForPayBill_withCompletion_, sel_resolveDueDateForPayBill_completion_, 0);
+  v89[6] = v72;
+  objc_msgSend(MEMORY[0x1E0C99D20], "arrayWithObjects:count:", v89, 7);
+  v71 = (void *)objc_claimAutoreleasedReturnValue();
+  _INIntentSchemaBuildIntentSlotDescriptionMap(v71);
+  v70 = (void *)objc_claimAutoreleasedReturnValue();
+  v69 = -[INIntentDescription initWithName:responseName:facadeClass:dataClass:type:isPrivate:handleSelector:confirmSelector:slotsByName:](v0, "initWithName:responseName:facadeClass:dataClass:type:isPrivate:handleSelector:confirmSelector:slotsByName:", CFSTR("PayBillIntent"), CFSTR("PayBillIntentResponse"), v1, v2, CFSTR("sirikit.intent.payments.PayBillIntent"), 0, sel_handlePayBill_completion_, sel_confirmPayBill_completion_, v70);
+  v90[0] = v69;
+  v3 = [INIntentDescription alloc];
+  v4 = objc_opt_class();
+  v5 = objc_opt_class();
+  v68 = -[INIntentSlotDescription initWithName:tag:facadePropertyName:dataPropertyName:isExtended:isPrivate:valueType:valueStyle:defaultValueSelectorStrings:provideOptionsSelectorStrings:resolutionResultClass:resolveSelectors:]([INIntentSlotDescription alloc], "initWithName:tag:facadePropertyName:dataPropertyName:isExtended:isPrivate:valueType:valueStyle:defaultValueSelectorStrings:provideOptionsSelectorStrings:resolutionResultClass:resolveSelectors:", CFSTR("payer"), 2, CFSTR("payer"), CFSTR("payer"), 0, 0, 10, 1, &unk_1E23F82C8, &unk_1E23F82E0, objc_opt_class(), sel_resolvePayerForRequestPayment_completion_, sel_resolvePayerForRequestPayment_withCompletion_, 0);
+  v88[0] = v68;
+  v67 = -[INIntentSlotDescription initWithName:tag:facadePropertyName:dataPropertyName:isExtended:isPrivate:valueType:valueStyle:defaultValueSelectorStrings:provideOptionsSelectorStrings:resolutionResultClass:resolveSelectors:]([INIntentSlotDescription alloc], "initWithName:tag:facadePropertyName:dataPropertyName:isExtended:isPrivate:valueType:valueStyle:defaultValueSelectorStrings:provideOptionsSelectorStrings:resolutionResultClass:resolveSelectors:", CFSTR("currencyAmount"), 3, CFSTR("currencyAmount"), CFSTR("currencyAmount"), 0, 0, 53, 1, &unk_1E23F82F8, &unk_1E23F8310, objc_opt_class(), sel_resolveCurrencyAmountForRequestPayment_completion_, sel_resolveCurrencyAmountForRequestPayment_withCompletion_, 0);
+  v88[1] = v67;
+  v66 = -[INIntentSlotDescription initWithName:tag:facadePropertyName:dataPropertyName:isExtended:isPrivate:valueType:valueStyle:defaultValueSelectorStrings:provideOptionsSelectorStrings:resolutionResultClass:resolveSelectors:]([INIntentSlotDescription alloc], "initWithName:tag:facadePropertyName:dataPropertyName:isExtended:isPrivate:valueType:valueStyle:defaultValueSelectorStrings:provideOptionsSelectorStrings:resolutionResultClass:resolveSelectors:", CFSTR("note"), 5, CFSTR("note"), CFSTR("note"), 0, 0, 30, 1, &unk_1E23F8328, &unk_1E23F8340, objc_opt_class(), sel_resolveNoteForRequestPayment_withCompletion_, sel_resolveNoteForRequestPayment_completion_, 0);
+  v88[2] = v66;
+  objc_msgSend(MEMORY[0x1E0C99D20], "arrayWithObjects:count:", v88, 3);
+  v65 = (void *)objc_claimAutoreleasedReturnValue();
+  _INIntentSchemaBuildIntentSlotDescriptionMap(v65);
+  v64 = (void *)objc_claimAutoreleasedReturnValue();
+  v63 = -[INIntentDescription initWithName:responseName:facadeClass:dataClass:type:isPrivate:handleSelector:confirmSelector:slotsByName:](v3, "initWithName:responseName:facadeClass:dataClass:type:isPrivate:handleSelector:confirmSelector:slotsByName:", CFSTR("RequestPaymentIntent"), CFSTR("RequestPaymentIntentResponse"), v4, v5, CFSTR("sirikit.intent.payments.RequestPaymentIntent"), 0, sel_handleRequestPayment_completion_, sel_confirmRequestPayment_completion_, v64);
+  v90[1] = v63;
+  v6 = [INIntentDescription alloc];
+  v7 = objc_opt_class();
+  v8 = objc_opt_class();
+  v62 = -[INIntentSlotDescription initWithName:tag:facadePropertyName:dataPropertyName:isExtended:isPrivate:valueType:valueStyle:defaultValueSelectorStrings:provideOptionsSelectorStrings:resolutionResultClass:resolveSelectors:]([INIntentSlotDescription alloc], "initWithName:tag:facadePropertyName:dataPropertyName:isExtended:isPrivate:valueType:valueStyle:defaultValueSelectorStrings:provideOptionsSelectorStrings:resolutionResultClass:resolveSelectors:", CFSTR("accountNickname"), 2, CFSTR("accountNickname"), CFSTR("accountNickname"), 0, 0, 12, 1, &unk_1E23F8358, &unk_1E23F8370, objc_opt_class(), sel_resolveAccountNicknameForSearchForAccounts_withCompletion_, sel_resolveAccountNicknameForSearchForAccounts_completion_, 0);
+  v87[0] = v62;
+  v61 = -[INIntentSlotDescription initWithName:tag:facadePropertyName:dataPropertyName:isExtended:isPrivate:valueType:valueStyle:defaultValueSelectorStrings:provideOptionsSelectorStrings:resolutionResultClass:resolveSelectors:]([INIntentSlotDescription alloc], "initWithName:tag:facadePropertyName:dataPropertyName:isExtended:isPrivate:valueType:valueStyle:defaultValueSelectorStrings:provideOptionsSelectorStrings:resolutionResultClass:resolveSelectors:", CFSTR("accountType"), 4, CFSTR("accountType"), CFSTR("accountType"), 0, 0, 63, 1, &unk_1E23F8388, &unk_1E23F83A0, objc_opt_class(), sel_resolveAccountTypeForSearchForAccounts_withCompletion_, sel_resolveAccountTypeForSearchForAccounts_completion_, 0);
+  v87[1] = v61;
+  v60 = -[INIntentSlotDescription initWithName:tag:facadePropertyName:dataPropertyName:isExtended:isPrivate:valueType:valueStyle:defaultValueSelectorStrings:provideOptionsSelectorStrings:resolutionResultClass:resolveSelectors:]([INIntentSlotDescription alloc], "initWithName:tag:facadePropertyName:dataPropertyName:isExtended:isPrivate:valueType:valueStyle:defaultValueSelectorStrings:provideOptionsSelectorStrings:resolutionResultClass:resolveSelectors:", CFSTR("organizationName"), 5, CFSTR("organizationName"), CFSTR("organizationName"), 0, 0, 12, 1, &unk_1E23F83B8, &unk_1E23F83D0, objc_opt_class(), sel_resolveOrganizationNameForSearchForAccounts_withCompletion_, sel_resolveOrganizationNameForSearchForAccounts_completion_, 0);
+  v87[2] = v60;
+  v59 = -[INIntentSlotDescription initWithName:tag:facadePropertyName:dataPropertyName:isExtended:isPrivate:valueType:valueStyle:defaultValueSelectorStrings:provideOptionsSelectorStrings:resolutionResultClass:resolveSelectors:]([INIntentSlotDescription alloc], "initWithName:tag:facadePropertyName:dataPropertyName:isExtended:isPrivate:valueType:valueStyle:defaultValueSelectorStrings:provideOptionsSelectorStrings:resolutionResultClass:resolveSelectors:", CFSTR("requestedBalanceType"), 6, CFSTR("requestedBalanceType"), CFSTR("requestedBalanceType"), 0, 0, 64, 1, &unk_1E23F83E8, &unk_1E23F8400, objc_opt_class(), sel_resolveRequestedBalanceTypeForSearchForAccounts_withCompletion_, sel_resolveRequestedBalanceTypeForSearchForAccounts_completion_, 0);
+  v87[3] = v59;
+  objc_msgSend(MEMORY[0x1E0C99D20], "arrayWithObjects:count:", v87, 4);
+  v58 = (void *)objc_claimAutoreleasedReturnValue();
+  _INIntentSchemaBuildIntentSlotDescriptionMap(v58);
+  v57 = (void *)objc_claimAutoreleasedReturnValue();
+  v56 = -[INIntentDescription initWithName:responseName:facadeClass:dataClass:type:isPrivate:handleSelector:confirmSelector:slotsByName:](v6, "initWithName:responseName:facadeClass:dataClass:type:isPrivate:handleSelector:confirmSelector:slotsByName:", CFSTR("SearchForAccountsIntent"), CFSTR("SearchForAccountsIntentResponse"), v7, v8, CFSTR("sirikit.intent.payments.SearchForAccountsIntent"), 0, sel_handleSearchForAccounts_completion_, sel_confirmSearchForAccounts_completion_, v57);
+  v90[2] = v56;
+  v9 = [INIntentDescription alloc];
+  v10 = objc_opt_class();
+  v11 = objc_opt_class();
+  v55 = -[INIntentSlotDescription initWithName:tag:facadePropertyName:dataPropertyName:isExtended:isPrivate:valueType:valueStyle:defaultValueSelectorStrings:provideOptionsSelectorStrings:resolutionResultClass:resolveSelectors:]([INIntentSlotDescription alloc], "initWithName:tag:facadePropertyName:dataPropertyName:isExtended:isPrivate:valueType:valueStyle:defaultValueSelectorStrings:provideOptionsSelectorStrings:resolutionResultClass:resolveSelectors:", CFSTR("billPayee"), 2, CFSTR("billPayee"), CFSTR("billPayee"), 0, 0, 59, 1, &unk_1E23F8418, &unk_1E23F8430, objc_opt_class(), sel_resolveBillPayeeForSearchForBills_withCompletion_, sel_resolveBillPayeeForSearchForBills_completion_, 0);
+  v86[0] = v55;
+  v54 = -[INIntentSlotDescription initWithName:tag:facadePropertyName:dataPropertyName:isExtended:isPrivate:valueType:valueStyle:defaultValueSelectorStrings:provideOptionsSelectorStrings:resolutionResultClass:resolveSelectors:]([INIntentSlotDescription alloc], "initWithName:tag:facadePropertyName:dataPropertyName:isExtended:isPrivate:valueType:valueStyle:defaultValueSelectorStrings:provideOptionsSelectorStrings:resolutionResultClass:resolveSelectors:", CFSTR("paymentDateRange"), 3, CFSTR("paymentDateRange"), CFSTR("paymentDateRange"), 0, 0, 16, 1, &unk_1E23F8448, &unk_1E23F8460, objc_opt_class(), sel_resolvePaymentDateRangeForSearchForBills_withCompletion_, sel_resolvePaymentDateRangeForSearchForBills_completion_, 0);
+  v86[1] = v54;
+  v53 = -[INIntentSlotDescription initWithName:tag:facadePropertyName:dataPropertyName:isExtended:isPrivate:valueType:valueStyle:defaultValueSelectorStrings:provideOptionsSelectorStrings:resolutionResultClass:resolveSelectors:]([INIntentSlotDescription alloc], "initWithName:tag:facadePropertyName:dataPropertyName:isExtended:isPrivate:valueType:valueStyle:defaultValueSelectorStrings:provideOptionsSelectorStrings:resolutionResultClass:resolveSelectors:", CFSTR("billType"), 4, CFSTR("billType"), CFSTR("billType"), 0, 0, 57, 1, &unk_1E23F8478, &unk_1E23F8490, objc_opt_class(), sel_resolveBillTypeForSearchForBills_withCompletion_, sel_resolveBillTypeForSearchForBills_completion_, 0);
+  v86[2] = v53;
+  v52 = -[INIntentSlotDescription initWithName:tag:facadePropertyName:dataPropertyName:isExtended:isPrivate:valueType:valueStyle:defaultValueSelectorStrings:provideOptionsSelectorStrings:resolutionResultClass:resolveSelectors:]([INIntentSlotDescription alloc], "initWithName:tag:facadePropertyName:dataPropertyName:isExtended:isPrivate:valueType:valueStyle:defaultValueSelectorStrings:provideOptionsSelectorStrings:resolutionResultClass:resolveSelectors:", CFSTR("status"), 5, CFSTR("status"), CFSTR("status"), 0, 0, 58, 1, &unk_1E23F84A8, &unk_1E23F84C0, objc_opt_class(), sel_resolveStatusForSearchForBills_withCompletion_, sel_resolveStatusForSearchForBills_completion_, 0);
+  v86[3] = v52;
+  v51 = -[INIntentSlotDescription initWithName:tag:facadePropertyName:dataPropertyName:isExtended:isPrivate:valueType:valueStyle:defaultValueSelectorStrings:provideOptionsSelectorStrings:resolutionResultClass:resolveSelectors:]([INIntentSlotDescription alloc], "initWithName:tag:facadePropertyName:dataPropertyName:isExtended:isPrivate:valueType:valueStyle:defaultValueSelectorStrings:provideOptionsSelectorStrings:resolutionResultClass:resolveSelectors:", CFSTR("dueDateRange"), 6, CFSTR("dueDateRange"), CFSTR("dueDateRange"), 0, 0, 16, 1, &unk_1E23F84D8, &unk_1E23F84F0, objc_opt_class(), sel_resolveDueDateRangeForSearchForBills_withCompletion_, sel_resolveDueDateRangeForSearchForBills_completion_, 0);
+  v86[4] = v51;
+  objc_msgSend(MEMORY[0x1E0C99D20], "arrayWithObjects:count:", v86, 5);
+  v50 = (void *)objc_claimAutoreleasedReturnValue();
+  _INIntentSchemaBuildIntentSlotDescriptionMap(v50);
+  v49 = (void *)objc_claimAutoreleasedReturnValue();
+  v48 = -[INIntentDescription initWithName:responseName:facadeClass:dataClass:type:isPrivate:handleSelector:confirmSelector:slotsByName:](v9, "initWithName:responseName:facadeClass:dataClass:type:isPrivate:handleSelector:confirmSelector:slotsByName:", CFSTR("SearchForBillsIntent"), CFSTR("SearchForBillsIntentResponse"), v10, v11, CFSTR("sirikit.intent.payments.SearchForBillsIntent"), 0, sel_handleSearchForBills_completion_, sel_confirmSearchForBills_completion_, v49);
+  v90[3] = v48;
+  v12 = [INIntentDescription alloc];
+  v13 = objc_opt_class();
+  v14 = objc_opt_class();
+  v47 = -[INIntentSlotDescription initWithName:tag:facadePropertyName:dataPropertyName:isExtended:isPrivate:valueType:valueStyle:defaultValueSelectorStrings:provideOptionsSelectorStrings:resolutionResultClass:resolveSelectors:]([INIntentSlotDescription alloc], "initWithName:tag:facadePropertyName:dataPropertyName:isExtended:isPrivate:valueType:valueStyle:defaultValueSelectorStrings:provideOptionsSelectorStrings:resolutionResultClass:resolveSelectors:", CFSTR("payee"), 2, CFSTR("payee"), CFSTR("payee"), 0, 0, 10, 1, &unk_1E23F8508, &unk_1E23F8520, objc_opt_class(), sel_resolvePayeeForSendPayment_completion_, sel_resolvePayeeForSendPayment_withCompletion_, 0);
+  v85[0] = v47;
+  v46 = -[INIntentSlotDescription initWithName:tag:facadePropertyName:dataPropertyName:isExtended:isPrivate:valueType:valueStyle:defaultValueSelectorStrings:provideOptionsSelectorStrings:resolutionResultClass:resolveSelectors:]([INIntentSlotDescription alloc], "initWithName:tag:facadePropertyName:dataPropertyName:isExtended:isPrivate:valueType:valueStyle:defaultValueSelectorStrings:provideOptionsSelectorStrings:resolutionResultClass:resolveSelectors:", CFSTR("currencyAmount"), 3, CFSTR("currencyAmount"), CFSTR("currencyAmount"), 0, 0, 53, 1, &unk_1E23F8538, &unk_1E23F8550, objc_opt_class(), sel_resolveCurrencyAmountForSendPayment_completion_, sel_resolveCurrencyAmountForSendPayment_withCompletion_, 0);
+  v85[1] = v46;
+  v45 = -[INIntentSlotDescription initWithName:tag:facadePropertyName:dataPropertyName:isExtended:isPrivate:valueType:valueStyle:defaultValueSelectorStrings:provideOptionsSelectorStrings:resolutionResultClass:resolveSelectors:]([INIntentSlotDescription alloc], "initWithName:tag:facadePropertyName:dataPropertyName:isExtended:isPrivate:valueType:valueStyle:defaultValueSelectorStrings:provideOptionsSelectorStrings:resolutionResultClass:resolveSelectors:", CFSTR("note"), 5, CFSTR("note"), CFSTR("note"), 0, 0, 30, 1, &unk_1E23F8568, &unk_1E23F8580, objc_opt_class(), sel_resolveNoteForSendPayment_withCompletion_, sel_resolveNoteForSendPayment_completion_, 0);
+  v85[2] = v45;
+  objc_msgSend(MEMORY[0x1E0C99D20], "arrayWithObjects:count:", v85, 3);
+  v44 = (void *)objc_claimAutoreleasedReturnValue();
+  _INIntentSchemaBuildIntentSlotDescriptionMap(v44);
+  v43 = (void *)objc_claimAutoreleasedReturnValue();
+  v15 = -[INIntentDescription initWithName:responseName:facadeClass:dataClass:type:isPrivate:handleSelector:confirmSelector:slotsByName:](v12, "initWithName:responseName:facadeClass:dataClass:type:isPrivate:handleSelector:confirmSelector:slotsByName:", CFSTR("SendPaymentIntent"), CFSTR("SendPaymentIntentResponse"), v13, v14, CFSTR("sirikit.intent.payments.SendPaymentIntent"), 0, sel_handleSendPayment_completion_, sel_confirmSendPayment_completion_, v43);
+  v90[4] = v15;
+  v42 = [INIntentDescription alloc];
+  v41 = objc_opt_class();
+  v40 = objc_opt_class();
+  v16 = -[INIntentSlotDescription initWithName:tag:facadePropertyName:dataPropertyName:isExtended:isPrivate:valueType:valueStyle:defaultValueSelectorStrings:provideOptionsSelectorStrings:resolutionResultClass:resolveSelectors:]([INIntentSlotDescription alloc], "initWithName:tag:facadePropertyName:dataPropertyName:isExtended:isPrivate:valueType:valueStyle:defaultValueSelectorStrings:provideOptionsSelectorStrings:resolutionResultClass:resolveSelectors:", CFSTR("fromAccount"), 4, CFSTR("fromAccount"), CFSTR("fromAccount"), 0, 0, 61, 1, &unk_1E23F8598, &unk_1E23F85B0, objc_opt_class(), sel_resolveFromAccountForTransferMoney_withCompletion_, sel_resolveFromAccountForTransferMoney_completion_, 0);
+  v84[0] = v16;
+  v17 = -[INIntentSlotDescription initWithName:tag:facadePropertyName:dataPropertyName:isExtended:isPrivate:valueType:valueStyle:defaultValueSelectorStrings:provideOptionsSelectorStrings:resolutionResultClass:resolveSelectors:]([INIntentSlotDescription alloc], "initWithName:tag:facadePropertyName:dataPropertyName:isExtended:isPrivate:valueType:valueStyle:defaultValueSelectorStrings:provideOptionsSelectorStrings:resolutionResultClass:resolveSelectors:", CFSTR("toAccount"), 5, CFSTR("toAccount"), CFSTR("toAccount"), 0, 0, 61, 1, &unk_1E23F85C8, &unk_1E23F85E0, objc_opt_class(), sel_resolveToAccountForTransferMoney_withCompletion_, sel_resolveToAccountForTransferMoney_completion_, 0);
+  v84[1] = v17;
+  v18 = -[INIntentSlotDescription initWithName:tag:facadePropertyName:dataPropertyName:isExtended:isPrivate:valueType:valueStyle:defaultValueSelectorStrings:provideOptionsSelectorStrings:resolutionResultClass:resolveSelectors:]([INIntentSlotDescription alloc], "initWithName:tag:facadePropertyName:dataPropertyName:isExtended:isPrivate:valueType:valueStyle:defaultValueSelectorStrings:provideOptionsSelectorStrings:resolutionResultClass:resolveSelectors:", CFSTR("transactionAmount"), 6, CFSTR("transactionAmount"), CFSTR("transactionAmount"), 0, 0, 62, 1, &unk_1E23F85F8, &unk_1E23F8610, objc_opt_class(), sel_resolveTransactionAmountForTransferMoney_withCompletion_, sel_resolveTransactionAmountForTransferMoney_completion_, 0);
+  v84[2] = v18;
+  v19 = -[INIntentSlotDescription initWithName:tag:facadePropertyName:dataPropertyName:isExtended:isPrivate:valueType:valueStyle:defaultValueSelectorStrings:provideOptionsSelectorStrings:resolutionResultClass:resolveSelectors:]([INIntentSlotDescription alloc], "initWithName:tag:facadePropertyName:dataPropertyName:isExtended:isPrivate:valueType:valueStyle:defaultValueSelectorStrings:provideOptionsSelectorStrings:resolutionResultClass:resolveSelectors:", CFSTR("transactionScheduledDate"), 7, CFSTR("transactionScheduledDate"), CFSTR("transactionScheduledDate"), 0, 0, 16, 1, &unk_1E23F8628, &unk_1E23F8640, objc_opt_class(), sel_resolveTransactionScheduledDateForTransferMoney_withCompletion_, sel_resolveTransactionScheduledDateForTransferMoney_completion_, 0);
+  v84[3] = v19;
+  v20 = -[INIntentSlotDescription initWithName:tag:facadePropertyName:dataPropertyName:isExtended:isPrivate:valueType:valueStyle:defaultValueSelectorStrings:provideOptionsSelectorStrings:resolutionResultClass:resolveSelectors:]([INIntentSlotDescription alloc], "initWithName:tag:facadePropertyName:dataPropertyName:isExtended:isPrivate:valueType:valueStyle:defaultValueSelectorStrings:provideOptionsSelectorStrings:resolutionResultClass:resolveSelectors:", CFSTR("transactionNote"), 8, CFSTR("transactionNote"), CFSTR("transactionNote"), 0, 0, 7, 1, &unk_1E23F8658, &unk_1E23F8670, objc_opt_class(), sel_resolveTransactionNoteForTransferMoney_withCompletion_, sel_resolveTransactionNoteForTransferMoney_completion_, 0);
+  v84[4] = v20;
+  objc_msgSend(MEMORY[0x1E0C99D20], "arrayWithObjects:count:", v84, 5);
+  v21 = (void *)objc_claimAutoreleasedReturnValue();
+  _INIntentSchemaBuildIntentSlotDescriptionMap(v21);
+  v22 = (void *)objc_claimAutoreleasedReturnValue();
+  v23 = -[INIntentDescription initWithName:responseName:facadeClass:dataClass:type:isPrivate:handleSelector:confirmSelector:slotsByName:](v42, "initWithName:responseName:facadeClass:dataClass:type:isPrivate:handleSelector:confirmSelector:slotsByName:", CFSTR("TransferMoneyIntent"), CFSTR("TransferMoneyIntentResponse"), v41, v40, CFSTR("sirikit.intent.payments.TransferMoneyIntent"), 0, sel_handleTransferMoney_completion_, sel_confirmTransferMoney_completion_, v22);
+  v90[5] = v23;
+  objc_msgSend(MEMORY[0x1E0C99D20], "arrayWithObjects:count:", v90, 6);
+  v24 = (void *)objc_claimAutoreleasedReturnValue();
+
+  v25 = objc_msgSend(v24, "count");
+  v26 = (void *)objc_msgSend(objc_alloc(MEMORY[0x1E0C99E08]), "initWithCapacity:", v25);
+  v27 = (void *)objc_msgSend(objc_alloc(MEMORY[0x1E0C99E08]), "initWithCapacity:", v25);
+  v79 = 0u;
+  v80 = 0u;
+  v81 = 0u;
+  v82 = 0u;
+  v28 = v24;
+  v29 = objc_msgSend(v28, "countByEnumeratingWithState:objects:count:", &v79, v83, 16);
+  if (v29)
+  {
+    v30 = v29;
+    v31 = *(_QWORD *)v80;
+    do
+    {
+      for (i = 0; i != v30; ++i)
+      {
+        if (*(_QWORD *)v80 != v31)
+          objc_enumerationMutation(v28);
+        v33 = *(void **)(*((_QWORD *)&v79 + 1) + 8 * i);
+        objc_msgSend(v33, "name");
+        v34 = (void *)objc_claimAutoreleasedReturnValue();
+        objc_msgSend(v26, "setObject:forKey:", v33, v34);
+
+        objc_msgSend(v33, "type");
+        v35 = (void *)objc_claimAutoreleasedReturnValue();
+        objc_msgSend(v27, "setObject:forKey:", v33, v35);
+
+      }
+      v30 = objc_msgSend(v28, "countByEnumeratingWithState:objects:count:", &v79, v83, 16);
+    }
+    while (v30);
+  }
+
+  v36 = objc_msgSend(v26, "copy");
+  v37 = (void *)sPaymentsDomain_intentDescsByName;
+  sPaymentsDomain_intentDescsByName = v36;
+
+  v38 = objc_msgSend(v27, "copy");
+  v39 = (void *)sPaymentsDomain_intentDescsByType;
+  sPaymentsDomain_intentDescsByType = v38;
+
+}
+
+@end

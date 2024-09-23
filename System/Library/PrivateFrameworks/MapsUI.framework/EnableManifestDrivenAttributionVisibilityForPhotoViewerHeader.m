@@ -1,0 +1,8 @@
+@implementation EnableManifestDrivenAttributionVisibilityForPhotoViewerHeader
+
+uint64_t MapsUIConfig_EnableManifestDrivenAttributionVisibilityForPhotoViewerHeader_Metadata_block_invoke_28()
+{
+  return MEMORY[0x1E0C9AAB0];
+}
+
+@end

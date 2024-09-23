@@ -1,0 +1,178 @@
+@implementation PMOngoingCredentialSharingAlertConfiguration
+
++ (id)alertTitleForFailingToMoveToGroup
+{
+  return +[OngoingCredentialSharingAlertConfiguration alertTitleForFailingToMoveToGroup](_TtC17PasswordManagerUI42OngoingCredentialSharingAlertConfiguration, "alertTitleForFailingToMoveToGroup");
+}
+
++ (id)alertSubtitleForFailingToMoveSavedAccounts:(id)a3 toGroupWithName:(id)a4
+{
+  return +[OngoingCredentialSharingAlertConfiguration alertSubtitleForFailingToMoveSavedAccounts:toGroupWithName:](_TtC17PasswordManagerUI42OngoingCredentialSharingAlertConfiguration, "alertSubtitleForFailingToMoveSavedAccounts:toGroupWithName:", a3, a4);
+}
+
++ (id)warningAlertTitleForMovingNumberOfReusedPasswords:(int64_t)a3 withTotalNumberOfAccountsSelected:(int64_t)a4
+{
+  return +[OngoingCredentialSharingAlertConfiguration warningAlertTitleForMovingNumberOfReusedPasswords:withTotalNumberOfAccountsSelected:](_TtC17PasswordManagerUI42OngoingCredentialSharingAlertConfiguration, "warningAlertTitleForMovingNumberOfReusedPasswords:withTotalNumberOfAccountsSelected:", a3, a4);
+}
+
++ (id)warningAlertMessageForMovingNumberOfReusedPasswords:(int64_t)a3 withTotalNumberOfAccountsSelected:(int64_t)a4
+{
+  return +[OngoingCredentialSharingAlertConfiguration warningAlertMessageForMovingNumberOfReusedPasswords:withTotalNumberOfAccountsSelected:](_TtC17PasswordManagerUI42OngoingCredentialSharingAlertConfiguration, "warningAlertMessageForMovingNumberOfReusedPasswords:withTotalNumberOfAccountsSelected:", a3, a4);
+}
+
++ (id)confirmationAlertTitleAndSubtitleForMovingSavedAccounts:(id)a3 toGroupWithName:(id)a4
+{
+  return +[OngoingCredentialSharingAlertConfiguration alertTitleAndSubtitleForMovingSavedAccounts:toGroupWithName:isDragAndDropOperation:](_TtC17PasswordManagerUI42OngoingCredentialSharingAlertConfiguration, "alertTitleAndSubtitleForMovingSavedAccounts:toGroupWithName:isDragAndDropOperation:", a3, a4, 0);
+}
+
++ (id)alertTitleForMovingSavedAccount:(id)a3 toGroupWithName:(id)a4
+{
+  return +[OngoingCredentialSharingAlertConfiguration alertTitleForMovingSavedAccount:toGroupWithName:](_TtC17PasswordManagerUI42OngoingCredentialSharingAlertConfiguration, "alertTitleForMovingSavedAccount:toGroupWithName:", a3, a4);
+}
+
++ (id)confirmationAlertSubtitleForMovingSavedAccount:(id)a3 toMyPasswordsFromGroup:(id)a4
+{
+  return +[OngoingCredentialSharingAlertConfiguration confirmationAlertSubtitleForMovingSavedAccount:toMyPasswordsFromGroup:](_TtC17PasswordManagerUI42OngoingCredentialSharingAlertConfiguration, "confirmationAlertSubtitleForMovingSavedAccount:toMyPasswordsFromGroup:", a3, a4);
+}
+
++ (id)confirmationAlertSubtitleForMovingSavedAccount:(id)a3 fromMyPasswordsToGroupWithName:(id)a4
+{
+  return +[OngoingCredentialSharingAlertConfiguration confirmationAlertSubtitleForMovingSavedAccount:fromMyPasswordstoGroupWithName:](_TtC17PasswordManagerUI42OngoingCredentialSharingAlertConfiguration, "confirmationAlertSubtitleForMovingSavedAccount:fromMyPasswordstoGroupWithName:", a3, a4);
+}
+
++ (id)confirmationAlertSubtitleForMovingSavedAccount:(id)a3 fromGroupWithName:(id)a4
+{
+  return +[OngoingCredentialSharingAlertConfiguration confirmationAlertSubtitleForMovingSavedAccount:fromGroupWithName:](_TtC17PasswordManagerUI42OngoingCredentialSharingAlertConfiguration, "confirmationAlertSubtitleForMovingSavedAccount:fromGroupWithName:", a3, a4);
+}
+
++ (id)confirmationAlertTitleForRemovingGroupMemberWithName:(id)a3
+{
+  return +[OngoingCredentialSharingAlertConfiguration confirmationAlertTitleForRemovingGroupMemberWithName:](_TtC17PasswordManagerUI42OngoingCredentialSharingAlertConfiguration, "confirmationAlertTitleForRemovingGroupMemberWithName:", a3);
+}
+
++ (id)confirmationAlertSubtitleForRemovingGroupMemberWithName:(id)a3
+{
+  return +[OngoingCredentialSharingAlertConfiguration confirmationAlertSubtitleForRemovingGroupMemberWithName:](_TtC17PasswordManagerUI42OngoingCredentialSharingAlertConfiguration, "confirmationAlertSubtitleForRemovingGroupMemberWithName:", a3);
+}
+
++ (id)warningAlertTitleTellingUserThatRemovedGroupMemberMightStillHaveAccessToAccountsAfterRemoval:(id)a3
+{
+  return +[OngoingCredentialSharingAlertConfiguration warningAlertTitleTellingUserThatRemovedGroupMemberMightStillHaveAccessToAccountsAfterRemovalWithName:](_TtC17PasswordManagerUI42OngoingCredentialSharingAlertConfiguration, "warningAlertTitleTellingUserThatRemovedGroupMemberMightStillHaveAccessToAccountsAfterRemovalWithName:", a3);
+}
+
++ (id)warningAlertSubtitleTellingUserThatRemovedGroupMemberMightStillHaveAccessToAccountsAfterRemoval:(id)a3
+{
+  return +[OngoingCredentialSharingAlertConfiguration warningAlertSubtitleTellingUserThatRemovedGroupMemberMightStillHaveAccessToAccountsAfterRemovalWithName:](_TtC17PasswordManagerUI42OngoingCredentialSharingAlertConfiguration, "warningAlertSubtitleTellingUserThatRemovedGroupMemberMightStillHaveAccessToAccountsAfterRemovalWithName:", a3);
+}
+
++ (id)alertTitleForFailingToCreateGroupWithError:(id)a3
+{
+  return +[OngoingCredentialSharingAlertConfiguration alertTitleForFailingToCreateGroupWithError:](_TtC17PasswordManagerUI42OngoingCredentialSharingAlertConfiguration, "alertTitleForFailingToCreateGroupWithError:", a3);
+}
+
++ (id)alertTitleForFailingToDeleteGroupWithError:(id)a3
+{
+  return +[OngoingCredentialSharingAlertConfiguration alertTitleForFailingToDeleteGroupWithError:](_TtC17PasswordManagerUI42OngoingCredentialSharingAlertConfiguration, "alertTitleForFailingToDeleteGroupWithError:", a3);
+}
+
++ (id)alertTitleForFailingToLeaveGroupWithError:(id)a3
+{
+  return +[OngoingCredentialSharingAlertConfiguration alertTitleForFailingToLeaveGroupWithError:](_TtC17PasswordManagerUI42OngoingCredentialSharingAlertConfiguration, "alertTitleForFailingToLeaveGroupWithError:", a3);
+}
+
++ (id)alertTitleForFailingToAddGroupMemberWithError:(id)a3
+{
+  return +[OngoingCredentialSharingAlertConfiguration alertTitleForFailingToAddGroupMemberWithError:](_TtC17PasswordManagerUI42OngoingCredentialSharingAlertConfiguration, "alertTitleForFailingToAddGroupMemberWithError:", a3);
+}
+
++ (id)alertTitleForFailingToRemoveGroupMemberWithError:(id)a3
+{
+  return +[OngoingCredentialSharingAlertConfiguration alertTitleForFailingToRemoveGroupMemberWithError:](_TtC17PasswordManagerUI42OngoingCredentialSharingAlertConfiguration, "alertTitleForFailingToRemoveGroupMemberWithError:", a3);
+}
+
++ (id)alertTitleForFailingToUpdateGroupWithError:(id)a3
+{
+  return +[OngoingCredentialSharingAlertConfiguration alertTitleForFailingToUpdateGroupWithError:](_TtC17PasswordManagerUI42OngoingCredentialSharingAlertConfiguration, "alertTitleForFailingToUpdateGroupWithError:", a3);
+}
+
++ (id)alertTitleForFailingToAcceptInvitationWithError:(id)a3
+{
+  return +[OngoingCredentialSharingAlertConfiguration alertTitleForFailingToAcceptInvitationWithError:](_TtC17PasswordManagerUI42OngoingCredentialSharingAlertConfiguration, "alertTitleForFailingToAcceptInvitationWithError:", a3);
+}
+
++ (id)alertTitleForFailingToDeclineInvitationWithError:(id)a3
+{
+  return +[OngoingCredentialSharingAlertConfiguration alertTitleForFailingToDeclineInvitationWithError:](_TtC17PasswordManagerUI42OngoingCredentialSharingAlertConfiguration, "alertTitleForFailingToDeclineInvitationWithError:", a3);
+}
+
++ (NSString)groupDeletionConfirmationAlertTitle
+{
+  return +[OngoingCredentialSharingAlertConfiguration groupDeletionConfirmationAlertTitle](_TtC17PasswordManagerUI42OngoingCredentialSharingAlertConfiguration, "groupDeletionConfirmationAlertTitle");
+}
+
++ (NSString)groupDeletionConfirmationAlertSubtitle
+{
+  return +[OngoingCredentialSharingAlertConfiguration groupDeletionConfirmationAlertSubtitle](_TtC17PasswordManagerUI42OngoingCredentialSharingAlertConfiguration, "groupDeletionConfirmationAlertSubtitle");
+}
+
++ (NSString)groupDeletionWarningAlertSubtitle
+{
+  return +[OngoingCredentialSharingAlertConfiguration groupDeletionWarningAlertSubtitle](_TtC17PasswordManagerUI42OngoingCredentialSharingAlertConfiguration, "groupDeletionWarningAlertSubtitle");
+}
+
++ (NSString)leaveGroupConfirmationAlertTitle
+{
+  return +[OngoingCredentialSharingAlertConfiguration leaveGroupConfirmationAlertTitle](_TtC17PasswordManagerUI42OngoingCredentialSharingAlertConfiguration, "leaveGroupConfirmationAlertTitle");
+}
+
++ (NSString)leaveGroupConfirmationAlertSubtitle
+{
+  return +[OngoingCredentialSharingAlertConfiguration leaveGroupConfirmationAlertSubtitle](_TtC17PasswordManagerUI42OngoingCredentialSharingAlertConfiguration, "leaveGroupConfirmationAlertSubtitle");
+}
+
++ (NSString)leaveGroupWarningAlertSubtitle
+{
+  return +[OngoingCredentialSharingAlertConfiguration leaveGroupWarningAlertSubtitle](_TtC17PasswordManagerUI42OngoingCredentialSharingAlertConfiguration, "leaveGroupWarningAlertSubtitle");
+}
+
++ (id)groupExitWarningAlertTitleWithGroupMemberNames:(id)a3
+{
+  return +[OngoingCredentialSharingAlertConfiguration groupExitWarningAlertTitleWithGroupMemberNames:](_TtC17PasswordManagerUI42OngoingCredentialSharingAlertConfiguration, "groupExitWarningAlertTitleWithGroupMemberNames:", a3);
+}
+
++ (NSString)alertTitleForFailingToMoveAccountsBackToPersonalKeychainWhileLeavingGroup
+{
+  return +[OngoingCredentialSharingAlertConfiguration alertTitleForFailingToMoveAccountsBackToPersonalKeychainWhileLeavingGroup](_TtC17PasswordManagerUI42OngoingCredentialSharingAlertConfiguration, "alertTitleForFailingToMoveAccountsBackToPersonalKeychainWhileLeavingGroup");
+}
+
++ (NSString)alertSubtitleForFailingToMoveAccountsBackToPersonalKeychainWhileLeavingGroup
+{
+  return +[OngoingCredentialSharingAlertConfiguration alertSubtitleForFailingToMoveAccountsBackToPersonalKeychainWhileLeavingGroup](_TtC17PasswordManagerUI42OngoingCredentialSharingAlertConfiguration, "alertSubtitleForFailingToMoveAccountsBackToPersonalKeychainWhileLeavingGroup");
+}
+
++ (NSString)alertTitleForFailingToMoveAccountsBackToPersonalKeychainWhileDeletingGroup
+{
+  return +[OngoingCredentialSharingAlertConfiguration alertTitleForFailingToMoveAccountsBackToPersonalKeychainWhileDeletingGroup](_TtC17PasswordManagerUI42OngoingCredentialSharingAlertConfiguration, "alertTitleForFailingToMoveAccountsBackToPersonalKeychainWhileDeletingGroup");
+}
+
++ (NSString)alertSubtitleForFailingToMoveAccountsBackToPersonalKeychainWhileDeletingGroup
+{
+  return +[OngoingCredentialSharingAlertConfiguration alertSubtitleForFailingToMoveAccountsBackToPersonalKeychainWhileDeletingGroup](_TtC17PasswordManagerUI42OngoingCredentialSharingAlertConfiguration, "alertSubtitleForFailingToMoveAccountsBackToPersonalKeychainWhileDeletingGroup");
+}
+
++ (id)alertTitleForUnavailableGroup
+{
+  return +[OngoingCredentialSharingAlertConfiguration alertTitleForUnavailableGroup](_TtC17PasswordManagerUI42OngoingCredentialSharingAlertConfiguration, "alertTitleForUnavailableGroup");
+}
+
++ (id)alertSubtitleForUnavailableGroup
+{
+  return +[OngoingCredentialSharingAlertConfiguration alertSubtitleForUnavailableGroup](_TtC17PasswordManagerUI42OngoingCredentialSharingAlertConfiguration, "alertSubtitleForUnavailableGroup");
+}
+
++ (id)declineGroupInvitationAlertTitleForGroupWithName:(id)a3 fromKnownSender:(BOOL)a4
+{
+  return +[OngoingCredentialSharingAlertConfiguration declineGroupInvitationAlertTitleForGroupWithName:fromKnownSender:](_TtC17PasswordManagerUI42OngoingCredentialSharingAlertConfiguration, "declineGroupInvitationAlertTitleForGroupWithName:fromKnownSender:", a3, a4);
+}
+
+@end

@@ -1,0 +1,159 @@
+@implementation HMIFetchFaceprintsForFaceCropsOperation
+
+- (HMIFetchFaceprintsForFaceCropsOperation)initWithDataSource:(id)a3 faceCropUUIDs:(id)a4
+{
+  id v7;
+  id v8;
+  HMIFetchFaceprintsForFaceCropsOperation *v9;
+  HMIFetchFaceprintsForFaceCropsOperation *v10;
+  uint64_t v11;
+  NSSet *faceprints;
+  objc_super v14;
+
+  v7 = a3;
+  v8 = a4;
+  v14.receiver = self;
+  v14.super_class = (Class)HMIFetchFaceprintsForFaceCropsOperation;
+  v9 = -[HMFOperation initWithTimeout:](&v14, sel_initWithTimeout_, 20.0);
+  v10 = v9;
+  if (v9)
+  {
+    objc_storeStrong((id *)&v9->_dataSource, a3);
+    objc_storeStrong((id *)&v10->_faceCropUUIDs, a4);
+    objc_msgSend(MEMORY[0x24BDBCF20], "set");
+    v11 = objc_claimAutoreleasedReturnValue();
+    faceprints = v10->_faceprints;
+    v10->_faceprints = (NSSet *)v11;
+
+  }
+  return v10;
+}
+
+- (void)main
+{
+  void *v3;
+
+  v3 = (void *)MEMORY[0x220735570](self, a2);
+  -[HMIFetchFaceprintsForFaceCropsOperation mainInsideAutoreleasePool](self, "mainInsideAutoreleasePool");
+  objc_autoreleasePoolPop(v3);
+}
+
+- (void)mainInsideAutoreleasePool
+{
+  void *v3;
+  void *v4;
+  _QWORD v5[4];
+  id v6;
+  id location;
+
+  objc_initWeak(&location, self);
+  -[HMIFetchFaceprintsForFaceCropsOperation dataSource](self, "dataSource");
+  v3 = (void *)objc_claimAutoreleasedReturnValue();
+  -[HMIFetchFaceprintsForFaceCropsOperation faceCropUUIDs](self, "faceCropUUIDs");
+  v4 = (void *)objc_claimAutoreleasedReturnValue();
+  v5[0] = MEMORY[0x24BDAC760];
+  v5[1] = 3221225472;
+  v5[2] = __68__HMIFetchFaceprintsForFaceCropsOperation_mainInsideAutoreleasePool__block_invoke;
+  v5[3] = &unk_24DBEB858;
+  objc_copyWeak(&v6, &location);
+  objc_msgSend(v3, "fetchFaceprintsForFaceCropsWithUUIDs:completion:", v4, v5);
+
+  objc_destroyWeak(&v6);
+  objc_destroyWeak(&location);
+}
+
+void __68__HMIFetchFaceprintsForFaceCropsOperation_mainInsideAutoreleasePool__block_invoke(uint64_t a1, void *a2, void *a3)
+{
+  id v6;
+  id v7;
+  id *WeakRetained;
+  id *v9;
+  void *v10;
+  id *v11;
+  NSObject *v12;
+  void *v13;
+  void *v14;
+  int v15;
+  void *v16;
+  __int16 v17;
+  void *v18;
+  __int16 v19;
+  id v20;
+  uint64_t v21;
+
+  v21 = *MEMORY[0x24BDAC8D0];
+  v6 = a2;
+  v7 = a3;
+  WeakRetained = (id *)objc_loadWeakRetained((id *)(a1 + 32));
+  v9 = WeakRetained;
+  if (WeakRetained)
+  {
+    if (v7)
+    {
+      v10 = (void *)MEMORY[0x220735570]();
+      v11 = v9;
+      HMFGetOSLogHandle();
+      v12 = objc_claimAutoreleasedReturnValue();
+      if (os_log_type_enabled(v12, OS_LOG_TYPE_ERROR))
+      {
+        HMFGetLogIdentifier();
+        v13 = (void *)objc_claimAutoreleasedReturnValue();
+        objc_msgSend(v11, "faceCropUUIDs");
+        v14 = (void *)objc_claimAutoreleasedReturnValue();
+        v15 = 138543874;
+        v16 = v13;
+        v17 = 2112;
+        v18 = v14;
+        v19 = 2112;
+        v20 = v7;
+        _os_log_impl(&dword_219D45000, v12, OS_LOG_TYPE_ERROR, "%{public}@Error fetching faceprints for face crop UUIDs:%@, error:%@", (uint8_t *)&v15, 0x20u);
+
+      }
+      objc_autoreleasePoolPop(v10);
+      objc_msgSend(v11, "cancelWithError:", v7);
+    }
+    else
+    {
+      objc_storeStrong(WeakRetained + 41, a2);
+      objc_msgSend(v9, "finish");
+    }
+  }
+
+}
+
++ (id)shortDescription
+{
+  objc_class *v2;
+
+  v2 = (objc_class *)objc_opt_class();
+  return NSStringFromClass(v2);
+}
+
+- (NSString)shortDescription
+{
+  return (NSString *)objc_msgSend((id)objc_opt_class(), "shortDescription");
+}
+
+- (HMIPersonManagerDataSource)dataSource
+{
+  return (HMIPersonManagerDataSource *)objc_getProperty(self, a2, 312, 1);
+}
+
+- (NSSet)faceCropUUIDs
+{
+  return (NSSet *)objc_getProperty(self, a2, 320, 1);
+}
+
+- (NSSet)faceprints
+{
+  return (NSSet *)objc_getProperty(self, a2, 328, 1);
+}
+
+- (void).cxx_destruct
+{
+  objc_storeStrong((id *)&self->_faceprints, 0);
+  objc_storeStrong((id *)&self->_faceCropUUIDs, 0);
+  objc_storeStrong((id *)&self->_dataSource, 0);
+}
+
+@end

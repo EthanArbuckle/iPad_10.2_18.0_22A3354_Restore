@@ -1,0 +1,101 @@
+@implementation NFContactlessPaymentSessionInterface
+
++ (id)interface
+{
+  id v0;
+  uint64_t v1;
+  uint64_t v2;
+  uint64_t v3;
+  uint64_t v4;
+  uint64_t v5;
+  uint64_t v6;
+  uint64_t v7;
+  uint64_t v8;
+  uint64_t v9;
+  uint64_t v10;
+  uint64_t v11;
+  uint64_t v12;
+  uint64_t v13;
+  uint64_t v14;
+  id v15;
+  uint64_t v16;
+  id v17;
+  uint64_t v18;
+  void *v19;
+  uint64_t v20;
+  uint64_t v21;
+  uint64_t v22;
+  uint64_t v23;
+  uint64_t v24;
+  uint64_t v25;
+  uint64_t v26;
+  uint64_t v27;
+  uint64_t v28;
+  void *v29;
+  id v31;
+  void *v32;
+  void *v33;
+  void *v34;
+  void *v35;
+  id v36;
+  void *v37;
+  void *v38;
+
+  objc_opt_self();
+  v0 = objc_alloc(MEMORY[0x1E0C99E60]);
+  v1 = objc_opt_class();
+  v2 = objc_opt_class();
+  v38 = (void *)objc_msgSend(v0, "initWithObjects:", v1, v2, objc_opt_class(), 0);
+  v36 = objc_alloc(MEMORY[0x1E0C99E60]);
+  v3 = objc_opt_class();
+  v4 = objc_opt_class();
+  v5 = objc_opt_class();
+  v6 = objc_opt_class();
+  v7 = objc_opt_class();
+  v8 = objc_opt_class();
+  v9 = objc_opt_class();
+  v10 = objc_opt_class();
+  v11 = objc_opt_class();
+  v12 = objc_opt_class();
+  v13 = objc_msgSend(v36, "initWithObjects:", v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, objc_opt_class(), 0);
+  v14 = objc_msgSend(objc_alloc(MEMORY[0x1E0C99E60]), "initWithObjects:", objc_opt_class(), 0);
+  v15 = objc_alloc(MEMORY[0x1E0C99E60]);
+  v16 = objc_opt_class();
+  v37 = (void *)objc_msgSend(v15, "initWithObjects:", v16, objc_opt_class(), 0);
+  v35 = (void *)objc_msgSend(objc_alloc(MEMORY[0x1E0C99E60]), "initWithObjects:", objc_opt_class(), 0);
+  v17 = objc_alloc(MEMORY[0x1E0C99E60]);
+  v18 = objc_opt_class();
+  v34 = (void *)objc_msgSend(v17, "initWithObjects:", v18, objc_opt_class(), 0);
+  objc_msgSend(MEMORY[0x1E0CB3B50], "interfaceWithProtocol:", &unk_1EE40ABC8);
+  v19 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(v19, "setClasses:forSelector:argumentIndex:ofReply:", v14, sel_setActivePaymentApplet_keys_authorization_completion_, 0, 0);
+  objc_msgSend(v19, "setClasses:forSelector:argumentIndex:ofReply:", v14, sel_setActivePaymentApplet_keys_authorization_completion_, 0, 1);
+  objc_msgSend(v19, "setClasses:forSelector:argumentIndex:ofReply:", v37, sel_setActivePaymentApplets_authorization_completion_, 0, 0);
+  objc_msgSend(v19, "setClasses:forSelector:argumentIndex:ofReply:", v35, sel_setActivePaymentApplets_authorization_completion_, 1, 0);
+  v33 = (void *)v14;
+  objc_msgSend(v19, "setClasses:forSelector:argumentIndex:ofReply:", v14, sel_setActivePaymentApplets_authorization_completion_, 0, 1);
+  objc_msgSend(v19, "setClasses:forSelector:argumentIndex:ofReply:", v34, sel_setActivePaymentApplets_authorization_completion_, 1, 1);
+  objc_msgSend(v19, "setClasses:forSelector:argumentIndex:ofReply:", v38, sel_getAppletsWithCompletion_, 0, 1);
+  objc_msgSend(v19, "setClasses:forSelector:argumentIndex:ofReply:", v14, sel_getAppletsWithCompletion_, 1, 1);
+  objc_msgSend(v19, "setClasses:forSelector:argumentIndex:ofReply:", v38, sel_getFelicaAppletState_completion_, 0, 0);
+  v32 = (void *)v13;
+  objc_msgSend(v19, "setClasses:forSelector:argumentIndex:ofReply:", v13, sel_getFelicaAppletState_completion_, 0, 1);
+  objc_msgSend(v19, "setClasses:forSelector:argumentIndex:ofReply:", v38, sel_getTransitAppletState_completion_, 0, 0);
+  objc_msgSend(v19, "setClasses:forSelector:argumentIndex:ofReply:", v13, sel_getTransitAppletState_completion_, 0, 1);
+  v31 = objc_alloc(MEMORY[0x1E0C99E60]);
+  v20 = objc_opt_class();
+  v21 = objc_opt_class();
+  v22 = objc_opt_class();
+  v23 = objc_opt_class();
+  v24 = objc_opt_class();
+  v25 = objc_opt_class();
+  v26 = objc_opt_class();
+  v27 = objc_opt_class();
+  v28 = objc_opt_class();
+  v29 = (void *)objc_msgSend(v31, "initWithObjects:", v20, v21, v22, v23, v24, v25, v26, v27, v28, objc_opt_class(), 0);
+  objc_msgSend(v19, "setClasses:forSelector:argumentIndex:ofReply:", v29, sel_setHostCards_, 0, 0);
+
+  return v19;
+}
+
+@end

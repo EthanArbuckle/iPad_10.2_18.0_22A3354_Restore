@@ -1,0 +1,8 @@
+@implementation MarkForDeletionExternalDataForOfflineBatchesNotAssociatedWithSubscription
+
+uint64_t __MarkForDeletionExternalDataForOfflineBatchesNotAssociatedWithSubscription_block_invoke()
+{
+  return 1;
+}
+
+@end

@@ -1,0 +1,88 @@
+@implementation FMPhoneNumberUtil
+
++ (id)formatWithPhoneNumber:(id)a3
+{
+  return sub_10000FB10((uint64_t)a1, (uint64_t)a2, (uint64_t)a3, (void (*)(uint64_t))sub_10000FF3C);
+}
+
++ (id)formattedWithHandle:(id)a3
+{
+  return sub_10000FB10((uint64_t)a1, (uint64_t)a2, (uint64_t)a3, (void (*)(uint64_t))sub_100010028);
+}
+
++ (id)unformatWithPhoneNumber:(id)a3
+{
+  uint64_t v4;
+  uint64_t v5;
+  uint64_t v6;
+  char *v7;
+  uint64_t v8;
+  unint64_t v9;
+  unint64_t v10;
+  uint64_t v11;
+  uint64_t v12;
+  NSString v13;
+  uint64_t v15;
+
+  v4 = type metadata accessor for CharacterSet(0);
+  v5 = *(_QWORD *)(v4 - 8);
+  __chkstk_darwin(v4);
+  v7 = (char *)&v15 - ((v6 + 15) & 0xFFFFFFFFFFFFFFF0);
+  v8 = static String._unconditionallyBridgeFromObjectiveC(_:)(a3);
+  v10 = v9;
+  static CharacterSet.decimalDigits.getter(v8);
+  CharacterSet.insert(_:)(43);
+  swift_bridgeObjectRetain(v10);
+  sub_100010150(v8, v10, (uint64_t)v7);
+  v12 = v11;
+  swift_bridgeObjectRelease(v10);
+  (*(void (**)(char *, uint64_t))(v5 + 8))(v7, v4);
+  swift_bridgeObjectRelease(v10);
+  v13 = String._bridgeToObjectiveC()();
+  swift_bridgeObjectRelease(v12);
+  return v13;
+}
+
++ (BOOL)isEmailValidWithEmail:(id)a3
+{
+  uint64_t v3;
+  uint64_t v4;
+  void *v5;
+  NSString v6;
+
+  static String._unconditionallyBridgeFromObjectiveC(_:)(a3);
+  v4 = v3;
+  if (qword_100020E90 != -1)
+    swift_once(&qword_100020E90, sub_10000F390);
+  v5 = (void *)static String.emailPredicate;
+  v6 = String._bridgeToObjectiveC()();
+  LOBYTE(v5) = objc_msgSend(v5, "evaluateWithObject:", v6);
+  swift_bridgeObjectRelease(v4);
+
+  return (char)v5;
+}
+
++ (BOOL)isPhoneNumberValidWithPhoneNumber:(id)a3
+{
+  uint64_t v3;
+  unint64_t v4;
+  unint64_t v5;
+  char v6;
+
+  v3 = static String._unconditionallyBridgeFromObjectiveC(_:)(a3);
+  v5 = v4;
+  v6 = sub_1000102E0(v3, v4);
+  swift_bridgeObjectRelease(v5);
+  return v6 & 1;
+}
+
+- (_TtC26FindMyNotificationsService17FMPhoneNumberUtil)init
+{
+  objc_super v3;
+
+  v3.receiver = self;
+  v3.super_class = (Class)type metadata accessor for FMPhoneNumberUtil();
+  return -[FMPhoneNumberUtil init](&v3, "init");
+}
+
+@end

@@ -1,0 +1,12 @@
+@implementation __KVOKeyPathBridgeMachinery
+
+- (_TtC10FoundationP33_6DA0945A07226B3278459E9368612FF427__KVOKeyPathBridgeMachinery)init
+{
+  objc_super v3;
+
+  v3.receiver = self;
+  v3.super_class = (Class)type metadata accessor for __KVOKeyPathBridgeMachinery();
+  return -[__KVOKeyPathBridgeMachinery init](&v3, sel_init);
+}
+
+@end

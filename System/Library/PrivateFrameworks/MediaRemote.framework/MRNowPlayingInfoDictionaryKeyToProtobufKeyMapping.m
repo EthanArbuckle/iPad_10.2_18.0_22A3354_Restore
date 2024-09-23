@@ -1,0 +1,108 @@
+@implementation MRNowPlayingInfoDictionaryKeyToProtobufKeyMapping
+
+void ___MRNowPlayingInfoDictionaryKeyToProtobufKeyMapping_block_invoke()
+{
+  void *v0;
+  void *v1;
+  void *v2;
+  void *v3;
+  void *v4;
+  void *v5;
+  void *v6;
+  void *v7;
+  void *v8;
+  void *v9;
+  uint64_t v10;
+  void *v11;
+  void *v12;
+  void *v13;
+  void *v14;
+  void *v15;
+  void *v16;
+  void *v17;
+  void *v18;
+  void *v19;
+  _QWORD v20[18];
+  _QWORD v21[20];
+
+  v21[18] = *MEMORY[0x1E0C80C00];
+  v20[0] = CFSTR("kMRMediaRemoteNowPlayingInfoAlbum");
+  NSStringFromSelector(sel_album);
+  v19 = (void *)objc_claimAutoreleasedReturnValue();
+  v21[0] = v19;
+  v20[1] = CFSTR("kMRMediaRemoteNowPlayingInfoArtist");
+  NSStringFromSelector(sel_artist);
+  v18 = (void *)objc_claimAutoreleasedReturnValue();
+  v21[1] = v18;
+  v20[2] = CFSTR("kMRMediaRemoteNowPlayingInfoDuration");
+  NSStringFromSelector(sel_duration);
+  v17 = (void *)objc_claimAutoreleasedReturnValue();
+  v21[2] = v17;
+  v20[3] = CFSTR("kMRMediaRemoteNowPlayingInfoElapsedTime");
+  NSStringFromSelector(sel_elapsedTime);
+  v16 = (void *)objc_claimAutoreleasedReturnValue();
+  v21[3] = v16;
+  v20[4] = CFSTR("kMRMediaRemoteNowPlayingInfoIsExplicitTrack");
+  NSStringFromSelector(sel_isExplicitTrack);
+  v15 = (void *)objc_claimAutoreleasedReturnValue();
+  v21[4] = v15;
+  v20[5] = CFSTR("kMRMediaRemoteNowPlayingInfoPlaybackRate");
+  NSStringFromSelector(sel_playbackRate);
+  v14 = (void *)objc_claimAutoreleasedReturnValue();
+  v21[5] = v14;
+  v20[6] = CFSTR("kMRMediaRemoteNowPlayingInfoRepeatMode");
+  NSStringFromSelector(sel_repeatMode);
+  v13 = (void *)objc_claimAutoreleasedReturnValue();
+  v21[6] = v13;
+  v20[7] = CFSTR("kMRMediaRemoteNowPlayingInfoShuffleMode");
+  NSStringFromSelector(sel_shuffleMode);
+  v12 = (void *)objc_claimAutoreleasedReturnValue();
+  v21[7] = v12;
+  v20[8] = CFSTR("kMRMediaRemoteNowPlayingInfoTimestamp");
+  NSStringFromSelector(sel_timestamp);
+  v0 = (void *)objc_claimAutoreleasedReturnValue();
+  v21[8] = v0;
+  v20[9] = CFSTR("kMRMediaRemoteNowPlayingInfoTitle");
+  NSStringFromSelector(sel_title);
+  v1 = (void *)objc_claimAutoreleasedReturnValue();
+  v21[9] = v1;
+  v20[10] = CFSTR("kMRMediaRemoteNowPlayingInfoUniqueIdentifier");
+  NSStringFromSelector(sel_uniqueIdentifier);
+  v2 = (void *)objc_claimAutoreleasedReturnValue();
+  v21[10] = v2;
+  v20[11] = CFSTR("kMRMediaRemoteNowPlayingInfoIsMusicApp");
+  NSStringFromSelector(sel_isMusicApp);
+  v3 = (void *)objc_claimAutoreleasedReturnValue();
+  v21[11] = v3;
+  v20[12] = CFSTR("kMRMediaRemoteNowPlayingInfoIsAlwaysLive");
+  NSStringFromSelector(sel_isAlwaysLive);
+  v4 = (void *)objc_claimAutoreleasedReturnValue();
+  v21[12] = v4;
+  v20[13] = CFSTR("kMRMediaRemoteNowPlayingInfoIsInTransition");
+  NSStringFromSelector(sel_isInTransition);
+  v5 = (void *)objc_claimAutoreleasedReturnValue();
+  v21[13] = v5;
+  v20[14] = CFSTR("kMRMediaRemoteNowPlayingInfoRadioStationName");
+  NSStringFromSelector(sel_radioStationName);
+  v6 = (void *)objc_claimAutoreleasedReturnValue();
+  v21[14] = v6;
+  v20[15] = CFSTR("kMRMediaRemoteNowPlayingInfoRadioStationHash");
+  NSStringFromSelector(sel_radioStationHash);
+  v7 = (void *)objc_claimAutoreleasedReturnValue();
+  v21[15] = v7;
+  v20[16] = CFSTR("kMRMediaRemoteNowPlayingInfoRadioStationIdentifier");
+  NSStringFromSelector(sel_radioStationIdentifier);
+  v8 = (void *)objc_claimAutoreleasedReturnValue();
+  v21[16] = v8;
+  v20[17] = CFSTR("kMRMediaRemoteNowPlayingInfoIsAdvertisement");
+  NSStringFromSelector(sel_isAdvertisement);
+  v9 = (void *)objc_claimAutoreleasedReturnValue();
+  v21[17] = v9;
+  objc_msgSend(MEMORY[0x1E0C99D80], "dictionaryWithObjects:forKeys:count:", v21, v20, 18);
+  v10 = objc_claimAutoreleasedReturnValue();
+  v11 = (void *)_MRNowPlayingInfoDictionaryKeyToProtobufKeyMapping___mapping;
+  _MRNowPlayingInfoDictionaryKeyToProtobufKeyMapping___mapping = v10;
+
+}
+
+@end

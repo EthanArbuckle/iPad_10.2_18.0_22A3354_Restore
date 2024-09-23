@@ -1,0 +1,8 @@
+@implementation NavdLocationUpdateDesiredAccuracyWhileStationaryForWalking
+
+void *GeoServicesConfig_NavdLocationUpdateDesiredAccuracyWhileStationaryForWalking_Metadata_block_invoke_248()
+{
+  return &unk_1E1E85D30;
+}
+
+@end

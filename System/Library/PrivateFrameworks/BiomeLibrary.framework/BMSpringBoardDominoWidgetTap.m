@@ -1,0 +1,520 @@
+@implementation BMSpringBoardDominoWidgetTap
+
+- (BMSpringBoardDominoWidgetTap)initWithWidget:(id)a3 stackId:(id)a4
+{
+  id v7;
+  id v8;
+  BMSpringBoardDominoWidgetTap *v9;
+  objc_super v11;
+
+  v7 = a3;
+  v8 = a4;
+  v11.receiver = self;
+  v11.super_class = (Class)BMSpringBoardDominoWidgetTap;
+  v9 = -[BMEventBase init](&v11, sel_init);
+  if (v9)
+  {
+    v9->_dataVersion = objc_msgSend((id)objc_opt_class(), "latestDataVersion");
+    objc_storeStrong((id *)&v9->_widget, a3);
+    objc_storeStrong((id *)&v9->_stackId, a4);
+  }
+
+  return v9;
+}
+
+- (NSString)description
+{
+  id v3;
+  void *v4;
+  void *v5;
+  void *v6;
+
+  v3 = objc_alloc(MEMORY[0x1E0CB3940]);
+  -[BMSpringBoardDominoWidgetTap widget](self, "widget");
+  v4 = (void *)objc_claimAutoreleasedReturnValue();
+  -[BMSpringBoardDominoWidgetTap stackId](self, "stackId");
+  v5 = (void *)objc_claimAutoreleasedReturnValue();
+  v6 = (void *)objc_msgSend(v3, "initWithFormat:", CFSTR("BMSpringBoardDominoWidgetTap with widget: %@, stackId: %@"), v4, v5);
+
+  return (NSString *)v6;
+}
+
+- (id)initByReadFrom:(id)a3
+{
+  _BYTE *v4;
+  BMSpringBoardDominoWidgetTap *v5;
+  int *v6;
+  int *v7;
+  int *v8;
+  int *v9;
+  char v10;
+  unsigned int v11;
+  unint64_t v12;
+  uint64_t v13;
+  unint64_t v14;
+  char v15;
+  int v17;
+  BMSpringBoardDominoWidget *v19;
+  BMSpringBoardDominoWidget *widget;
+  uint64_t v21;
+  NSString *stackId;
+  BMSpringBoardDominoWidgetTap *v23;
+  objc_super v25;
+  uint64_t v26;
+  uint64_t v27;
+
+  v4 = a3;
+  v25.receiver = self;
+  v25.super_class = (Class)BMSpringBoardDominoWidgetTap;
+  v5 = -[BMEventBase init](&v25, sel_init);
+  if (!v5)
+    goto LABEL_29;
+  v6 = (int *)MEMORY[0x1E0D82BF0];
+  v7 = (int *)MEMORY[0x1E0D82BD8];
+  v8 = (int *)MEMORY[0x1E0D82BC8];
+  if (*(_QWORD *)&v4[*MEMORY[0x1E0D82BF0]] < *(_QWORD *)&v4[*MEMORY[0x1E0D82BD8]])
+  {
+    v9 = (int *)MEMORY[0x1E0D82BB8];
+    do
+    {
+      if (v4[*v8])
+        break;
+      v10 = 0;
+      v11 = 0;
+      v12 = 0;
+      while (1)
+      {
+        v13 = *v6;
+        v14 = *(_QWORD *)&v4[v13];
+        if (v14 == -1 || v14 >= *(_QWORD *)&v4[*v7])
+          break;
+        v15 = *(_BYTE *)(*(_QWORD *)&v4[*v9] + v14);
+        *(_QWORD *)&v4[v13] = v14 + 1;
+        v12 |= (unint64_t)(v15 & 0x7F) << v10;
+        if ((v15 & 0x80) == 0)
+          goto LABEL_13;
+        v10 += 7;
+        if (v11++ >= 9)
+        {
+          v12 = 0;
+          v17 = v4[*v8];
+          goto LABEL_15;
+        }
+      }
+      v4[*v8] = 1;
+LABEL_13:
+      v17 = v4[*v8];
+      if (v4[*v8])
+        v12 = 0;
+LABEL_15:
+      if (v17 || (v12 & 7) == 4)
+        break;
+      if ((v12 >> 3) == 2)
+      {
+        PBReaderReadString();
+        v21 = objc_claimAutoreleasedReturnValue();
+        stackId = v5->_stackId;
+        v5->_stackId = (NSString *)v21;
+
+      }
+      else if ((v12 >> 3) == 1)
+      {
+        v26 = 0;
+        v27 = 0;
+        if ((PBReaderPlaceMark() & 1) == 0)
+          goto LABEL_28;
+        v19 = -[BMSpringBoardDominoWidget initByReadFrom:]([BMSpringBoardDominoWidget alloc], "initByReadFrom:", v4);
+        if (!v19)
+          goto LABEL_28;
+        widget = v5->_widget;
+        v5->_widget = v19;
+
+        PBReaderRecallMark();
+      }
+      else if (!PBReaderSkipValueWithTag())
+      {
+        goto LABEL_28;
+      }
+    }
+    while (*(_QWORD *)&v4[*v6] < *(_QWORD *)&v4[*v7]);
+  }
+  if (v4[*v8])
+LABEL_28:
+    v23 = 0;
+  else
+LABEL_29:
+    v23 = v5;
+
+  return v23;
+}
+
+- (void)writeTo:(id)a3
+{
+  id v4;
+
+  v4 = a3;
+  if (self->_widget)
+  {
+    PBDataWriterPlaceMark();
+    -[BMSpringBoardDominoWidget writeTo:](self->_widget, "writeTo:", v4);
+    PBDataWriterRecallMark();
+  }
+  if (self->_stackId)
+    PBDataWriterWriteStringField();
+
+}
+
+- (id)serialize
+{
+  void *v3;
+  void *v4;
+
+  v3 = (void *)objc_opt_new();
+  -[BMSpringBoardDominoWidgetTap writeTo:](self, "writeTo:", v3);
+  objc_msgSend(v3, "immutableData");
+  v4 = (void *)objc_claimAutoreleasedReturnValue();
+
+  return v4;
+}
+
+- (BMSpringBoardDominoWidgetTap)initWithJSONDictionary:(id)a3 error:(id *)a4
+{
+  id v6;
+  void *v7;
+  BMSpringBoardDominoWidget *v8;
+  void *v9;
+  id v10;
+  BMSpringBoardDominoWidgetTap *v11;
+  id v13;
+  void *v14;
+  id v15;
+  uint64_t v16;
+  id v17;
+  id v18;
+  uint64_t v19;
+  void *v20;
+  void *v21;
+  id v22;
+  uint64_t v23;
+  void *v24;
+  uint64_t v25;
+  _QWORD v26[2];
+
+  v26[1] = *MEMORY[0x1E0C80C00];
+  v6 = a3;
+  objc_msgSend(v6, "objectForKeyedSubscript:", CFSTR("widget"));
+  v7 = (void *)objc_claimAutoreleasedReturnValue();
+  if (!v7 || (objc_opt_class(), (objc_opt_isKindOfClass() & 1) != 0))
+  {
+    v8 = 0;
+    goto LABEL_4;
+  }
+  objc_opt_class();
+  if ((objc_opt_isKindOfClass() & 1) != 0)
+  {
+    v10 = v7;
+    v22 = 0;
+    v8 = -[BMSpringBoardDominoWidget initWithJSONDictionary:error:]([BMSpringBoardDominoWidget alloc], "initWithJSONDictionary:error:", v10, &v22);
+    v13 = v22;
+    if (v13)
+    {
+      v14 = v13;
+      if (a4)
+        *a4 = objc_retainAutorelease(v13);
+
+      v11 = 0;
+      goto LABEL_9;
+    }
+
+LABEL_4:
+    objc_msgSend(v6, "objectForKeyedSubscript:", CFSTR("stackId"));
+    v9 = (void *)objc_claimAutoreleasedReturnValue();
+    if (v9 && (objc_opt_class(), (objc_opt_isKindOfClass() & 1) == 0))
+    {
+      objc_opt_class();
+      if ((objc_opt_isKindOfClass() & 1) == 0)
+      {
+        if (a4)
+        {
+          v18 = objc_alloc(MEMORY[0x1E0CB35C8]);
+          v19 = *MEMORY[0x1E0D025B8];
+          v23 = *MEMORY[0x1E0CB2D50];
+          v20 = (void *)objc_msgSend(objc_alloc(MEMORY[0x1E0CB3940]), "initWithFormat:", CFSTR("Unexpected type %@ for element of %@, expecting NSString"), objc_opt_class(), CFSTR("stackId"));
+          v24 = v20;
+          objc_msgSend(MEMORY[0x1E0C99D80], "dictionaryWithObjects:forKeys:count:", &v24, &v23, 1);
+          v21 = (void *)objc_claimAutoreleasedReturnValue();
+          *a4 = (id)objc_msgSend(v18, "initWithDomain:code:userInfo:", v19, 2, v21);
+
+        }
+        v11 = 0;
+        v10 = 0;
+        goto LABEL_8;
+      }
+      v10 = v9;
+    }
+    else
+    {
+      v10 = 0;
+    }
+    self = -[BMSpringBoardDominoWidgetTap initWithWidget:stackId:](self, "initWithWidget:stackId:", v8, v10);
+    v11 = self;
+LABEL_8:
+
+    goto LABEL_9;
+  }
+  if (!a4)
+  {
+    v11 = 0;
+    goto LABEL_10;
+  }
+  v15 = objc_alloc(MEMORY[0x1E0CB35C8]);
+  v16 = *MEMORY[0x1E0D025B8];
+  v25 = *MEMORY[0x1E0CB2D50];
+  v8 = (BMSpringBoardDominoWidget *)objc_msgSend(objc_alloc(MEMORY[0x1E0CB3940]), "initWithFormat:", CFSTR("Unexpected type %@ for element of %@, expecting NSDictionary"), objc_opt_class(), CFSTR("widget"));
+  v26[0] = v8;
+  objc_msgSend(MEMORY[0x1E0C99D80], "dictionaryWithObjects:forKeys:count:", v26, &v25, 1);
+  v10 = (id)objc_claimAutoreleasedReturnValue();
+  v17 = (id)objc_msgSend(v15, "initWithDomain:code:userInfo:", v16, 2, v10);
+  v11 = 0;
+  *a4 = v17;
+LABEL_9:
+
+LABEL_10:
+  return v11;
+}
+
+- (id)jsonDictionary
+{
+  void *v3;
+  void *v4;
+  void *v5;
+  void *v6;
+  void *v7;
+  void *v8;
+  _QWORD v10[2];
+  _QWORD v11[3];
+
+  v11[2] = *MEMORY[0x1E0C80C00];
+  -[BMSpringBoardDominoWidgetTap widget](self, "widget");
+  v3 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(v3, "jsonDictionary");
+  v4 = (void *)objc_claimAutoreleasedReturnValue();
+
+  -[BMSpringBoardDominoWidgetTap stackId](self, "stackId");
+  v5 = (void *)objc_claimAutoreleasedReturnValue();
+  v10[0] = CFSTR("widget");
+  v6 = v4;
+  if (!v4)
+  {
+    objc_msgSend(MEMORY[0x1E0C99E38], "null");
+    v6 = (void *)objc_claimAutoreleasedReturnValue();
+  }
+  v10[1] = CFSTR("stackId");
+  v11[0] = v6;
+  v7 = v5;
+  if (!v5)
+  {
+    objc_msgSend(MEMORY[0x1E0C99E38], "null");
+    v7 = (void *)objc_claimAutoreleasedReturnValue();
+  }
+  v11[1] = v7;
+  objc_msgSend(MEMORY[0x1E0C99D80], "dictionaryWithObjects:forKeys:count:", v11, v10, 2);
+  v8 = (void *)objc_claimAutoreleasedReturnValue();
+  if (!v5)
+  {
+
+    if (v4)
+      goto LABEL_7;
+LABEL_9:
+
+    goto LABEL_7;
+  }
+  if (!v4)
+    goto LABEL_9;
+LABEL_7:
+
+  return v8;
+}
+
+- (BOOL)isEqual:(id)a3
+{
+  id v4;
+  id v5;
+  void *v6;
+  uint64_t v7;
+  void *v8;
+  void *v9;
+  void *v10;
+  int v11;
+  char v12;
+  void *v13;
+  void *v14;
+  void *v15;
+  void *v16;
+
+  v4 = a3;
+  objc_opt_class();
+  if ((objc_opt_isKindOfClass() & 1) != 0)
+  {
+    v5 = v4;
+    -[BMSpringBoardDominoWidgetTap widget](self, "widget");
+    v6 = (void *)objc_claimAutoreleasedReturnValue();
+    objc_msgSend(v5, "widget");
+    v7 = objc_claimAutoreleasedReturnValue();
+    if (v6 == (void *)v7)
+    {
+
+    }
+    else
+    {
+      v8 = (void *)v7;
+      -[BMSpringBoardDominoWidgetTap widget](self, "widget");
+      v9 = (void *)objc_claimAutoreleasedReturnValue();
+      objc_msgSend(v5, "widget");
+      v10 = (void *)objc_claimAutoreleasedReturnValue();
+      v11 = objc_msgSend(v9, "isEqual:", v10);
+
+      if (!v11)
+      {
+        v12 = 0;
+LABEL_11:
+
+        goto LABEL_12;
+      }
+    }
+    -[BMSpringBoardDominoWidgetTap stackId](self, "stackId");
+    v13 = (void *)objc_claimAutoreleasedReturnValue();
+    objc_msgSend(v5, "stackId");
+    v14 = (void *)objc_claimAutoreleasedReturnValue();
+    if (v13 == v14)
+    {
+      v12 = 1;
+    }
+    else
+    {
+      -[BMSpringBoardDominoWidgetTap stackId](self, "stackId");
+      v15 = (void *)objc_claimAutoreleasedReturnValue();
+      objc_msgSend(v5, "stackId");
+      v16 = (void *)objc_claimAutoreleasedReturnValue();
+      v12 = objc_msgSend(v15, "isEqual:", v16);
+
+    }
+    goto LABEL_11;
+  }
+  v12 = 0;
+LABEL_12:
+
+  return v12;
+}
+
+- (unsigned)dataVersion
+{
+  return self->_dataVersion;
+}
+
+- (BMSpringBoardDominoWidget)widget
+{
+  return self->_widget;
+}
+
+- (NSString)stackId
+{
+  return self->_stackId;
+}
+
+- (void).cxx_destruct
+{
+  objc_storeStrong((id *)&self->_stackId, 0);
+  objc_storeStrong((id *)&self->_widget, 0);
+}
+
++ (unsigned)latestDataVersion
+{
+  return 0;
+}
+
++ (id)eventWithData:(id)a3 dataVersion:(unsigned int)a4
+{
+  _DWORD *v4;
+  objc_class *v5;
+  id v6;
+  void *v7;
+
+  if (a4)
+  {
+    v4 = 0;
+  }
+  else
+  {
+    v5 = (objc_class *)MEMORY[0x1E0D82B90];
+    v6 = a3;
+    v7 = (void *)objc_msgSend([v5 alloc], "initWithData:", v6);
+
+    v4 = -[BMSpringBoardDominoWidgetTap initByReadFrom:]([BMSpringBoardDominoWidgetTap alloc], "initByReadFrom:", v7);
+    v4[4] = 0;
+
+  }
+  return v4;
+}
+
++ (id)columns
+{
+  void *v2;
+  void *v3;
+  void *v4;
+  _QWORD v6[3];
+
+  v6[2] = *MEMORY[0x1E0C80C00];
+  v2 = (void *)objc_msgSend(objc_alloc(MEMORY[0x1E0D02710]), "initWithName:dataType:requestOnly:extractBlock:", CFSTR("widget_json"), 5, 1, &__block_literal_global_40105);
+  v3 = (void *)objc_msgSend(objc_alloc(MEMORY[0x1E0D02720]), "initWithName:dataType:requestOnly:fieldNumber:protoDataType:convertedType:", CFSTR("stackId"), 2, 0, 2, 13, 0);
+  v6[0] = v2;
+  v6[1] = v3;
+  objc_msgSend(MEMORY[0x1E0C99D20], "arrayWithObjects:count:", v6, 2);
+  v4 = (void *)objc_claimAutoreleasedReturnValue();
+
+  return v4;
+}
+
++ (id)validKeyPaths
+{
+  return &unk_1E5F1D050;
+}
+
++ (id)protoFields
+{
+  void *v2;
+  void *v3;
+  void *v4;
+  _QWORD v6[3];
+
+  v6[2] = *MEMORY[0x1E0C80C00];
+  v2 = (void *)objc_msgSend(objc_alloc(MEMORY[0x1E0D026E8]), "initWithName:number:type:subMessageClass:", CFSTR("widget"), 1, 14, objc_opt_class());
+  v6[0] = v2;
+  v3 = (void *)objc_msgSend(objc_alloc(MEMORY[0x1E0D026E8]), "initWithName:number:type:subMessageClass:", CFSTR("stackId"), 2, 13, 0);
+  v6[1] = v3;
+  objc_msgSend(MEMORY[0x1E0C99D20], "arrayWithObjects:count:", v6, 2);
+  v4 = (void *)objc_claimAutoreleasedReturnValue();
+
+  return v4;
+}
+
+id __39__BMSpringBoardDominoWidgetTap_columns__block_invoke(uint64_t a1, void *a2)
+{
+  void *v2;
+  void *v3;
+  void *v4;
+  void *v5;
+
+  objc_msgSend(a2, "eventBodyKeepingBackingData:", 1);
+  v2 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(v2, "widget");
+  v3 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(v3, "jsonDictionary");
+  v4 = (void *)objc_claimAutoreleasedReturnValue();
+  BMConvertObjectToJSONString();
+  v5 = (void *)objc_claimAutoreleasedReturnValue();
+
+  return v5;
+}
+
+@end

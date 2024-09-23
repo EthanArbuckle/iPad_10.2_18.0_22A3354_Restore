@@ -1,0 +1,29 @@
+@implementation MSPresentationState
+
+void __48___MSPresentationState_isRunningInCameraContext__block_invoke()
+{
+  void *v0;
+  char v1;
+  id v2;
+
+  objc_msgSend(MEMORY[0x1E0CB34D0], "mainBundle");
+  v0 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(v0, "bundleIdentifier");
+  v2 = (id)objc_claimAutoreleasedReturnValue();
+
+  if ((objc_msgSend(v2, "isEqualToString:", CFSTR("com.apple.InCallService")) & 1) != 0
+    || (objc_msgSend(v2, "isEqualToString:", *MEMORY[0x1E0D37580]) & 1) != 0
+    || (objc_msgSend(v2, "isEqualToString:", *MEMORY[0x1E0D375A0]) & 1) != 0
+    || (objc_msgSend(v2, "isEqualToString:", CFSTR("com.apple.iMessageAppsBrowserTest")) & 1) != 0)
+  {
+    v1 = 1;
+  }
+  else
+  {
+    v1 = objc_msgSend(v2, "isEqualToString:", CFSTR("com.apple.CameraEffectsDemo"));
+  }
+  isRunningInCameraContext_isRunningInCameraContext = v1;
+
+}
+
+@end

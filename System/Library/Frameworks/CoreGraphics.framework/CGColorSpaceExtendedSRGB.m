@@ -1,0 +1,54 @@
+@implementation CGColorSpaceExtendedSRGB
+
+uint64_t __CGColorSpaceExtendedSRGB_block_invoke()
+{
+  uint64_t (*v0)(uint64_t);
+  _QWORD *v1;
+  uint64_t v2;
+  uint64_t v3;
+  uint64_t v4;
+  uint64_t v5;
+  uint64_t v6;
+  uint64_t v7;
+  uint64_t v8;
+  _QWORD *v9;
+  uint64_t v10;
+  unsigned int v11;
+  unsigned int v12;
+
+  if (color_space_state_create_extended_srgb_cglibrarypredicate != -1)
+    dispatch_once(&color_space_state_create_extended_srgb_cglibrarypredicate, &__block_literal_global_190_1691);
+  v0 = (uint64_t (*)(uint64_t))color_space_state_create_extended_srgb_f;
+  if (color_space_state_create_extended_srgb_cglibrarypredicate_191 != -1)
+    dispatch_once(&color_space_state_create_extended_srgb_cglibrarypredicate_191, &__block_literal_global_193_1692);
+  v1 = (_QWORD *)v0(color_space_state_create_extended_srgb_s);
+  v9 = create_from_profile(v1, 1);
+  if (v1)
+    CFRelease(v1);
+  if (v9)
+  {
+    v9[9] = CFSTR("kCGColorSpaceExtendedSRGB");
+    *(_QWORD *)(v9[11] + 48) = CFSTR("sRGB IEC61966-2.1");
+    *((_BYTE *)v9 + 8) = 1;
+    v10 = CGColorSpaceCreateWithState((unsigned int *)v9, v2, v3, v4, v5, v6, v7, v8);
+    do
+    {
+      v11 = __ldxr((unsigned int *)v9);
+      v12 = v11 - 1;
+    }
+    while (__stxr(v12, (unsigned int *)v9));
+    if (!v12)
+      color_space_state_dealloc((uint64_t)v9);
+  }
+  else
+  {
+    v10 = 0;
+  }
+  CGColorSpaceExtendedSRGB_space = v10;
+  CGColorSpaceSetProperty(v10, CFSTR("kCGColorSpaceStandardRangeOriginal"), CFSTR("kCGColorSpaceSRGB"));
+  CGColorSpaceSetProperty(CGColorSpaceExtendedSRGB_space, CFSTR("kCGColorSpaceLinearDerivative"), CFSTR("kCGColorSpaceExtendedLinearSRGB"));
+  CGColorSpaceSetProperty(CGColorSpaceExtendedSRGB_space, CFSTR("kCGColorSpaceExtendedDerivative"), (const void *)CGColorSpaceExtendedSRGB_space);
+  return CGColorSpaceSetProperty(CGColorSpaceExtendedSRGB_space, CFSTR("kCGColorSpaceExtendedLinearDerivative"), CFSTR("kCGColorSpaceExtendedLinearSRGB"));
+}
+
+@end

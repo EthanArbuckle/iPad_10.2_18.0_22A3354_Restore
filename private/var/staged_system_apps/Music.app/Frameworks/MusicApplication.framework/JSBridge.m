@@ -1,0 +1,39 @@
+@implementation JSBridge
+
+- (void)environmentMonitorDidChangeNetworkReachability:(id)a3
+{
+  uint64_t v5;
+  _TtC11MusicJSCore8JSBridge *v6;
+  id v7;
+
+  sub_4E684(0, (unint64_t *)&qword_14AD360, OS_dispatch_queue_ptr);
+  v5 = swift_allocObject(&unk_13D4E60, 24, 7);
+  *(_QWORD *)(v5 + 16) = self;
+  v6 = self;
+  v7 = a3;
+  static OS_dispatch_queue.asyncOnMainIfNeeded(_:)((uint64_t (*)(void))sub_F14384, v5);
+  swift_release();
+
+}
+
+- (_TtC11MusicJSCore8JSBridge)init
+{
+  return (_TtC11MusicJSCore8JSBridge *)JSBridge.init()();
+}
+
+- (void).cxx_destruct
+{
+  sub_56024((uint64_t)self + OBJC_IVAR____TtC11MusicJSCore8JSBridge_initializationDate, (uint64_t *)&unk_14AD5F0);
+  sub_56024((uint64_t)self + OBJC_IVAR____TtC11MusicJSCore8JSBridge____lazy_storage___bootSignpost, (uint64_t *)&unk_14B1190);
+  swift_release();
+  swift_release();
+  sub_F135AC(*(void **)((char *)&self->super.isa + OBJC_IVAR____TtC11MusicJSCore8JSBridge_singletons), *(void **)&self->thread[OBJC_IVAR____TtC11MusicJSCore8JSBridge_singletons], *(void **)&self->provider[OBJC_IVAR____TtC11MusicJSCore8JSBridge_singletons], *(void **)&self->singletons[OBJC_IVAR____TtC11MusicJSCore8JSBridge_singletons], *(void **)&self->singletons[OBJC_IVAR____TtC11MusicJSCore8JSBridge_singletons + 8], *(void **)&self->singletons[OBJC_IVAR____TtC11MusicJSCore8JSBridge_singletons + 16], *(void **)&self->singletons[OBJC_IVAR____TtC11MusicJSCore8JSBridge_singletons + 24], *(void **)&self->singletons[OBJC_IVAR____TtC11MusicJSCore8JSBridge_singletons + 32], *(void **)&self->singletons[OBJC_IVAR____TtC11MusicJSCore8JSBridge_singletons + 40], *(void **)&self->singletons[OBJC_IVAR____TtC11MusicJSCore8JSBridge_singletons + 48], *(void **)&self->singletons[OBJC_IVAR____TtC11MusicJSCore8JSBridge_singletons + 56], *(void **)&self->singletons[OBJC_IVAR____TtC11MusicJSCore8JSBridge_singletons + 64], *(void **)&self->singletons[OBJC_IVAR____TtC11MusicJSCore8JSBridge_singletons + 72], *(void **)&self->singletons[OBJC_IVAR____TtC11MusicJSCore8JSBridge_singletons + 80], *(void **)&self->singletons[OBJC_IVAR____TtC11MusicJSCore8JSBridge_singletons + 88]);
+  swift_release();
+  sub_F11B60(*(uint64_t *)((char *)&self->super.isa + OBJC_IVAR____TtC11MusicJSCore8JSBridge_state), *(_QWORD *)&self->thread[OBJC_IVAR____TtC11MusicJSCore8JSBridge_state], *(_QWORD *)&self->provider[OBJC_IVAR____TtC11MusicJSCore8JSBridge_state], *(_QWORD *)&self->singletons[OBJC_IVAR____TtC11MusicJSCore8JSBridge_state], *(_QWORD *)&self->singletons[OBJC_IVAR____TtC11MusicJSCore8JSBridge_state + 8]);
+  swift_bridgeObjectRelease();
+  swift_bridgeObjectRelease();
+  swift_bridgeObjectRelease();
+  swift_release();
+}
+
+@end

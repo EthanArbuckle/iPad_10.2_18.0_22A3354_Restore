@@ -1,0 +1,14 @@
+@implementation CSArrayEnumerateAllValues
+
+uint64_t ___CSArrayEnumerateAllValues_block_invoke(uint64_t a1, uint64_t a2, uint64_t a3, BOOL *a4)
+{
+  uint64_t result;
+  char v6;
+
+  v6 = 0;
+  result = (*(uint64_t (**)(void))(*(_QWORD *)(a1 + 32) + 16))();
+  *a4 = v6 != 0;
+  return result;
+}
+
+@end

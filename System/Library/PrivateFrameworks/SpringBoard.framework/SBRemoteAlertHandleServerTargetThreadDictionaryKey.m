@@ -1,0 +1,8 @@
+@implementation SBRemoteAlertHandleServerTargetThreadDictionaryKey
+
+uint64_t ___SBRemoteAlertHandleServerTargetThreadDictionaryKey_block_invoke()
+{
+  return pthread_key_create((pthread_key_t *)&_SBRemoteAlertHandleServerTargetThreadDictionaryKey_sSBRemoteAlertHandleServerTargetThreadDictionaryKey, 0);
+}
+
+@end

@@ -1,0 +1,24 @@
+@implementation RowWhitelist
+
+void ___RowWhitelist_block_invoke()
+{
+  uint64_t v0;
+  void *v1;
+  _QWORD v2[8];
+
+  v2[7] = *MEMORY[0x1E0C80C00];
+  v2[0] = objc_opt_class();
+  v2[1] = objc_opt_class();
+  v2[2] = objc_opt_class();
+  v2[3] = objc_opt_class();
+  v2[4] = objc_opt_class();
+  v2[5] = objc_opt_class();
+  v2[6] = objc_opt_class();
+  objc_msgSend(MEMORY[0x1E0C99D20], "arrayWithObjects:count:", v2, 7);
+  v0 = objc_claimAutoreleasedReturnValue();
+  v1 = (void *)_RowWhitelist_whitelist;
+  _RowWhitelist_whitelist = v0;
+
+}
+
+@end

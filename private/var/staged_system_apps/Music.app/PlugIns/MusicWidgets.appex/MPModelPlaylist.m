@@ -1,0 +1,53 @@
+@implementation MPModelPlaylist
+
+- (NSString)sortStorageKeyDomain
+{
+  MPModelPlaylist *v2;
+  uint64_t v3;
+  uint64_t v4;
+  NSString v5;
+
+  v2 = self;
+  MPModelPlaylist.sortStorageKeyDomain.getter();
+  v4 = v3;
+
+  if (v4)
+  {
+    v5 = String._bridgeToObjectiveC()();
+    swift_bridgeObjectRelease();
+  }
+  else
+  {
+    v5 = 0;
+  }
+  return (NSString *)v5;
+}
+
+- (NSArray)preferredTracklistSortDescriptors
+{
+  MPModelPlaylist *v2;
+  uint64_t v3;
+  NSArray v4;
+
+  v2 = self;
+  v3 = MPModelPlaylist.preferredTracklistSortDescriptors.getter();
+
+  if (v3)
+  {
+    sub_1001E3018();
+    v4.super.isa = Array._bridgeToObjectiveC()().super.isa;
+    swift_bridgeObjectRelease();
+  }
+  else
+  {
+    v4.super.isa = 0;
+  }
+  return (NSArray *)v4.super.isa;
+}
+
+- (NSString)shortDescription
+{
+  return (NSString *)sub_1002B4E38(self, (uint64_t)a2, (void (*)(void))sub_1002B47A0);
+}
+
+@end

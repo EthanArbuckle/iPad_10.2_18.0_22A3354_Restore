@@ -1,0 +1,8 @@
+@implementation MusicKitInternal_MediaPlaybackCore_FinalClass
+
+- (_TtC35_MusicKitInternal_MediaPlaybackCoreP33_8177ED806F85F03DE84DAFB709F9152445MusicKitInternal_MediaPlaybackCore_FinalClass)init
+{
+  return (_TtC35_MusicKitInternal_MediaPlaybackCoreP33_8177ED806F85F03DE84DAFB709F9152445MusicKitInternal_MediaPlaybackCore_FinalClass *)sub_22E241884();
+}
+
+@end

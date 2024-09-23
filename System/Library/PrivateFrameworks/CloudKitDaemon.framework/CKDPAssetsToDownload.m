@@ -1,0 +1,271 @@
+@implementation CKDPAssetsToDownload
+
+- (void)writeTo:(id)a3
+{
+  id v4;
+  id v5;
+
+  v4 = a3;
+  v5 = v4;
+  if ((*(_BYTE *)&self->_has & 1) != 0)
+  {
+    PBDataWriterWriteBOOLField();
+    v4 = v5;
+  }
+  if (self->_assetFields)
+  {
+    PBDataWriterWriteSubmessage();
+    v4 = v5;
+  }
+
+}
+
+- (void)setAllAssets:(BOOL)a3
+{
+  *(_BYTE *)&self->_has |= 1u;
+  self->_allAssets = a3;
+}
+
+- (void).cxx_destruct
+{
+  objc_storeStrong((id *)&self->_assetFields, 0);
+}
+
+- (void)setHasAllAssets:(BOOL)a3
+{
+  *(_BYTE *)&self->_has = *(_BYTE *)&self->_has & 0xFE | a3;
+}
+
+- (BOOL)hasAllAssets
+{
+  return *(_BYTE *)&self->_has & 1;
+}
+
+- (BOOL)hasAssetFields
+{
+  return self->_assetFields != 0;
+}
+
+- (id)description
+{
+  void *v3;
+  void *v4;
+  const char *v5;
+  uint64_t v6;
+  void *v7;
+  const char *v8;
+  void *v9;
+  objc_super v11;
+
+  v3 = (void *)MEMORY[0x1E0CB3940];
+  v11.receiver = self;
+  v11.super_class = (Class)CKDPAssetsToDownload;
+  -[CKDPAssetsToDownload description](&v11, sel_description);
+  v4 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend_dictionaryRepresentation(self, v5, v6);
+  v7 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend_stringWithFormat_(v3, v8, (uint64_t)CFSTR("%@ %@"), v4, v7);
+  v9 = (void *)objc_claimAutoreleasedReturnValue();
+
+  return v9;
+}
+
+- (id)dictionaryRepresentation
+{
+  uint64_t v2;
+  const char *v4;
+  uint64_t v5;
+  void *v6;
+  void *v7;
+  const char *v8;
+  CKDPRequestedFields *assetFields;
+  void *v10;
+  const char *v11;
+
+  objc_msgSend_dictionary(MEMORY[0x1E0C99E08], a2, v2);
+  v6 = (void *)objc_claimAutoreleasedReturnValue();
+  if ((*(_BYTE *)&self->_has & 1) != 0)
+  {
+    objc_msgSend_numberWithBool_(MEMORY[0x1E0CB37E8], v4, self->_allAssets);
+    v7 = (void *)objc_claimAutoreleasedReturnValue();
+    objc_msgSend_setObject_forKey_(v6, v8, (uint64_t)v7, CFSTR("allAssets"));
+
+  }
+  assetFields = self->_assetFields;
+  if (assetFields)
+  {
+    objc_msgSend_dictionaryRepresentation(assetFields, v4, v5);
+    v10 = (void *)objc_claimAutoreleasedReturnValue();
+    objc_msgSend_setObject_forKey_(v6, v11, (uint64_t)v10, CFSTR("assetFields"));
+
+  }
+  return v6;
+}
+
+- (BOOL)readFrom:(id)a3
+{
+  return sub_1BEC1BD10((uint64_t)self, (uint64_t)a3);
+}
+
+- (void)copyTo:(id)a3
+{
+  _BYTE *v4;
+  const char *v5;
+  CKDPRequestedFields *assetFields;
+  _BYTE *v7;
+
+  v4 = a3;
+  if ((*(_BYTE *)&self->_has & 1) != 0)
+  {
+    v4[16] = self->_allAssets;
+    v4[20] |= 1u;
+  }
+  assetFields = self->_assetFields;
+  if (assetFields)
+  {
+    v7 = v4;
+    objc_msgSend_setAssetFields_(v4, v5, (uint64_t)assetFields);
+    v4 = v7;
+  }
+
+}
+
+- (id)copyWithZone:(_NSZone *)a3
+{
+  void *v5;
+  const char *v6;
+  void *v7;
+  const char *v8;
+  uint64_t v9;
+  uint64_t v10;
+  const char *v11;
+  _QWORD *v12;
+  uint64_t v13;
+  void *v14;
+
+  v5 = (void *)objc_opt_class();
+  v7 = (void *)objc_msgSend_allocWithZone_(v5, v6, (uint64_t)a3);
+  v10 = objc_msgSend_init(v7, v8, v9);
+  v12 = (_QWORD *)v10;
+  if ((*(_BYTE *)&self->_has & 1) != 0)
+  {
+    *(_BYTE *)(v10 + 16) = self->_allAssets;
+    *(_BYTE *)(v10 + 20) |= 1u;
+  }
+  v13 = objc_msgSend_copyWithZone_(self->_assetFields, v11, (uint64_t)a3);
+  v14 = (void *)v12[1];
+  v12[1] = v13;
+
+  return v12;
+}
+
+- (BOOL)isEqual:(id)a3
+{
+  uint64_t *v4;
+  uint64_t v5;
+  const char *v6;
+  const char *v7;
+  char isEqual;
+  CKDPRequestedFields *assetFields;
+  uint64_t v11;
+
+  v4 = (uint64_t *)a3;
+  v5 = objc_opt_class();
+  if (!objc_msgSend_isMemberOfClass_(v4, v6, v5))
+    goto LABEL_6;
+  if ((*(_BYTE *)&self->_has & 1) != 0)
+  {
+    if ((*((_BYTE *)v4 + 20) & 1) != 0)
+    {
+      if (self->_allAssets)
+      {
+        if (*((_BYTE *)v4 + 16))
+          goto LABEL_12;
+      }
+      else if (!*((_BYTE *)v4 + 16))
+      {
+        goto LABEL_12;
+      }
+    }
+LABEL_6:
+    isEqual = 0;
+    goto LABEL_7;
+  }
+  if ((*((_BYTE *)v4 + 20) & 1) != 0)
+    goto LABEL_6;
+LABEL_12:
+  assetFields = self->_assetFields;
+  v11 = v4[1];
+  if ((unint64_t)assetFields | v11)
+    isEqual = objc_msgSend_isEqual_(assetFields, v7, v11);
+  else
+    isEqual = 1;
+LABEL_7:
+
+  return isEqual;
+}
+
+- (unint64_t)hash
+{
+  uint64_t v2;
+  uint64_t v3;
+
+  if ((*(_BYTE *)&self->_has & 1) != 0)
+    v3 = 2654435761 * self->_allAssets;
+  else
+    v3 = 0;
+  return objc_msgSend_hash(self->_assetFields, a2, v2) ^ v3;
+}
+
+- (void)mergeFrom:(id)a3
+{
+  _BYTE *v4;
+  _QWORD *v5;
+  CKDPRequestedFields *assetFields;
+  uint64_t v7;
+  _QWORD *v8;
+
+  v4 = a3;
+  v5 = v4;
+  if ((v4[20] & 1) != 0)
+  {
+    self->_allAssets = v4[16];
+    *(_BYTE *)&self->_has |= 1u;
+  }
+  assetFields = self->_assetFields;
+  v7 = v5[1];
+  if (assetFields)
+  {
+    if (v7)
+    {
+      v8 = v5;
+      objc_msgSend_mergeFrom_(assetFields, (const char *)v5, v7);
+LABEL_8:
+      v5 = v8;
+    }
+  }
+  else if (v7)
+  {
+    v8 = v5;
+    objc_msgSend_setAssetFields_(self, (const char *)v5, v7);
+    goto LABEL_8;
+  }
+
+}
+
+- (BOOL)allAssets
+{
+  return self->_allAssets;
+}
+
+- (CKDPRequestedFields)assetFields
+{
+  return self->_assetFields;
+}
+
+- (void)setAssetFields:(id)a3
+{
+  objc_storeStrong((id *)&self->_assetFields, a3);
+}
+
+@end

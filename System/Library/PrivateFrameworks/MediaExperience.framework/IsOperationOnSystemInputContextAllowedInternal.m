@@ -1,0 +1,8 @@
+@implementation IsOperationOnSystemInputContextAllowedInternal
+
+uint64_t __routingContext_IsOperationOnSystemInputContextAllowedInternal_block_invoke()
+{
+  return FigRoutingManagerContextUtilities_CopySystemAudioInputContextUUID((uint64_t)&routingContext_IsOperationOnSystemInputContextAllowedInternal_sSystemAudioInputContextUUID);
+}
+
+@end

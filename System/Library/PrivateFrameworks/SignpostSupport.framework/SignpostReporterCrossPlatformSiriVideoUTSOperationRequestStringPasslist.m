@@ -1,0 +1,12 @@
+@implementation SignpostReporterCrossPlatformSiriVideoUTSOperationRequestStringPasslist
+
+void __SignpostReporterCrossPlatformSiriVideoUTSOperationRequestStringPasslist_block_invoke()
+{
+  void *v0;
+
+  v0 = (void *)SignpostReporterCrossPlatformSiriVideoUTSOperationRequestStringPasslist_siriVideoUTSOperationRequestStringArray;
+  SignpostReporterCrossPlatformSiriVideoUTSOperationRequestStringPasslist_siriVideoUTSOperationRequestStringArray = (uint64_t)&unk_1E462E7A0;
+
+}
+
+@end

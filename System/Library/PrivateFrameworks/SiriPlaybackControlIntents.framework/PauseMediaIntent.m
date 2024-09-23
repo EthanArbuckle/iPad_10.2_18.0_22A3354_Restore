@@ -1,0 +1,55 @@
+@implementation PauseMediaIntent
+
+- (PauseMediaIntent)init
+{
+  return (PauseMediaIntent *)PauseMediaIntent.init()();
+}
+
++ (BOOL)shouldSkipDefaultSchemaCheck
+{
+  return 1;
+}
+
+- (PauseMediaIntent)initWithIdentifier:(id)a3 backingStore:(id)a4
+{
+  uint64_t v5;
+  uint64_t v6;
+  uint64_t v7;
+  id v8;
+  PauseMediaIntent *result;
+
+  if (a3)
+  {
+    v5 = sub_2249ECDD4();
+    v7 = v6;
+  }
+  else
+  {
+    v5 = 0;
+    v7 = 0;
+  }
+  v8 = a4;
+  PauseMediaIntent.init(identifier:backingStore:)(v5, v7, a4);
+  return result;
+}
+
+- (PauseMediaIntent)initWithCoder:(id)a3
+{
+  id v3;
+  PauseMediaIntent *result;
+
+  v3 = a3;
+  PauseMediaIntent.init(coder:)();
+  return result;
+}
+
+- (PauseMediaIntent)initWithDomain:(id)a3 verb:(id)a4 parametersByName:(id)a5
+{
+  sub_2249ECDD4();
+  sub_2249ECDD4();
+  if (a5)
+    sub_2249ECD68();
+  return (PauseMediaIntent *)PauseMediaIntent.init(domain:verb:parametersByName:)();
+}
+
+@end

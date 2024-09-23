@@ -1,0 +1,15 @@
+@implementation TVSearchTemplateController
+
+void __43___TVSearchTemplateController__isAtWordEnd__block_invoke()
+{
+  uint64_t v0;
+  void *v1;
+
+  objc_msgSend(MEMORY[0x24BDD14A8], "characterSetWithCharactersInString:", CFSTR(" -"));
+  v0 = objc_claimAutoreleasedReturnValue();
+  v1 = (void *)_isAtWordEnd_wordDelimiters;
+  _isAtWordEnd_wordDelimiters = v0;
+
+}
+
+@end

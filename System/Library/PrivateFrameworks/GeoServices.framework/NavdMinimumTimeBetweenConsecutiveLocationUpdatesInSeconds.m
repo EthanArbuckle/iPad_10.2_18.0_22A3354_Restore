@@ -1,0 +1,8 @@
+@implementation NavdMinimumTimeBetweenConsecutiveLocationUpdatesInSeconds
+
+void *GeoServicesConfig_NavdMinimumTimeBetweenConsecutiveLocationUpdatesInSeconds_Metadata_block_invoke_267()
+{
+  return &unk_1E1E81940;
+}
+
+@end

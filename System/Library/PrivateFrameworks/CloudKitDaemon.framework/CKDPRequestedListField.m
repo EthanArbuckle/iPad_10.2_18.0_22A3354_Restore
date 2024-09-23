@@ -1,0 +1,543 @@
+@implementation CKDPRequestedListField
+
+- (BOOL)hasFieldId
+{
+  return self->_fieldId != 0;
+}
+
+- (void)clearRanges
+{
+  uint64_t v2;
+
+  objc_msgSend_removeAllObjects(self->_ranges, a2, v2);
+}
+
+- (void)addRange:(id)a3
+{
+  const char *v4;
+  NSMutableArray *ranges;
+  NSMutableArray *v6;
+  NSMutableArray *v7;
+  char *v8;
+
+  v4 = (const char *)a3;
+  ranges = self->_ranges;
+  v8 = (char *)v4;
+  if (!ranges)
+  {
+    v6 = (NSMutableArray *)objc_alloc_init(MEMORY[0x1E0C99DE8]);
+    v7 = self->_ranges;
+    self->_ranges = v6;
+
+    v4 = v8;
+    ranges = self->_ranges;
+  }
+  objc_msgSend_addObject_(ranges, v4, (uint64_t)v4);
+
+}
+
+- (unint64_t)rangesCount
+{
+  uint64_t v2;
+
+  return objc_msgSend_count(self->_ranges, a2, v2);
+}
+
+- (id)rangeAtIndex:(unint64_t)a3
+{
+  return (id)objc_msgSend_objectAtIndex_(self->_ranges, a2, a3);
+}
+
++ (Class)rangeType
+{
+  return (Class)objc_opt_class();
+}
+
+- (id)description
+{
+  void *v3;
+  void *v4;
+  const char *v5;
+  uint64_t v6;
+  void *v7;
+  const char *v8;
+  void *v9;
+  objc_super v11;
+
+  v3 = (void *)MEMORY[0x1E0CB3940];
+  v11.receiver = self;
+  v11.super_class = (Class)CKDPRequestedListField;
+  -[CKDPRequestedListField description](&v11, sel_description);
+  v4 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend_dictionaryRepresentation(self, v5, v6);
+  v7 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend_stringWithFormat_(v3, v8, (uint64_t)CFSTR("%@ %@"), v4, v7);
+  v9 = (void *)objc_claimAutoreleasedReturnValue();
+
+  return v9;
+}
+
+- (id)dictionaryRepresentation
+{
+  uint64_t v2;
+  const char *v4;
+  uint64_t v5;
+  void *v6;
+  CKDPRecordFieldIdentifier *fieldId;
+  void *v8;
+  const char *v9;
+  id v10;
+  const char *v11;
+  uint64_t v12;
+  uint64_t v13;
+  const char *v14;
+  void *v15;
+  NSMutableArray *v16;
+  const char *v17;
+  uint64_t v18;
+  const char *v19;
+  uint64_t v20;
+  uint64_t v21;
+  uint64_t v22;
+  uint64_t i;
+  void *v24;
+  const char *v25;
+  const char *v26;
+  __int128 v28;
+  __int128 v29;
+  __int128 v30;
+  __int128 v31;
+  _BYTE v32[128];
+  uint64_t v33;
+
+  v33 = *MEMORY[0x1E0C80C00];
+  objc_msgSend_dictionary(MEMORY[0x1E0C99E08], a2, v2);
+  v6 = (void *)objc_claimAutoreleasedReturnValue();
+  fieldId = self->_fieldId;
+  if (fieldId)
+  {
+    objc_msgSend_dictionaryRepresentation(fieldId, v4, v5);
+    v8 = (void *)objc_claimAutoreleasedReturnValue();
+    objc_msgSend_setObject_forKey_(v6, v9, (uint64_t)v8, CFSTR("field_id"));
+
+  }
+  if (objc_msgSend_count(self->_ranges, v4, v5))
+  {
+    v10 = objc_alloc(MEMORY[0x1E0C99DE8]);
+    v13 = objc_msgSend_count(self->_ranges, v11, v12);
+    v15 = (void *)objc_msgSend_initWithCapacity_(v10, v14, v13);
+    v28 = 0u;
+    v29 = 0u;
+    v30 = 0u;
+    v31 = 0u;
+    v16 = self->_ranges;
+    v18 = objc_msgSend_countByEnumeratingWithState_objects_count_(v16, v17, (uint64_t)&v28, v32, 16);
+    if (v18)
+    {
+      v21 = v18;
+      v22 = *(_QWORD *)v29;
+      do
+      {
+        for (i = 0; i != v21; ++i)
+        {
+          if (*(_QWORD *)v29 != v22)
+            objc_enumerationMutation(v16);
+          objc_msgSend_dictionaryRepresentation(*(void **)(*((_QWORD *)&v28 + 1) + 8 * i), v19, v20, (_QWORD)v28);
+          v24 = (void *)objc_claimAutoreleasedReturnValue();
+          objc_msgSend_addObject_(v15, v25, (uint64_t)v24);
+
+        }
+        v21 = objc_msgSend_countByEnumeratingWithState_objects_count_(v16, v19, (uint64_t)&v28, v32, 16);
+      }
+      while (v21);
+    }
+
+    objc_msgSend_setObject_forKey_(v6, v26, (uint64_t)v15, CFSTR("range"));
+  }
+  return v6;
+}
+
+- (BOOL)readFrom:(id)a3
+{
+  return sub_1BEAB36C0((id *)&self->super.super.isa, (uint64_t)a3);
+}
+
+- (void)writeTo:(id)a3
+{
+  id v4;
+  NSMutableArray *v5;
+  const char *v6;
+  uint64_t v7;
+  uint64_t v8;
+  uint64_t v9;
+  uint64_t v10;
+  const char *v11;
+  __int128 v12;
+  __int128 v13;
+  __int128 v14;
+  __int128 v15;
+  _BYTE v16[128];
+  uint64_t v17;
+
+  v17 = *MEMORY[0x1E0C80C00];
+  v4 = a3;
+  if (self->_fieldId)
+    PBDataWriterWriteSubmessage();
+  v14 = 0u;
+  v15 = 0u;
+  v12 = 0u;
+  v13 = 0u;
+  v5 = self->_ranges;
+  v7 = objc_msgSend_countByEnumeratingWithState_objects_count_(v5, v6, (uint64_t)&v12, v16, 16);
+  if (v7)
+  {
+    v8 = v7;
+    v9 = *(_QWORD *)v13;
+    do
+    {
+      v10 = 0;
+      do
+      {
+        if (*(_QWORD *)v13 != v9)
+          objc_enumerationMutation(v5);
+        PBDataWriterWriteSubmessage();
+        ++v10;
+      }
+      while (v8 != v10);
+      v8 = objc_msgSend_countByEnumeratingWithState_objects_count_(v5, v11, (uint64_t)&v12, v16, 16);
+    }
+    while (v8);
+  }
+
+}
+
+- (void)copyTo:(id)a3
+{
+  const char *v4;
+  CKDPRecordFieldIdentifier *fieldId;
+  const char *v6;
+  uint64_t v7;
+  const char *v8;
+  uint64_t v9;
+  uint64_t v10;
+  const char *v11;
+  uint64_t v12;
+  uint64_t i;
+  void *v14;
+  const char *v15;
+  id v16;
+
+  v16 = a3;
+  fieldId = self->_fieldId;
+  if (fieldId)
+    objc_msgSend_setFieldId_(v16, v4, (uint64_t)fieldId);
+  if (objc_msgSend_rangesCount(self, v4, (uint64_t)fieldId))
+  {
+    objc_msgSend_clearRanges(v16, v6, v7);
+    v10 = objc_msgSend_rangesCount(self, v8, v9);
+    if (v10)
+    {
+      v12 = v10;
+      for (i = 0; i != v12; ++i)
+      {
+        objc_msgSend_rangeAtIndex_(self, v11, i);
+        v14 = (void *)objc_claimAutoreleasedReturnValue();
+        objc_msgSend_addRange_(v16, v15, (uint64_t)v14);
+
+      }
+    }
+  }
+
+}
+
+- (id)copyWithZone:(_NSZone *)a3
+{
+  void *v5;
+  const char *v6;
+  void *v7;
+  const char *v8;
+  uint64_t v9;
+  _QWORD *v10;
+  const char *v11;
+  uint64_t v12;
+  void *v13;
+  NSMutableArray *v14;
+  const char *v15;
+  uint64_t v16;
+  const char *v17;
+  uint64_t v18;
+  uint64_t v19;
+  uint64_t v20;
+  void *v21;
+  const char *v22;
+  __int128 v24;
+  __int128 v25;
+  __int128 v26;
+  __int128 v27;
+  _BYTE v28[128];
+  uint64_t v29;
+
+  v29 = *MEMORY[0x1E0C80C00];
+  v5 = (void *)objc_opt_class();
+  v7 = (void *)objc_msgSend_allocWithZone_(v5, v6, (uint64_t)a3);
+  v10 = (_QWORD *)objc_msgSend_init(v7, v8, v9);
+  v12 = objc_msgSend_copyWithZone_(self->_fieldId, v11, (uint64_t)a3);
+  v13 = (void *)v10[1];
+  v10[1] = v12;
+
+  v26 = 0u;
+  v27 = 0u;
+  v24 = 0u;
+  v25 = 0u;
+  v14 = self->_ranges;
+  v16 = objc_msgSend_countByEnumeratingWithState_objects_count_(v14, v15, (uint64_t)&v24, v28, 16);
+  if (v16)
+  {
+    v18 = v16;
+    v19 = *(_QWORD *)v25;
+    do
+    {
+      v20 = 0;
+      do
+      {
+        if (*(_QWORD *)v25 != v19)
+          objc_enumerationMutation(v14);
+        v21 = (void *)objc_msgSend_copyWithZone_(*(void **)(*((_QWORD *)&v24 + 1) + 8 * v20), v17, (uint64_t)a3, (_QWORD)v24);
+        objc_msgSend_addRange_(v10, v22, (uint64_t)v21);
+
+        ++v20;
+      }
+      while (v18 != v20);
+      v18 = objc_msgSend_countByEnumeratingWithState_objects_count_(v14, v17, (uint64_t)&v24, v28, 16);
+    }
+    while (v18);
+  }
+
+  return v10;
+}
+
+- (BOOL)isEqual:(id)a3
+{
+  _QWORD *v4;
+  uint64_t v5;
+  const char *v6;
+  const char *v7;
+  CKDPRecordFieldIdentifier *fieldId;
+  uint64_t v9;
+  NSMutableArray *ranges;
+  uint64_t v11;
+  char isEqual;
+
+  v4 = a3;
+  v5 = objc_opt_class();
+  if (objc_msgSend_isMemberOfClass_(v4, v6, v5)
+    && ((fieldId = self->_fieldId, v9 = v4[1], !((unint64_t)fieldId | v9))
+     || objc_msgSend_isEqual_(fieldId, v7, v9)))
+  {
+    ranges = self->_ranges;
+    v11 = v4[2];
+    if ((unint64_t)ranges | v11)
+      isEqual = objc_msgSend_isEqual_(ranges, v7, v11);
+    else
+      isEqual = 1;
+  }
+  else
+  {
+    isEqual = 0;
+  }
+
+  return isEqual;
+}
+
+- (unint64_t)hash
+{
+  uint64_t v2;
+  uint64_t v4;
+  const char *v5;
+  uint64_t v6;
+
+  v4 = objc_msgSend_hash(self->_fieldId, a2, v2);
+  return objc_msgSend_hash(self->_ranges, v5, v6) ^ v4;
+}
+
+- (void)mergeFrom:(id)a3
+{
+  const char *v4;
+  id v5;
+  CKDPRecordFieldIdentifier *fieldId;
+  uint64_t v7;
+  id v8;
+  const char *v9;
+  uint64_t v10;
+  const char *v11;
+  uint64_t v12;
+  uint64_t v13;
+  uint64_t i;
+  __int128 v15;
+  __int128 v16;
+  __int128 v17;
+  __int128 v18;
+  _BYTE v19[128];
+  uint64_t v20;
+
+  v20 = *MEMORY[0x1E0C80C00];
+  v5 = a3;
+  fieldId = self->_fieldId;
+  v7 = *((_QWORD *)v5 + 1);
+  if (fieldId)
+  {
+    if (v7)
+      objc_msgSend_mergeFrom_(fieldId, v4, v7);
+  }
+  else if (v7)
+  {
+    objc_msgSend_setFieldId_(self, v4, v7);
+  }
+  v17 = 0u;
+  v18 = 0u;
+  v15 = 0u;
+  v16 = 0u;
+  v8 = *((id *)v5 + 2);
+  v10 = objc_msgSend_countByEnumeratingWithState_objects_count_(v8, v9, (uint64_t)&v15, v19, 16);
+  if (v10)
+  {
+    v12 = v10;
+    v13 = *(_QWORD *)v16;
+    do
+    {
+      for (i = 0; i != v12; ++i)
+      {
+        if (*(_QWORD *)v16 != v13)
+          objc_enumerationMutation(v8);
+        objc_msgSend_addRange_(self, v11, *(_QWORD *)(*((_QWORD *)&v15 + 1) + 8 * i), (_QWORD)v15);
+      }
+      v12 = objc_msgSend_countByEnumeratingWithState_objects_count_(v8, v11, (uint64_t)&v15, v19, 16);
+    }
+    while (v12);
+  }
+
+}
+
+- (CKDPRecordFieldIdentifier)fieldId
+{
+  return self->_fieldId;
+}
+
+- (void)setFieldId:(id)a3
+{
+  objc_storeStrong((id *)&self->_fieldId, a3);
+}
+
+- (NSMutableArray)ranges
+{
+  return self->_ranges;
+}
+
+- (void)setRanges:(id)a3
+{
+  objc_storeStrong((id *)&self->_ranges, a3);
+}
+
+- (void).cxx_destruct
+{
+  objc_storeStrong((id *)&self->_ranges, 0);
+  objc_storeStrong((id *)&self->_fieldId, 0);
+}
+
+- (void)_CKLogToFileHandle:(id)a3 atDepth:(int)a4
+{
+  id v6;
+  const char *v7;
+  uint64_t v8;
+  void *v9;
+  uint64_t v10;
+  const char *v11;
+  void *v12;
+  const char *v13;
+  const char *v14;
+  uint64_t v15;
+  const char *v16;
+  uint64_t v17;
+  const char *v18;
+  uint64_t v19;
+  uint64_t v20;
+  uint64_t v21;
+  uint64_t v22;
+  const char *v23;
+  uint64_t v24;
+  void *v25;
+  const char *v26;
+  uint64_t v27;
+  unint64_t v28;
+  void *v29;
+  const char *v30;
+  void *v31;
+  const char *v32;
+  uint64_t v33;
+  id obj;
+  __int128 v35;
+  __int128 v36;
+  __int128 v37;
+  __int128 v38;
+  _BYTE v39[128];
+  uint64_t v40;
+
+  v40 = *MEMORY[0x1E0C80C00];
+  v6 = a3;
+  objc_msgSend_fieldId(self, v7, v8);
+  v9 = (void *)objc_claimAutoreleasedReturnValue();
+  v10 = (a4 + 1);
+  objc_msgSend__CKLogToFileHandle_atDepth_(v9, v11, (uint64_t)v6, v10);
+
+  sub_1BEB2E9F4();
+  v12 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend_writeData_(v6, v13, (uint64_t)v12);
+
+  v37 = 0u;
+  v38 = 0u;
+  v35 = 0u;
+  v36 = 0u;
+  objc_msgSend_ranges(self, v14, v15);
+  obj = (id)objc_claimAutoreleasedReturnValue();
+  v17 = objc_msgSend_countByEnumeratingWithState_objects_count_(obj, v16, (uint64_t)&v35, v39, 16);
+  if (v17)
+  {
+    v19 = v17;
+    v20 = 0;
+    v21 = *(_QWORD *)v36;
+    do
+    {
+      v22 = 0;
+      v33 = v20;
+      do
+      {
+        if (*(_QWORD *)v36 != v21)
+          objc_enumerationMutation(obj);
+        objc_msgSend__CKLogToFileHandle_atDepth_(*(void **)(*((_QWORD *)&v35 + 1) + 8 * v22), v18, (uint64_t)v6, v10, v33);
+        objc_msgSend_ranges(self, v23, v24);
+        v25 = (void *)objc_claimAutoreleasedReturnValue();
+        v28 = objc_msgSend_count(v25, v26, v27);
+
+        if (v20 + 1 + v22 < v28)
+        {
+          sub_1BEB2D880();
+          v29 = (void *)objc_claimAutoreleasedReturnValue();
+          objc_msgSend_writeData_(v6, v30, (uint64_t)v29);
+
+        }
+        ++v22;
+      }
+      while (v19 != v22);
+      v20 = v19 + v33;
+      v19 = objc_msgSend_countByEnumeratingWithState_objects_count_(obj, v18, (uint64_t)&v35, v39, 16);
+    }
+    while (v19);
+  }
+
+  sub_1BEB2EA34();
+  v31 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend_writeData_(v6, v32, (uint64_t)v31);
+
+}
+
+@end

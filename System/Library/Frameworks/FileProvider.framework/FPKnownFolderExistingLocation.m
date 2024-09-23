@@ -1,0 +1,73 @@
+@implementation FPKnownFolderExistingLocation
+
+- (FPKnownFolderExistingLocation)initWithExistingItemIdentifier:(id)a3
+{
+  id v4;
+  FPKnownFolderExistingLocation *v5;
+  uint64_t v6;
+  NSString *itemIdentifier;
+  objc_super v9;
+
+  v4 = a3;
+  v9.receiver = self;
+  v9.super_class = (Class)FPKnownFolderExistingLocation;
+  v5 = -[FPKnownFolderExistingLocation init](&v9, sel_init);
+  if (v5)
+  {
+    v6 = objc_msgSend(v4, "copy");
+    itemIdentifier = v5->_itemIdentifier;
+    v5->_itemIdentifier = (NSString *)v6;
+
+  }
+  return v5;
+}
+
++ (BOOL)supportsSecureCoding
+{
+  return 1;
+}
+
+- (FPKnownFolderExistingLocation)initWithCoder:(id)a3
+{
+  id v4;
+  FPKnownFolderExistingLocation *v5;
+  uint64_t v6;
+  NSString *itemIdentifier;
+  objc_super v9;
+
+  v4 = a3;
+  v9.receiver = self;
+  v9.super_class = (Class)FPKnownFolderExistingLocation;
+  v5 = -[FPKnownFolderExistingLocation init](&v9, sel_init);
+  if (v5)
+  {
+    objc_msgSend(v4, "decodeObjectOfClass:forKey:", objc_opt_class(), CFSTR("_itemIdentifier"));
+    v6 = objc_claimAutoreleasedReturnValue();
+    itemIdentifier = v5->_itemIdentifier;
+    v5->_itemIdentifier = (NSString *)v6;
+
+  }
+  return v5;
+}
+
+- (void)encodeWithCoder:(id)a3
+{
+  objc_msgSend(a3, "encodeObject:forKey:", self->_itemIdentifier, CFSTR("_itemIdentifier"));
+}
+
+- (id)description
+{
+  return self->_itemIdentifier;
+}
+
+- (NSString)itemIdentifier
+{
+  return self->_itemIdentifier;
+}
+
+- (void).cxx_destruct
+{
+  objc_storeStrong((id *)&self->_itemIdentifier, 0);
+}
+
+@end

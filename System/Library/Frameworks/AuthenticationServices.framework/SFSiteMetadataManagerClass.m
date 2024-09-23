@@ -1,0 +1,30 @@
+@implementation SFSiteMetadataManagerClass
+
+Class __get_SFSiteMetadataManagerClass_block_invoke(uint64_t a1)
+{
+  Class result;
+
+  MobileSafariLibrary();
+  result = objc_getClass("_SFSiteMetadataManager");
+  *(_QWORD *)(*(_QWORD *)(*(_QWORD *)(a1 + 32) + 8) + 24) = result;
+  if (!*(_QWORD *)(*(_QWORD *)(*(_QWORD *)(a1 + 32) + 8) + 24))
+    __get_SFSiteMetadataManagerClass_block_invoke_cold_1();
+  get_SFSiteMetadataManagerClass_softClass = *(_QWORD *)(*(_QWORD *)(*(_QWORD *)(a1 + 32) + 8) + 24);
+  return result;
+}
+
+void __get_SFSiteMetadataManagerClass_block_invoke_cold_1()
+{
+  void *v0;
+  void *v1;
+
+  objc_msgSend(MEMORY[0x24BDD1448], "currentHandler");
+  v0 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(MEMORY[0x24BDD17C8], "stringWithUTF8String:", "Class get_SFSiteMetadataManagerClass(void)_block_invoke");
+  v1 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(v0, "handleFailureInFunction:file:lineNumber:description:", v1, CFSTR("_ASPasswordManagerIconController_iOS.m"), 39, CFSTR("Unable to find class %s"), "_SFSiteMetadataManager");
+
+  __break(1u);
+}
+
+@end

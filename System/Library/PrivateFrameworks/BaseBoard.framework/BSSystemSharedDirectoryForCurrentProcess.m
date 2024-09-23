@@ -1,0 +1,17 @@
+@implementation BSSystemSharedDirectoryForCurrentProcess
+
+void __BSSystemSharedDirectoryForCurrentProcess_block_invoke()
+{
+  uint64_t v0;
+  void *v1;
+  id v2;
+
+  BSSystemSharedDirectoryForIdentifier(0);
+  v2 = (id)objc_claimAutoreleasedReturnValue();
+  v0 = objc_msgSend(v2, "copy");
+  v1 = (void *)qword_1ECD39970;
+  qword_1ECD39970 = v0;
+
+}
+
+@end

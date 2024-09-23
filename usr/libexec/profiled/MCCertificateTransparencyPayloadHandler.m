@@ -1,0 +1,110 @@
+@implementation MCCertificateTransparencyPayloadHandler
+
+- (BOOL)installWithInstaller:(id)a3 options:(id)a4 interactionClient:(id)a5 outError:(id *)a6
+{
+  return -[MCCertificateTransparencyPayloadHandler _installOutError:](self, "_installOutError:", a6, a4, a5);
+}
+
+- (void)remove
+{
+  void *v3;
+  unsigned __int8 v4;
+
+  v3 = (void *)objc_claimAutoreleasedReturnValue(-[MCNewPayloadHandler profileHandler](self, "profileHandler"));
+  v4 = objc_msgSend(v3, "isSetAside");
+
+  if ((v4 & 1) == 0)
+    -[MCCertificateTransparencyPayloadHandler _remove](self, "_remove");
+}
+
+- (void)unsetAside
+{
+  -[MCCertificateTransparencyPayloadHandler _installOutError:](self, "_installOutError:", 0);
+}
+
+- (BOOL)_installOutError:(id *)a3
+{
+  void *v5;
+
+  v5 = (void *)objc_claimAutoreleasedReturnValue(-[MCCertificateTransparencyPayloadHandler exceptionsDictionary](self, "exceptionsDictionary"));
+  LOBYTE(a3) = -[MCCertificateTransparencyPayloadHandler setExceptions:outError:](self, "setExceptions:outError:", v5, a3);
+
+  return (char)a3;
+}
+
+- (void)_remove
+{
+  -[MCCertificateTransparencyPayloadHandler setExceptions:outError:](self, "setExceptions:outError:", 0, 0);
+}
+
+- (id)applicationID
+{
+  void *v3;
+  void *v4;
+  void *v5;
+  void *v6;
+  void *v7;
+  void *v8;
+  void *v9;
+  void *v10;
+  void *v11;
+  void *v12;
+
+  v3 = (void *)objc_claimAutoreleasedReturnValue(-[MCNewPayloadHandler payload](self, "payload"));
+  v4 = (void *)objc_claimAutoreleasedReturnValue(objc_msgSend(v3, "profile"));
+  v5 = (void *)objc_claimAutoreleasedReturnValue(objc_msgSend(v4, "identifier"));
+
+  v6 = (void *)objc_claimAutoreleasedReturnValue(-[MCNewPayloadHandler payload](self, "payload"));
+  v7 = (void *)objc_claimAutoreleasedReturnValue(objc_msgSend(v6, "UUID"));
+
+  v8 = (void *)objc_claimAutoreleasedReturnValue(objc_msgSend(v5, "dataUsingEncoding:", 4));
+  v9 = (void *)objc_claimAutoreleasedReturnValue(objc_msgSend(v7, "dataUsingEncoding:", 4));
+  v10 = (void *)objc_claimAutoreleasedReturnValue(objc_msgSend(v8, "base64EncodedStringWithOptions:", 0));
+  v11 = (void *)objc_claimAutoreleasedReturnValue(objc_msgSend(v9, "base64EncodedStringWithOptions:", 0));
+  v12 = (void *)objc_claimAutoreleasedReturnValue(+[NSString stringWithFormat:](NSString, "stringWithFormat:", CFSTR("com.apple.configurationprofiles.%@.%@"), v10, v11));
+
+  return v12;
+}
+
+- (BOOL)setExceptions:(id)a3 outError:(id *)a4
+{
+  id v5;
+
+  v5 = a3;
+  LOBYTE(self) = SecTrustStoreSetCTExceptions(-[MCCertificateTransparencyPayloadHandler applicationID](self, "applicationID"), v5, 0);
+
+  return (char)self;
+}
+
+- (id)exceptionsDictionary
+{
+  void *v2;
+  void *v3;
+  void *v4;
+  void *v5;
+  void *v6;
+  void *v7;
+  _QWORD v9[2];
+  _QWORD v10[2];
+
+  v2 = (void *)objc_claimAutoreleasedReturnValue(-[MCNewPayloadHandler payload](self, "payload"));
+  v9[0] = kSecCTExceptionsDomainsKey;
+  v3 = (void *)objc_claimAutoreleasedReturnValue(objc_msgSend(v2, "domainRules"));
+  v4 = v3;
+  if (!v3)
+    v4 = (void *)objc_claimAutoreleasedReturnValue(+[NSArray array](NSArray, "array"));
+  v10[0] = v4;
+  v9[1] = kSecCTExceptionsCAsKey;
+  v5 = (void *)objc_claimAutoreleasedReturnValue(objc_msgSend(v2, "hashDictionaries"));
+  v6 = v5;
+  if (!v5)
+    v6 = (void *)objc_claimAutoreleasedReturnValue(+[NSArray array](NSArray, "array"));
+  v10[1] = v6;
+  v7 = (void *)objc_claimAutoreleasedReturnValue(+[NSDictionary dictionaryWithObjects:forKeys:count:](NSDictionary, "dictionaryWithObjects:forKeys:count:", v10, v9, 2));
+  if (!v5)
+
+  if (!v3)
+  return v7;
+}
+
+@end

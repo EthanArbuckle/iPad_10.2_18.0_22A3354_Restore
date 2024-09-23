@@ -1,0 +1,36 @@
+@implementation AKColorPaletteButtonAccessibility
+
++ (id)safeCategoryTargetClassName
+{
+  return CFSTR("AKColorPaletteButton");
+}
+
++ (Class)safeCategoryBaseClass
+{
+  return (Class)objc_opt_class();
+}
+
++ (void)_accessibilityPerformValidations:(id)a3
+{
+  objc_msgSend(a3, "validateClass:hasInstanceMethod:withFullSignature:", CFSTR("AKColorPaletteButton"), CFSTR("color"), "@", 0);
+}
+
+- (id)accessibilityLabel
+{
+  return accessibilityLocalizedString(CFSTR("color.picker.label"));
+}
+
+- (id)accessibilityValue
+{
+  void *v2;
+  void *v3;
+
+  -[AKColorPaletteButtonAccessibility safeValueForKey:](self, "safeValueForKey:", CFSTR("color"));
+  v2 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(v2, "accessibilityLabel");
+  v3 = (void *)objc_claimAutoreleasedReturnValue();
+
+  return v3;
+}
+
+@end

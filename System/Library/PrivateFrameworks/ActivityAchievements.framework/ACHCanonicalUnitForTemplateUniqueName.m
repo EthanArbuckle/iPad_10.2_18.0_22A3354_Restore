@@ -1,0 +1,103 @@
+@implementation ACHCanonicalUnitForTemplateUniqueName
+
+void __ACHCanonicalUnitForTemplateUniqueName_block_invoke()
+{
+  void *v0;
+  void *v1;
+  void *v2;
+  void *v3;
+  void *v4;
+  void *v5;
+  void *v6;
+  void *v7;
+  void *v8;
+  void *v9;
+  uint64_t v10;
+  void *v11;
+  void *v12;
+  void *v13;
+  void *v14;
+  void *v15;
+  void *v16;
+  void *v17;
+  void *v18;
+  _QWORD v19[17];
+  _QWORD v20[19];
+
+  v20[17] = *MEMORY[0x24BDAC8D0];
+  v19[0] = CFSTR("NewMoveGoalAchieved");
+  objc_msgSend(MEMORY[0x24BDD4048], "kilocalorieUnit");
+  v18 = (void *)objc_claimAutoreleasedReturnValue();
+  v20[0] = v18;
+  v19[1] = CFSTR("NewMoveRecord");
+  objc_msgSend(MEMORY[0x24BDD4048], "kilocalorieUnit");
+  v17 = (void *)objc_claimAutoreleasedReturnValue();
+  v20[1] = v17;
+  v19[2] = CFSTR("NewExerciseRecord");
+  objc_msgSend(MEMORY[0x24BDD4048], "minuteUnit");
+  v16 = (void *)objc_claimAutoreleasedReturnValue();
+  v20[2] = v16;
+  v19[3] = CFSTR("LongestMoveStreak");
+  objc_msgSend(MEMORY[0x24BDD4048], "countUnit");
+  v15 = (void *)objc_claimAutoreleasedReturnValue();
+  v20[3] = v15;
+  v19[4] = CFSTR("MoveGoal200Percent");
+  objc_msgSend(MEMORY[0x24BDD4048], "kilocalorieUnit");
+  v14 = (void *)objc_claimAutoreleasedReturnValue();
+  v20[4] = v14;
+  v19[5] = CFSTR("MoveGoal300Percent");
+  objc_msgSend(MEMORY[0x24BDD4048], "kilocalorieUnit");
+  v13 = (void *)objc_claimAutoreleasedReturnValue();
+  v20[5] = v13;
+  v19[6] = CFSTR("MoveGoal400Percent");
+  objc_msgSend(MEMORY[0x24BDD4048], "kilocalorieUnit");
+  v12 = (void *)objc_claimAutoreleasedReturnValue();
+  v20[6] = v12;
+  v19[7] = CFSTR("PerfectWeekMove");
+  objc_msgSend(MEMORY[0x24BDD4048], "countUnit");
+  v0 = (void *)objc_claimAutoreleasedReturnValue();
+  v20[7] = v0;
+  v19[8] = CFSTR("PerfectWeekExercise");
+  objc_msgSend(MEMORY[0x24BDD4048], "countUnit");
+  v1 = (void *)objc_claimAutoreleasedReturnValue();
+  v20[8] = v1;
+  v19[9] = CFSTR("PerfectWeekStand");
+  objc_msgSend(MEMORY[0x24BDD4048], "countUnit");
+  v2 = (void *)objc_claimAutoreleasedReturnValue();
+  v20[9] = v2;
+  v19[10] = CFSTR("PerfectWeekAll");
+  objc_msgSend(MEMORY[0x24BDD4048], "countUnit");
+  v3 = (void *)objc_claimAutoreleasedReturnValue();
+  v20[10] = v3;
+  v19[11] = CFSTR("100MoveGoals");
+  objc_msgSend(MEMORY[0x24BDD4048], "countUnit");
+  v4 = (void *)objc_claimAutoreleasedReturnValue();
+  v20[11] = v4;
+  v19[12] = CFSTR("365MoveGoals");
+  objc_msgSend(MEMORY[0x24BDD4048], "countUnit");
+  v5 = (void *)objc_claimAutoreleasedReturnValue();
+  v20[12] = v5;
+  v19[13] = CFSTR("500MoveGoals");
+  objc_msgSend(MEMORY[0x24BDD4048], "countUnit");
+  v6 = (void *)objc_claimAutoreleasedReturnValue();
+  v20[13] = v6;
+  v19[14] = CFSTR("1000MoveGoals");
+  objc_msgSend(MEMORY[0x24BDD4048], "countUnit");
+  v7 = (void *)objc_claimAutoreleasedReturnValue();
+  v20[14] = v7;
+  v19[15] = CFSTR("7WorkoutWeek");
+  objc_msgSend(MEMORY[0x24BDD4048], "countUnit");
+  v8 = (void *)objc_claimAutoreleasedReturnValue();
+  v20[15] = v8;
+  v19[16] = CFSTR("BestWorkout");
+  objc_msgSend(MEMORY[0x24BDD4048], "kilocalorieUnit");
+  v9 = (void *)objc_claimAutoreleasedReturnValue();
+  v20[16] = v9;
+  objc_msgSend(MEMORY[0x24BDBCE70], "dictionaryWithObjects:forKeys:count:", v20, v19, 17);
+  v10 = objc_claimAutoreleasedReturnValue();
+  v11 = (void *)ACHCanonicalUnitForTemplateUniqueName_mappingDictionary;
+  ACHCanonicalUnitForTemplateUniqueName_mappingDictionary = v10;
+
+}
+
+@end

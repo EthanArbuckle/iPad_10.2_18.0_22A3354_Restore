@@ -1,0 +1,10 @@
+@implementation ThresholdSpecifierViewControllerDataSource
+
+- (void).cxx_destruct
+{
+  sub_1A961AEDC((uint64_t)self + OBJC_IVAR____TtC18HealthExperienceUI42ThresholdSpecifierViewControllerDataSource_eventHandler);
+  sub_1A961AEDC((uint64_t)self + OBJC_IVAR____TtC18HealthExperienceUI42ThresholdSpecifierViewControllerDataSource_presentationContext);
+  __swift_destroy_boxed_opaque_existential_1((uint64_t)self + OBJC_IVAR____TtC18HealthExperienceUI42ThresholdSpecifierViewControllerDataSource_configuration);
+}
+
+@end

@@ -1,0 +1,325 @@
+@implementation TRIPBBoolInt32Dictionary
+
+- (TRIPBBoolInt32Dictionary)init
+{
+  return -[TRIPBBoolInt32Dictionary initWithInt32s:forKeys:count:](self, "initWithInt32s:forKeys:count:", 0, 0, 0);
+}
+
+- (TRIPBBoolInt32Dictionary)initWithInt32s:(const int *)a3 forKeys:(const BOOL *)a4 count:(unint64_t)a5
+{
+  TRIPBBoolInt32Dictionary *result;
+  uint64_t v9;
+  unsigned int v10;
+  int v11;
+  objc_super v12;
+
+  v12.receiver = self;
+  v12.super_class = (Class)TRIPBBoolInt32Dictionary;
+  result = -[TRIPBBoolInt32Dictionary init](&v12, sel_init);
+  if (a5 && result)
+  {
+    do
+    {
+      v10 = *(unsigned __int8 *)a4++;
+      v9 = v10;
+      v11 = *a3++;
+      result->_values[v9] = v11;
+      result->_valueSet[v9] = 1;
+      --a5;
+    }
+    while (a5);
+  }
+  return result;
+}
+
+- (TRIPBBoolInt32Dictionary)initWithDictionary:(id)a3
+{
+  TRIPBBoolInt32Dictionary *result;
+  uint64_t v5;
+  char v6;
+  char v7;
+
+  result = -[TRIPBBoolInt32Dictionary initWithInt32s:forKeys:count:](self, "initWithInt32s:forKeys:count:", 0, 0, 0);
+  if (a3 && result)
+  {
+    v5 = 0;
+    v6 = 1;
+    do
+    {
+      v7 = v6;
+      if (*((_BYTE *)a3 + v5 + 24))
+      {
+        result->_values[v5] = *((_DWORD *)a3 + v5 + 4);
+        result->_valueSet[v5] = 1;
+      }
+      v6 = 0;
+      v5 = 1;
+    }
+    while ((v7 & 1) != 0);
+  }
+  return result;
+}
+
+- (TRIPBBoolInt32Dictionary)initWithCapacity:(unint64_t)a3
+{
+  return -[TRIPBBoolInt32Dictionary initWithInt32s:forKeys:count:](self, "initWithInt32s:forKeys:count:", 0, 0, 0);
+}
+
+- (void)dealloc
+{
+  objc_super v3;
+
+  if (self->_autocreator)
+    objc_msgSend((id)objc_msgSend(MEMORY[0x1E0CB3488], "currentHandler"), "handleFailureInMethod:object:file:lineNumber:description:", a2, self, CFSTR("TRIPBDictionary.m"), 10289, CFSTR("%@: Autocreator must be cleared before release, autocreator: %@"), objc_opt_class(), self->_autocreator);
+  v3.receiver = self;
+  v3.super_class = (Class)TRIPBBoolInt32Dictionary;
+  -[TRIPBBoolInt32Dictionary dealloc](&v3, sel_dealloc);
+}
+
+- (id)copyWithZone:(_NSZone *)a3
+{
+  return -[TRIPBBoolInt32Dictionary initWithDictionary:](+[TRIPBBoolInt32Dictionary allocWithZone:](TRIPBBoolInt32Dictionary, "allocWithZone:", a3), "initWithDictionary:", self);
+}
+
+- (BOOL)isEqual:(id)a3
+{
+  if (self == a3)
+    return 1;
+  objc_opt_class();
+  return (objc_opt_isKindOfClass() & 1) != 0
+      && self->_valueSet[0] == *((unsigned __int8 *)a3 + 24)
+      && self->_valueSet[1] == *((unsigned __int8 *)a3 + 25)
+      && (!self->_valueSet[0] || self->_values[0] == *((_DWORD *)a3 + 4))
+      && (!self->_valueSet[1] || self->_values[1] == *((_DWORD *)a3 + 5));
+}
+
+- (unint64_t)hash
+{
+  return self->_valueSet[1] + (unint64_t)self->_valueSet[0];
+}
+
+- (id)description
+{
+  void *v3;
+  void *v4;
+
+  v3 = (void *)objc_msgSend(MEMORY[0x1E0CB37A0], "stringWithFormat:", CFSTR("<%@ %p> {"), objc_opt_class(), self);
+  v4 = v3;
+  if (self->_valueSet[0])
+    objc_msgSend(v3, "appendFormat:", CFSTR("NO: %d"), self->_values[0]);
+  if (self->_valueSet[1])
+    objc_msgSend(v4, "appendFormat:", CFSTR("YES: %d"), self->_values[1]);
+  objc_msgSend(v4, "appendString:", CFSTR(" }"));
+  return v4;
+}
+
+- (unint64_t)count
+{
+  return self->_valueSet[1] + (unint64_t)self->_valueSet[0];
+}
+
+- (BOOL)getInt32:(int *)a3 forKey:(BOOL)a4
+{
+  _BOOL4 v4;
+
+  v4 = self->_valueSet[a4];
+  if (a3 && self->_valueSet[a4])
+    *a3 = self->_values[a4];
+  return v4;
+}
+
+- (void)setTRIPBGenericValue:(id *)a3 forTRIPBGenericValueKey:(id *)a4
+{
+  _BOOL8 var0;
+
+  var0 = a4->var0;
+  self->_values[var0] = a3->var1;
+  self->_valueSet[var0] = 1;
+}
+
+- (void)enumerateForTextFormat:(id)a3
+{
+  if (self->_valueSet[0])
+    (*((void (**)(id, const __CFString *, uint64_t))a3 + 2))(a3, CFSTR("false"), objc_msgSend(MEMORY[0x1E0CB3940], "stringWithFormat:", CFSTR("%d"), self->_values[0]));
+  if (self->_valueSet[1])
+    (*((void (**)(id, const __CFString *, uint64_t))a3 + 2))(a3, CFSTR("true"), objc_msgSend(MEMORY[0x1E0CB3940], "stringWithFormat:", CFSTR("%d"), self->_values[1]));
+}
+
+- (void)enumerateKeysAndInt32sUsingBlock:(id)a3
+{
+  char v5;
+
+  v5 = 0;
+  if (!self->_valueSet[0]
+    || ((*((void (**)(id, _QWORD, _QWORD, char *))a3 + 2))(a3, 0, self->_values[0], &v5), !v5))
+  {
+    if (self->_valueSet[1])
+      (*((void (**)(id, uint64_t, _QWORD, char *))a3 + 2))(a3, 1, self->_values[1], &v5);
+  }
+}
+
+- (unint64_t)computeSerializedSizeAsField:(id)a3
+{
+  uint64_t v3;
+  uint64_t v4;
+  uint64_t v5;
+  unsigned int v6;
+  BOOL *valueSet;
+  int *values;
+  char v9;
+  char v10;
+  uint64_t v11;
+  uint64_t v12;
+  uint64_t v13;
+  unsigned int v14;
+  uint64_t v15;
+  BOOL v16;
+
+  v3 = 0;
+  v4 = 0;
+  v5 = 0;
+  v6 = *(unsigned __int8 *)(*((_QWORD *)a3 + 1) + 30);
+  valueSet = self->_valueSet;
+  values = self->_values;
+  v9 = 1;
+  do
+  {
+    v10 = v9;
+    if (valueSet[v3])
+    {
+      ++v4;
+      v11 = ComputeDictInt32FieldSize(values[v3], 2, v6);
+      v12 = v11 + 2;
+      if ((v11 + 2) >> 28)
+        v13 = 5;
+      else
+        v13 = 4;
+      if (v12 < 0x200000)
+        v13 = 3;
+      if (v12 < 0x4000)
+        v13 = 2;
+      if (v12 < 0x80)
+        v13 = 1;
+      v5 += v12 + v13;
+    }
+    v9 = 0;
+    v3 = 1;
+  }
+  while ((v10 & 1) != 0);
+  v14 = 8 * *(_DWORD *)(*((_QWORD *)a3 + 1) + 16);
+  if (v14 >= 0x80)
+  {
+    if (v14 >= 0x4000)
+    {
+      if (v14 >= 0x200000)
+      {
+        v16 = v14 >> 28 == 0;
+        v15 = 4;
+        if (!v16)
+          v15 = 5;
+      }
+      else
+      {
+        v15 = 3;
+      }
+    }
+    else
+    {
+      v15 = 2;
+    }
+  }
+  else
+  {
+    v15 = 1;
+  }
+  return v5 + v15 * v4;
+}
+
+- (void)writeToCodedOutputStream:(id)a3 asField:(id)a4
+{
+  char v5;
+  uint64_t v6;
+  uint64_t v7;
+  unsigned int v8;
+  uint64_t v9;
+  BOOL *valueSet;
+  int *values;
+  char v12;
+  char v13;
+
+  v5 = 0;
+  v6 = 0;
+  v7 = *((_QWORD *)a4 + 1);
+  v8 = *(unsigned __int8 *)(v7 + 30);
+  v9 = (8 * *(_DWORD *)(v7 + 16)) | 2u;
+  valueSet = self->_valueSet;
+  values = self->_values;
+  v12 = 1;
+  do
+  {
+    v13 = v12;
+    if (valueSet[v6])
+    {
+      objc_msgSend(a3, "writeInt32NoTag:", v9);
+      objc_msgSend(a3, "writeInt32NoTag:", ComputeDictInt32FieldSize(values[v6], 2, v8) + 2);
+      objc_msgSend(a3, "writeBool:value:", 1, v5 & 1);
+      WriteDictInt32Field(a3, values[v6], 2, v8);
+    }
+    v12 = 0;
+    v5 = 1;
+    v6 = 1;
+  }
+  while ((v13 & 1) != 0);
+}
+
+- (void)addEntriesFromDictionary:(id)a3
+{
+  uint64_t v4;
+  char v5;
+  char v6;
+  TRIPBMessage *autocreator;
+
+  if (a3)
+  {
+    v4 = 0;
+    v5 = 1;
+    do
+    {
+      v6 = v5;
+      if (*((_BYTE *)a3 + v4 + 24))
+      {
+        self->_valueSet[v4] = 1;
+        self->_values[v4] = *((_DWORD *)a3 + v4 + 4);
+      }
+      v5 = 0;
+      v4 = 1;
+    }
+    while ((v6 & 1) != 0);
+    autocreator = self->_autocreator;
+    if (autocreator)
+      TRIPBAutocreatedDictionaryModified(autocreator, (uint64_t)self);
+  }
+}
+
+- (void)setInt32:(int)a3 forKey:(BOOL)a4
+{
+  TRIPBMessage *autocreator;
+
+  self->_values[a4] = a3;
+  self->_valueSet[a4] = 1;
+  autocreator = self->_autocreator;
+  if (autocreator)
+    TRIPBAutocreatedDictionaryModified(autocreator, (uint64_t)self);
+}
+
+- (void)removeInt32ForKey:(BOOL)a3
+{
+  self->_valueSet[a3] = 0;
+}
+
+- (void)removeAll
+{
+  *(_WORD *)self->_valueSet = 0;
+}
+
+@end

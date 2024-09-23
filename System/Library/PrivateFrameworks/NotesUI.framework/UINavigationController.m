@@ -1,0 +1,8 @@
+@implementation UINavigationController
+
+uint64_t __82__UINavigationController_IC__ic_pushViewControllerAfterActiveTransition_animated___block_invoke(uint64_t a1)
+{
+  return objc_msgSend(*(id *)(a1 + 32), "pushViewController:animated:", *(_QWORD *)(a1 + 40), *(unsigned __int8 *)(a1 + 48));
+}
+
+@end

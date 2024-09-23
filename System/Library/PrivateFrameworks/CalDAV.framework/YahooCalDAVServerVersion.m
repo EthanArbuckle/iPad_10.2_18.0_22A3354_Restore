@@ -1,0 +1,35 @@
+@implementation YahooCalDAVServerVersion
+
+- (YahooCalDAVServerVersion)init
+{
+  YahooCalDAVServerVersion *v2;
+  void *v3;
+  uint64_t v5;
+  objc_super v6;
+
+  v6.receiver = self;
+  v6.super_class = (Class)YahooCalDAVServerVersion;
+  v2 = -[CalDAVServerVersion init](&v6, sel_init);
+  if (v2)
+  {
+    v5 = 0;
+    objc_msgSend(MEMORY[0x24BDD1798], "regularExpressionWithPattern:options:error:", CFSTR("ATS|YTS/([0-9]+\\.[0-9]+)"), 1, &v5);
+    v3 = (void *)objc_claimAutoreleasedReturnValue();
+    -[CalDAVConcreteServerVersion setRegularExpression:](v2, "setRegularExpression:", v3);
+
+    -[CalDAVServerVersion setSupportsChecksumming:](v2, "setSupportsChecksumming:", 0);
+  }
+  return v2;
+}
+
+- (id)type
+{
+  return CFSTR("Yahoo");
+}
+
+- (BOOL)supportsAutoSchedule
+{
+  return 1;
+}
+
+@end

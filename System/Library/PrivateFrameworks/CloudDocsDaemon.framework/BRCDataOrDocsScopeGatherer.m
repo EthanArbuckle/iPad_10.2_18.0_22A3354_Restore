@@ -1,0 +1,1072 @@
+@implementation BRCDataOrDocsScopeGatherer
+
+- (BRCDataOrDocsScopeGatherer)initWithNotificationPipe:(id)a3 appLibraries:(id)a4 startingRank:(unint64_t)a5 maxRank:(unint64_t)a6 withDeadItems:(BOOL)a7 gatherReply:(id)a8
+{
+  id *v14;
+  id v15;
+  id v16;
+  BRCDataOrDocsScopeGatherer *v17;
+  BRCDataOrDocsScopeGatherer *v18;
+  void *v19;
+  id v20;
+  uint64_t v21;
+  id gatherReply;
+  void *v23;
+  uint64_t v24;
+  BRCAccountSession *session;
+  uint64_t v26;
+  NSMutableArray *gatheringAppLibraries;
+  void *v28;
+  NSObject *v29;
+  void *v30;
+  NSObject *v31;
+  uint64_t v33;
+  uint64_t v34;
+  void (*v35)(uint64_t, void *);
+  void *v36;
+  id v37;
+  id v38;
+  objc_super v39;
+  uint8_t buf[4];
+  id *v41;
+  __int16 v42;
+  unint64_t v43;
+  __int16 v44;
+  unint64_t v45;
+  __int16 v46;
+  void *v47;
+  uint64_t v48;
+
+  v48 = *MEMORY[0x1E0C80C00];
+  v14 = (id *)a3;
+  v15 = a4;
+  v16 = a8;
+  v39.receiver = self;
+  v39.super_class = (Class)BRCDataOrDocsScopeGatherer;
+  v17 = -[BRCDataOrDocsScopeGatherer init](&v39, sel_init);
+  v18 = v17;
+  if (v17)
+  {
+    objc_storeWeak((id *)&v17->_pipe, v14);
+    objc_msgSend(v14, "queue");
+    v19 = (void *)objc_claimAutoreleasedReturnValue();
+    v33 = MEMORY[0x1E0C809B0];
+    v34 = 3221225472;
+    v35 = __115__BRCDataOrDocsScopeGatherer_initWithNotificationPipe_appLibraries_startingRank_maxRank_withDeadItems_gatherReply___block_invoke;
+    v36 = &unk_1E875FCF8;
+    v20 = v19;
+    v37 = v20;
+    v38 = v16;
+    v21 = MEMORY[0x1D17A6DB0](&v33);
+    gatherReply = v18->_gatherReply;
+    v18->_gatherReply = (id)v21;
+
+    objc_msgSend(v14, "manager", v33, v34, v35, v36);
+    v23 = (void *)objc_claimAutoreleasedReturnValue();
+    objc_msgSend(v23, "session");
+    v24 = objc_claimAutoreleasedReturnValue();
+    session = v18->_session;
+    v18->_session = (BRCAccountSession *)v24;
+
+    v18->_gatheringRankMin = a5;
+    v18->_gatheringRankMax = a6;
+    v26 = objc_msgSend(v15, "mutableCopy");
+    gatheringAppLibraries = v18->_gatheringAppLibraries;
+    v18->_gatheringAppLibraries = (NSMutableArray *)v26;
+
+    objc_storeStrong((id *)&v18->_gatheringNamePrefix, v14[20]);
+    v18->_includesDeadItems = a7;
+    v18->_invalidated = 0;
+    brc_bread_crumbs();
+    v28 = (void *)objc_claimAutoreleasedReturnValue();
+    brc_notifications_log();
+    v29 = objc_claimAutoreleasedReturnValue();
+    if (os_log_type_enabled(v29, OS_LOG_TYPE_DEBUG))
+    {
+      *(_DWORD *)buf = 138413058;
+      v41 = v14;
+      v42 = 2048;
+      v43 = a5;
+      v44 = 2048;
+      v45 = a6;
+      v46 = 2112;
+      v47 = v28;
+      _os_log_debug_impl(&dword_1CBD43000, v29, OS_LOG_TYPE_DEBUG, "[NOTIF] %@: gathering from %lld to %lld%@", buf, 0x2Au);
+    }
+
+    if (v18->_gatheringNamePrefix)
+    {
+      brc_bread_crumbs();
+      v30 = (void *)objc_claimAutoreleasedReturnValue();
+      brc_notifications_log();
+      v31 = objc_claimAutoreleasedReturnValue();
+      if (os_log_type_enabled(v31, OS_LOG_TYPE_DEBUG))
+        -[BRCDataOrDocsScopeGatherer initWithNotificationPipe:appLibraries:startingRank:maxRank:withDeadItems:gatherReply:].cold.1();
+
+    }
+  }
+
+  return v18;
+}
+
+void __115__BRCDataOrDocsScopeGatherer_initWithNotificationPipe_appLibraries_startingRank_maxRank_withDeadItems_gatherReply___block_invoke(uint64_t a1, void *a2)
+{
+  NSObject *v3;
+  id v4;
+  uint64_t v5;
+  id v6;
+
+  v3 = *(NSObject **)(a1 + 32);
+  v4 = a2;
+  dispatch_assert_queue_V2(v3);
+  v5 = *(_QWORD *)(a1 + 40);
+  objc_msgSend(v4, "brc_wrappedError");
+  v6 = (id)objc_claimAutoreleasedReturnValue();
+
+  (*(void (**)(uint64_t, id))(v5 + 16))(v5, v6);
+}
+
+- (void)gatherWithBatchSize:(int64_t)a3 completion:(id)a4
+{
+  id WeakRetained;
+  void *v7;
+  void *v8;
+  NSObject *v9;
+  id v10;
+  void *v11;
+  void *v12;
+  void *v13;
+  void *v14;
+  void *v15;
+  void *v16;
+  char v17;
+  void *v18;
+  NSObject *v19;
+  NSObject *v20;
+  id v21;
+  NSObject *v22;
+  id v23;
+  void *v24;
+  id v25;
+  void *v26;
+  _QWORD v27[4];
+  NSObject *v28;
+  id v29;
+  id v30;
+  id v31[2];
+  _QWORD block[4];
+  id v33;
+  _QWORD v34[4];
+  id v35;
+  id v36;
+  id location;
+  uint8_t buf[4];
+  void *v39;
+  uint64_t v40;
+
+  v40 = *MEMORY[0x1E0C80C00];
+  v25 = a4;
+  WeakRetained = objc_loadWeakRetained((id *)&self->_pipe);
+  v7 = WeakRetained;
+  if (WeakRetained)
+  {
+    v24 = (void *)a3;
+    objc_msgSend(WeakRetained, "manager");
+    v8 = (void *)objc_claimAutoreleasedReturnValue();
+    objc_msgSend(v8, "session");
+    v26 = (void *)objc_claimAutoreleasedReturnValue();
+
+    objc_msgSend(v26, "readOnlyDB");
+    v9 = objc_claimAutoreleasedReturnValue();
+    objc_initWeak(&location, self);
+    v34[0] = MEMORY[0x1E0C809B0];
+    v34[1] = 3221225472;
+    v34[2] = __61__BRCDataOrDocsScopeGatherer_gatherWithBatchSize_completion___block_invoke;
+    v34[3] = &unk_1E875FD20;
+    objc_copyWeak(&v36, &location);
+    v10 = v25;
+    v35 = v10;
+    v11 = (void *)MEMORY[0x1D17A6DB0](v34);
+    -[NSObject serialQueue](v9, "serialQueue");
+    v12 = (void *)objc_claimAutoreleasedReturnValue();
+    if (v12)
+    {
+      objc_msgSend(v26, "personaIdentifier");
+      v13 = (void *)objc_claimAutoreleasedReturnValue();
+      if (v13)
+      {
+        objc_msgSend(v26, "personaIdentifier");
+        v14 = (void *)objc_claimAutoreleasedReturnValue();
+        objc_msgSend(MEMORY[0x1E0DC5EE8], "sharedManager");
+        v15 = (void *)objc_claimAutoreleasedReturnValue();
+        objc_msgSend(v15, "br_currentPersonaID");
+        v16 = (void *)objc_claimAutoreleasedReturnValue();
+        v17 = objc_msgSend(v14, "isEqualToString:", v16);
+
+        if ((v17 & 1) == 0)
+          goto LABEL_5;
+      }
+      else
+      {
+
+      }
+      -[NSObject serialQueue](v9, "serialQueue");
+      v22 = objc_claimAutoreleasedReturnValue();
+      v27[0] = MEMORY[0x1E0C809B0];
+      v27[1] = 3221225472;
+      v27[2] = __61__BRCDataOrDocsScopeGatherer_gatherWithBatchSize_completion___block_invoke_2;
+      v27[3] = &unk_1E875FD70;
+      objc_copyWeak(v31, &location);
+      v31[1] = v24;
+      v29 = v11;
+      v28 = v9;
+      v30 = v10;
+      v23 = v11;
+      dispatch_async(v22, v27);
+
+      objc_destroyWeak(v31);
+LABEL_12:
+
+      objc_destroyWeak(&v36);
+      objc_destroyWeak(&location);
+      goto LABEL_13;
+    }
+LABEL_5:
+    brc_bread_crumbs();
+    v18 = (void *)objc_claimAutoreleasedReturnValue();
+    brc_default_log();
+    v19 = objc_claimAutoreleasedReturnValue();
+    if (os_log_type_enabled(v19, OS_LOG_TYPE_DEFAULT))
+    {
+      *(_DWORD *)buf = 138412290;
+      v39 = v18;
+      _os_log_impl(&dword_1CBD43000, v19, OS_LOG_TYPE_DEFAULT, "[WARNING] Can't gather anymore because the personaID is incorrect or db has no serial queue%@", buf, 0xCu);
+    }
+
+    objc_msgSend(v7, "queue");
+    v20 = objc_claimAutoreleasedReturnValue();
+    block[0] = MEMORY[0x1E0C809B0];
+    block[1] = 3221225472;
+    block[2] = __61__BRCDataOrDocsScopeGatherer_gatherWithBatchSize_completion___block_invoke_15;
+    block[3] = &unk_1E875FD48;
+    v33 = v11;
+    v21 = v11;
+    dispatch_async(v20, block);
+
+    goto LABEL_12;
+  }
+  brc_bread_crumbs();
+  v26 = (void *)objc_claimAutoreleasedReturnValue();
+  brc_default_log();
+  v9 = objc_claimAutoreleasedReturnValue();
+  if (os_log_type_enabled(v9, OS_LOG_TYPE_DEFAULT))
+  {
+    *(_DWORD *)buf = 138412290;
+    v39 = v26;
+    _os_log_impl(&dword_1CBD43000, v9, OS_LOG_TYPE_DEFAULT, "[WARNING] Notification pipe got deallocated. Nothing to do%@", buf, 0xCu);
+  }
+LABEL_13:
+
+}
+
+void __61__BRCDataOrDocsScopeGatherer_gatherWithBatchSize_completion___block_invoke(uint64_t a1)
+{
+  id WeakRetained;
+  void *v3;
+  NSObject *v4;
+
+  WeakRetained = objc_loadWeakRetained((id *)(a1 + 40));
+  if (WeakRetained)
+  {
+    (*(void (**)(void))(*(_QWORD *)(a1 + 32) + 16))();
+  }
+  else
+  {
+    brc_bread_crumbs();
+    v3 = (void *)objc_claimAutoreleasedReturnValue();
+    brc_notifications_log();
+    v4 = objc_claimAutoreleasedReturnValue();
+    if (os_log_type_enabled(v4, OS_LOG_TYPE_DEBUG))
+      __61__BRCDataOrDocsScopeGatherer_gatherWithBatchSize_completion___block_invoke_cold_1();
+
+  }
+}
+
+uint64_t __61__BRCDataOrDocsScopeGatherer_gatherWithBatchSize_completion___block_invoke_15(uint64_t a1)
+{
+  return (*(uint64_t (**)(void))(*(_QWORD *)(a1 + 32) + 16))();
+}
+
+void __61__BRCDataOrDocsScopeGatherer_gatherWithBatchSize_completion___block_invoke_2(uint64_t a1)
+{
+  id *WeakRetained;
+  id *v2;
+  char *v3;
+  id v4;
+  void *v5;
+  NSObject *v6;
+  unsigned int v7;
+  NSObject *v8;
+  uint64_t v9;
+  NSObject *v10;
+  void *v11;
+  NSObject *v12;
+  void *v13;
+  NSObject *v14;
+  NSObject *v15;
+  id v16;
+  unsigned int v17;
+  unsigned int v18;
+  uint64_t v19;
+  uint64_t v20;
+  id v21;
+  int v22;
+  id v23;
+  uint64_t v24;
+  uint64_t v25;
+  uint64_t v26;
+  void *v27;
+  void *v28;
+  void *v29;
+  NSObject *v30;
+  void *v31;
+  NSObject *v32;
+  NSObject *v33;
+  const char *v34;
+  uint32_t v35;
+  void *v36;
+  NSObject *v37;
+  uint64_t v38;
+  char v39;
+  char v40;
+  NSObject *v41;
+  _QWORD *v42;
+  NSObject *v43;
+  NSObject *v44;
+  uint64_t v45;
+  void *v46;
+  NSObject *v47;
+  NSObject *v48;
+  id v49;
+  uint64_t v50;
+  NSObject *v51;
+  void *v52;
+  void *v53;
+  NSObject *v54;
+  NSObject *v55;
+  int v56;
+  const char *v57;
+  void *v58;
+  NSObject *v59;
+  void *v60;
+  NSObject *v61;
+  uint64_t v62;
+  int v63;
+  void *v64;
+  void *v65;
+  unint64_t v66;
+  uint64_t v68;
+  void *v69;
+  _QWORD v70[5];
+  id v71;
+  id v72;
+  __int128 v73;
+  __int128 v74;
+  __int128 v75;
+  __int128 v76;
+  _QWORD v77[5];
+  _QWORD v78[4];
+  id v79;
+  uint64_t v80[3];
+  _QWORD block[5];
+  id v82;
+  _BYTE v83[128];
+  uint64_t v84;
+  uint8_t buf[4];
+  uint64_t v86;
+  __int16 v87;
+  unint64_t v88;
+  __int16 v89;
+  NSObject *v90;
+  __int16 v91;
+  unint64_t v92;
+  __int16 v93;
+  void *v94;
+  __int16 v95;
+  void *v96;
+  uint64_t v97;
+
+  v97 = *MEMORY[0x1E0C80C00];
+  WeakRetained = (id *)objc_loadWeakRetained((id *)(a1 + 56));
+  v2 = WeakRetained;
+  if (WeakRetained)
+  {
+    v68 = (uint64_t)objc_loadWeakRetained(WeakRetained + 1);
+    if (v68)
+    {
+      v66 = *(_QWORD *)(a1 + 64);
+      if ((v66 & 0x8000000000000000) != 0)
+      {
+        brc_bread_crumbs();
+        v58 = (void *)objc_claimAutoreleasedReturnValue();
+        brc_default_log();
+        v59 = objc_claimAutoreleasedReturnValue();
+        if (os_log_type_enabled(v59, OS_LOG_TYPE_FAULT))
+          __61__BRCDataOrDocsScopeGatherer_gatherWithBatchSize_completion___block_invoke_2_cold_6();
+
+      }
+      if (objc_msgSend(v2[3], "count"))
+      {
+        v69 = (void *)objc_msgSend(objc_alloc(MEMORY[0x1E0C99DE8]), "initWithCapacity:", v66);
+        objc_msgSend(v2[3], "lastObject");
+        v65 = (void *)objc_claimAutoreleasedReturnValue();
+        if (!v65)
+        {
+          brc_bread_crumbs();
+          v60 = (void *)objc_claimAutoreleasedReturnValue();
+          brc_default_log();
+          v61 = objc_claimAutoreleasedReturnValue();
+          if (os_log_type_enabled(v61, OS_LOG_TYPE_FAULT))
+            __61__BRCDataOrDocsScopeGatherer_gatherWithBatchSize_completion___block_invoke_2_cold_5();
+
+        }
+        v3 = (char *)v2[6];
+        if (v3 + 1 > v2[4])
+          v4 = v3 + 1;
+        else
+          v4 = v2[4];
+        memset(v80, 0, sizeof(v80));
+        __brc_create_section(0, (uint64_t)"-[BRCDataOrDocsScopeGatherer gatherWithBatchSize:completion:]_block_invoke", 200, v80);
+        brc_bread_crumbs();
+        v5 = (void *)objc_claimAutoreleasedReturnValue();
+        brc_notifications_log();
+        v6 = objc_claimAutoreleasedReturnValue();
+        if (os_log_type_enabled(v6, OS_LOG_TYPE_DEBUG))
+        {
+          v50 = v80[0];
+          objc_msgSend(v65, "logName");
+          v51 = objc_claimAutoreleasedReturnValue();
+          BRCPrettyPrintBitmap();
+          v52 = (void *)objc_claimAutoreleasedReturnValue();
+          *(_DWORD *)buf = 134219266;
+          v86 = v50;
+          v87 = 2048;
+          v88 = (unint64_t)v4;
+          v89 = 2112;
+          v90 = v51;
+          v91 = 2048;
+          v92 = v66;
+          v93 = 2112;
+          v94 = v52;
+          v95 = 2112;
+          v96 = v5;
+          _os_log_debug_impl(&dword_1CBD43000, v6, OS_LOG_TYPE_DEBUG, "[NOTIF] ┏%llx Looking for item with ranks >= %lld in %@ (%ld kind %@)%@", buf, 0x3Eu);
+
+        }
+        v7 = *(_DWORD *)(v68 + 152);
+        if ((v7 & 1) != 0)
+        {
+          v8 = v2[10];
+          if (!v8)
+          {
+            v11 = 0;
+            v64 = 0;
+            v22 = 1;
+            goto LABEL_36;
+          }
+          if ((*(_WORD *)(v68 + 156) & 2) != 0)
+          {
+            objc_msgSend(v65, "itemsEnumeratorChildOf:withDeadItems:rankMin:rankMax:count:db:", v2[10], *((unsigned __int8 *)v2 + 72), v4, v2[5], v66, *(_QWORD *)(a1 + 32));
+            v49 = (id)objc_claimAutoreleasedReturnValue();
+            if (!v49)
+            {
+              brc_bread_crumbs();
+              v53 = (void *)objc_claimAutoreleasedReturnValue();
+              brc_default_log();
+              v54 = objc_claimAutoreleasedReturnValue();
+              if (os_log_type_enabled(v54, OS_LOG_TYPE_FAULT))
+                __61__BRCDataOrDocsScopeGatherer_gatherWithBatchSize_completion___block_invoke_2_cold_3();
+
+              objc_msgSend((id)v68, "queue");
+              v55 = objc_claimAutoreleasedReturnValue();
+              v78[0] = MEMORY[0x1E0C809B0];
+              v78[1] = 3221225472;
+              v78[2] = __61__BRCDataOrDocsScopeGatherer_gatherWithBatchSize_completion___block_invoke_19;
+              v78[3] = &unk_1E875FD48;
+              v79 = *(id *)(a1 + 40);
+              dispatch_async(v55, v78);
+
+              v23 = 0;
+              v64 = 0;
+              goto LABEL_79;
+            }
+            v11 = v49;
+            v63 = 0;
+            v64 = v49;
+LABEL_37:
+
+            v75 = 0u;
+            v76 = 0u;
+            v73 = 0u;
+            v74 = 0u;
+            v23 = v11;
+            v24 = objc_msgSend(v23, "countByEnumeratingWithState:objects:count:", &v73, v83, 16);
+            if (v24)
+            {
+              v25 = *(_QWORD *)v74;
+              do
+              {
+                v26 = 0;
+                do
+                {
+                  if (*(_QWORD *)v74 != v25)
+                    objc_enumerationMutation(v23);
+                  v27 = *(void **)(*((_QWORD *)&v73 + 1) + 8 * v26);
+                  v28 = (void *)MEMORY[0x1D17A6BE8]();
+                  v2[6] = (id)objc_msgSend(v27, "notifsRank");
+                  if (!objc_msgSend(v27, "isZoneRoot"))
+                  {
+                    if (objc_msgSend(v27, "isReserved"))
+                    {
+                      brc_bread_crumbs();
+                      v36 = (void *)objc_claimAutoreleasedReturnValue();
+                      brc_default_log();
+                      v37 = objc_claimAutoreleasedReturnValue();
+                      if (os_log_type_enabled(v37, OS_LOG_TYPE_FAULT))
+                      {
+                        *(_DWORD *)buf = 138412290;
+                        v86 = (uint64_t)v36;
+                        _os_log_fault_impl(&dword_1CBD43000, v37, OS_LOG_TYPE_FAULT, "[CRIT] Assertion failed: !item.isReserved%@", buf, 0xCu);
+                      }
+
+                    }
+                    +[BRCNotification notificationGatheredFromItem:](BRCNotification, "notificationGatheredFromItem:", v27);
+                    v31 = (void *)objc_claimAutoreleasedReturnValue();
+                    v29 = v31;
+                    if (*((_BYTE *)v2 + 72) || !objc_msgSend(v31, "isDead"))
+                    {
+                      objc_msgSend(v69, "addObject:", v29);
+                      brc_bread_crumbs();
+                      v30 = objc_claimAutoreleasedReturnValue();
+                      brc_notifications_log();
+                      v32 = objc_claimAutoreleasedReturnValue();
+                      if (os_log_type_enabled(v32, OS_LOG_TYPE_DEBUG))
+                      {
+                        *(_DWORD *)buf = 138412802;
+                        v86 = (uint64_t)v2;
+                        v87 = 2112;
+                        v88 = (unint64_t)v29;
+                        v89 = 2112;
+                        v90 = v30;
+                        v33 = v32;
+                        v34 = "[NOTIF] %@: queued gathered notification %@%@";
+                        v35 = 32;
+LABEL_55:
+                        _os_log_debug_impl(&dword_1CBD43000, v33, OS_LOG_TYPE_DEBUG, v34, buf, v35);
+                      }
+                    }
+                    else
+                    {
+                      brc_bread_crumbs();
+                      v30 = objc_claimAutoreleasedReturnValue();
+                      brc_notifications_log();
+                      v32 = objc_claimAutoreleasedReturnValue();
+                      if (os_log_type_enabled(v32, OS_LOG_TYPE_DEBUG))
+                      {
+                        *(_DWORD *)buf = 138412546;
+                        v86 = (uint64_t)v29;
+                        v87 = 2112;
+                        v88 = (unint64_t)v30;
+                        v33 = v32;
+                        v34 = "[NOTIF] Ignoring dead update %@%@";
+                        v35 = 22;
+                        goto LABEL_55;
+                      }
+                    }
+
+                    goto LABEL_52;
+                  }
+                  brc_bread_crumbs();
+                  v29 = (void *)objc_claimAutoreleasedReturnValue();
+                  brc_notifications_log();
+                  v30 = objc_claimAutoreleasedReturnValue();
+                  if (os_log_type_enabled(v30, OS_LOG_TYPE_DEBUG))
+                  {
+                    *(_DWORD *)buf = 138412546;
+                    v86 = (uint64_t)v27;
+                    v87 = 2112;
+                    v88 = (unint64_t)v29;
+                    _os_log_debug_impl(&dword_1CBD43000, v30, OS_LOG_TYPE_DEBUG, "[NOTIF] Ignoring zone root item %@%@", buf, 0x16u);
+                  }
+LABEL_52:
+
+                  objc_autoreleasePoolPop(v28);
+                  ++v26;
+                }
+                while (v24 != v26);
+                v38 = objc_msgSend(v23, "countByEnumeratingWithState:objects:count:", &v73, v83, 16);
+                v24 = v38;
+              }
+              while (v38);
+            }
+
+            if (v64)
+              v39 = v63;
+            else
+              v39 = 1;
+            if ((v39 & 1) != 0)
+            {
+              if (v63)
+              {
+LABEL_65:
+                objc_msgSend(v2[3], "removeLastObject");
+                v2[6] = 0;
+                v40 = 1;
+LABEL_68:
+                if (!objc_msgSend(v69, "count"))
+                {
+                  if ((v40 & 1) == 0)
+                  {
+                    brc_bread_crumbs();
+                    v43 = objc_claimAutoreleasedReturnValue();
+                    brc_default_log();
+                    v44 = objc_claimAutoreleasedReturnValue();
+                    if (os_log_type_enabled(v44, OS_LOG_TYPE_DEFAULT))
+                    {
+                      v45 = objc_msgSend(v64, "rowNumber");
+                      *(_DWORD *)buf = 134218498;
+                      v86 = v45;
+                      v87 = 2048;
+                      v88 = v66;
+                      v89 = 2112;
+                      v90 = v43;
+                      _os_log_impl(&dword_1CBD43000, v44, OS_LOG_TYPE_DEFAULT, "[WARNING] Strange... No updates received and phase isn't done %lu vs %ld%@", buf, 0x20u);
+                    }
+
+                  }
+                  objc_msgSend(v2, "gatherWithBatchSize:completion:", v66, *(_QWORD *)(a1 + 48));
+                  goto LABEL_80;
+                }
+                objc_msgSend((id)v68, "queue");
+                v41 = objc_claimAutoreleasedReturnValue();
+                v70[0] = MEMORY[0x1E0C809B0];
+                v70[1] = 3221225472;
+                v70[2] = __61__BRCDataOrDocsScopeGatherer_gatherWithBatchSize_completion___block_invoke_25;
+                v70[3] = &unk_1E875EB70;
+                v42 = v70;
+                v70[4] = v69;
+                v71 = (id)v68;
+                v72 = *(id *)(a1 + 40);
+                dispatch_async(v41, v70);
+
+                goto LABEL_78;
+              }
+            }
+            else if (objc_msgSend(v64, "rowNumber") < v66)
+            {
+              goto LABEL_65;
+            }
+            v40 = 0;
+            goto LABEL_68;
+          }
+          objc_msgSend(v2[8], "itemByItemGlobalID:db:", v8, *(_QWORD *)(a1 + 32));
+          v9 = objc_claimAutoreleasedReturnValue();
+          v10 = v9;
+          if (v9)
+          {
+            v84 = v9;
+            objc_msgSend(MEMORY[0x1E0C99D20], "arrayWithObjects:count:", &v84, 1);
+            v11 = (void *)objc_claimAutoreleasedReturnValue();
+            v64 = 0;
+          }
+          else
+          {
+            v64 = 0;
+            v11 = (void *)MEMORY[0x1E0C9AA60];
+          }
+        }
+        else
+        {
+          v17 = (v7 >> 7) & 1;
+          if ((v7 & 8) != 0)
+          {
+            v18 = 1;
+          }
+          else
+          {
+            v17 = 0;
+            v18 = 0;
+          }
+          if ((v7 & 6) != 0)
+            v19 = v17;
+          else
+            v19 = 0;
+          if ((v7 & 6) != 0)
+            v20 = v18;
+          else
+            v20 = 1;
+          BYTE3(v62) = (*(_DWORD *)(v68 + 152) & 0x40) != 0;
+          BYTE2(v62) = (*(_DWORD *)(v68 + 152) & 0x20) != 0;
+          BYTE1(v62) = (*(_DWORD *)(v68 + 152) & 4) != 0;
+          LOBYTE(v62) = (*(_DWORD *)(v68 + 152) & 2) != 0;
+          objc_msgSend(v65, "itemsEnumeratorWithRankMin:rankMax:namePrefix:withDeadItems:shouldIncludeFolders:shouldIncludeOnlyFolders:shouldIncludeDocumentsScope:shouldIncludeDataScope:shouldIncludeExternalScope:shouldIncludeTrashScope:count:db:", v4, v2[5], v2[7], *((unsigned __int8 *)v2 + 72), v20, v19, v62, v66, *(_QWORD *)(a1 + 32));
+          v21 = (id)objc_claimAutoreleasedReturnValue();
+          if (!v21)
+          {
+            brc_bread_crumbs();
+            v46 = (void *)objc_claimAutoreleasedReturnValue();
+            brc_default_log();
+            v47 = objc_claimAutoreleasedReturnValue();
+            if (os_log_type_enabled(v47, OS_LOG_TYPE_FAULT))
+              __61__BRCDataOrDocsScopeGatherer_gatherWithBatchSize_completion___block_invoke_2_cold_3();
+
+            objc_msgSend((id)v68, "queue");
+            v48 = objc_claimAutoreleasedReturnValue();
+            v77[0] = MEMORY[0x1E0C809B0];
+            v77[1] = 3221225472;
+            v77[2] = __61__BRCDataOrDocsScopeGatherer_gatherWithBatchSize_completion___block_invoke_21;
+            v77[3] = &unk_1E875FD48;
+            v42 = v77;
+            v77[4] = *(id *)(a1 + 40);
+            dispatch_async(v48, v77);
+
+            v23 = 0;
+            v64 = 0;
+LABEL_78:
+            v8 = v42[4];
+LABEL_79:
+
+LABEL_80:
+            __brc_leave_section(v80);
+
+            v13 = v69;
+            goto LABEL_81;
+          }
+          v11 = v21;
+          brc_bread_crumbs();
+          v8 = objc_claimAutoreleasedReturnValue();
+          brc_notifications_log();
+          v10 = objc_claimAutoreleasedReturnValue();
+          if (os_log_type_enabled(v10, OS_LOG_TYPE_DEBUG))
+          {
+            v56 = *((unsigned __int8 *)v2 + 72);
+            *(_DWORD *)buf = 134218498;
+            if (v56)
+              v57 = "yes";
+            else
+              v57 = "no";
+            v86 = (uint64_t)v11;
+            v87 = 2080;
+            v88 = (unint64_t)v57;
+            v89 = 2112;
+            v90 = v8;
+            _os_log_debug_impl(&dword_1CBD43000, v10, OS_LOG_TYPE_DEBUG, "[NOTIF] Creating enumertor %p including dead items: %s%@", buf, 0x20u);
+          }
+          v64 = v11;
+        }
+
+        v22 = v7 & 1;
+LABEL_36:
+        v63 = v22;
+        goto LABEL_37;
+      }
+      objc_msgSend((id)v68, "queue");
+      v15 = objc_claimAutoreleasedReturnValue();
+      block[0] = MEMORY[0x1E0C809B0];
+      block[1] = 3221225472;
+      block[2] = __61__BRCDataOrDocsScopeGatherer_gatherWithBatchSize_completion___block_invoke_17;
+      block[3] = &unk_1E875F7C0;
+      v16 = *(id *)(a1 + 40);
+      block[4] = v2;
+      v82 = v16;
+      dispatch_async(v15, block);
+
+      v13 = v82;
+    }
+    else
+    {
+      brc_bread_crumbs();
+      v13 = (void *)objc_claimAutoreleasedReturnValue();
+      brc_notifications_log();
+      v14 = objc_claimAutoreleasedReturnValue();
+      if (os_log_type_enabled(v14, OS_LOG_TYPE_DEBUG))
+        __61__BRCDataOrDocsScopeGatherer_gatherWithBatchSize_completion___block_invoke_2_cold_2();
+
+    }
+  }
+  else
+  {
+    brc_bread_crumbs();
+    v68 = objc_claimAutoreleasedReturnValue();
+    brc_notifications_log();
+    v12 = objc_claimAutoreleasedReturnValue();
+    v13 = v12;
+    if (os_log_type_enabled(v12, OS_LOG_TYPE_DEBUG))
+    {
+      __61__BRCDataOrDocsScopeGatherer_gatherWithBatchSize_completion___block_invoke_cold_1();
+      v13 = v12;
+    }
+  }
+LABEL_81:
+
+}
+
+uint64_t __61__BRCDataOrDocsScopeGatherer_gatherWithBatchSize_completion___block_invoke_17(uint64_t a1)
+{
+  (*(void (**)(void))(*(_QWORD *)(a1 + 40) + 16))();
+  return objc_msgSend(*(id *)(a1 + 32), "done");
+}
+
+uint64_t __61__BRCDataOrDocsScopeGatherer_gatherWithBatchSize_completion___block_invoke_19(uint64_t a1)
+{
+  return (*(uint64_t (**)(void))(*(_QWORD *)(a1 + 32) + 16))();
+}
+
+uint64_t __61__BRCDataOrDocsScopeGatherer_gatherWithBatchSize_completion___block_invoke_21(uint64_t a1)
+{
+  return (*(uint64_t (**)(void))(*(_QWORD *)(a1 + 32) + 16))();
+}
+
+uint64_t __61__BRCDataOrDocsScopeGatherer_gatherWithBatchSize_completion___block_invoke_25(uint64_t a1)
+{
+  id v2;
+  uint64_t v3;
+  uint64_t v4;
+  uint64_t v5;
+  uint64_t v6;
+  uint64_t v7;
+  void *v8;
+  __int128 v10;
+  __int128 v11;
+  __int128 v12;
+  __int128 v13;
+  _BYTE v14[128];
+  uint64_t v15;
+
+  v15 = *MEMORY[0x1E0C80C00];
+  v10 = 0u;
+  v11 = 0u;
+  v12 = 0u;
+  v13 = 0u;
+  v2 = *(id *)(a1 + 32);
+  v3 = objc_msgSend(v2, "countByEnumeratingWithState:objects:count:", &v10, v14, 16);
+  if (v3)
+  {
+    v4 = v3;
+    v5 = *(_QWORD *)v11;
+    do
+    {
+      v6 = 0;
+      do
+      {
+        if (*(_QWORD *)v11 != v5)
+          objc_enumerationMutation(v2);
+        v7 = *(_QWORD *)(*((_QWORD *)&v10 + 1) + 8 * v6);
+        v8 = (void *)MEMORY[0x1D17A6BE8](v3);
+        objc_msgSend(*(id *)(a1 + 40), "addNotification:asDead:", v7, 0, (_QWORD)v10);
+        objc_autoreleasePoolPop(v8);
+        ++v6;
+      }
+      while (v4 != v6);
+      v3 = objc_msgSend(v2, "countByEnumeratingWithState:objects:count:", &v10, v14, 16);
+      v4 = v3;
+    }
+    while (v3);
+  }
+
+  return (*(uint64_t (**)(void))(*(_QWORD *)(a1 + 48) + 16))();
+}
+
+- (id)_popGatherReply
+{
+  BRCDataOrDocsScopeGatherer *v2;
+  void *v3;
+  id gatherReply;
+  void *v5;
+
+  v2 = self;
+  objc_sync_enter(v2);
+  v3 = (void *)MEMORY[0x1D17A6DB0](v2->_gatherReply);
+  gatherReply = v2->_gatherReply;
+  v2->_gatherReply = 0;
+
+  v5 = (void *)MEMORY[0x1D17A6DB0](v3);
+  objc_sync_exit(v2);
+
+  return v5;
+}
+
+- (void)done
+{
+  uint64_t v0;
+  os_log_t v1;
+
+  OUTLINED_FUNCTION_1();
+  OUTLINED_FUNCTION_0(&dword_1CBD43000, v0, v1, "[NOTIF] %@: gather phase ends%@");
+  OUTLINED_FUNCTION_2();
+}
+
+void __34__BRCDataOrDocsScopeGatherer_done__block_invoke(uint64_t a1)
+{
+  void *v1;
+  _QWORD v2[4];
+  id v3;
+
+  v2[0] = MEMORY[0x1E0C809B0];
+  v2[1] = 3221225472;
+  v2[2] = __34__BRCDataOrDocsScopeGatherer_done__block_invoke_2;
+  v2[3] = &unk_1E875FD48;
+  v1 = *(void **)(a1 + 32);
+  v3 = *(id *)(a1 + 40);
+  objc_msgSend(v1, "addDequeueCallback:", v2);
+
+}
+
+uint64_t __34__BRCDataOrDocsScopeGatherer_done__block_invoke_2(uint64_t a1)
+{
+  return (*(uint64_t (**)(void))(*(_QWORD *)(a1 + 32) + 16))();
+}
+
+- (void)invalidate
+{
+  uint64_t v0;
+  os_log_t v1;
+
+  OUTLINED_FUNCTION_1();
+  OUTLINED_FUNCTION_4_1(&dword_1CBD43000, v0, v1, "[ERROR] %@: EINTR: client gather phase was invalidated%@");
+  OUTLINED_FUNCTION_2();
+}
+
+void __40__BRCDataOrDocsScopeGatherer_invalidate__block_invoke(uint64_t a1)
+{
+  uint64_t v1;
+  id v2;
+
+  v1 = *(_QWORD *)(a1 + 32);
+  objc_msgSend(MEMORY[0x1E0CB35C8], "br_errorWithPOSIXCode:", 4);
+  v2 = (id)objc_claimAutoreleasedReturnValue();
+  (*(void (**)(uint64_t, id))(v1 + 16))(v1, v2);
+
+}
+
+- (void)dealloc
+{
+  objc_super v3;
+
+  -[BRCDataOrDocsScopeGatherer invalidate](self, "invalidate");
+  v3.receiver = self;
+  v3.super_class = (Class)BRCDataOrDocsScopeGatherer;
+  -[BRCDataOrDocsScopeGatherer dealloc](&v3, sel_dealloc);
+}
+
+- (BRCItemGlobalID)gatheredChildrenItemGlobalID
+{
+  return self->_gatheredChildrenItemGlobalID;
+}
+
+- (void)setGatheredChildrenItemGlobalID:(id)a3
+{
+  objc_storeStrong((id *)&self->_gatheredChildrenItemGlobalID, a3);
+}
+
+- (void).cxx_destruct
+{
+  objc_storeStrong((id *)&self->_gatheredChildrenItemGlobalID, 0);
+  objc_storeStrong((id *)&self->_session, 0);
+  objc_storeStrong((id *)&self->_gatheringNamePrefix, 0);
+  objc_storeStrong((id *)&self->_gatheringAppLibraries, 0);
+  objc_storeStrong(&self->_gatherReply, 0);
+  objc_destroyWeak((id *)&self->_pipe);
+}
+
+- (void)initWithNotificationPipe:appLibraries:startingRank:maxRank:withDeadItems:gatherReply:.cold.1()
+{
+  uint64_t v0;
+  uint64_t v1;
+  os_log_t v2;
+  __int128 v3;
+
+  OUTLINED_FUNCTION_11_0(*MEMORY[0x1E0C80C00]);
+  LODWORD(v3) = 138412546;
+  *(_QWORD *)((char *)&v3 + 4) = v0;
+  OUTLINED_FUNCTION_5();
+  OUTLINED_FUNCTION_0(&dword_1CBD43000, v1, v2, "[NOTIF] matching prefix: %@%@", (_QWORD)v3, DWORD2(v3));
+  OUTLINED_FUNCTION_2();
+}
+
+void __61__BRCDataOrDocsScopeGatherer_gatherWithBatchSize_completion___block_invoke_cold_1()
+{
+  NSObject *v0;
+  uint64_t v1;
+  uint64_t v2;
+  uint64_t v3;
+  uint64_t v4;
+  uint64_t v5;
+  uint8_t v6;
+
+  OUTLINED_FUNCTION_4_0();
+  OUTLINED_FUNCTION_3_1(&dword_1CBD43000, v0, v1, "[NOTIF] Self got deallocated. Nothing to do%@", v2, v3, v4, v5, v6);
+  OUTLINED_FUNCTION_2();
+}
+
+void __61__BRCDataOrDocsScopeGatherer_gatherWithBatchSize_completion___block_invoke_2_cold_2()
+{
+  NSObject *v0;
+  uint64_t v1;
+  uint64_t v2;
+  uint64_t v3;
+  uint64_t v4;
+  uint64_t v5;
+  uint8_t v6;
+
+  OUTLINED_FUNCTION_4_0();
+  OUTLINED_FUNCTION_3_1(&dword_1CBD43000, v0, v1, "[NOTIF] Notification pipe got deallocated. Nothing to do%@", v2, v3, v4, v5, v6);
+  OUTLINED_FUNCTION_2();
+}
+
+void __61__BRCDataOrDocsScopeGatherer_gatherWithBatchSize_completion___block_invoke_2_cold_3()
+{
+  NSObject *v0;
+  uint64_t v1;
+  uint64_t v2;
+  uint64_t v3;
+  uint64_t v4;
+  uint64_t v5;
+  uint8_t v6;
+
+  OUTLINED_FUNCTION_4_0();
+  OUTLINED_FUNCTION_0_2(&dword_1CBD43000, v0, v1, "[CRIT] UNREACHABLE: No gathered items enumerator - bailing out%@", v2, v3, v4, v5, v6);
+  OUTLINED_FUNCTION_2();
+}
+
+void __61__BRCDataOrDocsScopeGatherer_gatherWithBatchSize_completion___block_invoke_2_cold_5()
+{
+  NSObject *v0;
+  uint64_t v1;
+  uint64_t v2;
+  uint64_t v3;
+  uint64_t v4;
+  uint64_t v5;
+  uint8_t v6;
+
+  OUTLINED_FUNCTION_4_0();
+  OUTLINED_FUNCTION_0_2(&dword_1CBD43000, v0, v1, "[CRIT] Assertion failed: appLibrary%@", v2, v3, v4, v5, v6);
+  OUTLINED_FUNCTION_2();
+}
+
+void __61__BRCDataOrDocsScopeGatherer_gatherWithBatchSize_completion___block_invoke_2_cold_6()
+{
+  NSObject *v0;
+  uint64_t v1;
+  uint64_t v2;
+  uint64_t v3;
+  uint64_t v4;
+  uint64_t v5;
+  uint8_t v6;
+
+  OUTLINED_FUNCTION_4_0();
+  OUTLINED_FUNCTION_0_2(&dword_1CBD43000, v0, v1, "[CRIT] Assertion failed: count >= 0%@", v2, v3, v4, v5, v6);
+  OUTLINED_FUNCTION_2();
+}
+
+@end

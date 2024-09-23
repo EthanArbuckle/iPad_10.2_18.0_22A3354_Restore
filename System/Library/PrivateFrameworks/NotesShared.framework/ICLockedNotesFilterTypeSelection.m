@@ -1,0 +1,18 @@
+@implementation ICLockedNotesFilterTypeSelection
+
+- (id)copyWithZone:(_NSZone *)a3
+{
+  return -[ICInclusionFilterTypeSelection initWithInclusionType:](+[ICLockedNotesFilterTypeSelection allocWithZone:](ICLockedNotesFilterTypeSelection, "allocWithZone:", a3), "initWithInclusionType:", -[ICInclusionFilterTypeSelection inclusionType](self, "inclusionType"));
+}
+
+- (int64_t)filterType
+{
+  return 10;
+}
+
+- (id)filterName
+{
+  return (id)objc_msgSend(MEMORY[0x1E0D64218], "localizedFrameworkStringForKey:value:table:allowSiri:", CFSTR("Locked Notes"), CFSTR("Locked Notes"), 0, 1);
+}
+
+@end

@@ -1,0 +1,192 @@
+@implementation HFIconDescriptorForIdentifier
+
+void ___HFIconDescriptorForIdentifier_block_invoke()
+{
+  void *v0;
+  HFSymbolIconConfiguration *v1;
+  HFSymbolIconConfiguration *v2;
+  void *v3;
+  void *v4;
+  HFSymbolIconConfiguration *v5;
+  HFSymbolIconConfiguration *v6;
+  void *v7;
+  void *v8;
+  HFSymbolIconConfiguration *v9;
+  HFSymbolIconConfiguration *v10;
+  void *v11;
+  void *v12;
+  HFSymbolIconConfiguration *v13;
+  HFSymbolIconConfiguration *v14;
+  void *v15;
+  void *v16;
+  HFSymbolIconConfiguration *v17;
+  HFSymbolIconConfiguration *v18;
+  void *v19;
+  void *v20;
+  HFSymbolIconConfiguration *v21;
+  HFSymbolIconConfiguration *v22;
+  void *v23;
+  void *v24;
+  HFSymbolIconConfiguration *v25;
+  HFSymbolIconConfiguration *v26;
+  void *v27;
+  HFMultistateImageIconDescriptor *v28;
+  void *v29;
+  HFSymbolIconConfiguration *v30;
+  HFSymbolIconConfiguration *v31;
+  void *v32;
+  HFMultistateImageIconDescriptor *v33;
+  void *v34;
+  HFSymbolIconConfiguration *v35;
+  void *v36;
+  HFMultistateImageIconDescriptor *v37;
+  uint64_t v38;
+  void *v39;
+  HFMultistateImageIconDescriptor *v40;
+  HFMultistateImageIconDescriptor *v41;
+  HFMultistateImageIconDescriptor *v42;
+  HFMultistateImageIconDescriptor *v43;
+  HFMultistateImageIconDescriptor *v44;
+  HFMultistateImageIconDescriptor *v45;
+  _QWORD v46[9];
+  _QWORD v47[9];
+  void *v48;
+  void *v49;
+  HFSymbolIconConfiguration *v50;
+  HFSymbolIconConfiguration *v51;
+  uint64_t v52;
+
+  v52 = *MEMORY[0x1E0C80C00];
+  v46[0] = CFSTR("lightbulb.fill");
+  objc_msgSend(MEMORY[0x1E0CEA650], "configurationWithPointSize:weight:", 5, 32.0);
+  v0 = (void *)objc_claimAutoreleasedReturnValue();
+  v1 = -[HFSymbolIconConfiguration initWithSystemImageName:configuration:]([HFSymbolIconConfiguration alloc], "initWithSystemImageName:configuration:", CFSTR("lightbulb.fill"), v0);
+  v2 = -[HFSymbolIconConfiguration initWithSystemImageName:configuration:]([HFSymbolIconConfiguration alloc], "initWithSystemImageName:configuration:", CFSTR("lightbulb.slash.fill"), v0);
+  v48 = &unk_1EA7CC448;
+  v49 = &unk_1EA7CC430;
+  v50 = v1;
+  v51 = v2;
+  objc_msgSend(MEMORY[0x1E0C99D80], "dictionaryWithObjects:forKeys:count:", &v50, &v48, 2);
+  v3 = (void *)objc_claimAutoreleasedReturnValue();
+  v45 = -[HFMultistateImageIconDescriptor initWithSymbolIconConfigurationsKeyedByPrimaryState:]([HFMultistateImageIconDescriptor alloc], "initWithSymbolIconConfigurationsKeyedByPrimaryState:", v3);
+
+  v47[0] = v45;
+  v46[1] = CFSTR("fanblades.fill");
+  objc_msgSend(MEMORY[0x1E0CEA650], "configurationWithPointSize:weight:", 5, 32.0);
+  v4 = (void *)objc_claimAutoreleasedReturnValue();
+  v5 = -[HFSymbolIconConfiguration initWithSystemImageName:configuration:]([HFSymbolIconConfiguration alloc], "initWithSystemImageName:configuration:", CFSTR("fanblades.fill"), v4);
+  v6 = -[HFSymbolIconConfiguration initWithSystemImageName:configuration:]([HFSymbolIconConfiguration alloc], "initWithSystemImageName:configuration:", CFSTR("fanblades.slash.fill"), v4);
+  v48 = &unk_1EA7CC448;
+  v49 = &unk_1EA7CC430;
+  v50 = v5;
+  v51 = v6;
+  objc_msgSend(MEMORY[0x1E0C99D80], "dictionaryWithObjects:forKeys:count:", &v50, &v48, 2);
+  v7 = (void *)objc_claimAutoreleasedReturnValue();
+  v44 = -[HFMultistateImageIconDescriptor initWithSymbolIconConfigurationsKeyedByPrimaryState:]([HFMultistateImageIconDescriptor alloc], "initWithSymbolIconConfigurationsKeyedByPrimaryState:", v7);
+
+  v47[1] = v44;
+  v46[2] = CFSTR("arrow.clockwise");
+  objc_msgSend(MEMORY[0x1E0CEA650], "configurationWithPointSize:weight:", 5, 32.0);
+  v8 = (void *)objc_claimAutoreleasedReturnValue();
+  v9 = -[HFSymbolIconConfiguration initWithSystemImageName:configuration:]([HFSymbolIconConfiguration alloc], "initWithSystemImageName:configuration:", CFSTR("arrow.clockwise"), v8);
+  v10 = -[HFSymbolIconConfiguration initWithSystemImageName:configuration:]([HFSymbolIconConfiguration alloc], "initWithSystemImageName:configuration:", CFSTR("arrow.counterclockwise"), v8);
+  v48 = &unk_1EA7CC448;
+  v49 = &unk_1EA7CC430;
+  v50 = v9;
+  v51 = v10;
+  objc_msgSend(MEMORY[0x1E0C99D80], "dictionaryWithObjects:forKeys:count:", &v50, &v48, 2);
+  v11 = (void *)objc_claimAutoreleasedReturnValue();
+  v43 = -[HFMultistateImageIconDescriptor initWithSymbolIconConfigurationsKeyedByPrimaryState:]([HFMultistateImageIconDescriptor alloc], "initWithSymbolIconConfigurationsKeyedByPrimaryState:", v11);
+
+  v47[2] = v43;
+  v46[3] = CFSTR("lock.fill");
+  objc_msgSend(MEMORY[0x1E0CEA650], "configurationWithPointSize:weight:", 5, 32.0);
+  v12 = (void *)objc_claimAutoreleasedReturnValue();
+  v13 = -[HFSymbolIconConfiguration initWithSystemImageName:configuration:]([HFSymbolIconConfiguration alloc], "initWithSystemImageName:configuration:", CFSTR("lock.open.fill"), v12);
+  v14 = -[HFSymbolIconConfiguration initWithSystemImageName:configuration:]([HFSymbolIconConfiguration alloc], "initWithSystemImageName:configuration:", CFSTR("lock.fill"), v12);
+  v48 = &unk_1EA7CC448;
+  v49 = &unk_1EA7CC430;
+  v50 = v13;
+  v51 = v14;
+  objc_msgSend(MEMORY[0x1E0C99D80], "dictionaryWithObjects:forKeys:count:", &v50, &v48, 2);
+  v15 = (void *)objc_claimAutoreleasedReturnValue();
+  v42 = -[HFMultistateImageIconDescriptor initWithSymbolIconConfigurationsKeyedByPrimaryState:]([HFMultistateImageIconDescriptor alloc], "initWithSymbolIconConfigurationsKeyedByPrimaryState:", v15);
+
+  v47[3] = v42;
+  v46[4] = CFSTR("door.garage.closed");
+  objc_msgSend(MEMORY[0x1E0CEA650], "configurationWithPointSize:weight:", 5, 32.0);
+  v16 = (void *)objc_claimAutoreleasedReturnValue();
+  v17 = -[HFSymbolIconConfiguration initWithSystemImageName:configuration:]([HFSymbolIconConfiguration alloc], "initWithSystemImageName:configuration:", CFSTR("door.garage.open"), v16);
+  v18 = -[HFSymbolIconConfiguration initWithSystemImageName:configuration:]([HFSymbolIconConfiguration alloc], "initWithSystemImageName:configuration:", CFSTR("door.garage.closed"), v16);
+  v48 = &unk_1EA7CC448;
+  v49 = &unk_1EA7CC430;
+  v50 = v17;
+  v51 = v18;
+  objc_msgSend(MEMORY[0x1E0C99D80], "dictionaryWithObjects:forKeys:count:", &v50, &v48, 2);
+  v19 = (void *)objc_claimAutoreleasedReturnValue();
+  v41 = -[HFMultistateImageIconDescriptor initWithSymbolIconConfigurationsKeyedByPrimaryState:]([HFMultistateImageIconDescriptor alloc], "initWithSymbolIconConfigurationsKeyedByPrimaryState:", v19);
+
+  v47[4] = v41;
+  v46[5] = CFSTR("door.right.hand.closed");
+  objc_msgSend(MEMORY[0x1E0CEA650], "configurationWithPointSize:weight:", 5, 32.0);
+  v20 = (void *)objc_claimAutoreleasedReturnValue();
+  v21 = -[HFSymbolIconConfiguration initWithSystemImageName:configuration:]([HFSymbolIconConfiguration alloc], "initWithSystemImageName:configuration:", CFSTR("door.right.hand.open"), v20);
+  v22 = -[HFSymbolIconConfiguration initWithSystemImageName:configuration:]([HFSymbolIconConfiguration alloc], "initWithSystemImageName:configuration:", CFSTR("door.right.hand.closed"), v20);
+  v48 = &unk_1EA7CC448;
+  v49 = &unk_1EA7CC430;
+  v50 = v21;
+  v51 = v22;
+  objc_msgSend(MEMORY[0x1E0C99D80], "dictionaryWithObjects:forKeys:count:", &v50, &v48, 2);
+  v23 = (void *)objc_claimAutoreleasedReturnValue();
+  v40 = -[HFMultistateImageIconDescriptor initWithSymbolIconConfigurationsKeyedByPrimaryState:]([HFMultistateImageIconDescriptor alloc], "initWithSymbolIconConfigurationsKeyedByPrimaryState:", v23);
+
+  v47[5] = v40;
+  v46[6] = CFSTR("window.awning.closed");
+  objc_msgSend(MEMORY[0x1E0CEA650], "configurationWithPointSize:weight:", 5, 32.0);
+  v24 = (void *)objc_claimAutoreleasedReturnValue();
+  v25 = -[HFSymbolIconConfiguration initWithSystemImageName:configuration:]([HFSymbolIconConfiguration alloc], "initWithSystemImageName:configuration:", CFSTR("window.vertical.open"), v24);
+  v26 = -[HFSymbolIconConfiguration initWithSystemImageName:configuration:]([HFSymbolIconConfiguration alloc], "initWithSystemImageName:configuration:", CFSTR("window.awning.closed"), v24);
+  v48 = &unk_1EA7CC448;
+  v49 = &unk_1EA7CC430;
+  v50 = v25;
+  v51 = v26;
+  objc_msgSend(MEMORY[0x1E0C99D80], "dictionaryWithObjects:forKeys:count:", &v50, &v48, 2);
+  v27 = (void *)objc_claimAutoreleasedReturnValue();
+  v28 = -[HFMultistateImageIconDescriptor initWithSymbolIconConfigurationsKeyedByPrimaryState:]([HFMultistateImageIconDescriptor alloc], "initWithSymbolIconConfigurationsKeyedByPrimaryState:", v27);
+
+  v47[6] = v28;
+  v46[7] = CFSTR("roller.shade.closed");
+  objc_msgSend(MEMORY[0x1E0CEA650], "configurationWithPointSize:weight:", 5, 32.0);
+  v29 = (void *)objc_claimAutoreleasedReturnValue();
+  v30 = -[HFSymbolIconConfiguration initWithSystemImageName:configuration:]([HFSymbolIconConfiguration alloc], "initWithSystemImageName:configuration:", CFSTR("roller.shade.open"), v29);
+  v31 = -[HFSymbolIconConfiguration initWithSystemImageName:configuration:]([HFSymbolIconConfiguration alloc], "initWithSystemImageName:configuration:", CFSTR("roller.shade.closed"), v29);
+  v48 = &unk_1EA7CC448;
+  v49 = &unk_1EA7CC430;
+  v50 = v30;
+  v51 = v31;
+  objc_msgSend(MEMORY[0x1E0C99D80], "dictionaryWithObjects:forKeys:count:", &v50, &v48, 2);
+  v32 = (void *)objc_claimAutoreleasedReturnValue();
+  v33 = -[HFMultistateImageIconDescriptor initWithSymbolIconConfigurationsKeyedByPrimaryState:]([HFMultistateImageIconDescriptor alloc], "initWithSymbolIconConfigurationsKeyedByPrimaryState:", v32);
+
+  v47[7] = v33;
+  v46[8] = CFSTR("light.beacon.min.fill");
+  objc_msgSend(MEMORY[0x1E0CEA650], "configurationWithPointSize:weight:", 5, 32.0);
+  v34 = (void *)objc_claimAutoreleasedReturnValue();
+  v35 = -[HFSymbolIconConfiguration initWithSystemImageName:configuration:]([HFSymbolIconConfiguration alloc], "initWithSystemImageName:configuration:", CFSTR("light.beacon.min.fill"), v34);
+  v48 = &unk_1EA7CC448;
+  v49 = &unk_1EA7CC430;
+  v50 = v35;
+  v51 = v35;
+  objc_msgSend(MEMORY[0x1E0C99D80], "dictionaryWithObjects:forKeys:count:", &v50, &v48, 2);
+  v36 = (void *)objc_claimAutoreleasedReturnValue();
+  v37 = -[HFMultistateImageIconDescriptor initWithSymbolIconConfigurationsKeyedByPrimaryState:]([HFMultistateImageIconDescriptor alloc], "initWithSymbolIconConfigurationsKeyedByPrimaryState:", v36);
+
+  v47[8] = v37;
+  objc_msgSend(MEMORY[0x1E0C99D80], "dictionaryWithObjects:forKeys:count:", v47, v46, 9);
+  v38 = objc_claimAutoreleasedReturnValue();
+  v39 = (void *)_MergedGlobals_267;
+  _MergedGlobals_267 = v38;
+
+}
+
+@end

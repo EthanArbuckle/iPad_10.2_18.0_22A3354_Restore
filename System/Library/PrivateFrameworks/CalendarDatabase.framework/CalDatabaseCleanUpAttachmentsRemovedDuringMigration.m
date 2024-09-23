@@ -1,0 +1,8 @@
+@implementation CalDatabaseCleanUpAttachmentsRemovedDuringMigration
+
+void __CalDatabaseCleanUpAttachmentsRemovedDuringMigration_block_invoke()
+{
+  CalDatabaseCleanUpAttachmentsRemovedDuringMigration_cleanupRequired = attachmentsDeletedDuringMigration;
+}
+
+@end

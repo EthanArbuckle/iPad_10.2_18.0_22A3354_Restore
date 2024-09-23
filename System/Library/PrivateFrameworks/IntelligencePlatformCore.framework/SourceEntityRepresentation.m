@@ -1,0 +1,62 @@
+@implementation SourceEntityRepresentation
+
+- (unsigned)dataVersion
+{
+  return 1;
+}
+
++ (id)eventWithData:(id)a3 dataVersion:(unsigned int)a4
+{
+  id v4;
+  uint64_t v5;
+  unint64_t v6;
+  unint64_t v7;
+  void *v8;
+
+  v4 = a3;
+  v5 = sub_1C106AC18();
+  v7 = v6;
+
+  swift_getObjCClassMetadata();
+  v8 = (void *)static SourceEntityRepresentation.event(with:dataVersion:)();
+  sub_1C07B3374(v5, v7);
+  return v8;
+}
+
+- (id)serialize
+{
+  _TtC24IntelligencePlatformCore26SourceEntityRepresentation *v2;
+  uint64_t v3;
+  unint64_t v4;
+  unint64_t v5;
+  void *v6;
+
+  v2 = self;
+  v3 = SourceEntityRepresentation.serialize()();
+  v5 = v4;
+
+  if (v5 >> 60 == 15)
+  {
+    v6 = 0;
+  }
+  else
+  {
+    v6 = (void *)sub_1C106ABF4();
+    sub_1C07B33B8(v3, v5);
+  }
+  return v6;
+}
+
+- (_TtC24IntelligencePlatformCore26SourceEntityRepresentation)init
+{
+  SourceEntityRepresentation.init()();
+}
+
+- (void).cxx_destruct
+{
+  sub_1C07B1F90((uint64_t)self + OBJC_IVAR____TtC24IntelligencePlatformCore26SourceEntityRepresentation_source, (uint64_t (*)(_QWORD))type metadata accessor for Source);
+  swift_bridgeObjectRelease();
+  swift_bridgeObjectRelease();
+}
+
+@end

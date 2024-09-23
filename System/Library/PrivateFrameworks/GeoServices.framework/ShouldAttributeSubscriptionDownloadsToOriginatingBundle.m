@@ -1,0 +1,8 @@
+@implementation ShouldAttributeSubscriptionDownloadsToOriginatingBundle
+
+uint64_t GeoServicesConfig_ShouldAttributeSubscriptionDownloadsToOriginatingBundle_Metadata_block_invoke_444()
+{
+  return MEMORY[0x1E0C9AAB0];
+}
+
+@end

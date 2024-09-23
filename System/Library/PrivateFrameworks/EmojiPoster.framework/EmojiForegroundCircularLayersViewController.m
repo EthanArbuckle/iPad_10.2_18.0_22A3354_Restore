@@ -1,0 +1,78 @@
+@implementation EmojiForegroundCircularLayersViewController
+
+- (BOOL)_canShowWhileLocked
+{
+  return 1;
+}
+
+- (_TtC11EmojiPoster43EmojiForegroundCircularLayersViewController)initWithCoder:(id)a3
+{
+  return (_TtC11EmojiPoster43EmojiForegroundCircularLayersViewController *)EmojiForegroundCircularLayersViewController.init(coder:)(a3);
+}
+
+- (void)viewDidLoad
+{
+  _TtC11EmojiPoster43EmojiForegroundCircularLayersViewController *v2;
+
+  v2 = self;
+  sub_1DD2C7150();
+
+}
+
+- (void)viewIsAppearing:(BOOL)a3
+{
+  _BOOL8 v3;
+  id v4;
+  objc_super v5;
+
+  v3 = a3;
+  v5.receiver = self;
+  v5.super_class = (Class)type metadata accessor for EmojiForegroundCircularLayersViewController();
+  v4 = v5.receiver;
+  -[EmojiForegroundCircularLayersViewController viewIsAppearing:](&v5, sel_viewIsAppearing_, v3);
+  sub_1DD2C7760();
+
+}
+
+- (void)viewDidLayoutSubviews
+{
+  id v2;
+  objc_super v3;
+
+  v3.receiver = self;
+  v3.super_class = (Class)type metadata accessor for EmojiForegroundCircularLayersViewController();
+  v2 = v3.receiver;
+  -[EmojiForegroundCircularLayersViewController viewDidLayoutSubviews](&v3, sel_viewDidLayoutSubviews);
+  sub_1DD2C7B3C();
+
+}
+
+- (_TtC11EmojiPoster43EmojiForegroundCircularLayersViewController)initWithNibName:(id)a3 bundle:(id)a4
+{
+  id v4;
+  _TtC11EmojiPoster43EmojiForegroundCircularLayersViewController *result;
+
+  v4 = a4;
+  result = (_TtC11EmojiPoster43EmojiForegroundCircularLayersViewController *)_swift_stdlib_reportUnimplementedInitializer();
+  __break(1u);
+  return result;
+}
+
+- (void).cxx_destruct
+{
+  char *v3;
+  uint64_t v4;
+  _BYTE v5[128];
+
+  v3 = (char *)self + OBJC_IVAR____TtC11EmojiPoster43EmojiForegroundCircularLayersViewController_logger;
+  v4 = sub_1DD2F9CE8();
+  (*(void (**)(char *, uint64_t))(*(_QWORD *)(v4 - 8) + 8))(v3, v4);
+  swift_release();
+  sub_1DD2C37E8((uint64_t)self + OBJC_IVAR____TtC11EmojiPoster43EmojiForegroundCircularLayersViewController_configuration, (uint64_t)v5);
+  sub_1DD2C3968((uint64_t)v5, (void (*)(_QWORD, _QWORD, _QWORD, _QWORD, _QWORD, _QWORD, _QWORD, _QWORD, _QWORD, _QWORD, _QWORD, _QWORD, _QWORD, _QWORD, _QWORD, char))sub_1DD2C39CC);
+  swift_release();
+  swift_bridgeObjectRelease();
+  swift_bridgeObjectRelease();
+}
+
+@end

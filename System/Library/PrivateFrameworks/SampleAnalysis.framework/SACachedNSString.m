@@ -1,0 +1,15 @@
+@implementation SACachedNSString
+
+void __SACachedNSString_block_invoke()
+{
+  uint64_t v0;
+  void *v1;
+
+  objc_msgSend(MEMORY[0x1E0CB3690], "weakObjectsHashTable");
+  v0 = objc_claimAutoreleasedReturnValue();
+  v1 = (void *)qword_1ED1DD8E0;
+  qword_1ED1DD8E0 = v0;
+
+}
+
+@end

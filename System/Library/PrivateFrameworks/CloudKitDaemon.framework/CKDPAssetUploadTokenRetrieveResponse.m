@@ -1,0 +1,695 @@
+@implementation CKDPAssetUploadTokenRetrieveResponse
+
+- (void)clearUploadTokens
+{
+  uint64_t v2;
+
+  objc_msgSend_removeAllObjects(self->_uploadTokens, a2, v2);
+}
+
+- (void)addUploadTokens:(id)a3
+{
+  const char *v4;
+  NSMutableArray *uploadTokens;
+  NSMutableArray *v6;
+  NSMutableArray *v7;
+  char *v8;
+
+  v4 = (const char *)a3;
+  uploadTokens = self->_uploadTokens;
+  v8 = (char *)v4;
+  if (!uploadTokens)
+  {
+    v6 = (NSMutableArray *)objc_alloc_init(MEMORY[0x1E0C99DE8]);
+    v7 = self->_uploadTokens;
+    self->_uploadTokens = v6;
+
+    v4 = v8;
+    uploadTokens = self->_uploadTokens;
+  }
+  objc_msgSend_addObject_(uploadTokens, v4, (uint64_t)v4);
+
+}
+
+- (unint64_t)uploadTokensCount
+{
+  uint64_t v2;
+
+  return objc_msgSend_count(self->_uploadTokens, a2, v2);
+}
+
+- (id)uploadTokensAtIndex:(unint64_t)a3
+{
+  return (id)objc_msgSend_objectAtIndex_(self->_uploadTokens, a2, a3);
+}
+
++ (Class)uploadTokensType
+{
+  return (Class)objc_opt_class();
+}
+
+- (BOOL)hasAuthPutResponse
+{
+  return self->_authPutResponse != 0;
+}
+
+- (void)clearContentResponseHeaders
+{
+  uint64_t v2;
+
+  objc_msgSend_removeAllObjects(self->_contentResponseHeaders, a2, v2);
+}
+
+- (void)addContentResponseHeaders:(id)a3
+{
+  const char *v4;
+  NSMutableArray *contentResponseHeaders;
+  NSMutableArray *v6;
+  NSMutableArray *v7;
+  char *v8;
+
+  v4 = (const char *)a3;
+  contentResponseHeaders = self->_contentResponseHeaders;
+  v8 = (char *)v4;
+  if (!contentResponseHeaders)
+  {
+    v6 = (NSMutableArray *)objc_alloc_init(MEMORY[0x1E0C99DE8]);
+    v7 = self->_contentResponseHeaders;
+    self->_contentResponseHeaders = v6;
+
+    v4 = v8;
+    contentResponseHeaders = self->_contentResponseHeaders;
+  }
+  objc_msgSend_addObject_(contentResponseHeaders, v4, (uint64_t)v4);
+
+}
+
+- (unint64_t)contentResponseHeadersCount
+{
+  uint64_t v2;
+
+  return objc_msgSend_count(self->_contentResponseHeaders, a2, v2);
+}
+
+- (id)contentResponseHeadersAtIndex:(unint64_t)a3
+{
+  return (id)objc_msgSend_objectAtIndex_(self->_contentResponseHeaders, a2, a3);
+}
+
++ (Class)contentResponseHeadersType
+{
+  return (Class)objc_opt_class();
+}
+
+- (id)description
+{
+  void *v3;
+  void *v4;
+  const char *v5;
+  uint64_t v6;
+  void *v7;
+  const char *v8;
+  void *v9;
+  objc_super v11;
+
+  v3 = (void *)MEMORY[0x1E0CB3940];
+  v11.receiver = self;
+  v11.super_class = (Class)CKDPAssetUploadTokenRetrieveResponse;
+  -[CKDPAssetUploadTokenRetrieveResponse description](&v11, sel_description);
+  v4 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend_dictionaryRepresentation(self, v5, v6);
+  v7 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend_stringWithFormat_(v3, v8, (uint64_t)CFSTR("%@ %@"), v4, v7);
+  v9 = (void *)objc_claimAutoreleasedReturnValue();
+
+  return v9;
+}
+
+- (id)dictionaryRepresentation
+{
+  uint64_t v2;
+  void *v4;
+  const char *v5;
+  uint64_t v6;
+  const char *v7;
+  id v8;
+  const char *v9;
+  uint64_t v10;
+  uint64_t v11;
+  const char *v12;
+  void *v13;
+  NSMutableArray *v14;
+  const char *v15;
+  uint64_t v16;
+  const char *v17;
+  uint64_t v18;
+  uint64_t v19;
+  uint64_t v20;
+  uint64_t i;
+  void *v22;
+  const char *v23;
+  const char *v24;
+  NSData *authPutResponse;
+  id v26;
+  const char *v27;
+  uint64_t v28;
+  uint64_t v29;
+  const char *v30;
+  void *v31;
+  NSMutableArray *v32;
+  const char *v33;
+  uint64_t v34;
+  const char *v35;
+  uint64_t v36;
+  uint64_t v37;
+  uint64_t v38;
+  uint64_t j;
+  void *v40;
+  const char *v41;
+  const char *v42;
+  __int128 v44;
+  __int128 v45;
+  __int128 v46;
+  __int128 v47;
+  __int128 v48;
+  __int128 v49;
+  __int128 v50;
+  __int128 v51;
+  _BYTE v52[128];
+  _BYTE v53[128];
+  uint64_t v54;
+
+  v54 = *MEMORY[0x1E0C80C00];
+  objc_msgSend_dictionary(MEMORY[0x1E0C99E08], a2, v2);
+  v4 = (void *)objc_claimAutoreleasedReturnValue();
+  if (objc_msgSend_count(self->_uploadTokens, v5, v6))
+  {
+    v8 = objc_alloc(MEMORY[0x1E0C99DE8]);
+    v11 = objc_msgSend_count(self->_uploadTokens, v9, v10);
+    v13 = (void *)objc_msgSend_initWithCapacity_(v8, v12, v11);
+    v48 = 0u;
+    v49 = 0u;
+    v50 = 0u;
+    v51 = 0u;
+    v14 = self->_uploadTokens;
+    v16 = objc_msgSend_countByEnumeratingWithState_objects_count_(v14, v15, (uint64_t)&v48, v53, 16);
+    if (v16)
+    {
+      v19 = v16;
+      v20 = *(_QWORD *)v49;
+      do
+      {
+        for (i = 0; i != v19; ++i)
+        {
+          if (*(_QWORD *)v49 != v20)
+            objc_enumerationMutation(v14);
+          objc_msgSend_dictionaryRepresentation(*(void **)(*((_QWORD *)&v48 + 1) + 8 * i), v17, v18);
+          v22 = (void *)objc_claimAutoreleasedReturnValue();
+          objc_msgSend_addObject_(v13, v23, (uint64_t)v22);
+
+        }
+        v19 = objc_msgSend_countByEnumeratingWithState_objects_count_(v14, v17, (uint64_t)&v48, v53, 16);
+      }
+      while (v19);
+    }
+
+    objc_msgSend_setObject_forKey_(v4, v24, (uint64_t)v13, CFSTR("uploadTokens"));
+  }
+  authPutResponse = self->_authPutResponse;
+  if (authPutResponse)
+    objc_msgSend_setObject_forKey_(v4, v7, (uint64_t)authPutResponse, CFSTR("authPutResponse"));
+  if (objc_msgSend_count(self->_contentResponseHeaders, v7, (uint64_t)authPutResponse))
+  {
+    v26 = objc_alloc(MEMORY[0x1E0C99DE8]);
+    v29 = objc_msgSend_count(self->_contentResponseHeaders, v27, v28);
+    v31 = (void *)objc_msgSend_initWithCapacity_(v26, v30, v29);
+    v44 = 0u;
+    v45 = 0u;
+    v46 = 0u;
+    v47 = 0u;
+    v32 = self->_contentResponseHeaders;
+    v34 = objc_msgSend_countByEnumeratingWithState_objects_count_(v32, v33, (uint64_t)&v44, v52, 16);
+    if (v34)
+    {
+      v37 = v34;
+      v38 = *(_QWORD *)v45;
+      do
+      {
+        for (j = 0; j != v37; ++j)
+        {
+          if (*(_QWORD *)v45 != v38)
+            objc_enumerationMutation(v32);
+          objc_msgSend_dictionaryRepresentation(*(void **)(*((_QWORD *)&v44 + 1) + 8 * j), v35, v36, (_QWORD)v44);
+          v40 = (void *)objc_claimAutoreleasedReturnValue();
+          objc_msgSend_addObject_(v31, v41, (uint64_t)v40);
+
+        }
+        v37 = objc_msgSend_countByEnumeratingWithState_objects_count_(v32, v35, (uint64_t)&v44, v52, 16);
+      }
+      while (v37);
+    }
+
+    objc_msgSend_setObject_forKey_(v4, v42, (uint64_t)v31, CFSTR("contentResponseHeaders"));
+  }
+  return v4;
+}
+
+- (BOOL)readFrom:(id)a3
+{
+  return sub_1BEC38B84(self, (uint64_t)a3);
+}
+
+- (void)writeTo:(id)a3
+{
+  id v4;
+  NSMutableArray *v5;
+  const char *v6;
+  uint64_t v7;
+  uint64_t v8;
+  uint64_t v9;
+  uint64_t v10;
+  const char *v11;
+  NSMutableArray *v12;
+  const char *v13;
+  uint64_t v14;
+  uint64_t v15;
+  uint64_t v16;
+  uint64_t v17;
+  const char *v18;
+  __int128 v19;
+  __int128 v20;
+  __int128 v21;
+  __int128 v22;
+  __int128 v23;
+  __int128 v24;
+  __int128 v25;
+  __int128 v26;
+  _BYTE v27[128];
+  _BYTE v28[128];
+  uint64_t v29;
+
+  v29 = *MEMORY[0x1E0C80C00];
+  v4 = a3;
+  v23 = 0u;
+  v24 = 0u;
+  v25 = 0u;
+  v26 = 0u;
+  v5 = self->_uploadTokens;
+  v7 = objc_msgSend_countByEnumeratingWithState_objects_count_(v5, v6, (uint64_t)&v23, v28, 16);
+  if (v7)
+  {
+    v8 = v7;
+    v9 = *(_QWORD *)v24;
+    do
+    {
+      v10 = 0;
+      do
+      {
+        if (*(_QWORD *)v24 != v9)
+          objc_enumerationMutation(v5);
+        PBDataWriterWriteSubmessage();
+        ++v10;
+      }
+      while (v8 != v10);
+      v8 = objc_msgSend_countByEnumeratingWithState_objects_count_(v5, v11, (uint64_t)&v23, v28, 16);
+    }
+    while (v8);
+  }
+
+  if (self->_authPutResponse)
+    PBDataWriterWriteDataField();
+  v21 = 0u;
+  v22 = 0u;
+  v19 = 0u;
+  v20 = 0u;
+  v12 = self->_contentResponseHeaders;
+  v14 = objc_msgSend_countByEnumeratingWithState_objects_count_(v12, v13, (uint64_t)&v19, v27, 16);
+  if (v14)
+  {
+    v15 = v14;
+    v16 = *(_QWORD *)v20;
+    do
+    {
+      v17 = 0;
+      do
+      {
+        if (*(_QWORD *)v20 != v16)
+          objc_enumerationMutation(v12);
+        PBDataWriterWriteSubmessage();
+        ++v17;
+      }
+      while (v15 != v17);
+      v15 = objc_msgSend_countByEnumeratingWithState_objects_count_(v12, v18, (uint64_t)&v19, v27, 16);
+    }
+    while (v15);
+  }
+
+}
+
+- (void)copyTo:(id)a3
+{
+  const char *v4;
+  uint64_t v5;
+  const char *v6;
+  uint64_t v7;
+  const char *v8;
+  uint64_t v9;
+  uint64_t v10;
+  uint64_t v11;
+  uint64_t i;
+  void *v13;
+  const char *v14;
+  NSData *authPutResponse;
+  const char *v16;
+  uint64_t v17;
+  const char *v18;
+  uint64_t v19;
+  uint64_t v20;
+  const char *v21;
+  uint64_t v22;
+  uint64_t j;
+  void *v24;
+  const char *v25;
+  id v26;
+
+  v26 = a3;
+  if (objc_msgSend_uploadTokensCount(self, v4, v5))
+  {
+    objc_msgSend_clearUploadTokens(v26, v6, v7);
+    v10 = objc_msgSend_uploadTokensCount(self, v8, v9);
+    if (v10)
+    {
+      v11 = v10;
+      for (i = 0; i != v11; ++i)
+      {
+        objc_msgSend_uploadTokensAtIndex_(self, v6, i);
+        v13 = (void *)objc_claimAutoreleasedReturnValue();
+        objc_msgSend_addUploadTokens_(v26, v14, (uint64_t)v13);
+
+      }
+    }
+  }
+  authPutResponse = self->_authPutResponse;
+  if (authPutResponse)
+    objc_msgSend_setAuthPutResponse_(v26, v6, (uint64_t)authPutResponse);
+  if (objc_msgSend_contentResponseHeadersCount(self, v6, (uint64_t)authPutResponse))
+  {
+    objc_msgSend_clearContentResponseHeaders(v26, v16, v17);
+    v20 = objc_msgSend_contentResponseHeadersCount(self, v18, v19);
+    if (v20)
+    {
+      v22 = v20;
+      for (j = 0; j != v22; ++j)
+      {
+        objc_msgSend_contentResponseHeadersAtIndex_(self, v21, j);
+        v24 = (void *)objc_claimAutoreleasedReturnValue();
+        objc_msgSend_addContentResponseHeaders_(v26, v25, (uint64_t)v24);
+
+      }
+    }
+  }
+
+}
+
+- (id)copyWithZone:(_NSZone *)a3
+{
+  void *v5;
+  const char *v6;
+  void *v7;
+  const char *v8;
+  uint64_t v9;
+  _QWORD *v10;
+  NSMutableArray *v11;
+  const char *v12;
+  uint64_t v13;
+  const char *v14;
+  uint64_t v15;
+  uint64_t v16;
+  uint64_t v17;
+  void *v18;
+  const char *v19;
+  const char *v20;
+  uint64_t v21;
+  void *v22;
+  NSMutableArray *v23;
+  const char *v24;
+  uint64_t v25;
+  const char *v26;
+  uint64_t v27;
+  uint64_t v28;
+  uint64_t v29;
+  void *v30;
+  const char *v31;
+  __int128 v33;
+  __int128 v34;
+  __int128 v35;
+  __int128 v36;
+  __int128 v37;
+  __int128 v38;
+  __int128 v39;
+  __int128 v40;
+  _BYTE v41[128];
+  _BYTE v42[128];
+  uint64_t v43;
+
+  v43 = *MEMORY[0x1E0C80C00];
+  v5 = (void *)objc_opt_class();
+  v7 = (void *)objc_msgSend_allocWithZone_(v5, v6, (uint64_t)a3);
+  v10 = (_QWORD *)objc_msgSend_init(v7, v8, v9);
+  v37 = 0u;
+  v38 = 0u;
+  v39 = 0u;
+  v40 = 0u;
+  v11 = self->_uploadTokens;
+  v13 = objc_msgSend_countByEnumeratingWithState_objects_count_(v11, v12, (uint64_t)&v37, v42, 16);
+  if (v13)
+  {
+    v15 = v13;
+    v16 = *(_QWORD *)v38;
+    do
+    {
+      v17 = 0;
+      do
+      {
+        if (*(_QWORD *)v38 != v16)
+          objc_enumerationMutation(v11);
+        v18 = (void *)objc_msgSend_copyWithZone_(*(void **)(*((_QWORD *)&v37 + 1) + 8 * v17), v14, (uint64_t)a3);
+        objc_msgSend_addUploadTokens_(v10, v19, (uint64_t)v18);
+
+        ++v17;
+      }
+      while (v15 != v17);
+      v15 = objc_msgSend_countByEnumeratingWithState_objects_count_(v11, v14, (uint64_t)&v37, v42, 16);
+    }
+    while (v15);
+  }
+
+  v21 = objc_msgSend_copyWithZone_(self->_authPutResponse, v20, (uint64_t)a3);
+  v22 = (void *)v10[1];
+  v10[1] = v21;
+
+  v35 = 0u;
+  v36 = 0u;
+  v33 = 0u;
+  v34 = 0u;
+  v23 = self->_contentResponseHeaders;
+  v25 = objc_msgSend_countByEnumeratingWithState_objects_count_(v23, v24, (uint64_t)&v33, v41, 16);
+  if (v25)
+  {
+    v27 = v25;
+    v28 = *(_QWORD *)v34;
+    do
+    {
+      v29 = 0;
+      do
+      {
+        if (*(_QWORD *)v34 != v28)
+          objc_enumerationMutation(v23);
+        v30 = (void *)objc_msgSend_copyWithZone_(*(void **)(*((_QWORD *)&v33 + 1) + 8 * v29), v26, (uint64_t)a3, (_QWORD)v33);
+        objc_msgSend_addContentResponseHeaders_(v10, v31, (uint64_t)v30);
+
+        ++v29;
+      }
+      while (v27 != v29);
+      v27 = objc_msgSend_countByEnumeratingWithState_objects_count_(v23, v26, (uint64_t)&v33, v41, 16);
+    }
+    while (v27);
+  }
+
+  return v10;
+}
+
+- (BOOL)isEqual:(id)a3
+{
+  _QWORD *v4;
+  uint64_t v5;
+  const char *v6;
+  const char *v7;
+  NSMutableArray *uploadTokens;
+  uint64_t v9;
+  NSData *authPutResponse;
+  uint64_t v11;
+  NSMutableArray *contentResponseHeaders;
+  uint64_t v13;
+  char isEqual;
+
+  v4 = a3;
+  v5 = objc_opt_class();
+  if (objc_msgSend_isMemberOfClass_(v4, v6, v5)
+    && ((uploadTokens = self->_uploadTokens, v9 = v4[3], !((unint64_t)uploadTokens | v9))
+     || objc_msgSend_isEqual_(uploadTokens, v7, v9))
+    && ((authPutResponse = self->_authPutResponse, v11 = v4[1], !((unint64_t)authPutResponse | v11))
+     || objc_msgSend_isEqual_(authPutResponse, v7, v11)))
+  {
+    contentResponseHeaders = self->_contentResponseHeaders;
+    v13 = v4[2];
+    if ((unint64_t)contentResponseHeaders | v13)
+      isEqual = objc_msgSend_isEqual_(contentResponseHeaders, v7, v13);
+    else
+      isEqual = 1;
+  }
+  else
+  {
+    isEqual = 0;
+  }
+
+  return isEqual;
+}
+
+- (unint64_t)hash
+{
+  uint64_t v2;
+  uint64_t v4;
+  const char *v5;
+  uint64_t v6;
+  uint64_t v7;
+  const char *v8;
+  uint64_t v9;
+
+  v4 = objc_msgSend_hash(self->_uploadTokens, a2, v2);
+  v7 = objc_msgSend_hash(self->_authPutResponse, v5, v6) ^ v4;
+  return v7 ^ objc_msgSend_hash(self->_contentResponseHeaders, v8, v9);
+}
+
+- (void)mergeFrom:(id)a3
+{
+  id v4;
+  id v5;
+  const char *v6;
+  uint64_t v7;
+  const char *v8;
+  uint64_t v9;
+  uint64_t v10;
+  uint64_t i;
+  const char *v12;
+  uint64_t v13;
+  id v14;
+  const char *v15;
+  uint64_t v16;
+  const char *v17;
+  uint64_t v18;
+  uint64_t v19;
+  uint64_t j;
+  __int128 v21;
+  __int128 v22;
+  __int128 v23;
+  __int128 v24;
+  __int128 v25;
+  __int128 v26;
+  __int128 v27;
+  __int128 v28;
+  _BYTE v29[128];
+  _BYTE v30[128];
+  uint64_t v31;
+
+  v31 = *MEMORY[0x1E0C80C00];
+  v4 = a3;
+  v25 = 0u;
+  v26 = 0u;
+  v27 = 0u;
+  v28 = 0u;
+  v5 = *((id *)v4 + 3);
+  v7 = objc_msgSend_countByEnumeratingWithState_objects_count_(v5, v6, (uint64_t)&v25, v30, 16);
+  if (v7)
+  {
+    v9 = v7;
+    v10 = *(_QWORD *)v26;
+    do
+    {
+      for (i = 0; i != v9; ++i)
+      {
+        if (*(_QWORD *)v26 != v10)
+          objc_enumerationMutation(v5);
+        objc_msgSend_addUploadTokens_(self, v8, *(_QWORD *)(*((_QWORD *)&v25 + 1) + 8 * i));
+      }
+      v9 = objc_msgSend_countByEnumeratingWithState_objects_count_(v5, v8, (uint64_t)&v25, v30, 16);
+    }
+    while (v9);
+  }
+
+  v13 = *((_QWORD *)v4 + 1);
+  if (v13)
+    objc_msgSend_setAuthPutResponse_(self, v12, v13);
+  v23 = 0u;
+  v24 = 0u;
+  v21 = 0u;
+  v22 = 0u;
+  v14 = *((id *)v4 + 2);
+  v16 = objc_msgSend_countByEnumeratingWithState_objects_count_(v14, v15, (uint64_t)&v21, v29, 16);
+  if (v16)
+  {
+    v18 = v16;
+    v19 = *(_QWORD *)v22;
+    do
+    {
+      for (j = 0; j != v18; ++j)
+      {
+        if (*(_QWORD *)v22 != v19)
+          objc_enumerationMutation(v14);
+        objc_msgSend_addContentResponseHeaders_(self, v17, *(_QWORD *)(*((_QWORD *)&v21 + 1) + 8 * j), (_QWORD)v21);
+      }
+      v18 = objc_msgSend_countByEnumeratingWithState_objects_count_(v14, v17, (uint64_t)&v21, v29, 16);
+    }
+    while (v18);
+  }
+
+}
+
+- (NSMutableArray)uploadTokens
+{
+  return self->_uploadTokens;
+}
+
+- (void)setUploadTokens:(id)a3
+{
+  objc_storeStrong((id *)&self->_uploadTokens, a3);
+}
+
+- (NSData)authPutResponse
+{
+  return self->_authPutResponse;
+}
+
+- (void)setAuthPutResponse:(id)a3
+{
+  objc_storeStrong((id *)&self->_authPutResponse, a3);
+}
+
+- (NSMutableArray)contentResponseHeaders
+{
+  return self->_contentResponseHeaders;
+}
+
+- (void)setContentResponseHeaders:(id)a3
+{
+  objc_storeStrong((id *)&self->_contentResponseHeaders, a3);
+}
+
+- (void).cxx_destruct
+{
+  objc_storeStrong((id *)&self->_uploadTokens, 0);
+  objc_storeStrong((id *)&self->_contentResponseHeaders, 0);
+  objc_storeStrong((id *)&self->_authPutResponse, 0);
+}
+
+@end

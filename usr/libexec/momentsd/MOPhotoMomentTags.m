@@ -1,0 +1,150 @@
+@implementation MOPhotoMomentTags
+
++ (id)getInferenceTagMap
+{
+  _QWORD v3[31];
+  _QWORD v4[31];
+
+  v3[0] = &off_1002D9398;
+  v3[1] = &off_1002D93B0;
+  v4[0] = CFSTR("baby");
+  v4[1] = CFSTR("pet");
+  v3[2] = &off_1002D93C8;
+  v3[3] = &off_1002D93E0;
+  v4[2] = CFSTR("trip");
+  v4[3] = CFSTR("nature");
+  v3[4] = &off_1002D93F8;
+  v3[5] = &off_1002D9410;
+  v4[4] = CFSTR("mountain");
+  v4[5] = CFSTR("beach");
+  v3[6] = &off_1002D9428;
+  v3[7] = &off_1002D9440;
+  v4[6] = CFSTR("home");
+  v4[7] = CFSTR("work");
+  v3[8] = &off_1002D9458;
+  v3[9] = &off_1002D9470;
+  v4[8] = CFSTR("frequentLocation");
+  v4[9] = CFSTR("Activity");
+  v3[10] = &off_1002D9488;
+  v3[11] = &off_1002D94A0;
+  v4[10] = CFSTR("Hiking");
+  v4[11] = CFSTR("Climbing");
+  v3[12] = &off_1002D94B8;
+  v3[13] = &off_1002D94D0;
+  v4[12] = CFSTR("Beaching");
+  v4[13] = CFSTR("Diving");
+  v3[14] = &off_1002D94E8;
+  v3[15] = &off_1002D9500;
+  v4[14] = CFSTR("WinterSport");
+  v4[15] = CFSTR("Entertainment");
+  v3[16] = &off_1002D9518;
+  v3[17] = &off_1002D9530;
+  v4[16] = CFSTR("AmusementPark");
+  v4[17] = CFSTR("Performance");
+  v3[18] = &off_1002D9548;
+  v3[19] = &off_1002D9560;
+  v4[18] = CFSTR("Concert");
+  v4[19] = CFSTR("Festival");
+  v3[20] = &off_1002D9578;
+  v3[21] = &off_1002D9590;
+  v4[20] = CFSTR("Theater");
+  v4[21] = CFSTR("Dance");
+  v3[22] = &off_1002D95A8;
+  v3[23] = &off_1002D95C0;
+  v4[22] = CFSTR("SportEvent");
+  v4[23] = CFSTR("NightOut");
+  v3[24] = &off_1002D95D8;
+  v3[25] = &off_1002D95F0;
+  v4[24] = CFSTR("Museum");
+  v4[25] = CFSTR("Celebration");
+  v3[26] = &off_1002D9608;
+  v3[27] = &off_1002D9620;
+  v4[26] = CFSTR("Birthday");
+  v4[27] = CFSTR("Anniversary");
+  v3[28] = &off_1002D9638;
+  v3[29] = &off_1002D9650;
+  v4[28] = CFSTR("Wedding");
+  v4[29] = CFSTR("HolidayEvent");
+  v3[30] = &off_1002D9668;
+  v4[30] = CFSTR("Gathering");
+  return (id)objc_claimAutoreleasedReturnValue(+[NSDictionary dictionaryWithObjects:forKeys:count:](NSDictionary, "dictionaryWithObjects:forKeys:count:", v4, v3, 31));
+}
+
++ (id)getCoarseInferenceTag:(id)a3
+{
+  id v3;
+  void *v4;
+  void *v5;
+  _QWORD v7[31];
+  _QWORD v8[31];
+
+  v7[0] = &off_1002D9428;
+  v7[1] = &off_1002D9440;
+  v8[0] = &off_1002D9680;
+  v8[1] = &off_1002D9680;
+  v7[2] = &off_1002D9458;
+  v7[3] = &off_1002D9590;
+  v8[2] = &off_1002D9680;
+  v8[3] = &off_1002D9698;
+  v7[4] = &off_1002D95C0;
+  v7[5] = &off_1002D9650;
+  v8[4] = &off_1002D9698;
+  v8[5] = &off_1002D9698;
+  v7[6] = &off_1002D9668;
+  v7[7] = &off_1002D9518;
+  v8[6] = &off_1002D9698;
+  v8[7] = &off_1002D96B0;
+  v7[8] = &off_1002D95D8;
+  v7[9] = &off_1002D9530;
+  v8[8] = &off_1002D96B0;
+  v8[9] = &off_1002D96B0;
+  v7[10] = &off_1002D9548;
+  v7[11] = &off_1002D9560;
+  v8[10] = &off_1002D96B0;
+  v8[11] = &off_1002D96B0;
+  v7[12] = &off_1002D9578;
+  v7[13] = &off_1002D93E0;
+  v8[12] = &off_1002D96B0;
+  v8[13] = &off_1002D96C8;
+  v7[14] = &off_1002D93F8;
+  v7[15] = &off_1002D9410;
+  v8[14] = &off_1002D96C8;
+  v8[15] = &off_1002D96C8;
+  v7[16] = &off_1002D95F0;
+  v7[17] = &off_1002D9608;
+  v8[16] = &off_1002D96E0;
+  v8[17] = &off_1002D96E0;
+  v7[18] = &off_1002D9620;
+  v7[19] = &off_1002D9638;
+  v8[18] = &off_1002D96E0;
+  v8[19] = &off_1002D96E0;
+  v7[20] = &off_1002D9470;
+  v7[21] = &off_1002D9488;
+  v8[20] = &off_1002D96F8;
+  v8[21] = &off_1002D96F8;
+  v7[22] = &off_1002D94A0;
+  v7[23] = &off_1002D94B8;
+  v8[22] = &off_1002D96F8;
+  v8[23] = &off_1002D96F8;
+  v7[24] = &off_1002D94D0;
+  v7[25] = &off_1002D94E8;
+  v8[24] = &off_1002D96F8;
+  v8[25] = &off_1002D96F8;
+  v7[26] = &off_1002D95A8;
+  v7[27] = &off_1002D9398;
+  v8[26] = &off_1002D96F8;
+  v8[27] = &off_1002D9710;
+  v7[28] = &off_1002D93B0;
+  v7[29] = &off_1002D93C8;
+  v8[28] = &off_1002D9710;
+  v8[29] = &off_1002D9728;
+  v7[30] = &off_1002D9500;
+  v8[30] = &off_1002D9728;
+  v3 = a3;
+  v4 = (void *)objc_claimAutoreleasedReturnValue(+[NSDictionary dictionaryWithObjects:forKeys:count:](NSDictionary, "dictionaryWithObjects:forKeys:count:", v8, v7, 31));
+  v5 = (void *)objc_claimAutoreleasedReturnValue(objc_msgSend(v4, "objectForKeyedSubscript:", v3));
+
+  return v5;
+}
+
+@end

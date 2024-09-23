@@ -1,0 +1,468 @@
+@implementation SISchemaUEISiriWasUnavailable
+
+- (id)suppressMessageUnderConditions
+{
+  SISensitiveConditionsSet *v2;
+
+  v2 = objc_alloc_init(SISensitiveConditionsSet);
+  -[SISensitiveConditionsSet addCondition:](v2, "addCondition:", 1);
+  return v2;
+}
+
+- (void)setProduct:(int)a3
+{
+  *(_BYTE *)&self->_has |= 1u;
+  self->_product = a3;
+}
+
+- (BOOL)hasProduct
+{
+  return *(_BYTE *)&self->_has & 1;
+}
+
+- (void)setHasProduct:(BOOL)a3
+{
+  *(_BYTE *)&self->_has = *(_BYTE *)&self->_has & 0xFE | a3;
+}
+
+- (void)deleteProduct
+{
+  -[SISchemaUEISiriWasUnavailable setProduct:](self, "setProduct:", 0);
+  *(_BYTE *)&self->_has &= ~1u;
+}
+
+- (void)setReason:(int)a3
+{
+  *(_BYTE *)&self->_has |= 2u;
+  self->_reason = a3;
+}
+
+- (BOOL)hasReason
+{
+  return (*(_BYTE *)&self->_has >> 1) & 1;
+}
+
+- (void)setHasReason:(BOOL)a3
+{
+  char v3;
+
+  if (a3)
+    v3 = 2;
+  else
+    v3 = 0;
+  *(_BYTE *)&self->_has = *(_BYTE *)&self->_has & 0xFD | v3;
+}
+
+- (void)deleteReason
+{
+  -[SISchemaUEISiriWasUnavailable setReason:](self, "setReason:", 0);
+  *(_BYTE *)&self->_has &= ~2u;
+}
+
+- (void)clearAssetType
+{
+  -[NSArray removeAllObjects](self->_assetTypes, "removeAllObjects");
+}
+
+- (void)addAssetType:(int)a3
+{
+  uint64_t v3;
+  NSArray *assetTypes;
+  NSArray *v6;
+  NSArray *v7;
+  id v8;
+
+  v3 = *(_QWORD *)&a3;
+  assetTypes = self->_assetTypes;
+  if (!assetTypes)
+  {
+    objc_msgSend(MEMORY[0x1E0C99DE8], "array");
+    v6 = (NSArray *)objc_claimAutoreleasedReturnValue();
+    v7 = self->_assetTypes;
+    self->_assetTypes = v6;
+
+    assetTypes = self->_assetTypes;
+  }
+  objc_msgSend(MEMORY[0x1E0CB37E8], "numberWithInt:", v3);
+  v8 = (id)objc_claimAutoreleasedReturnValue();
+  -[NSArray addObject:](assetTypes, "addObject:", v8);
+
+}
+
+- (unint64_t)assetTypeCount
+{
+  return -[NSArray count](self->_assetTypes, "count");
+}
+
+- (int)assetTypeAtIndex:(unint64_t)a3
+{
+  void *v3;
+  int v4;
+
+  -[NSArray objectAtIndexedSubscript:](self->_assetTypes, "objectAtIndexedSubscript:", a3);
+  v3 = (void *)objc_claimAutoreleasedReturnValue();
+  v4 = objc_msgSend(v3, "intValue");
+
+  return v4;
+}
+
+- (BOOL)readFrom:(id)a3
+{
+  return SISchemaUEISiriWasUnavailableReadFrom(self, (uint64_t)a3);
+}
+
+- (void)writeTo:(id)a3
+{
+  id v4;
+  char has;
+  NSArray *v6;
+  uint64_t v7;
+  uint64_t v8;
+  uint64_t v9;
+  uint64_t i;
+  __int128 v11;
+  __int128 v12;
+  __int128 v13;
+  __int128 v14;
+  _BYTE v15[128];
+  uint64_t v16;
+
+  v16 = *MEMORY[0x1E0C80C00];
+  v4 = a3;
+  has = (char)self->_has;
+  if ((has & 1) != 0)
+  {
+    PBDataWriterWriteInt32Field();
+    has = (char)self->_has;
+  }
+  if ((has & 2) != 0)
+    PBDataWriterWriteInt32Field();
+  v13 = 0u;
+  v14 = 0u;
+  v11 = 0u;
+  v12 = 0u;
+  v6 = self->_assetTypes;
+  v7 = -[NSArray countByEnumeratingWithState:objects:count:](v6, "countByEnumeratingWithState:objects:count:", &v11, v15, 16);
+  if (v7)
+  {
+    v8 = v7;
+    v9 = *(_QWORD *)v12;
+    do
+    {
+      for (i = 0; i != v8; ++i)
+      {
+        if (*(_QWORD *)v12 != v9)
+          objc_enumerationMutation(v6);
+        objc_msgSend(*(id *)(*((_QWORD *)&v11 + 1) + 8 * i), "intValue", (_QWORD)v11);
+        PBDataWriterWriteInt32Field();
+      }
+      v8 = -[NSArray countByEnumeratingWithState:objects:count:](v6, "countByEnumeratingWithState:objects:count:", &v11, v15, 16);
+    }
+    while (v8);
+  }
+
+}
+
+- (BOOL)isEqual:(id)a3
+{
+  unsigned __int8 *v4;
+  $42749C524EFCEAC9FE113FD9BCEA5C35 has;
+  unsigned int v6;
+  int product;
+  int v8;
+  int reason;
+  void *v10;
+  void *v11;
+  void *v12;
+  uint64_t v13;
+  void *v14;
+  void *v15;
+  void *v16;
+  char v17;
+  BOOL v18;
+
+  v4 = (unsigned __int8 *)a3;
+  if (!objc_msgSend(v4, "isMemberOfClass:", objc_opt_class()))
+    goto LABEL_14;
+  has = self->_has;
+  v6 = v4[24];
+  if ((*(_BYTE *)&has & 1) != (v6 & 1))
+    goto LABEL_14;
+  if ((*(_BYTE *)&has & 1) != 0)
+  {
+    product = self->_product;
+    if (product != objc_msgSend(v4, "product"))
+      goto LABEL_14;
+    has = self->_has;
+    v6 = v4[24];
+  }
+  v8 = (*(unsigned int *)&has >> 1) & 1;
+  if (v8 == ((v6 >> 1) & 1))
+  {
+    if (!v8 || (reason = self->_reason, reason == objc_msgSend(v4, "reason")))
+    {
+      -[SISchemaUEISiriWasUnavailable assetTypes](self, "assetTypes");
+      v10 = (void *)objc_claimAutoreleasedReturnValue();
+      objc_msgSend(v4, "assetTypes");
+      v11 = (void *)objc_claimAutoreleasedReturnValue();
+      v12 = v11;
+      if ((v10 == 0) != (v11 != 0))
+      {
+        -[SISchemaUEISiriWasUnavailable assetTypes](self, "assetTypes");
+        v13 = objc_claimAutoreleasedReturnValue();
+        if (!v13)
+        {
+
+LABEL_17:
+          v18 = 1;
+          goto LABEL_15;
+        }
+        v14 = (void *)v13;
+        -[SISchemaUEISiriWasUnavailable assetTypes](self, "assetTypes");
+        v15 = (void *)objc_claimAutoreleasedReturnValue();
+        objc_msgSend(v4, "assetTypes");
+        v16 = (void *)objc_claimAutoreleasedReturnValue();
+        v17 = objc_msgSend(v15, "isEqual:", v16);
+
+        if ((v17 & 1) != 0)
+          goto LABEL_17;
+      }
+      else
+      {
+
+      }
+    }
+  }
+LABEL_14:
+  v18 = 0;
+LABEL_15:
+
+  return v18;
+}
+
+- (unint64_t)hash
+{
+  uint64_t v2;
+  uint64_t v3;
+
+  if ((*(_BYTE *)&self->_has & 1) != 0)
+  {
+    v2 = 2654435761 * self->_product;
+    if ((*(_BYTE *)&self->_has & 2) != 0)
+      goto LABEL_3;
+LABEL_5:
+    v3 = 0;
+    return v3 ^ v2 ^ -[NSArray hash](self->_assetTypes, "hash");
+  }
+  v2 = 0;
+  if ((*(_BYTE *)&self->_has & 2) == 0)
+    goto LABEL_5;
+LABEL_3:
+  v3 = 2654435761 * self->_reason;
+  return v3 ^ v2 ^ -[NSArray hash](self->_assetTypes, "hash");
+}
+
+- (id)dictionaryRepresentation
+{
+  void *v3;
+  void *v4;
+  void *v5;
+  char has;
+  int v7;
+  const __CFString *v8;
+  const __CFString *v9;
+  int v10;
+  const __CFString *v11;
+  const __CFString *v12;
+
+  objc_msgSend(MEMORY[0x1E0C99E08], "dictionary");
+  v3 = (void *)objc_claimAutoreleasedReturnValue();
+  if (-[NSArray count](self->_assetTypes, "count"))
+  {
+    -[SISchemaUEISiriWasUnavailable assetTypes](self, "assetTypes");
+    v4 = (void *)objc_claimAutoreleasedReturnValue();
+    v5 = (void *)objc_msgSend(v4, "copy");
+    objc_msgSend(v3, "setObject:forKeyedSubscript:", v5, CFSTR("assetType"));
+
+  }
+  has = (char)self->_has;
+  if ((has & 1) != 0)
+  {
+    v7 = -[SISchemaUEISiriWasUnavailable product](self, "product");
+    v8 = CFSTR("PRODUCT_UNKNOWN");
+    if (v7 == 1)
+      v8 = CFSTR("PRODUCT_ASSISTANT");
+    if (v7 == 2)
+      v9 = CFSTR("PRODUCT_DICTATION");
+    else
+      v9 = v8;
+    objc_msgSend(v3, "setObject:forKeyedSubscript:", v9, CFSTR("product"));
+    has = (char)self->_has;
+  }
+  if ((has & 2) != 0)
+  {
+    v10 = -[SISchemaUEISiriWasUnavailable reason](self, "reason");
+    v11 = CFSTR("SIRIUNAVAILABLEREASON_UNKNOWN");
+    if (v10 == 1)
+      v11 = CFSTR("SIRIUNAVAILABLEREASON_THERMAL_MITIGATION");
+    if (v10 == 2)
+      v12 = CFSTR("SIRIUNAVAILABLEREASON_MISSING_ASSET");
+    else
+      v12 = v11;
+    objc_msgSend(v3, "setObject:forKeyedSubscript:", v12, CFSTR("reason"));
+  }
+  -[SISchemaInstrumentationMessage willProduceDictionaryRepresentation:](self, "willProduceDictionaryRepresentation:", v3);
+  return v3;
+}
+
+- (NSData)jsonData
+{
+  void *v2;
+  void *v3;
+
+  -[SISchemaUEISiriWasUnavailable dictionaryRepresentation](self, "dictionaryRepresentation");
+  v2 = (void *)objc_claimAutoreleasedReturnValue();
+  if (objc_msgSend(MEMORY[0x1E0CB36D8], "isValidJSONObject:", v2))
+  {
+    objc_msgSend(MEMORY[0x1E0CB36D8], "dataWithJSONObject:options:error:", v2, 0, 0);
+    v3 = (void *)objc_claimAutoreleasedReturnValue();
+  }
+  else
+  {
+    v3 = 0;
+  }
+
+  return (NSData *)v3;
+}
+
+- (SISchemaUEISiriWasUnavailable)initWithJSON:(id)a3
+{
+  void *v4;
+  SISchemaUEISiriWasUnavailable *v5;
+  uint64_t v7;
+
+  v7 = 0;
+  objc_msgSend(MEMORY[0x1E0CB36D8], "JSONObjectWithData:options:error:", a3, 0, &v7);
+  v4 = (void *)objc_claimAutoreleasedReturnValue();
+  if (v7 || (objc_opt_class(), (objc_opt_isKindOfClass() & 1) == 0))
+  {
+    v5 = 0;
+  }
+  else
+  {
+    self = -[SISchemaUEISiriWasUnavailable initWithDictionary:](self, "initWithDictionary:", v4);
+    v5 = self;
+  }
+
+  return v5;
+}
+
+- (SISchemaUEISiriWasUnavailable)initWithDictionary:(id)a3
+{
+  id v4;
+  SISchemaUEISiriWasUnavailable *v5;
+  void *v6;
+  void *v7;
+  void *v8;
+  id v9;
+  uint64_t v10;
+  uint64_t v11;
+  uint64_t v12;
+  uint64_t v13;
+  void *v14;
+  SISchemaUEISiriWasUnavailable *v15;
+  void *v17;
+  __int128 v18;
+  __int128 v19;
+  __int128 v20;
+  __int128 v21;
+  objc_super v22;
+  _BYTE v23[128];
+  uint64_t v24;
+
+  v24 = *MEMORY[0x1E0C80C00];
+  v4 = a3;
+  v22.receiver = self;
+  v22.super_class = (Class)SISchemaUEISiriWasUnavailable;
+  v5 = -[SISchemaUEISiriWasUnavailable init](&v22, sel_init);
+  if (v5)
+  {
+    objc_msgSend(v4, "objectForKeyedSubscript:", CFSTR("product"));
+    v6 = (void *)objc_claimAutoreleasedReturnValue();
+    objc_opt_class();
+    if ((objc_opt_isKindOfClass() & 1) != 0)
+      -[SISchemaUEISiriWasUnavailable setProduct:](v5, "setProduct:", objc_msgSend(v6, "intValue"));
+    objc_msgSend(v4, "objectForKeyedSubscript:", CFSTR("reason"));
+    v7 = (void *)objc_claimAutoreleasedReturnValue();
+    objc_opt_class();
+    if ((objc_opt_isKindOfClass() & 1) != 0)
+      -[SISchemaUEISiriWasUnavailable setReason:](v5, "setReason:", objc_msgSend(v7, "intValue"));
+    objc_msgSend(v4, "objectForKeyedSubscript:", CFSTR("assetType"));
+    v8 = (void *)objc_claimAutoreleasedReturnValue();
+    objc_opt_class();
+    if ((objc_opt_isKindOfClass() & 1) != 0)
+    {
+      v17 = v6;
+      v20 = 0u;
+      v21 = 0u;
+      v18 = 0u;
+      v19 = 0u;
+      v9 = v8;
+      v10 = objc_msgSend(v9, "countByEnumeratingWithState:objects:count:", &v18, v23, 16);
+      if (v10)
+      {
+        v11 = v10;
+        v12 = *(_QWORD *)v19;
+        do
+        {
+          v13 = 0;
+          do
+          {
+            if (*(_QWORD *)v19 != v12)
+              objc_enumerationMutation(v9);
+            v14 = *(void **)(*((_QWORD *)&v18 + 1) + 8 * v13);
+            objc_opt_class();
+            if ((objc_opt_isKindOfClass() & 1) != 0)
+              -[SISchemaUEISiriWasUnavailable addAssetType:](v5, "addAssetType:", objc_msgSend(v14, "intValue"));
+            ++v13;
+          }
+          while (v11 != v13);
+          v11 = objc_msgSend(v9, "countByEnumeratingWithState:objects:count:", &v18, v23, 16);
+        }
+        while (v11);
+      }
+
+      v6 = v17;
+    }
+    v15 = v5;
+
+  }
+  return v5;
+}
+
+- (int)product
+{
+  return self->_product;
+}
+
+- (int)reason
+{
+  return self->_reason;
+}
+
+- (NSArray)assetTypes
+{
+  return self->_assetTypes;
+}
+
+- (void)setAssetTypes:(id)a3
+{
+  objc_setProperty_nonatomic_copy(self, a2, a3, 16);
+}
+
+- (void).cxx_destruct
+{
+  objc_storeStrong((id *)&self->_assetTypes, 0);
+}
+
+@end

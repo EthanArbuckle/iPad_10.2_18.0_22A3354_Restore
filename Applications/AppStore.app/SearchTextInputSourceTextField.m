@@ -1,0 +1,84 @@
+@implementation SearchTextInputSourceTextField
+
+- (void)textFieldDidEdit:(id)a3
+{
+  id v4;
+  _TtC8AppStore30SearchTextInputSourceTextField *v5;
+
+  v4 = a3;
+  v5 = self;
+  sub_1005291E0();
+
+}
+
+- (BOOL)textField:(id)a3 shouldChangeCharactersInRange:(_NSRange)a4 replacementString:(id)a5
+{
+  NSUInteger length;
+  uint64_t v8;
+  uint64_t v9;
+  uint64_t v10;
+  char *v11;
+  _TtC8AppStore30SearchTextInputSourceTextField *v12;
+  uint64_t v13;
+
+  length = a4.length;
+  v8 = static String._unconditionallyBridgeFromObjectiveC(_:)(a5);
+  v10 = v9;
+  v11 = (char *)a3;
+  v12 = self;
+  LOBYTE(length) = sub_100528AF8(v11, v13, length, v8, v10);
+
+  swift_bridgeObjectRelease(v10);
+  return length & 1;
+}
+
+- (void)textFieldDidChangeSelection:(id)a3
+{
+  uint64_t ObjectType;
+  id v6;
+  id v7;
+  _TtC8AppStore30SearchTextInputSourceTextField *v8;
+
+  ObjectType = swift_getObjectType();
+  if (swift_conformsToProtocol2(ObjectType, &protocol descriptor for GhostHintTextDisplayable))
+    v6 = a3;
+  else
+    v6 = 0;
+  if (v6)
+  {
+    v7 = a3;
+    v8 = self;
+    sub_1004D64D8(0, 0);
+
+  }
+}
+
+- (BOOL)textFieldShouldEndEditing:(id)a3
+{
+  return 1;
+}
+
+- (BOOL)scribbleInteractionShouldDelayFocus:(id)a3
+{
+  return 1;
+}
+
+- (_TtC8AppStore30SearchTextInputSourceTextField)init
+{
+  _TtC8AppStore30SearchTextInputSourceTextField *result;
+
+  result = (_TtC8AppStore30SearchTextInputSourceTextField *)_swift_stdlib_reportUnimplementedInitializer("AppStore.SearchTextInputSourceTextField", 39, "init()", 6, 0);
+  __break(1u);
+  return result;
+}
+
+- (void).cxx_destruct
+{
+
+  objc_release(*(id *)((char *)&self->super.isa
+                     + OBJC_IVAR____TtC8AppStore30SearchTextInputSourceTextField_scribbleInteraction));
+  swift_release(*(Class *)((char *)&self->super.isa
+                         + OBJC_IVAR____TtC8AppStore30SearchTextInputSourceTextField_onSnapshotDidUpdate));
+}
+
+@end

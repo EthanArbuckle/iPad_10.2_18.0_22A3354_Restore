@@ -1,0 +1,8 @@
+@implementation VKAnimationCurveForCAMediaTimingFunction
+
+uint64_t __VKAnimationCurveForCAMediaTimingFunction_block_invoke(uint64_t a1)
+{
+  return objc_msgSend(*(id *)(a1 + 32), "_solveForInput:");
+}
+
+@end

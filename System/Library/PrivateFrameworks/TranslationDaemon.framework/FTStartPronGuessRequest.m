@@ -1,0 +1,345 @@
+@implementation FTStartPronGuessRequest
+
+- (FTStartPronGuessRequest)initWithFlatbuffData:(id)a3
+{
+  return -[FTStartPronGuessRequest initWithFlatbuffData:root:verify:](self, "initWithFlatbuffData:root:verify:", a3, 0, 0);
+}
+
+- (id)initAndVerifyWithFlatbuffData:(id)a3
+{
+  return -[FTStartPronGuessRequest initWithFlatbuffData:root:verify:](self, "initWithFlatbuffData:root:verify:", a3, 0, 1);
+}
+
+- (FTStartPronGuessRequest)initWithFlatbuffData:(id)a3 root:(const StartPronGuessRequest *)a4
+{
+  return -[FTStartPronGuessRequest initWithFlatbuffData:root:verify:](self, "initWithFlatbuffData:root:verify:", a3, a4, 0);
+}
+
+- (FTStartPronGuessRequest)initWithFlatbuffData:(id)a3 root:(const StartPronGuessRequest *)a4 verify:(BOOL)a5
+{
+  _BOOL4 v5;
+  id v9;
+  FTStartPronGuessRequest *v10;
+  id *p_data;
+  unsigned int *v12;
+  unint64_t v13;
+  uint64_t v14;
+  const StartPronGuessRequest *root;
+  uint64_t v17;
+  uint64_t v18;
+  siri::speech::schema_fb::StartPronGuessRequest *v19;
+  FTStartPronGuessRequest *v20;
+  _QWORD v22[2];
+  __int128 v23;
+  uint64_t v24;
+  char v25;
+  objc_super v26;
+
+  v5 = a5;
+  v9 = a3;
+  v26.receiver = self;
+  v26.super_class = (Class)FTStartPronGuessRequest;
+  v10 = -[FTStartPronGuessRequest init](&v26, sel_init);
+  if (!v10)
+    goto LABEL_13;
+  if (!v9 || !objc_msgSend(v9, "length"))
+    goto LABEL_14;
+  p_data = (id *)&v10->_data;
+  objc_storeStrong((id *)&v10->_data, a3);
+  if (!a4)
+  {
+    v12 = (unsigned int *)objc_msgSend(*p_data, "bytes");
+    a4 = (const StartPronGuessRequest *)v12 + *v12;
+  }
+  v10->_root = a4;
+  if (!v5)
+    goto LABEL_13;
+  v13 = objc_msgSend(*p_data, "bytes");
+  v14 = objc_msgSend(*p_data, "length");
+  root = v10->_root;
+  if ((unint64_t)root < v13 || (unint64_t)root > v13 + v14)
+    goto LABEL_14;
+  v17 = objc_msgSend(*p_data, "bytes");
+  v18 = objc_msgSend(*p_data, "length");
+  v22[0] = v17;
+  v22[1] = v18;
+  v23 = xmmword_249338830;
+  v24 = 0;
+  v25 = 1;
+  v19 = (siri::speech::schema_fb::StartPronGuessRequest *)v10->_root;
+  if (!v19)
+    goto LABEL_13;
+  if (!siri::speech::schema_fb::StartPronGuessRequest::Verify(v19, (apple::aiml::flatbuffers2::Verifier *)v22))
+LABEL_14:
+    v20 = 0;
+  else
+LABEL_13:
+    v20 = v10;
+
+  return v20;
+}
+
+- (NSString)speech_id
+{
+  const StartPronGuessRequest *root;
+  uint64_t v3;
+  uint64_t v4;
+  uint64_t v5;
+  const StartPronGuessRequest *v6;
+
+  root = self->_root;
+  v3 = *(int *)root->var0;
+  v4 = *(unsigned __int16 *)root[-v3 + 4].var0;
+  if (*(_WORD *)root[-v3 + 4].var0)
+  {
+    v5 = *(unsigned int *)root[v4].var0;
+    v6 = &root[v4 + v5];
+  }
+  else
+  {
+    v4 = 0;
+    v6 = 0;
+    v5 = *(unsigned int *)root->var0;
+  }
+  return (NSString *)(id)objc_msgSend(objc_alloc(MEMORY[0x24BDD17C8]), "initWithBytes:length:encoding:", &v6[4], *(unsigned int *)root[v4 + v5].var0, 4);
+}
+
+- (NSString)session_id
+{
+  const StartPronGuessRequest *root;
+  uint64_t v3;
+  uint64_t v4;
+  uint64_t v5;
+  const StartPronGuessRequest *v6;
+
+  root = self->_root;
+  v3 = *(int *)root->var0;
+  v4 = *(unsigned __int16 *)root[-v3 + 6].var0;
+  if (*(_WORD *)root[-v3 + 6].var0)
+  {
+    v5 = *(unsigned int *)root[v4].var0;
+    v6 = &root[v4 + v5];
+  }
+  else
+  {
+    v4 = 0;
+    v6 = 0;
+    v5 = *(unsigned int *)root->var0;
+  }
+  return (NSString *)(id)objc_msgSend(objc_alloc(MEMORY[0x24BDD17C8]), "initWithBytes:length:encoding:", &v6[4], *(unsigned int *)root[v4 + v5].var0, 4);
+}
+
+- (NSString)orthography
+{
+  const StartPronGuessRequest *root;
+  uint64_t v3;
+  uint64_t v4;
+  uint64_t v5;
+  const StartPronGuessRequest *v6;
+
+  root = self->_root;
+  v3 = *(int *)root->var0;
+  v4 = *(unsigned __int16 *)root[-v3 + 8].var0;
+  if (*(_WORD *)root[-v3 + 8].var0)
+  {
+    v5 = *(unsigned int *)root[v4].var0;
+    v6 = &root[v4 + v5];
+  }
+  else
+  {
+    v4 = 0;
+    v6 = 0;
+    v5 = *(unsigned int *)root->var0;
+  }
+  return (NSString *)(id)objc_msgSend(objc_alloc(MEMORY[0x24BDD17C8]), "initWithBytes:length:encoding:", &v6[4], *(unsigned int *)root[v4 + v5].var0, 4);
+}
+
+- (NSString)language
+{
+  const StartPronGuessRequest *root;
+  uint64_t v3;
+  uint64_t v4;
+  uint64_t v5;
+  const StartPronGuessRequest *v6;
+
+  root = self->_root;
+  v3 = *(int *)root->var0;
+  v4 = *(unsigned __int16 *)root[-v3 + 10].var0;
+  if (*(_WORD *)root[-v3 + 10].var0)
+  {
+    v5 = *(unsigned int *)root[v4].var0;
+    v6 = &root[v4 + v5];
+  }
+  else
+  {
+    v4 = 0;
+    v6 = 0;
+    v5 = *(unsigned int *)root->var0;
+  }
+  return (NSString *)(id)objc_msgSend(objc_alloc(MEMORY[0x24BDD17C8]), "initWithBytes:length:encoding:", &v6[4], *(unsigned int *)root[v4 + v5].var0, 4);
+}
+
+- (int64_t)codec
+{
+  const StartPronGuessRequest *root;
+  const StartPronGuessRequest *v3;
+  uint64_t v4;
+
+  root = self->_root;
+  v3 = &root[-*(int *)root->var0];
+  if (*(unsigned __int16 *)v3->var0 >= 0xDu && (v4 = *(unsigned __int16 *)v3[12].var0) != 0)
+    return *(int *)root[v4].var0;
+  else
+    return 0;
+}
+
+- (Offset<siri::speech::schema_fb::StartPronGuessRequest>)addObjectToBuffer:(void *)a3
+{
+  __CFString *v5;
+  __CFString *v6;
+  const char *v7;
+  size_t v8;
+  int String;
+  __CFString *v10;
+  __CFString *v11;
+  const char *v12;
+  size_t v13;
+  int v14;
+  __CFString *v15;
+  __CFString *v16;
+  const char *v17;
+  size_t v18;
+  int v19;
+  __CFString *v20;
+  __CFString *v21;
+  const char *v22;
+  size_t v23;
+  int v24;
+  int v25;
+
+  -[FTStartPronGuessRequest speech_id](self, "speech_id");
+  v5 = (__CFString *)objc_claimAutoreleasedReturnValue();
+  v6 = v5;
+  if (!v5)
+    v5 = &stru_251A15610;
+  v7 = (const char *)-[__CFString UTF8String](objc_retainAutorelease(v5), "UTF8String");
+  v8 = strlen(v7);
+  String = apple::aiml::flatbuffers2::FlatBufferBuilder::CreateString((apple::aiml::flatbuffers2::FlatBufferBuilder *)a3, v7, v8);
+
+  -[FTStartPronGuessRequest session_id](self, "session_id");
+  v10 = (__CFString *)objc_claimAutoreleasedReturnValue();
+  v11 = v10;
+  if (!v10)
+    v10 = &stru_251A15610;
+  v12 = (const char *)-[__CFString UTF8String](objc_retainAutorelease(v10), "UTF8String");
+  v13 = strlen(v12);
+  v14 = apple::aiml::flatbuffers2::FlatBufferBuilder::CreateString((apple::aiml::flatbuffers2::FlatBufferBuilder *)a3, v12, v13);
+
+  -[FTStartPronGuessRequest orthography](self, "orthography");
+  v15 = (__CFString *)objc_claimAutoreleasedReturnValue();
+  v16 = v15;
+  if (!v15)
+    v15 = &stru_251A15610;
+  v17 = (const char *)-[__CFString UTF8String](objc_retainAutorelease(v15), "UTF8String");
+  v18 = strlen(v17);
+  v19 = apple::aiml::flatbuffers2::FlatBufferBuilder::CreateString((apple::aiml::flatbuffers2::FlatBufferBuilder *)a3, v17, v18);
+
+  -[FTStartPronGuessRequest language](self, "language");
+  v20 = (__CFString *)objc_claimAutoreleasedReturnValue();
+  v21 = v20;
+  if (!v20)
+    v20 = &stru_251A15610;
+  v22 = (const char *)-[__CFString UTF8String](objc_retainAutorelease(v20), "UTF8String");
+  v23 = strlen(v22);
+  LODWORD(v22) = apple::aiml::flatbuffers2::FlatBufferBuilder::CreateString((apple::aiml::flatbuffers2::FlatBufferBuilder *)a3, v22, v23);
+
+  v24 = -[FTStartPronGuessRequest codec](self, "codec");
+  *((_BYTE *)a3 + 70) = 1;
+  v25 = *((_DWORD *)a3 + 8) - *((_DWORD *)a3 + 12) + *((_DWORD *)a3 + 10);
+  apple::aiml::flatbuffers2::FlatBufferBuilder::AddOffset<apple::aiml::flatbuffers2::String>((char *)a3, 4, String);
+  apple::aiml::flatbuffers2::FlatBufferBuilder::AddOffset<apple::aiml::flatbuffers2::String>((char *)a3, 6, v14);
+  apple::aiml::flatbuffers2::FlatBufferBuilder::AddOffset<apple::aiml::flatbuffers2::String>((char *)a3, 8, v19);
+  apple::aiml::flatbuffers2::FlatBufferBuilder::AddOffset<apple::aiml::flatbuffers2::String>((char *)a3, 10, (int)v22);
+  apple::aiml::flatbuffers2::FlatBufferBuilder::AddElement<unsigned int>((char *)a3, 12, v24, 0);
+  return (Offset<siri::speech::schema_fb::StartPronGuessRequest>)apple::aiml::flatbuffers2::FlatBufferBuilder::EndTable((apple::aiml::flatbuffers2::FlatBufferBuilder *)a3, v25);
+}
+
+- (id)flatbuffData
+{
+  uint64_t v2;
+  int v3;
+  __int128 v4;
+  uint64_t v5;
+  uint64_t v6;
+  id v7;
+  void *v8;
+  _QWORD v10[5];
+  uint64_t v11;
+  unsigned __int8 v12;
+  __int128 v13;
+  __int128 v14;
+  __int128 v15;
+  uint64_t v16;
+  uint64_t v17;
+  __int16 v18;
+  uint64_t v19;
+
+  v11 = 0;
+  v12 = 0;
+  v13 = xmmword_249338840;
+  v14 = 0u;
+  v15 = 0u;
+  v16 = 0;
+  v17 = 1;
+  v18 = 256;
+  v19 = 0;
+  apple::aiml::flatbuffers2::FlatBufferBuilder::Finish((apple::aiml::flatbuffers2::FlatBufferBuilder *)&v11, -[FTStartPronGuessRequest addObjectToBuffer:](self, "addObjectToBuffer:", &v11), 0, 0);
+  v2 = operator new();
+  v3 = v12;
+  v4 = v14;
+  v5 = v15;
+  v6 = (v14 + DWORD2(v14) - v15);
+  *(_QWORD *)v2 = v11;
+  *(_BYTE *)(v2 + 8) = v3;
+  *(_QWORD *)(v2 + 16) = *((_QWORD *)&v4 + 1);
+  *(_QWORD *)(v2 + 24) = v4;
+  *(_QWORD *)(v2 + 32) = v5;
+  *(_QWORD *)(v2 + 40) = v6;
+  if (v3)
+  {
+    v11 = 0;
+    v12 = 0;
+  }
+  v14 = 0u;
+  v15 = 0u;
+  v7 = objc_alloc(MEMORY[0x24BDBCE50]);
+  v10[0] = MEMORY[0x24BDAC760];
+  v10[1] = 3221225472;
+  v10[2] = __39__FTStartPronGuessRequest_flatbuffData__block_invoke;
+  v10[3] = &__block_descriptor_40_e12_v24__0_v8Q16l;
+  v10[4] = v2;
+  v8 = (void *)objc_msgSend(v7, "initWithBytesNoCopy:length:deallocator:", v5, v6, v10);
+  apple::aiml::flatbuffers2::FlatBufferBuilder::~FlatBufferBuilder((apple::aiml::flatbuffers2::FlatBufferBuilder *)&v11);
+  return v8;
+}
+
+apple::aiml::flatbuffers2::DetachedBuffer *__39__FTStartPronGuessRequest_flatbuffData__block_invoke(uint64_t a1)
+{
+  apple::aiml::flatbuffers2::DetachedBuffer *result;
+
+  result = *(apple::aiml::flatbuffers2::DetachedBuffer **)(a1 + 32);
+  if (result)
+  {
+    apple::aiml::flatbuffers2::DetachedBuffer::~DetachedBuffer(result);
+    JUMPOUT(0x2495AE51CLL);
+  }
+  return result;
+}
+
+- (void).cxx_destruct
+{
+  objc_storeStrong((id *)&self->_data, 0);
+  objc_storeStrong((id *)&self->_storage, 0);
+}
+
+@end

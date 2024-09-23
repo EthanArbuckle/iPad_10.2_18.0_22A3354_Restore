@@ -1,0 +1,151 @@
+@implementation FSURLCopyResourcePropertyValuesAndFlags
+
+const void *___FSURLCopyResourcePropertyValuesAndFlags_block_invoke()
+{
+  uint64_t *v0;
+  const void *result;
+  uint64_t v2;
+
+  if ((_ZGVZZ40_FSURLCopyResourcePropertyValuesAndFlagsEUb_E8theTable & 1) == 0)
+  {
+    _ZZZ40_FSURLCopyResourcePropertyValuesAndFlagsEUb_E8theTable = 1;
+    dword_1EDC2BC40 = 0;
+    qword_1EDC2BC48 = *MEMORY[0x1E0C9B5A0];
+    unk_1EDC2BC50 = 0;
+    qword_1EDC2BC58 = 2;
+    dword_1EDC2BC60 = 0;
+    qword_1EDC2BC68 = *MEMORY[0x1E0C9B570];
+    unk_1EDC2BC70 = 0;
+    qword_1EDC2BC78 = 4;
+    dword_1EDC2BC80 = 0;
+    qword_1EDC2BC88 = *MEMORY[0x1E0C9B6A0];
+    unk_1EDC2BC90 = 0;
+    qword_1EDC2BC98 = 8;
+    dword_1EDC2BCA0 = 0;
+    qword_1EDC2BCA8 = *MEMORY[0x1E0C9AC50];
+    unk_1EDC2BCB0 = 0;
+    qword_1EDC2BCB8 = 16;
+    dword_1EDC2BCC0 = 0;
+    qword_1EDC2BCC8 = *MEMORY[0x1E0C9B408];
+    unk_1EDC2BCD0 = 0;
+    qword_1EDC2BCD8 = 32;
+    dword_1EDC2BCE0 = 0;
+    qword_1EDC2BCE8 = *MEMORY[0x1E0C9B400];
+    unk_1EDC2BCF0 = 0;
+    qword_1EDC2BCF8 = 64;
+    dword_1EDC2BD00 = 0;
+    qword_1EDC2BD08 = *MEMORY[0x1E0C9B3C0];
+    unk_1EDC2BD10 = 0;
+    qword_1EDC2BD18 = 128;
+    dword_1EDC2BD20 = 0;
+    qword_1EDC2BD28 = *MEMORY[0x1E0C9B4A8];
+    unk_1EDC2BD30 = 0;
+    qword_1EDC2BD38 = 256;
+    dword_1EDC2BD40 = 0;
+    qword_1EDC2BD48 = *MEMORY[0x1E0C9B420];
+    unk_1EDC2BD50 = 0;
+    qword_1EDC2BD58 = 512;
+    dword_1EDC2BD60 = 0;
+    qword_1EDC2BD68 = *MEMORY[0x1E0C9AC58];
+    unk_1EDC2BD70 = 0;
+    qword_1EDC2BD78 = 1024;
+    dword_1EDC2BD80 = 0;
+    qword_1EDC2BD88 = *MEMORY[0x1E0C9AC40];
+    unk_1EDC2BD90 = 0;
+    qword_1EDC2BD98 = 2048;
+    dword_1EDC2BDA0 = 0;
+    qword_1EDC2BDA8 = *MEMORY[0x1E0C9AC60];
+    unk_1EDC2BDB0 = 0;
+    qword_1EDC2BDB8 = 4096;
+    dword_1EDC2BDC0 = 0;
+    qword_1EDC2BDC8 = *MEMORY[0x1E0C9B4A0];
+    unk_1EDC2BDD0 = 0;
+    qword_1EDC2BDD8 = 1;
+    dword_1EDC2BDE0 = 1;
+    qword_1EDC2BDE8 = *MEMORY[0x1E0C9B520];
+    unk_1EDC2BDF0 = 0;
+    qword_1EDC2BDF8 = 2;
+    dword_1EDC2BE00 = 1;
+    qword_1EDC2BE08 = *MEMORY[0x1E0C9B4E0];
+    unk_1EDC2BE10 = 0;
+    qword_1EDC2BE18 = 4;
+    dword_1EDC2BE20 = 1;
+    qword_1EDC2BE28 = *MEMORY[0x1E0C9B530];
+    unk_1EDC2BE30 = 0;
+    qword_1EDC2BE38 = 8;
+    dword_1EDC2BE40 = 1;
+    qword_1EDC2BE48 = *MEMORY[0x1E0C9B550];
+    qword_1EDC2BE50 = 0;
+    qword_1EDC2BE58 = 16;
+    dword_1EDC2BE60 = 1;
+    qword_1EDC2BE68 = *MEMORY[0x1E0C9B508];
+    qword_1EDC2BE70 = 0;
+    qword_1EDC2BE78 = 32;
+    dword_1EDC2BE80 = 1;
+    qword_1EDC2BE88 = *MEMORY[0x1E0C9B538];
+    qword_1EDC2BE90 = 0;
+    qword_1EDC2BE98 = 64;
+    dword_1EDC2BEA0 = 1;
+    qword_1EDC2BEA8 = *MEMORY[0x1E0C9B548];
+    qword_1EDC2BEB0 = 0;
+    qword_1EDC2BEB8 = 128;
+    dword_1EDC2BEC0 = 1;
+    qword_1EDC2BEC8 = *MEMORY[0x1E0C9B4F8];
+    qword_1EDC2BED0 = 0;
+    qword_1EDC2BED8 = 256;
+    dword_1EDC2BEE0 = 1;
+    qword_1EDC2BEE8 = *MEMORY[0x1E0C9B4C8];
+    qword_1EDC2BEF0 = 0;
+    qword_1EDC2BEF8 = 512;
+    dword_1EDC2BF00 = 1;
+    qword_1EDC2BF08 = *MEMORY[0x1E0C9B4D8];
+    qword_1EDC2BF10 = 0;
+    qword_1EDC2BF18 = 1024;
+    dword_1EDC2BF20 = 1;
+    qword_1EDC2BF28 = *MEMORY[0x1E0C9AC88];
+    qword_1EDC2BF30 = 0;
+    qword_1EDC2BF38 = 2048;
+    dword_1EDC2BF40 = 1;
+    qword_1EDC2BF48 = *MEMORY[0x1E0C9ABF8];
+    qword_1EDC2BF50 = 0;
+    qword_1EDC2BF58 = 4096;
+    dword_1EDC2BF60 = 1;
+    qword_1EDC2BF68 = *MEMORY[0x1E0C9B518];
+    qword_1EDC2BF70 = 0;
+    qword_1EDC2BF78 = 0x2000;
+    dword_1EDC2BF80 = 1;
+    qword_1EDC2BF88 = *MEMORY[0x1E0C9B558];
+    qword_1EDC2BF90 = 0;
+    qword_1EDC2BF98 = 0x4000;
+    dword_1EDC2BFA0 = 1;
+    qword_1EDC2BFA8 = *MEMORY[0x1E0C9B4F0];
+    qword_1EDC2BFB0 = 0;
+    qword_1EDC2BFB8 = 0x8000;
+    dword_1EDC2BFC0 = 1;
+    qword_1EDC2BFC8 = *MEMORY[0x1E0C9B4D0];
+    qword_1EDC2BFD0 = 0;
+    qword_1EDC2BFD8 = 0x10000;
+    dword_1EDC2BFE0 = 1;
+    qword_1EDC2BFE8 = *MEMORY[0x1E0C9B500];
+    qword_1EDC2BFF8 = 0;
+    qword_1EDC2BFF0 = 0;
+    dword_1EDC2C000 = 0;
+    qword_1EDC2C008 = 0;
+    qword_1EDC2C010 = 0;
+    _ZGVZZ40_FSURLCopyResourcePropertyValuesAndFlagsEUb_E8theTable = 1;
+  }
+  _FSURLCopyResourcePropertyValuesAndFlags::maskToPropertyTable = (uint64_t)&_ZZZ40_FSURLCopyResourcePropertyValuesAndFlagsEUb_E8theTable;
+  _FSURLCopyResourcePropertyValuesAndFlags::maskToPropertyTableCount = 1;
+  v0 = &qword_1EDC2BC58;
+  do
+  {
+    result = CFDictionaryGetValue((CFDictionaryRef)qword_1ECD2A668, (const void *)*(v0 - 2));
+    *(v0 - 1) = (uint64_t)result;
+    v2 = *v0;
+    v0 += 4;
+  }
+  while (v2);
+  return result;
+}
+
+@end

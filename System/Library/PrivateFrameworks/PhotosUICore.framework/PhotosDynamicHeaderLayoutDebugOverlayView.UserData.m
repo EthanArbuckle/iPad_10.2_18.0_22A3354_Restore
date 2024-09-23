@@ -1,0 +1,17 @@
+@implementation PhotosDynamicHeaderLayoutDebugOverlayView.UserData
+
+- (_TtCC12PhotosUICoreP33_D2105462B28C8B244908FEC7DAEF9E2941PhotosDynamicHeaderLayoutDebugOverlayView8UserData)init
+{
+  _TtCC12PhotosUICoreP33_D2105462B28C8B244908FEC7DAEF9E2941PhotosDynamicHeaderLayoutDebugOverlayView8UserData *result;
+
+  result = (_TtCC12PhotosUICoreP33_D2105462B28C8B244908FEC7DAEF9E2941PhotosDynamicHeaderLayoutDebugOverlayView8UserData *)_swift_stdlib_reportUnimplementedInitializer();
+  __break(1u);
+  return result;
+}
+
+- (void).cxx_destruct
+{
+  __swift_destroy_boxed_opaque_existential_0((uint64_t)self+ OBJC_IVAR____TtCC12PhotosUICoreP33_D2105462B28C8B244908FEC7DAEF9E2941PhotosDynamicHeaderLayoutDebugOverlayView8UserData_insets);
+}
+
+@end

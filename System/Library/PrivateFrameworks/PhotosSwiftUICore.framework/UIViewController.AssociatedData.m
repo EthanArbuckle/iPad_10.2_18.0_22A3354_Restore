@@ -1,0 +1,13 @@
+@implementation UIViewController.AssociatedData
+
+- (_TtCE17PhotosSwiftUICoreCSo16UIViewControllerP33_BC75BA9775690B5F54CDBFF2E7C5972414AssociatedData)init
+{
+  return (_TtCE17PhotosSwiftUICoreCSo16UIViewControllerP33_BC75BA9775690B5F54CDBFF2E7C5972414AssociatedData *)sub_2441284FC();
+}
+
+- (void).cxx_destruct
+{
+  sub_24412AA18(*(uint64_t *)((char *)&self->super.isa+ OBJC_IVAR____TtCE17PhotosSwiftUICoreCSo16UIViewControllerP33_BC75BA9775690B5F54CDBFF2E7C5972414AssociatedData_detailsNavigationContext), *(_QWORD *)&self->detailsNavigationContext[OBJC_IVAR____TtCE17PhotosSwiftUICoreCSo16UIViewControllerP33_BC75BA9775690B5F54CDBFF2E7C5972414AssociatedData_detailsNavigationContext], *(_QWORD *)&self->detailsNavigationContext[OBJC_IVAR____TtCE17PhotosSwiftUICoreCSo16UIViewControllerP33_BC75BA9775690B5F54CDBFF2E7C5972414AssociatedData_detailsNavigationContext+ 8], *(_QWORD *)&self->detailsNavigationContext[OBJC_IVAR____TtCE17PhotosSwiftUICoreCSo16UIViewControllerP33_BC75BA9775690B5F54CDBFF2E7C5972414AssociatedData_detailsNavigationContext+ 16], *(_QWORD *)&self->detailsNavigationContext[OBJC_IVAR____TtCE17PhotosSwiftUICoreCSo16UIViewControllerP33_BC75BA9775690B5F54CDBFF2E7C5972414AssociatedData_detailsNavigationContext+ 24]);
+}
+
+@end

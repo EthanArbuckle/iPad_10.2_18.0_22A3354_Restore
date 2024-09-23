@@ -1,0 +1,206 @@
+@implementation VCPImageSaliencyAnalyzerBinary
+
+- (int)prepareModelForSourceWidth:(int)a3 andSourceHeight:(int)a4
+{
+  _BOOL8 v5;
+  void *v6;
+  void *v7;
+  NSURL *v8;
+  NSURL *modelURL;
+  VCPCNNModel *v10;
+  VCPCNNModel *model;
+  VCPCNNConvBlockBinary *v12;
+  int v13;
+  VCPCNNConvBlockBinary *v14;
+  void *v15;
+  void *v16;
+  VCPCNNConvBlockBinary *v17;
+  VCPCNNConvBlockBinary *v18;
+  VCPCNNConvBlockBinary *v20;
+  VCPCNNConvBlockBinary *v21;
+  VCPCNNConvBlockBinary *v22;
+  VCPCNNConvBlockBinary *v23;
+  VCPCNNConvBlockBinary *v24;
+  void *v25;
+  VCPCNNConvBlockBinary *v26;
+  VCPCNNConvBlockBinary *v27;
+
+  v5 = +[VCPCNNMetalContext supportGPU](VCPCNNMetalContext, "supportGPU", *(_QWORD *)&a3, *(_QWORD *)&a4);
+  objc_msgSend(MEMORY[0x1E0CB34D0], "vcp_mediaAnalysisBundle");
+  v6 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(v6, "resourceURL");
+  v7 = (void *)objc_claimAutoreleasedReturnValue();
+
+  objc_msgSend(MEMORY[0x1E0C99E98], "URLWithString:relativeToURL:", CFSTR("cnn_saliency_binary.dat"), v7);
+  v8 = (NSURL *)objc_claimAutoreleasedReturnValue();
+  modelURL = self->_modelURL;
+  self->_modelURL = v8;
+
+  v10 = -[VCPCNNModel initWithParameters:useGPU:]([VCPCNNModel alloc], "initWithParameters:useGPU:", 1, v5);
+  model = self->_model;
+  self->_model = v10;
+
+  if (self->_model)
+  {
+    v12 = -[VCPCNNConvBlockBinary initWithParameters:filterNum:convType:reLU:padding:]([VCPCNNConvBlockBinary alloc], "initWithParameters:filterNum:convType:reLU:padding:", 3, 32, 0, 0, 1);
+    v13 = -[VCPCNNModel add:](self->_model, "add:", v12);
+    if (!v13)
+    {
+      v14 = -[VCPCNNConvBlockBinary initWithParameters:filterNum:convType:reLU:padding:]([VCPCNNConvBlockBinary alloc], "initWithParameters:filterNum:convType:reLU:padding:", 3, 32, 1, 0, 1);
+      v13 = -[VCPCNNModel add:](self->_model, "add:", v14);
+      if (!v13)
+      {
+        +[VCPCNNPoolingBlock poolingBlockWithPoolX:poolY:chunk:](VCPCNNPoolingBlock, "poolingBlockWithPoolX:poolY:chunk:", 2, 2, self->super._chunk);
+        v15 = (void *)objc_claimAutoreleasedReturnValue();
+        v13 = -[VCPCNNModel add:](self->_model, "add:", v15);
+        if (!v13)
+        {
+          v27 = -[VCPCNNConvBlockBinary initWithParameters:filterNum:convType:reLU:padding:]([VCPCNNConvBlockBinary alloc], "initWithParameters:filterNum:convType:reLU:padding:", 3, 64, 1, 0, 1);
+          v13 = -[VCPCNNModel add:](self->_model, "add:", v27);
+          if (!v13)
+          {
+            v26 = -[VCPCNNConvBlockBinary initWithParameters:filterNum:convType:reLU:padding:]([VCPCNNConvBlockBinary alloc], "initWithParameters:filterNum:convType:reLU:padding:", 3, 64, 1, 0, 1);
+            v13 = -[VCPCNNModel add:](self->_model, "add:", v26);
+            if (!v13)
+            {
+              +[VCPCNNPoolingBlock poolingBlockWithPoolX:poolY:chunk:](VCPCNNPoolingBlock, "poolingBlockWithPoolX:poolY:chunk:", 2, 2, self->super._chunk);
+              v25 = (void *)objc_claimAutoreleasedReturnValue();
+              v13 = -[VCPCNNModel add:](self->_model, "add:", v25);
+              if (!v13)
+              {
+                v24 = -[VCPCNNConvBlockBinary initWithParameters:filterNum:convType:reLU:padding:]([VCPCNNConvBlockBinary alloc], "initWithParameters:filterNum:convType:reLU:padding:", 3, 128, 1, 0, 1);
+                v13 = -[VCPCNNModel add:](self->_model, "add:", v24);
+                if (!v13)
+                {
+                  v23 = -[VCPCNNConvBlockBinary initWithParameters:filterNum:convType:reLU:padding:]([VCPCNNConvBlockBinary alloc], "initWithParameters:filterNum:convType:reLU:padding:", 3, 128, 1, 0, 1);
+                  v13 = -[VCPCNNModel add:](self->_model, "add:", v23);
+                  if (!v13)
+                  {
+                    v22 = -[VCPCNNConvBlockBinary initWithParameters:filterNum:convType:reLU:padding:]([VCPCNNConvBlockBinary alloc], "initWithParameters:filterNum:convType:reLU:padding:", 3, 128, 1, 0, 1);
+                    v13 = -[VCPCNNModel add:](self->_model, "add:", v22);
+                    if (!v13)
+                    {
+                      +[VCPCNNPoolingBlock poolingBlockWithPoolX:poolY:chunk:](VCPCNNPoolingBlock, "poolingBlockWithPoolX:poolY:chunk:", 2, 2, self->super._chunk);
+                      v16 = (void *)objc_claimAutoreleasedReturnValue();
+                      v13 = -[VCPCNNModel add:](self->_model, "add:", v16);
+                      if (!v13)
+                      {
+                        v17 = -[VCPCNNConvBlockBinary initWithParameters:filterNum:convType:reLU:padding:]([VCPCNNConvBlockBinary alloc], "initWithParameters:filterNum:convType:reLU:padding:", 3, 256, 1, 0, 1);
+                        v13 = -[VCPCNNModel add:](self->_model, "add:", v17);
+                        if (!v13)
+                        {
+                          v21 = -[VCPCNNConvBlockBinary initWithParameters:filterNum:convType:reLU:padding:]([VCPCNNConvBlockBinary alloc], "initWithParameters:filterNum:convType:reLU:padding:", 3, 256, 1, 0, 1);
+                          v13 = -[VCPCNNModel add:](self->_model, "add:", v21);
+                          if (!v13)
+                          {
+                            v20 = -[VCPCNNConvBlockBinary initWithParameters:filterNum:convType:reLU:padding:]([VCPCNNConvBlockBinary alloc], "initWithParameters:filterNum:convType:reLU:padding:", 3, 256, 1, 0, 1);
+                            v13 = -[VCPCNNModel add:](self->_model, "add:", v20);
+                            if (!v13)
+                            {
+                              v18 = -[VCPCNNConvBlockBinary initWithParameters:filterNum:convType:reLU:padding:]([VCPCNNConvBlockBinary alloc], "initWithParameters:filterNum:convType:reLU:padding:", 1, 1, 1, 1, 1);
+                              v13 = -[VCPCNNModel add:](self->_model, "add:", v18);
+
+                            }
+                          }
+
+                        }
+                      }
+
+                    }
+                  }
+
+                }
+              }
+
+            }
+          }
+
+        }
+      }
+
+    }
+  }
+  else
+  {
+    v13 = -108;
+  }
+
+  return v13;
+}
+
+- (float)outputScaling
+{
+  return 255.0;
+}
+
+- (float)getInputBuffer:(int)a3 srcWidth:(int)a4 cnnInputHeight:(int *)a5 cnnInputWidth:(int *)a6
+{
+  uint64_t v6;
+  uint64_t v8;
+  void *v9;
+  VCPCNNData *v10;
+  VCPCNNData *input;
+
+  v6 = *(_QWORD *)&a4;
+  *a5 = a3;
+  *a6 = a4;
+  v8 = *a5;
+  -[VCPCNNModel getGPUContext](self->_model, "getGPUContext");
+  v9 = (void *)objc_claimAutoreleasedReturnValue();
+  +[VCPCNNData cnnDataWithPlane:height:width:context:](VCPCNNData, "cnnDataWithPlane:height:width:context:", 4, v8, v6, v9);
+  v10 = (VCPCNNData *)objc_claimAutoreleasedReturnValue();
+  input = self->_input;
+  self->_input = v10;
+
+  -[VCPCNNData allocBuffers:](self->_input, "allocBuffers:", 1);
+  return -[VCPCNNData data](self->_input, "data");
+}
+
+- (int)getSalientRegions:(id)a3
+{
+  int v4;
+  void *v5;
+  void *v6;
+  void *v7;
+  uint64_t v8;
+  void *v9;
+  void *v10;
+  void *v11;
+  uint64_t v12;
+  void *v13;
+
+  v4 = -[VCPCNNModel dynamicForward:paramFileUrl:cancel:](self->_model, "dynamicForward:paramFileUrl:cancel:", self->_input, self->_modelURL, a3);
+  if (!v4)
+  {
+    -[VCPCNNModel output](self->_model, "output");
+    v5 = (void *)objc_claimAutoreleasedReturnValue();
+    objc_msgSend(v5, "size");
+    v6 = (void *)objc_claimAutoreleasedReturnValue();
+    objc_msgSend(v6, "objectAtIndexedSubscript:", 1);
+    v7 = (void *)objc_claimAutoreleasedReturnValue();
+    v8 = objc_msgSend(v7, "intValue");
+
+    -[VCPCNNModel output](self->_model, "output");
+    v9 = (void *)objc_claimAutoreleasedReturnValue();
+    objc_msgSend(v9, "size");
+    v10 = (void *)objc_claimAutoreleasedReturnValue();
+    objc_msgSend(v10, "objectAtIndexedSubscript:", 2);
+    v11 = (void *)objc_claimAutoreleasedReturnValue();
+    v12 = objc_msgSend(v11, "intValue");
+
+    -[VCPCNNModel output](self->_model, "output");
+    v13 = (void *)objc_claimAutoreleasedReturnValue();
+    v4 = -[VCPImageSaliencyAnalyzer generateSalientRegion:outHeight:outWidth:](self, "generateSalientRegion:outHeight:outWidth:", objc_msgSend(v13, "data"), v8, v12);
+
+  }
+  return v4;
+}
+
+- (void).cxx_destruct
+{
+  objc_storeStrong((id *)&self->_modelURL, 0);
+  objc_storeStrong((id *)&self->_input, 0);
+  objc_storeStrong((id *)&self->_model, 0);
+}
+
+@end

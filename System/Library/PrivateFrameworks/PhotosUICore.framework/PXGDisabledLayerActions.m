@@ -1,0 +1,103 @@
+@implementation PXGDisabledLayerActions
+
+void ___PXGDisabledLayerActions_block_invoke()
+{
+  void *v0;
+  void *v1;
+  void *v2;
+  void *v3;
+  void *v4;
+  void *v5;
+  void *v6;
+  void *v7;
+  void *v8;
+  void *v9;
+  uint64_t v10;
+  void *v11;
+  void *v12;
+  void *v13;
+  void *v14;
+  void *v15;
+  void *v16;
+  void *v17;
+  void *v18;
+  _QWORD v19[17];
+  _QWORD v20[19];
+
+  v20[17] = *MEMORY[0x1E0C80C00];
+  v19[0] = CFSTR("onOrderIn");
+  objc_msgSend(MEMORY[0x1E0C99E38], "null");
+  v18 = (void *)objc_claimAutoreleasedReturnValue();
+  v20[0] = v18;
+  v19[1] = CFSTR("onOrderOut");
+  objc_msgSend(MEMORY[0x1E0C99E38], "null");
+  v17 = (void *)objc_claimAutoreleasedReturnValue();
+  v20[1] = v17;
+  v19[2] = CFSTR("sublayers");
+  objc_msgSend(MEMORY[0x1E0C99E38], "null");
+  v16 = (void *)objc_claimAutoreleasedReturnValue();
+  v20[2] = v16;
+  v19[3] = CFSTR("contents");
+  objc_msgSend(MEMORY[0x1E0C99E38], "null");
+  v15 = (void *)objc_claimAutoreleasedReturnValue();
+  v20[3] = v15;
+  v19[4] = CFSTR("bounds");
+  objc_msgSend(MEMORY[0x1E0C99E38], "null");
+  v14 = (void *)objc_claimAutoreleasedReturnValue();
+  v20[4] = v14;
+  v19[5] = CFSTR("position");
+  objc_msgSend(MEMORY[0x1E0C99E38], "null");
+  v13 = (void *)objc_claimAutoreleasedReturnValue();
+  v20[5] = v13;
+  v19[6] = CFSTR("zPosition");
+  objc_msgSend(MEMORY[0x1E0C99E38], "null");
+  v12 = (void *)objc_claimAutoreleasedReturnValue();
+  v20[6] = v12;
+  v19[7] = CFSTR("opacity");
+  objc_msgSend(MEMORY[0x1E0C99E38], "null");
+  v0 = (void *)objc_claimAutoreleasedReturnValue();
+  v20[7] = v0;
+  v19[8] = CFSTR("contentsRect");
+  objc_msgSend(MEMORY[0x1E0C99E38], "null");
+  v1 = (void *)objc_claimAutoreleasedReturnValue();
+  v20[8] = v1;
+  v19[9] = CFSTR("contentsCenter");
+  objc_msgSend(MEMORY[0x1E0C99E38], "null");
+  v2 = (void *)objc_claimAutoreleasedReturnValue();
+  v20[9] = v2;
+  v19[10] = CFSTR("contentsScale");
+  objc_msgSend(MEMORY[0x1E0C99E38], "null");
+  v3 = (void *)objc_claimAutoreleasedReturnValue();
+  v20[10] = v3;
+  v19[11] = CFSTR("hidden");
+  objc_msgSend(MEMORY[0x1E0C99E38], "null");
+  v4 = (void *)objc_claimAutoreleasedReturnValue();
+  v20[11] = v4;
+  v19[12] = CFSTR("transform");
+  objc_msgSend(MEMORY[0x1E0C99E38], "null");
+  v5 = (void *)objc_claimAutoreleasedReturnValue();
+  v20[12] = v5;
+  v19[13] = CFSTR("cornerRadius");
+  objc_msgSend(MEMORY[0x1E0C99E38], "null");
+  v6 = (void *)objc_claimAutoreleasedReturnValue();
+  v20[13] = v6;
+  v19[14] = CFSTR("maskedCorners");
+  objc_msgSend(MEMORY[0x1E0C99E38], "null");
+  v7 = (void *)objc_claimAutoreleasedReturnValue();
+  v20[14] = v7;
+  v19[15] = CFSTR("masksToBounds");
+  objc_msgSend(MEMORY[0x1E0C99E38], "null");
+  v8 = (void *)objc_claimAutoreleasedReturnValue();
+  v20[15] = v8;
+  v19[16] = CFSTR("anchorPoint");
+  objc_msgSend(MEMORY[0x1E0C99E38], "null");
+  v9 = (void *)objc_claimAutoreleasedReturnValue();
+  v20[16] = v9;
+  objc_msgSend(MEMORY[0x1E0C99D80], "dictionaryWithObjects:forKeys:count:", v20, v19, 17);
+  v10 = objc_claimAutoreleasedReturnValue();
+  v11 = (void *)_PXGDisabledLayerActions_disabledActions;
+  _PXGDisabledLayerActions_disabledActions = v10;
+
+}
+
+@end

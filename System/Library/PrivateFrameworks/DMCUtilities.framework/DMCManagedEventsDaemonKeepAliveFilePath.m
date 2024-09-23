@@ -1,0 +1,17 @@
+@implementation DMCManagedEventsDaemonKeepAliveFilePath
+
+void __DMCManagedEventsDaemonKeepAliveFilePath_block_invoke()
+{
+  uint64_t v0;
+  void *v1;
+  id v2;
+
+  objc_msgSend(0, "stringByAppendingPathComponent:", CFSTR("managedeventsd_alive_token"));
+  v2 = (id)objc_claimAutoreleasedReturnValue();
+  v0 = objc_msgSend(v2, "copy");
+  v1 = (void *)DMCManagedEventsDaemonKeepAliveFilePath_str;
+  DMCManagedEventsDaemonKeepAliveFilePath_str = v0;
+
+}
+
+@end

@@ -1,0 +1,8 @@
+@implementation MOTrendsAnalyzer(Metrics)
+
+- (void)setCommonFields:()Metrics .cold.1(uint64_t a1, NSObject *a2, uint64_t a3, uint64_t a4, uint64_t a5, uint64_t a6, uint64_t a7, uint64_t a8)
+{
+  OUTLINED_FUNCTION_0((void *)&_mh_execute_header, a2, a3, "Semaphore wait failed with context: %@", a5, a6, a7, a8, 2u);
+}
+
+@end

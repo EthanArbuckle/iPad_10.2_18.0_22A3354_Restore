@@ -1,0 +1,8 @@
+@implementation STCommunicationSafetyAnalyticsTipViewControllerFactory
+
++ (id)makeCommunicationSafetyAnalyticsTipViewControllerWithActionBlock:(id)a3 dismissTipBlock:(id)a4
+{
+  return +[STCommunicationSafetyAnalyticsTipContentInterface makeCommunicationSafetyAnalyticsTipViewControllerWithActionBlock:dismissTipBlock:](_TtC16ScreenTimeUICore49STCommunicationSafetyAnalyticsTipContentInterface, "makeCommunicationSafetyAnalyticsTipViewControllerWithActionBlock:dismissTipBlock:", a3, a4);
+}
+
+@end

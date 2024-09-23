@@ -1,0 +1,30 @@
+@implementation DKEventStreamClass
+
+Class __get_DKEventStreamClass_block_invoke(uint64_t a1)
+{
+  Class result;
+
+  CoreDuetLibrary();
+  result = objc_getClass("_DKEventStream");
+  *(_QWORD *)(*(_QWORD *)(*(_QWORD *)(a1 + 32) + 8) + 24) = result;
+  if (!*(_QWORD *)(*(_QWORD *)(*(_QWORD *)(a1 + 32) + 8) + 24))
+    __get_DKEventStreamClass_block_invoke_cold_1();
+  get_DKEventStreamClass_softClass = *(_QWORD *)(*(_QWORD *)(*(_QWORD *)(a1 + 32) + 8) + 24);
+  return result;
+}
+
+void __get_DKEventStreamClass_block_invoke_cold_1()
+{
+  void *v0;
+  void *v1;
+
+  objc_msgSend(MEMORY[0x24BDD1448], "currentHandler");
+  v0 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(MEMORY[0x24BDD17C8], "stringWithUTF8String:", "Class get_DKEventStreamClass(void)_block_invoke");
+  v1 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(v0, "handleFailureInFunction:file:lineNumber:description:", v1, CFSTR("BBServer.m"), 108, CFSTR("Unable to find class %s"), "_DKEventStream");
+
+  __break(1u);
+}
+
+@end

@@ -1,0 +1,11 @@
+@implementation NSMutableDictionary(NSKeyValueCoding)
+
+- (uint64_t)setValue:()NSKeyValueCoding forKey:
+{
+  if (a3)
+    return objc_msgSend(a1, "setObject:forKey:");
+  else
+    return objc_msgSend(a1, "removeObjectForKey:", a4);
+}
+
+@end

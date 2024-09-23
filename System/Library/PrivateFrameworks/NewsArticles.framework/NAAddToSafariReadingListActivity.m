@@ -1,0 +1,21 @@
+@implementation NAAddToSafariReadingListActivity
+
+- (id)activityType
+{
+  return CFSTR("com.apple.news.activity.AddToSafariReadingList");
+}
+
+- (id)activityTitle
+{
+  void *v2;
+  void *v3;
+
+  objc_msgSend(MEMORY[0x1E0CB34D0], "mainBundle");
+  v2 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(v2, "localizedStringForKey:value:table:", CFSTR("Add to Safari Reading List"), &stru_1E71B2988, 0);
+  v3 = (void *)objc_claimAutoreleasedReturnValue();
+
+  return v3;
+}
+
+@end

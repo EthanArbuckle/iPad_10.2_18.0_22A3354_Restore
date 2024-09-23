@@ -1,0 +1,297 @@
+@implementation INRelativeReferenceResolutionResult
+
++ (INRelativeReferenceResolutionResult)successWithResolvedRelativeReference:(INRelativeReference)resolvedRelativeReference
+{
+  void *v4;
+  void *v5;
+
+  if (resolvedRelativeReference)
+  {
+    objc_msgSend(MEMORY[0x1E0CB37E8], "numberWithInteger:");
+    v4 = (void *)objc_claimAutoreleasedReturnValue();
+    objc_msgSend(a1, "resolutionResultSuccessWithResolvedValue:", v4);
+    v5 = (void *)objc_claimAutoreleasedReturnValue();
+
+  }
+  else
+  {
+    NSLog((NSString *)CFSTR("Success resolution with INRelativeReferenceUnknown will be reformed to notRequired."), a2);
+    objc_msgSend(a1, "notRequired");
+    v5 = (void *)objc_claimAutoreleasedReturnValue();
+  }
+  return (INRelativeReferenceResolutionResult *)v5;
+}
+
++ (INRelativeReferenceResolutionResult)confirmationRequiredWithRelativeReferenceToConfirm:(INRelativeReference)relativeReferenceToConfirm
+{
+  void *v4;
+  void *v5;
+  id v7;
+
+  if (relativeReferenceToConfirm == INRelativeReferenceUnknown)
+  {
+    objc_msgSend(MEMORY[0x1E0C99DA0], "exceptionWithName:reason:userInfo:", *MEMORY[0x1E0C99778], CFSTR("Confirmation of INRelativeReferenceUnknown is not supported."), 0);
+    v7 = (id)objc_claimAutoreleasedReturnValue();
+    objc_exception_throw(v7);
+  }
+  objc_msgSend(MEMORY[0x1E0CB37E8], "numberWithInteger:");
+  v4 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(a1, "resolutionResultConfirmationRequiredWithItemToConfirm:", v4);
+  v5 = (void *)objc_claimAutoreleasedReturnValue();
+
+  return (INRelativeReferenceResolutionResult *)v5;
+}
+
+- (id)_intentSlotValueForObject:(id)a3 slotDescription:(id)a4
+{
+  id v5;
+  id v6;
+  _INPBIntentSlotValue *v7;
+  uint64_t v8;
+  unsigned int v9;
+  uint64_t v10;
+
+  v5 = a3;
+  v6 = a4;
+  v7 = objc_alloc_init(_INPBIntentSlotValue);
+  if (objc_msgSend(v6, "valueType") == 124)
+  {
+    -[_INPBIntentSlotValue setType:](v7, "setType:", 1000);
+    if (objc_msgSend(v6, "valueStyle") != 3)
+    {
+      objc_opt_class();
+      if ((objc_opt_isKindOfClass() & 1) != 0)
+      {
+        v8 = objc_msgSend(v5, "integerValue");
+        if (v8 == 1)
+          v9 = 1;
+        else
+          v9 = 0x7FFFFFFF;
+        if (v8 == 2)
+          v10 = 2;
+        else
+          v10 = v9;
+        -[_INPBIntentSlotValue addPayloadRelativeReference:](v7, "addPayloadRelativeReference:", v10);
+      }
+    }
+  }
+
+  return v7;
+}
+
+- (id)_vocabularyValueForObject:(id)a3 slotDescription:(id)a4
+{
+  id v5;
+  id v6;
+  void *v7;
+  uint64_t v8;
+  uint64_t v9;
+  __CFString *v10;
+  __CFString *v11;
+
+  v5 = a3;
+  v6 = a4;
+  objc_msgSend(v5, "description");
+  v7 = (void *)objc_claimAutoreleasedReturnValue();
+  v8 = objc_msgSend(v6, "valueType");
+
+  if (v8 == 124)
+  {
+    objc_opt_class();
+    if ((objc_opt_isKindOfClass() & 1) != 0)
+    {
+      v9 = objc_msgSend(v5, "integerValue");
+      v10 = CFSTR("unknown");
+      if (v9 == 2)
+        v10 = CFSTR("previous");
+      if (v9 == 1)
+        v10 = CFSTR("next");
+      v11 = v10;
+
+      v7 = v11;
+    }
+  }
+
+  return v7;
+}
+
+- (void)transformResolutionResultForIntent:(id)a3 intentSlotDescription:(id)a4 withOptionsProvider:(id)a5 completion:(id)a6
+{
+  id v9;
+  id v10;
+  void (**v11)(id, INRelativeReferenceResolutionResult *);
+  int64_t v12;
+  void *v13;
+  void *v14;
+  void *v15;
+  int v16;
+  void *v17;
+  void *v18;
+  id v19;
+  uint64_t v20;
+  void *v21;
+  void *v22;
+  void *v23;
+  void *v24;
+  void *v25;
+  void *v26;
+  id v27;
+  void *v28;
+  id v29;
+  void *v30;
+  void *v31;
+  void *v32;
+  uint64_t v33;
+  uint64_t v34;
+  uint64_t v35;
+  uint64_t i;
+  void *v37;
+  void *v38;
+  void *v39;
+  id v40;
+  void *v41;
+  INRelativeReferenceResolutionResult *v42;
+  id v43;
+  __int128 v44;
+  __int128 v45;
+  __int128 v46;
+  __int128 v47;
+  _BYTE v48[128];
+  uint64_t v49;
+
+  v49 = *MEMORY[0x1E0C80C00];
+  v9 = a3;
+  v10 = a4;
+  v11 = (void (**)(id, INRelativeReferenceResolutionResult *))a6;
+  v12 = -[INIntentResolutionResult resolutionResultCode](self, "resolutionResultCode");
+  objc_msgSend(v9, "_metadata");
+  v13 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(v10, "facadePropertyName");
+  v14 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(v13, "forceNeedsValueForParameters");
+  v15 = (void *)objc_claimAutoreleasedReturnValue();
+  v16 = objc_msgSend(v15, "containsObject:", v14);
+
+  if (v16)
+  {
+    objc_msgSend(v9, "valueForKey:", v14);
+    v17 = (void *)objc_claimAutoreleasedReturnValue();
+    if (v17)
+    {
+      objc_opt_class();
+      if ((objc_opt_isKindOfClass() & 1) != 0)
+        v18 = v17;
+      else
+        v18 = 0;
+    }
+    else
+    {
+      v18 = 0;
+    }
+    v19 = v18;
+
+    v20 = objc_msgSend(v19, "integerValue");
+    if (!v20 && v12 != 2 && v12 != 3)
+    {
+      v12 = 4;
+      -[INIntentResolutionResult setResolutionResultCode:](self, "setResolutionResultCode:", 4);
+    }
+    objc_msgSend(v13, "forceNeedsValueForParameters");
+    v21 = (void *)objc_claimAutoreleasedReturnValue();
+    objc_msgSend(v21, "if_arrayByRemovingObject:", v14);
+    v22 = (void *)objc_claimAutoreleasedReturnValue();
+    objc_msgSend(v13, "setForceNeedsValueForParameters:", v22);
+
+  }
+  if ((v12 == 4 || v12 == 1) && objc_msgSend(v9, "_executionContext") != 1)
+  {
+    objc_msgSend(v9, "_codableDescription");
+    v23 = (void *)objc_claimAutoreleasedReturnValue();
+    objc_msgSend(v10, "facadePropertyName");
+    v24 = (void *)objc_claimAutoreleasedReturnValue();
+    objc_msgSend(v23, "attributeByName:", v24);
+    v25 = (void *)objc_claimAutoreleasedReturnValue();
+
+    if (v25)
+    {
+      objc_opt_class();
+      if ((objc_opt_isKindOfClass() & 1) != 0)
+        v26 = v25;
+      else
+        v26 = 0;
+    }
+    else
+    {
+      v26 = 0;
+    }
+    v27 = v26;
+
+    objc_msgSend(v27, "codableEnum");
+    v28 = (void *)objc_claimAutoreleasedReturnValue();
+    if (v28)
+    {
+      v40 = v27;
+      v41 = v14;
+      v42 = self;
+      v43 = v10;
+      v29 = objc_alloc(MEMORY[0x1E0C99DE8]);
+      objc_msgSend(v28, "values");
+      v30 = (void *)objc_claimAutoreleasedReturnValue();
+      v31 = (void *)objc_msgSend(v29, "initWithCapacity:", objc_msgSend(v30, "count"));
+
+      v46 = 0u;
+      v47 = 0u;
+      v44 = 0u;
+      v45 = 0u;
+      v39 = v28;
+      objc_msgSend(v28, "values");
+      v32 = (void *)objc_claimAutoreleasedReturnValue();
+      v33 = objc_msgSend(v32, "countByEnumeratingWithState:objects:count:", &v44, v48, 16);
+      if (v33)
+      {
+        v34 = v33;
+        v35 = *(_QWORD *)v45;
+        do
+        {
+          for (i = 0; i != v34; ++i)
+          {
+            if (*(_QWORD *)v45 != v35)
+              objc_enumerationMutation(v32);
+            v37 = *(void **)(*((_QWORD *)&v44 + 1) + 8 * i);
+            if (objc_msgSend(v37, "index"))
+            {
+              objc_msgSend(MEMORY[0x1E0CB37E8], "numberWithInteger:", objc_msgSend(v37, "index"));
+              v38 = (void *)objc_claimAutoreleasedReturnValue();
+              objc_msgSend(v31, "addObject:", v38);
+
+            }
+          }
+          v34 = objc_msgSend(v32, "countByEnumeratingWithState:objects:count:", &v44, v48, 16);
+        }
+        while (v34);
+      }
+
+      if (v12 == 4)
+        -[INIntentResolutionResult setResolutionResultCode:](v42, "setResolutionResultCode:", 2);
+      -[INIntentResolutionResult setDisambiguationItems:](v42, "setDisambiguationItems:", v31);
+      v11[2](v11, v42);
+
+      v10 = v43;
+      v27 = v40;
+      v14 = v41;
+      v28 = v39;
+    }
+    else
+    {
+      v11[2](v11, self);
+    }
+
+  }
+  else
+  {
+    v11[2](v11, self);
+  }
+
+}
+
+@end

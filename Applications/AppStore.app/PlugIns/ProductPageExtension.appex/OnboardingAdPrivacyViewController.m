@@ -1,0 +1,101 @@
+@implementation OnboardingAdPrivacyViewController
+
+- (void)viewDidLoad
+{
+  _TtC20ProductPageExtension33OnboardingAdPrivacyViewController *v2;
+
+  v2 = self;
+  sub_1004E8EEC();
+
+}
+
+- (void)viewDidLayoutSubviews
+{
+  _TtC20ProductPageExtension33OnboardingAdPrivacyViewController *v2;
+
+  v2 = self;
+  sub_1004E9640();
+
+}
+
+- (unint64_t)supportedInterfaceOrientations
+{
+  _TtC20ProductPageExtension33OnboardingAdPrivacyViewController *v2;
+  id v3;
+  id v4;
+
+  v2 = self;
+  v3 = -[OnboardingAdPrivacyViewController traitCollection](v2, "traitCollection");
+  v4 = objc_msgSend(v3, "userInterfaceIdiom");
+
+  if (v4 == (id)1)
+    return 30;
+  else
+    return 2;
+}
+
+- (void)didTapLearnMore
+{
+  _TtC20ProductPageExtension33OnboardingAdPrivacyViewController *v2;
+  NSString v3;
+  id v4;
+
+  v2 = self;
+  v3 = String._bridgeToObjectiveC()();
+  v4 = objc_msgSend((id)objc_opt_self(OBPrivacyPresenter), "presenterForPrivacySplashWithIdentifier:", v3);
+
+  if (v4)
+    objc_msgSend(v4, "setPresentingViewController:", v2);
+  objc_msgSend(v4, "present");
+
+}
+
+- (void)didTapTurnOn
+{
+  void (*v2)(void);
+  _TtC20ProductPageExtension33OnboardingAdPrivacyViewController *v3;
+
+  v2 = *(void (**)(void))&self->OBWelcomeController_opaque[OBJC_IVAR____TtC20ProductPageExtension33OnboardingAdPrivacyViewController_buttonsCallback];
+  v3 = self;
+  v2();
+
+}
+
+- (void)didTapTurnOff
+{
+  void (*v2)(void);
+  _TtC20ProductPageExtension33OnboardingAdPrivacyViewController *v3;
+
+  v2 = *(void (**)(void))&self->OBWelcomeController_opaque[OBJC_IVAR____TtC20ProductPageExtension33OnboardingAdPrivacyViewController_buttonsCallback];
+  v3 = self;
+  v2();
+
+}
+
+- (_TtC20ProductPageExtension33OnboardingAdPrivacyViewController)initWithTitle:(id)a3 detailText:(id)a4 symbolName:(id)a5 contentLayout:(int64_t)a6
+{
+  _TtC20ProductPageExtension33OnboardingAdPrivacyViewController *result;
+
+  result = (_TtC20ProductPageExtension33OnboardingAdPrivacyViewController *)_swift_stdlib_reportUnimplementedInitializer("ProductPageExtension.OnboardingAdPrivacyViewController", 54, "init(title:detailText:symbolName:contentLayout:)", 48, 0);
+  __break(1u);
+  return result;
+}
+
+- (_TtC20ProductPageExtension33OnboardingAdPrivacyViewController)initWithTitle:(id)a3 detailText:(id)a4 icon:(id)a5 contentLayout:(int64_t)a6
+{
+  id v6;
+  _TtC20ProductPageExtension33OnboardingAdPrivacyViewController *result;
+
+  v6 = a5;
+  result = (_TtC20ProductPageExtension33OnboardingAdPrivacyViewController *)_swift_stdlib_reportUnimplementedInitializer("ProductPageExtension.OnboardingAdPrivacyViewController", 54, "init(title:detailText:icon:contentLayout:)", 42, 0);
+  __break(1u);
+  return result;
+}
+
+- (void).cxx_destruct
+{
+  swift_release(*(_QWORD *)&self->buttonsStyle[OBJC_IVAR____TtC20ProductPageExtension33OnboardingAdPrivacyViewController_buttonsCallback]);
+
+}
+
+@end

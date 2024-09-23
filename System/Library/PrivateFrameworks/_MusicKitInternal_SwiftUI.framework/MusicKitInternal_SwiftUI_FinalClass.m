@@ -1,0 +1,8 @@
+@implementation MusicKitInternal_SwiftUI_FinalClass
+
+- (_TtC25_MusicKitInternal_SwiftUIP33_79821C289084085D53822AD4F13ECF6035MusicKitInternal_SwiftUI_FinalClass)init
+{
+  return (_TtC25_MusicKitInternal_SwiftUIP33_79821C289084085D53822AD4F13ECF6035MusicKitInternal_SwiftUI_FinalClass *)sub_21FF644E8();
+}
+
+@end

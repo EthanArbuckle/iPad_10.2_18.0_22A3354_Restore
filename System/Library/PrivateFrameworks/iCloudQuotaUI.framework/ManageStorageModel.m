@@ -1,0 +1,22 @@
+@implementation ManageStorageModel
+
+- (_TtC13iCloudQuotaUI18ManageStorageModel)init
+{
+  return (_TtC13iCloudQuotaUI18ManageStorageModel *)ManageStorageModel.init()();
+}
+
+- (void).cxx_destruct
+{
+  char *v2;
+  uint64_t v3;
+
+  v2 = (char *)self + OBJC_IVAR____TtC13iCloudQuotaUI18ManageStorageModel__shouldPresentAlert;
+  v3 = __swift_instantiateConcreteTypeFromMangledName(&qword_2554C22C0);
+  (*(void (**)(char *, uint64_t))(*(_QWORD *)(v3 - 8) + 8))(v2, v3);
+  swift_release();
+  swift_bridgeObjectRelease();
+  swift_bridgeObjectRelease();
+  swift_bridgeObjectRelease();
+}
+
+@end

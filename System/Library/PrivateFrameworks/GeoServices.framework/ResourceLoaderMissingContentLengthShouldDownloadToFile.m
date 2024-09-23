@@ -1,0 +1,8 @@
+@implementation ResourceLoaderMissingContentLengthShouldDownloadToFile
+
+uint64_t GeoServicesConfig_ResourceLoaderMissingContentLengthShouldDownloadToFile_Metadata_block_invoke_410()
+{
+  return MEMORY[0x1E0C9AAB0];
+}
+
+@end

@@ -1,0 +1,28 @@
+@implementation UAPBIRSandboxExtConverter
+
++ (void)registerConverter
+{
+  id v3;
+
+  +[UASharedPasteboardIRManager sharedIRManager](UASharedPasteboardIRManager, "sharedIRManager");
+  v3 = (id)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(v3, "registerIRHandlerClass:forType:", a1, CFSTR("com.apple.security.sandbox-extension-dict"));
+
+}
+
+- (id)typeString
+{
+  return CFSTR("com.apple.security.sandbox-extension-dict");
+}
+
+- (id)convertPlatformDataToIR:(id)a3
+{
+  return a3;
+}
+
+- (id)convertIRDataToPlatform:(id)a3
+{
+  return a3;
+}
+
+@end

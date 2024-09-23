@@ -1,0 +1,12 @@
+@implementation TTRIReminderListPickerAssembly
+
+- (_TtC15RemindersUICore30TTRIReminderListPickerAssembly)init
+{
+  objc_super v3;
+
+  v3.receiver = self;
+  v3.super_class = (Class)type metadata accessor for TTRIReminderListPickerAssembly();
+  return -[TTRIReminderListPickerAssembly init](&v3, sel_init);
+}
+
+@end

@@ -1,0 +1,466 @@
+@implementation ACProtobufVariableValueDictionary
+
+- (ACProtobufVariableValueDictionary)initWithDictionary:(id)a3
+{
+  id v4;
+  ACProtobufVariableValueDictionary *v5;
+  ACProtobufVariableValueDictionary *v6;
+  ACProtobufVariableValueDictionary *v7;
+
+  v4 = a3;
+  v5 = -[ACProtobufVariableValueDictionary init](self, "init");
+  v6 = v5;
+  if (v5)
+  {
+    if (!v4
+      || (-[ACProtobufVariableValueDictionary setDictionary:](v5, "setDictionary:", v4),
+          -[ACProtobufVariableValueDictionary pairs](v6, "pairs"),
+          v7 = (ACProtobufVariableValueDictionary *)objc_claimAutoreleasedReturnValue(),
+          v7,
+          v7))
+    {
+      v7 = v6;
+    }
+  }
+  else
+  {
+    v7 = 0;
+  }
+
+  return v7;
+}
+
+- (void)setDictionary:(id)a3
+{
+  objc_class *v4;
+  id v5;
+  void *v6;
+  id v7;
+  _QWORD v8[4];
+  id v9;
+
+  v4 = (objc_class *)MEMORY[0x1E0C99DE8];
+  v5 = a3;
+  v6 = (void *)objc_msgSend([v4 alloc], "initWithCapacity:", objc_msgSend(v5, "count"));
+  v8[0] = MEMORY[0x1E0C809B0];
+  v8[1] = 3221225472;
+  v8[2] = __60__ACProtobufVariableValueDictionary_Helpers__setDictionary___block_invoke;
+  v8[3] = &unk_1E48946C0;
+  v9 = v6;
+  v7 = v6;
+  objc_msgSend(v5, "enumerateKeysAndObjectsUsingBlock:", v8);
+
+  -[ACProtobufVariableValueDictionary setPairs:](self, "setPairs:", v7);
+}
+
+void __60__ACProtobufVariableValueDictionary_Helpers__setDictionary___block_invoke(uint64_t a1, void *a2, void *a3)
+{
+  id v5;
+  id v6;
+  ACProtobufVariableKeyValuePair *v7;
+  ACProtobufVariableKeyValuePair *v8;
+
+  v5 = a3;
+  v6 = a2;
+  v8 = -[ACProtobufVariableKeyValuePair initWithObjectValue:forKey:]([ACProtobufVariableKeyValuePair alloc], "initWithObjectValue:forKey:", v5, v6);
+
+  v7 = v8;
+  if (v8)
+  {
+    objc_msgSend(*(id *)(a1 + 32), "addObject:", v8);
+    v7 = v8;
+  }
+
+}
+
+- (NSDictionary)dictionary
+{
+  void *v3;
+  void *v4;
+  uint64_t v5;
+  uint64_t v6;
+  uint64_t v7;
+  uint64_t i;
+  void *v9;
+  void *v10;
+  void *v11;
+  void *v12;
+  __int128 v14;
+  __int128 v15;
+  __int128 v16;
+  __int128 v17;
+  _BYTE v18[128];
+  uint64_t v19;
+
+  v19 = *MEMORY[0x1E0C80C00];
+  v3 = (void *)objc_msgSend(objc_alloc(MEMORY[0x1E0C99E08]), "initWithCapacity:", -[ACProtobufVariableValueDictionary pairsCount](self, "pairsCount"));
+  v14 = 0u;
+  v15 = 0u;
+  v16 = 0u;
+  v17 = 0u;
+  -[ACProtobufVariableValueDictionary pairs](self, "pairs", 0);
+  v4 = (void *)objc_claimAutoreleasedReturnValue();
+  v5 = objc_msgSend(v4, "countByEnumeratingWithState:objects:count:", &v14, v18, 16);
+  if (v5)
+  {
+    v6 = v5;
+    v7 = *(_QWORD *)v15;
+    do
+    {
+      for (i = 0; i != v6; ++i)
+      {
+        if (*(_QWORD *)v15 != v7)
+          objc_enumerationMutation(v4);
+        v9 = *(void **)(*((_QWORD *)&v14 + 1) + 8 * i);
+        objc_msgSend(v9, "value");
+        v10 = (void *)objc_claimAutoreleasedReturnValue();
+        objc_msgSend(v10, "object");
+        v11 = (void *)objc_claimAutoreleasedReturnValue();
+        objc_msgSend(v9, "key");
+        v12 = (void *)objc_claimAutoreleasedReturnValue();
+        objc_msgSend(v3, "setObject:forKeyedSubscript:", v11, v12);
+
+      }
+      v6 = objc_msgSend(v4, "countByEnumeratingWithState:objects:count:", &v14, v18, 16);
+    }
+    while (v6);
+  }
+
+  return (NSDictionary *)v3;
+}
+
+- (void)clearPairs
+{
+  -[NSMutableArray removeAllObjects](self->_pairs, "removeAllObjects");
+}
+
+- (void)addPair:(id)a3
+{
+  id v4;
+  NSMutableArray *pairs;
+  NSMutableArray *v6;
+  NSMutableArray *v7;
+  id v8;
+
+  v4 = a3;
+  pairs = self->_pairs;
+  v8 = v4;
+  if (!pairs)
+  {
+    v6 = (NSMutableArray *)objc_alloc_init(MEMORY[0x1E0C99DE8]);
+    v7 = self->_pairs;
+    self->_pairs = v6;
+
+    v4 = v8;
+    pairs = self->_pairs;
+  }
+  -[NSMutableArray addObject:](pairs, "addObject:", v4);
+
+}
+
+- (unint64_t)pairsCount
+{
+  return -[NSMutableArray count](self->_pairs, "count");
+}
+
+- (id)pairAtIndex:(unint64_t)a3
+{
+  return (id)-[NSMutableArray objectAtIndex:](self->_pairs, "objectAtIndex:", a3);
+}
+
++ (Class)pairType
+{
+  return (Class)objc_opt_class();
+}
+
+- (id)description
+{
+  void *v3;
+  void *v4;
+  void *v5;
+  void *v6;
+  objc_super v8;
+
+  v3 = (void *)MEMORY[0x1E0CB3940];
+  v8.receiver = self;
+  v8.super_class = (Class)ACProtobufVariableValueDictionary;
+  -[ACProtobufVariableValueDictionary description](&v8, sel_description);
+  v4 = (void *)objc_claimAutoreleasedReturnValue();
+  -[ACProtobufVariableValueDictionary dictionaryRepresentation](self, "dictionaryRepresentation");
+  v5 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(v3, "stringWithFormat:", CFSTR("%@ %@"), v4, v5);
+  v6 = (void *)objc_claimAutoreleasedReturnValue();
+
+  return v6;
+}
+
+- (id)dictionaryRepresentation
+{
+  void *v3;
+  void *v4;
+  NSMutableArray *v5;
+  uint64_t v6;
+  uint64_t v7;
+  uint64_t v8;
+  uint64_t v9;
+  void *v10;
+  __int128 v12;
+  __int128 v13;
+  __int128 v14;
+  __int128 v15;
+  _BYTE v16[128];
+  uint64_t v17;
+
+  v17 = *MEMORY[0x1E0C80C00];
+  objc_msgSend(MEMORY[0x1E0C99E08], "dictionary");
+  v3 = (void *)objc_claimAutoreleasedReturnValue();
+  if (-[NSMutableArray count](self->_pairs, "count"))
+  {
+    v4 = (void *)objc_msgSend(objc_alloc(MEMORY[0x1E0C99DE8]), "initWithCapacity:", -[NSMutableArray count](self->_pairs, "count"));
+    v12 = 0u;
+    v13 = 0u;
+    v14 = 0u;
+    v15 = 0u;
+    v5 = self->_pairs;
+    v6 = -[NSMutableArray countByEnumeratingWithState:objects:count:](v5, "countByEnumeratingWithState:objects:count:", &v12, v16, 16);
+    if (v6)
+    {
+      v7 = v6;
+      v8 = *(_QWORD *)v13;
+      do
+      {
+        v9 = 0;
+        do
+        {
+          if (*(_QWORD *)v13 != v8)
+            objc_enumerationMutation(v5);
+          objc_msgSend(*(id *)(*((_QWORD *)&v12 + 1) + 8 * v9), "dictionaryRepresentation", (_QWORD)v12);
+          v10 = (void *)objc_claimAutoreleasedReturnValue();
+          objc_msgSend(v4, "addObject:", v10);
+
+          ++v9;
+        }
+        while (v7 != v9);
+        v7 = -[NSMutableArray countByEnumeratingWithState:objects:count:](v5, "countByEnumeratingWithState:objects:count:", &v12, v16, 16);
+      }
+      while (v7);
+    }
+
+    objc_msgSend(v3, "setObject:forKey:", v4, CFSTR("pair"));
+  }
+  return v3;
+}
+
+- (BOOL)readFrom:(id)a3
+{
+  return ACProtobufVariableValueDictionaryReadFrom(self, (uint64_t)a3);
+}
+
+- (void)writeTo:(id)a3
+{
+  id v4;
+  NSMutableArray *v5;
+  uint64_t v6;
+  uint64_t v7;
+  uint64_t v8;
+  uint64_t v9;
+  __int128 v10;
+  __int128 v11;
+  __int128 v12;
+  __int128 v13;
+  _BYTE v14[128];
+  uint64_t v15;
+
+  v15 = *MEMORY[0x1E0C80C00];
+  v4 = a3;
+  v10 = 0u;
+  v11 = 0u;
+  v12 = 0u;
+  v13 = 0u;
+  v5 = self->_pairs;
+  v6 = -[NSMutableArray countByEnumeratingWithState:objects:count:](v5, "countByEnumeratingWithState:objects:count:", &v10, v14, 16);
+  if (v6)
+  {
+    v7 = v6;
+    v8 = *(_QWORD *)v11;
+    do
+    {
+      v9 = 0;
+      do
+      {
+        if (*(_QWORD *)v11 != v8)
+          objc_enumerationMutation(v5);
+        PBDataWriterWriteSubmessage();
+        ++v9;
+      }
+      while (v7 != v9);
+      v7 = -[NSMutableArray countByEnumeratingWithState:objects:count:](v5, "countByEnumeratingWithState:objects:count:", &v10, v14, 16);
+    }
+    while (v7);
+  }
+
+}
+
+- (void)copyTo:(id)a3
+{
+  unint64_t v4;
+  unint64_t v5;
+  uint64_t i;
+  void *v7;
+  id v8;
+
+  v8 = a3;
+  if (-[ACProtobufVariableValueDictionary pairsCount](self, "pairsCount"))
+  {
+    objc_msgSend(v8, "clearPairs");
+    v4 = -[ACProtobufVariableValueDictionary pairsCount](self, "pairsCount");
+    if (v4)
+    {
+      v5 = v4;
+      for (i = 0; i != v5; ++i)
+      {
+        -[ACProtobufVariableValueDictionary pairAtIndex:](self, "pairAtIndex:", i);
+        v7 = (void *)objc_claimAutoreleasedReturnValue();
+        objc_msgSend(v8, "addPair:", v7);
+
+      }
+    }
+  }
+
+}
+
+- (id)copyWithZone:(_NSZone *)a3
+{
+  void *v5;
+  NSMutableArray *v6;
+  uint64_t v7;
+  uint64_t v8;
+  uint64_t v9;
+  uint64_t v10;
+  void *v11;
+  __int128 v13;
+  __int128 v14;
+  __int128 v15;
+  __int128 v16;
+  _BYTE v17[128];
+  uint64_t v18;
+
+  v18 = *MEMORY[0x1E0C80C00];
+  v5 = (void *)objc_msgSend((id)objc_msgSend((id)objc_opt_class(), "allocWithZone:", a3), "init");
+  v13 = 0u;
+  v14 = 0u;
+  v15 = 0u;
+  v16 = 0u;
+  v6 = self->_pairs;
+  v7 = -[NSMutableArray countByEnumeratingWithState:objects:count:](v6, "countByEnumeratingWithState:objects:count:", &v13, v17, 16);
+  if (v7)
+  {
+    v8 = v7;
+    v9 = *(_QWORD *)v14;
+    do
+    {
+      v10 = 0;
+      do
+      {
+        if (*(_QWORD *)v14 != v9)
+          objc_enumerationMutation(v6);
+        v11 = (void *)objc_msgSend(*(id *)(*((_QWORD *)&v13 + 1) + 8 * v10), "copyWithZone:", a3, (_QWORD)v13);
+        objc_msgSend(v5, "addPair:", v11);
+
+        ++v10;
+      }
+      while (v8 != v10);
+      v8 = -[NSMutableArray countByEnumeratingWithState:objects:count:](v6, "countByEnumeratingWithState:objects:count:", &v13, v17, 16);
+    }
+    while (v8);
+  }
+
+  return v5;
+}
+
+- (BOOL)isEqual:(id)a3
+{
+  _QWORD *v4;
+  NSMutableArray *pairs;
+  char v6;
+
+  v4 = a3;
+  if (objc_msgSend(v4, "isMemberOfClass:", objc_opt_class()))
+  {
+    pairs = self->_pairs;
+    if ((unint64_t)pairs | v4[1])
+      v6 = -[NSMutableArray isEqual:](pairs, "isEqual:");
+    else
+      v6 = 1;
+  }
+  else
+  {
+    v6 = 0;
+  }
+
+  return v6;
+}
+
+- (unint64_t)hash
+{
+  return -[NSMutableArray hash](self->_pairs, "hash");
+}
+
+- (void)mergeFrom:(id)a3
+{
+  id v4;
+  uint64_t v5;
+  uint64_t v6;
+  uint64_t v7;
+  uint64_t v8;
+  __int128 v9;
+  __int128 v10;
+  __int128 v11;
+  __int128 v12;
+  _BYTE v13[128];
+  uint64_t v14;
+
+  v14 = *MEMORY[0x1E0C80C00];
+  v9 = 0u;
+  v10 = 0u;
+  v11 = 0u;
+  v12 = 0u;
+  v4 = *((id *)a3 + 1);
+  v5 = objc_msgSend(v4, "countByEnumeratingWithState:objects:count:", &v9, v13, 16);
+  if (v5)
+  {
+    v6 = v5;
+    v7 = *(_QWORD *)v10;
+    do
+    {
+      v8 = 0;
+      do
+      {
+        if (*(_QWORD *)v10 != v7)
+          objc_enumerationMutation(v4);
+        -[ACProtobufVariableValueDictionary addPair:](self, "addPair:", *(_QWORD *)(*((_QWORD *)&v9 + 1) + 8 * v8++), (_QWORD)v9);
+      }
+      while (v6 != v8);
+      v6 = objc_msgSend(v4, "countByEnumeratingWithState:objects:count:", &v9, v13, 16);
+    }
+    while (v6);
+  }
+
+}
+
+- (NSMutableArray)pairs
+{
+  return self->_pairs;
+}
+
+- (void)setPairs:(id)a3
+{
+  objc_storeStrong((id *)&self->_pairs, a3);
+}
+
+- (void).cxx_destruct
+{
+  objc_storeStrong((id *)&self->_pairs, 0);
+}
+
+@end

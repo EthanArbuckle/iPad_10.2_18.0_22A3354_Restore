@@ -1,0 +1,39 @@
+@implementation PhoneRotateToWeekViewTest
+
+- (void)_setupViewToDate:(id)a3
+{
+  id v4;
+  void *v5;
+  void *v6;
+  void *v7;
+  id v8;
+
+  v4 = a3;
+  v5 = (void *)objc_claimAutoreleasedReturnValue(-[ApplicationTest application](self, "application"));
+  v6 = (void *)objc_claimAutoreleasedReturnValue(objc_msgSend(v5, "rootNavigationController"));
+  v8 = (id)objc_claimAutoreleasedReturnValue(objc_msgSend(v6, "resetToYearView"));
+
+  v7 = (void *)objc_claimAutoreleasedReturnValue(objc_msgSend(v4, "date"));
+  objc_msgSend(v8, "showDate:animated:", v7, 0);
+
+}
+
+- (id)rotationAnimationStartedNotificationName
+{
+  return CFSTR("RootNavigationController_TransitionStartedNotification");
+}
+
+- (id)rotationAnimationCompleteNotificationName
+{
+  return CFSTR("RootNavigationController_TransitionCompletedNotification");
+}
+
+- (id)checkTestPreconditions
+{
+  if (EKUIUseLargeFormatPhoneUI(self, a2))
+    return CFSTR("Test cannot be run on plus-sized phones");
+  else
+    return 0;
+}
+
+@end

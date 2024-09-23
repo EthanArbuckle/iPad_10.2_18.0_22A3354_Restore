@@ -1,0 +1,12 @@
+@implementation MBSQLiteJournalSuffixes
+
+uint64_t __MBSQLiteJournalSuffixes_block_invoke()
+{
+  uint64_t result;
+
+  result = objc_msgSend(objc_alloc(MEMORY[0x1E0C99E60]), "initWithObjects:", CFSTR("-journal"), CFSTR("-wal"), CFSTR("-shm"), 0);
+  MBSQLiteJournalSuffixes_set = result;
+  return result;
+}
+
+@end

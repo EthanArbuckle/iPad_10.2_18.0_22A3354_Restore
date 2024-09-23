@@ -1,0 +1,168 @@
+@implementation SBApplication32BitDeprecationAlertItem
+
+- (SBApplication32BitDeprecationAlertItem)initWithApplication:(id)a3
+{
+  id v4;
+  SBApplication32BitDeprecationAlertItem *v5;
+  SBApplication32BitDeprecationAlertItem *v6;
+  objc_super v8;
+
+  v4 = a3;
+  v8.receiver = self;
+  v8.super_class = (Class)SBApplication32BitDeprecationAlertItem;
+  v5 = -[SBAlertItem init](&v8, sel_init);
+  v6 = v5;
+  if (v5)
+    objc_storeWeak((id *)&v5->_associatedDisplay, v4);
+
+  return v6;
+}
+
+- (void)configure:(BOOL)a3 requirePasscodeForActions:(BOOL)a4
+{
+  void *v5;
+  void *v6;
+  void *v7;
+  void *v8;
+  void *v9;
+  void *v10;
+  uint64_t v11;
+  void *v12;
+  void *v13;
+  void *v14;
+  void *v15;
+  void *v16;
+  _QWORD v17[5];
+  _QWORD v18[5];
+
+  -[SBAlertItem alertController](self, "alertController", a3, a4);
+  v5 = (void *)objc_claimAutoreleasedReturnValue();
+  -[SBApplication32BitDeprecationAlertItem _title](self, "_title");
+  v6 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(v5, "setTitle:", v6);
+
+  -[SBApplication32BitDeprecationAlertItem _message](self, "_message");
+  v7 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(v5, "setMessage:", v7);
+
+  v8 = (void *)MEMORY[0x1E0CEA2E0];
+  objc_msgSend(MEMORY[0x1E0CB34D0], "mainBundle");
+  v9 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(v9, "localizedStringForKey:value:table:", CFSTR("DEPRECATED_32_BIT_APP_SECONDARY_NO_UPDATE"), &stru_1E8EC7EC0, CFSTR("SpringBoard"));
+  v10 = (void *)objc_claimAutoreleasedReturnValue();
+  v11 = MEMORY[0x1E0C809B0];
+  v18[0] = MEMORY[0x1E0C809B0];
+  v18[1] = 3221225472;
+  v18[2] = __78__SBApplication32BitDeprecationAlertItem_configure_requirePasscodeForActions___block_invoke;
+  v18[3] = &unk_1E8E9DCB0;
+  v18[4] = self;
+  objc_msgSend(v8, "actionWithTitle:style:handler:", v10, 0, v18);
+  v12 = (void *)objc_claimAutoreleasedReturnValue();
+
+  objc_msgSend(v5, "addAction:", v12);
+  v13 = (void *)MEMORY[0x1E0CEA2E0];
+  objc_msgSend(MEMORY[0x1E0CB34D0], "mainBundle");
+  v14 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(v14, "localizedStringForKey:value:table:", CFSTR("DEPRECATED_32_BIT_APP_ACKNOWLEDGE"), &stru_1E8EC7EC0, CFSTR("SpringBoard"));
+  v15 = (void *)objc_claimAutoreleasedReturnValue();
+  v17[0] = v11;
+  v17[1] = 3221225472;
+  v17[2] = __78__SBApplication32BitDeprecationAlertItem_configure_requirePasscodeForActions___block_invoke_2;
+  v17[3] = &unk_1E8E9DCB0;
+  v17[4] = self;
+  objc_msgSend(v13, "actionWithTitle:style:handler:", v15, 0, v17);
+  v16 = (void *)objc_claimAutoreleasedReturnValue();
+
+  objc_msgSend(v5, "addAction:", v16);
+  objc_msgSend(v5, "setPreferredAction:", v16);
+
+}
+
+uint64_t __78__SBApplication32BitDeprecationAlertItem_configure_requirePasscodeForActions___block_invoke(uint64_t a1)
+{
+  void *v2;
+
+  objc_msgSend(MEMORY[0x1E0C99E98], "URLWithString:", CFSTR("prefs:root=General&path=About/APPLICATIONS"));
+  v2 = (void *)objc_claimAutoreleasedReturnValue();
+  SBWorkspaceActivateApplicationFromURL(v2, 0, 0);
+
+  return objc_msgSend(*(id *)(a1 + 32), "deactivateForButton");
+}
+
+uint64_t __78__SBApplication32BitDeprecationAlertItem_configure_requirePasscodeForActions___block_invoke_2(uint64_t a1)
+{
+  return objc_msgSend(*(id *)(a1 + 32), "deactivateForButton");
+}
+
+- (BOOL)forcesModalAlertAppearance
+{
+  return 1;
+}
+
+- (BOOL)shouldShowInLockScreen
+{
+  return 1;
+}
+
+- (BOOL)dismissOnLock
+{
+  return 1;
+}
+
+- (id)_title
+{
+  void *v3;
+  void *v4;
+  void *v5;
+  id WeakRetained;
+  void *v7;
+  void *v8;
+
+  v3 = (void *)MEMORY[0x1E0CB3940];
+  objc_msgSend(MEMORY[0x1E0CB34D0], "mainBundle");
+  v4 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(v4, "localizedStringForKey:value:table:", CFSTR("DEPRECATED_32_BIT_APP_TITLE"), &stru_1E8EC7EC0, CFSTR("SpringBoard"));
+  v5 = (void *)objc_claimAutoreleasedReturnValue();
+  WeakRetained = objc_loadWeakRetained((id *)&self->_associatedDisplay);
+  objc_msgSend(WeakRetained, "displayName");
+  v7 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(v3, "stringWithFormat:", v5, v7);
+  v8 = (void *)objc_claimAutoreleasedReturnValue();
+
+  return v8;
+}
+
+- (id)_message
+{
+  void *v2;
+  void *v3;
+  void *v4;
+  void *v5;
+
+  v2 = (void *)MEMORY[0x1E0CB3940];
+  objc_msgSend(MEMORY[0x1E0CB34D0], "mainBundle");
+  v3 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(v3, "localizedStringForKey:value:table:", CFSTR("DEPRECATED_32_BIT_APP_BODY_NO_UPDATE_NO_SYSTEM_VERSION"), &stru_1E8EC7EC0, CFSTR("SpringBoard"));
+  v4 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(v2, "stringWithFormat:", v4);
+  v5 = (void *)objc_claimAutoreleasedReturnValue();
+
+  return v5;
+}
+
+- (SBApplication)associatedDisplay
+{
+  return (SBApplication *)objc_loadWeakRetained((id *)&self->_associatedDisplay);
+}
+
+- (void)setAssociatedDisplay:(id)a3
+{
+  objc_storeWeak((id *)&self->_associatedDisplay, a3);
+}
+
+- (void).cxx_destruct
+{
+  objc_destroyWeak((id *)&self->_associatedDisplay);
+}
+
+@end

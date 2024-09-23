@@ -1,0 +1,8 @@
+@implementation FigCaptureSessionSetVideoPreviewTapCallback
+
+uint64_t __FigCaptureSessionSetVideoPreviewTapCallback_block_invoke(uint64_t a1)
+{
+  return (*(uint64_t (**)(_QWORD, uint64_t, _QWORD))(a1 + 32))(*(_QWORD *)(a1 + 40), 2, 0);
+}
+
+@end

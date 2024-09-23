@@ -1,0 +1,18 @@
+@implementation MTUIDigitalClockLabelAccessibility
+
++ (id)safeCategoryTargetClassName
+{
+  return CFSTR("MTUIDigitalClockLabel");
+}
+
++ (Class)safeCategoryBaseClass
+{
+  return (Class)objc_opt_class();
+}
+
+- (BOOL)isAccessibilityElement
+{
+  return 0;
+}
+
+@end

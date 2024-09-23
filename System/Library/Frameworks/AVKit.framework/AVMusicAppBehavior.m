@@ -1,0 +1,23 @@
+@implementation AVMusicAppBehavior
+
+- (void)setBehaviorContext:(id)a3
+{
+  objc_storeWeak((id *)&self->_behaviorContext, a3);
+}
+
++ (Class)behaviorContextClass
+{
+  return (Class)objc_opt_class();
+}
+
+- (AVMusicAppBehaviorContext)behaviorContext
+{
+  return (AVMusicAppBehaviorContext *)objc_loadWeakRetained((id *)&self->_behaviorContext);
+}
+
+- (void).cxx_destruct
+{
+  objc_destroyWeak((id *)&self->_behaviorContext);
+}
+
+@end

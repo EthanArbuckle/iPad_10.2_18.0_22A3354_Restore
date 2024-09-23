@@ -1,0 +1,144 @@
+@implementation GTFileEntry
+
++ (BOOL)supportsSecureCoding
+{
+  return 1;
+}
+
+- (GTFileEntry)initWithPath:(id)a3 fileSize:(unint64_t)a4
+{
+  id v7;
+  GTFileEntry *v8;
+  GTFileEntry *v9;
+  NSString *destination;
+  objc_super v12;
+
+  v7 = a3;
+  v12.receiver = self;
+  v12.super_class = (Class)GTFileEntry;
+  v8 = -[GTFileEntry init](&v12, "init");
+  v9 = v8;
+  if (v8)
+  {
+    objc_storeStrong((id *)&v8->_path, a3);
+    destination = v9->_destination;
+    v9->_destination = 0;
+
+    v9->_fileSize = a4;
+  }
+
+  return v9;
+}
+
+- (GTFileEntry)initWithLink:(id)a3 destination:(id)a4
+{
+  id v7;
+  id v8;
+  GTFileEntry *v9;
+  GTFileEntry *v10;
+  objc_super v12;
+
+  v7 = a3;
+  v8 = a4;
+  v12.receiver = self;
+  v12.super_class = (Class)GTFileEntry;
+  v9 = -[GTFileEntry init](&v12, "init");
+  v10 = v9;
+  if (v9)
+  {
+    objc_storeStrong((id *)&v9->_path, a3);
+    objc_storeStrong((id *)&v10->_destination, a4);
+    v10->_fileSize = 0;
+  }
+
+  return v10;
+}
+
+- (GTFileEntry)initWithCoder:(id)a3
+{
+  id v4;
+  GTFileEntry *v5;
+  id v6;
+  uint64_t v7;
+  NSString *path;
+  id v9;
+  uint64_t v10;
+  NSString *destination;
+  objc_super v13;
+
+  v4 = a3;
+  v13.receiver = self;
+  v13.super_class = (Class)GTFileEntry;
+  v5 = -[GTFileEntry init](&v13, "init");
+  if (v5)
+  {
+    v6 = objc_msgSend(v4, "decodeObjectOfClass:forKey:", objc_opt_class(NSString), CFSTR("path"));
+    v7 = objc_claimAutoreleasedReturnValue(v6);
+    path = v5->_path;
+    v5->_path = (NSString *)v7;
+
+    v9 = objc_msgSend(v4, "decodeObjectOfClass:forKey:", objc_opt_class(NSString), CFSTR("destination"));
+    v10 = objc_claimAutoreleasedReturnValue(v9);
+    destination = v5->_destination;
+    v5->_destination = (NSString *)v10;
+
+    v5->_fileSize = (unint64_t)objc_msgSend(v4, "decodeIntegerForKey:", CFSTR("fileSize"));
+  }
+
+  return v5;
+}
+
+- (void)encodeWithCoder:(id)a3
+{
+  NSString *path;
+  id v5;
+
+  path = self->_path;
+  v5 = a3;
+  objc_msgSend(v5, "encodeObject:forKey:", path, CFSTR("path"));
+  objc_msgSend(v5, "encodeObject:forKey:", self->_destination, CFSTR("destination"));
+  objc_msgSend(v5, "encodeInteger:forKey:", self->_fileSize, CFSTR("fileSize"));
+
+}
+
+- (id)description
+{
+  objc_class *v3;
+  NSString *v4;
+  void *v5;
+  void *v6;
+  void *v7;
+  void *v8;
+
+  v3 = (objc_class *)objc_opt_class(self);
+  v4 = NSStringFromClass(v3);
+  v5 = (void *)objc_claimAutoreleasedReturnValue(v4);
+  v6 = (void *)objc_claimAutoreleasedReturnValue(-[GTFileEntry path](self, "path"));
+  v7 = (void *)objc_claimAutoreleasedReturnValue(-[GTFileEntry destination](self, "destination"));
+  v8 = (void *)objc_claimAutoreleasedReturnValue(+[NSString stringWithFormat:](NSString, "stringWithFormat:", CFSTR("<%@: %p, Path: %@, Destination: %@, Size: %lu>"), v5, self, v6, v7, -[GTFileEntry fileSize](self, "fileSize")));
+
+  return v8;
+}
+
+- (NSString)path
+{
+  return self->_path;
+}
+
+- (NSString)destination
+{
+  return self->_destination;
+}
+
+- (unint64_t)fileSize
+{
+  return self->_fileSize;
+}
+
+- (void).cxx_destruct
+{
+  objc_storeStrong((id *)&self->_destination, 0);
+  objc_storeStrong((id *)&self->_path, 0);
+}
+
+@end

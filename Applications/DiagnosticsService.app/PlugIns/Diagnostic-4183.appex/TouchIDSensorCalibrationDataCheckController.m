@@ -1,0 +1,36 @@
+@implementation TouchIDSensorCalibrationDataCheckController
+
+- (void)start
+{
+  uint64_t v3;
+  void *v4;
+  void *v5;
+  void *v6;
+  void *v7;
+  id v8;
+
+  if ((-[TouchIDSensorCalibrationDataCheckController isCancelled](self, "isCancelled") & 1) != 0
+    || (v3 = objc_claimAutoreleasedReturnValue(+[TouchIDManager runTouchIDDiagnostic:options:](TouchIDManager, "runTouchIDDiagnostic:options:", 3, &__NSDictionary0__struct))) == 0)
+  {
+    v8 = 0;
+  }
+  else
+  {
+    v8 = (id)v3;
+    if ((-[TouchIDSensorCalibrationDataCheckController isCancelled](self, "isCancelled") & 1) == 0)
+    {
+      v4 = (void *)objc_claimAutoreleasedReturnValue(objc_msgSend(v8, "objectForKeyedSubscript:", CFSTR("data")));
+      v5 = (void *)objc_claimAutoreleasedReturnValue(-[TouchIDSensorCalibrationDataCheckController result](self, "result"));
+      objc_msgSend(v5, "setData:", v4);
+
+      v6 = (void *)objc_claimAutoreleasedReturnValue(objc_msgSend(v8, "objectForKeyedSubscript:", CFSTR("testStatus")));
+      v7 = (void *)objc_claimAutoreleasedReturnValue(-[TouchIDSensorCalibrationDataCheckController result](self, "result"));
+      objc_msgSend(v7, "setStatusCode:", v6);
+
+    }
+  }
+  -[TouchIDSensorCalibrationDataCheckController setFinished:](self, "setFinished:", 1);
+
+}
+
+@end

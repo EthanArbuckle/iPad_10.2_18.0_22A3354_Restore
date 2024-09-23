@@ -1,0 +1,2069 @@
+@implementation NUNIAegirRenderer
+
+- (NUNIAegirRenderer)initWithPixelFormat:(unint64_t)a3 textureSuffix:(id)a4 rendererStyle:(unint64_t)a5
+{
+  id v8;
+  NUNIAegirRenderer *v9;
+  uint64_t v10;
+  NUNIAegirResourceManager *resourceManager;
+  uint64_t v12;
+  MTLDevice *device;
+  uint64_t v14;
+  NUNIAegirTextureGroup *textureGroup;
+  uint64_t i;
+  uint64_t v17;
+  NSMutableArray *v18;
+  objc_super v20;
+
+  v8 = a4;
+  v20.receiver = self;
+  v20.super_class = (Class)NUNIAegirRenderer;
+  v9 = -[NUNIRenderer initWithPixelFormat:textureSuffix:rendererStyle:](&v20, sel_initWithPixelFormat_textureSuffix_rendererStyle_, a3, v8, a5);
+  if (v9)
+  {
+    +[NUNIAegirResourceManager sharedInstanceWithDisplayPixelFormat:](NUNIAegirResourceManager, "sharedInstanceWithDisplayPixelFormat:", a3);
+    v10 = objc_claimAutoreleasedReturnValue();
+    resourceManager = v9->_resourceManager;
+    v9->_resourceManager = (NUNIAegirResourceManager *)v10;
+
+    -[NUNIAegirResourceManager addClient](v9->_resourceManager, "addClient");
+    objc_msgSend(MEMORY[0x24BE16F48], "sharedDevice");
+    v12 = objc_claimAutoreleasedReturnValue();
+    device = v9->_device;
+    v9->_device = (MTLDevice *)v12;
+
+    -[NUNIAegirResourceManager textureGroupWithSuffix:](v9->_resourceManager, "textureGroupWithSuffix:", v8);
+    v14 = objc_claimAutoreleasedReturnValue();
+    textureGroup = v9->_textureGroup;
+    v9->_textureGroup = (NUNIAegirTextureGroup *)v14;
+
+    for (i = 0; i != 3; ++i)
+    {
+      v17 = objc_opt_new();
+      v18 = v9->_renderUniformsBuffers[i];
+      v9->_renderUniformsBuffers[i] = (NSMutableArray *)v17;
+
+    }
+    v9->_supportsMTLGPUFamilyApple6 = -[MTLDevice supportsFamily:](v9->_device, "supportsFamily:", 1006);
+  }
+
+  return v9;
+}
+
+- (void)dealloc
+{
+  objc_super v3;
+
+  -[NUNIAegirResourceManager removeClient](self->_resourceManager, "removeClient");
+  v3.receiver = self;
+  v3.super_class = (Class)NUNIAegirRenderer;
+  -[NUNIRenderer dealloc](&v3, sel_dealloc);
+}
+
+- (void)setRendererOptions:(id)a3
+{
+  NUNIRendererOptions **p_rendererOptions;
+  id v6;
+
+  p_rendererOptions = &self->_rendererOptions;
+  objc_storeStrong((id *)&self->_rendererOptions, a3);
+  v6 = a3;
+  LODWORD(p_rendererOptions) = -[NUNIRendererOptions changeSequence](*p_rendererOptions, "changeSequence");
+
+  self->_rendererOptionsChangeSequence = (_DWORD)p_rendererOptions - 1;
+}
+
+- (void)purgeUnusedWithScene:(id)a3
+{
+  uint64_t v4;
+  void *v5;
+  uint64_t i;
+  void *v7;
+  void *v8;
+  void *v9;
+  void *v10;
+  void *v11;
+  void *v12;
+  void *v13;
+  void *v14;
+  void *v15;
+  void *v16;
+  void *v17;
+  void *v18;
+  void *v19;
+  void *v20;
+  void *v21;
+  void *v22;
+  void *v23;
+  void *v24;
+  void *v25;
+  void *v26;
+  void *v27;
+  void *v28;
+  void *v29;
+  void *v30;
+  void *v31;
+  void *v32;
+  void *v33;
+  void *v34;
+  id v35;
+
+  v4 = objc_msgSend(a3, "snap");
+  objc_msgSend(MEMORY[0x24BE16F60], "sharedInstance");
+  v35 = (id)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(MEMORY[0x24BE16F70], "nullTexture2D");
+  v5 = (void *)objc_claimAutoreleasedReturnValue();
+  for (i = 0; i != 24; ++i)
+  {
+    if (v4 != i)
+    {
+      -[NUNIAegirTextureGroup albedos](self->_textureGroup, "albedos");
+      v7 = (void *)objc_claimAutoreleasedReturnValue();
+      objc_msgSend(v7, "objectAtIndexedSubscript:", i);
+      v8 = (void *)objc_claimAutoreleasedReturnValue();
+
+      if (v8 != v5)
+      {
+        objc_msgSend(v8, "atlas");
+        v9 = (void *)objc_claimAutoreleasedReturnValue();
+        objc_msgSend(v9, "uuid");
+        v10 = (void *)objc_claimAutoreleasedReturnValue();
+        objc_msgSend(v35, "purge:", v10);
+
+      }
+      -[NUNIAegirTextureGroup normals](self->_textureGroup, "normals");
+      v11 = (void *)objc_claimAutoreleasedReturnValue();
+      objc_msgSend(v11, "objectAtIndexedSubscript:", i);
+      v12 = (void *)objc_claimAutoreleasedReturnValue();
+
+      if (v12 != v5)
+      {
+        objc_msgSend(v12, "atlas");
+        v13 = (void *)objc_claimAutoreleasedReturnValue();
+        objc_msgSend(v13, "uuid");
+        v14 = (void *)objc_claimAutoreleasedReturnValue();
+        objc_msgSend(v35, "purge:", v14);
+
+      }
+      -[NUNIAegirTextureGroup emissives](self->_textureGroup, "emissives");
+      v15 = (void *)objc_claimAutoreleasedReturnValue();
+      objc_msgSend(v15, "objectAtIndexedSubscript:", i);
+      v16 = (void *)objc_claimAutoreleasedReturnValue();
+
+      if (v16 != v5)
+      {
+        objc_msgSend(v16, "atlas");
+        v17 = (void *)objc_claimAutoreleasedReturnValue();
+        objc_msgSend(v17, "uuid");
+        v18 = (void *)objc_claimAutoreleasedReturnValue();
+        objc_msgSend(v35, "purge:", v18);
+
+      }
+      -[NUNIAegirTextureGroup cloudsLo](self->_textureGroup, "cloudsLo");
+      v19 = (void *)objc_claimAutoreleasedReturnValue();
+      objc_msgSend(v19, "objectAtIndexedSubscript:", i);
+      v20 = (void *)objc_claimAutoreleasedReturnValue();
+
+      if (v20 != v5)
+      {
+        objc_msgSend(v20, "atlas");
+        v21 = (void *)objc_claimAutoreleasedReturnValue();
+        objc_msgSend(v21, "uuid");
+        v22 = (void *)objc_claimAutoreleasedReturnValue();
+        objc_msgSend(v35, "purge:", v22);
+
+      }
+      -[NUNIAegirTextureGroup cloudsMd](self->_textureGroup, "cloudsMd");
+      v23 = (void *)objc_claimAutoreleasedReturnValue();
+      objc_msgSend(v23, "objectAtIndexedSubscript:", i);
+      v24 = (void *)objc_claimAutoreleasedReturnValue();
+
+      if (v24 != v5)
+      {
+        objc_msgSend(v24, "atlas");
+        v25 = (void *)objc_claimAutoreleasedReturnValue();
+        objc_msgSend(v25, "uuid");
+        v26 = (void *)objc_claimAutoreleasedReturnValue();
+        objc_msgSend(v35, "purge:", v26);
+
+      }
+      -[NUNIAegirTextureGroup cloudsHi](self->_textureGroup, "cloudsHi");
+      v27 = (void *)objc_claimAutoreleasedReturnValue();
+      objc_msgSend(v27, "objectAtIndexedSubscript:", i);
+      v28 = (void *)objc_claimAutoreleasedReturnValue();
+
+      if (v28 != v5)
+      {
+        objc_msgSend(v28, "atlas");
+        v29 = (void *)objc_claimAutoreleasedReturnValue();
+        objc_msgSend(v29, "uuid");
+        v30 = (void *)objc_claimAutoreleasedReturnValue();
+        objc_msgSend(v35, "purge:", v30);
+
+      }
+      -[NUNIAegirTextureGroup gradients](self->_textureGroup, "gradients");
+      v31 = (void *)objc_claimAutoreleasedReturnValue();
+      objc_msgSend(v31, "objectAtIndexedSubscript:", i);
+      v32 = (void *)objc_claimAutoreleasedReturnValue();
+
+      if (v32 != v5)
+      {
+        objc_msgSend(v32, "atlas");
+        v33 = (void *)objc_claimAutoreleasedReturnValue();
+        objc_msgSend(v33, "uuid");
+        v34 = (void *)objc_claimAutoreleasedReturnValue();
+        objc_msgSend(v35, "purge:", v34);
+
+      }
+    }
+  }
+
+}
+
+- (id)contentMaskLayer
+{
+  return self->_contentMaskLayer;
+}
+
+- (void)setContentMaskLayer:(id)a3
+{
+  objc_storeStrong((id *)&self->_contentMaskLayer, a3);
+}
+
+- (void)_updateStateWithScene:(id)a3 viewport:(NUNIViewport)a4
+{
+  int width;
+  int height;
+  id v7;
+  float32x4_t v8;
+  float32x4_t v9;
+  float v10;
+  float v11;
+  uint64_t v12;
+  int32x4_t v20;
+  int32x4_t v21;
+  float32x4_t v22;
+  float32x4_t v24;
+  int32x4_t v29;
+  float v33;
+  float v34;
+  float v35;
+  simd_float4 v36;
+  simd_float4 v37;
+  simd_float4 v38;
+  simd_float4 v39;
+  __float2 v40;
+  float32x2_t v41;
+  simd_float4 v42;
+  simd_float4 v43;
+  simd_float4 v44;
+  simd_float4 v45;
+  simd_float4 v46;
+  simd_float4 v47;
+  simd_float4 v48;
+  simd_float4 v49;
+  simd_float4 v50;
+  simd_float4 v51;
+  simd_float4 v52;
+  simd_float4 v53;
+  simd_float4 v54;
+  simd_float4 v55;
+  simd_float4 v56;
+  simd_float4 v57;
+  simd_float4 v58;
+  simd_float4 v59;
+  simd_float4 v60;
+  simd_float4 v61;
+  __int128 v62;
+  __int128 v63;
+  __int128 v64;
+  __int128 v65;
+  simd_float4 v66;
+  simd_float4 v67;
+  simd_float4 v68;
+  simd_float4 v69;
+  simd_float4 v70;
+  simd_float4 v71;
+  simd_float4 v72;
+  simd_float4 v73;
+  float32x4_t v74;
+  int32x4_t v75;
+  uint64_t v76;
+  float32x4_t v77;
+  simd_float4 v78;
+  simd_float4 v79;
+  simd_float4 v80;
+  int32x4_t v81;
+  simd_float4 v82;
+  float32x4_t v83;
+  float32x4_t v84;
+  simd_float4x4 v85;
+  simd_float4x4 v86;
+  simd_float4x4 v87;
+  simd_float4x4 v88;
+  simd_float4x4 v89;
+  simd_float4x4 v90;
+  simd_float4x4 v91;
+  simd_float4x4 v92;
+
+  width = a4.width;
+  height = a4.height;
+  v7 = a3;
+  objc_msgSend(v7, "cameraPosition");
+  v83 = v8;
+  objc_msgSend(v7, "cameraTarget");
+  v77 = v9;
+  objc_msgSend(v7, "cameraRoll");
+  v11 = v10;
+  objc_msgSend(v7, "cameraOffset");
+  v76 = v12;
+  _Q0 = vsubq_f32(v77, v83);
+  _Q1 = vmulq_f32(_Q0, _Q0);
+  _S2 = _Q0.i32[2];
+  __asm { FMLA            S1, S2, V0.S[2] }
+  _Q1.f32[0] = sqrtf(_Q1.f32[0]);
+  v84 = vdivq_f32(_Q0, (float32x4_t)vdupq_lane_s32(*(int32x2_t *)_Q1.f32, 0));
+  objc_msgSend(v7, "cameraUp");
+  v81 = v20;
+
+  v21 = (int32x4_t)v84;
+  v22 = (float32x4_t)vextq_s8(vextq_s8((int8x16_t)v21, (int8x16_t)v21, 0xCuLL), (int8x16_t)v21, 8uLL);
+  _Q4 = v81;
+  _Q3 = (float32x4_t)vextq_s8((int8x16_t)vuzp1q_s32(_Q4, _Q4), (int8x16_t)_Q4, 0xCuLL);
+  v24 = (float32x4_t)vextq_s8((int8x16_t)vuzp1q_s32(v21, v21), (int8x16_t)v21, 0xCuLL);
+  _Q2 = vmlaq_f32(vmulq_f32((float32x4_t)vextq_s8(vextq_s8((int8x16_t)_Q4, (int8x16_t)_Q4, 0xCuLL), (int8x16_t)_Q4, 8uLL), vnegq_f32(v24)), _Q3, v22);
+  _Q3.i32[0] = _Q2.i32[2];
+  __asm { FMLA            S4, S3, V2.S[2] }
+  _Q3.f32[0] = sqrtf(*(float *)_Q4.i32);
+  if (_Q3.f32[0] < 0.00001)
+  {
+    _Q2 = vmlaq_f32(vmulq_f32(v24, (float32x4_t)xmmword_2134DC490), (float32x4_t)xmmword_2134DBD80, v22);
+    _Q3.i64[0] = _Q2.u32[2];
+    __asm { FMLA            S4, S3, V2.S[2] }
+    _Q3.f32[0] = sqrtf(_S4);
+    if (_Q3.f32[0] < 0.00001)
+    {
+      _Q2 = vmlaq_f32(vmulq_f32(v24, (float32x4_t)xmmword_2134DC4A0), (float32x4_t)xmmword_2134DC4B0, v22);
+      _Q3.i64[0] = _Q2.u32[2];
+      __asm { FMLA            S4, S3, V2.S[2] }
+      _Q3.f32[0] = sqrtf(_S4);
+    }
+  }
+  v29 = (int32x4_t)vdivq_f32(_Q2, (float32x4_t)vdupq_lane_s32(*(int32x2_t *)_Q3.f32, 0));
+  _Q0 = vmlaq_f32(vmulq_f32(v22, vnegq_f32((float32x4_t)vextq_s8((int8x16_t)vuzp1q_s32(v29, v29), (int8x16_t)v29, 0xCuLL))), v24, (float32x4_t)vextq_s8(vextq_s8((int8x16_t)v29, (int8x16_t)v29, 0xCuLL), (int8x16_t)v29, 8uLL));
+  _Q1 = vmulq_f32(_Q0, _Q0);
+  _S2 = _Q0.i32[2];
+  __asm { FMLA            S1, S2, V0.S[2] }
+  _Q1.f32[0] = sqrtf(_Q1.f32[0]);
+  v74 = vnegq_f32(vdivq_f32(_Q0, (float32x4_t)vdupq_lane_s32(*(int32x2_t *)_Q1.f32, 0)));
+  v75 = v29;
+  v33 = (float)width / (float)height;
+  if (v33 >= 1.0)
+  {
+    v35 = 0.34907;
+  }
+  else
+  {
+    v34 = atanf(0.17633 / v33);
+    v35 = v34 + v34;
+  }
+  *(__n64 *)v36.f32 = UMFloat4x4MakeLookAt(*(double *)v75.i64, v74.f32[0]);
+  v80 = v37;
+  v82 = v36;
+  v78 = v39;
+  v79 = v38;
+  if (fabsf(v11) > 0.00001)
+  {
+    v40 = __sincosf_stret(v11 * 0.5);
+    v41 = vmul_n_f32(*(float32x2_t *)v84.f32, v40.__sinval);
+    *(__n64 *)v42.f32 = UMFloat4x4Make(v41.f32[0], v41.f32[1], vmuls_lane_f32(v40.__sinval, v84, 2), v40.__cosval);
+    v89.columns[0] = v42;
+    v89.columns[1] = v43;
+    v89.columns[2] = v44;
+    v89.columns[3] = v45;
+    v85.columns[1] = v80;
+    v85.columns[0] = v82;
+    v85.columns[3] = v78;
+    v85.columns[2] = v79;
+    *(double *)v46.i64 = UMMul(v85, v89);
+    v80 = v47;
+    v82 = v46;
+    v78 = v49;
+    v79 = v48;
+  }
+  *(double *)v50.i64 = UMFloat4x4MakeTranslate();
+  v90.columns[0] = v50;
+  v90.columns[1] = v51;
+  v90.columns[2] = v52;
+  v90.columns[3] = v53;
+  v86.columns[1] = v80;
+  v86.columns[0] = v82;
+  v86.columns[3] = v78;
+  v86.columns[2] = v79;
+  *(double *)v54.i64 = UMMul(v86, v90);
+  v72 = v55;
+  v73 = v54;
+  v70 = v57;
+  v71 = v56;
+  v58.f32[0] = UMFloat4x4MakePerspective((float)(v35 * 180.0) / 3.1416, (float)width / (float)height, 0.001, 5.0);
+  v68 = v59;
+  v69 = v58;
+  v66 = v61;
+  v67 = v60;
+  *(double *)v87.columns[0].i64 = UMFloat4x4MakeTranslate();
+  v91.columns[1] = v68;
+  v91.columns[0] = v69;
+  v91.columns[3] = v66;
+  v91.columns[2] = v67;
+  *(double *)v88.columns[0].i64 = UMMul(v87, v91);
+  v92.columns[1] = v72;
+  v92.columns[0] = v73;
+  v92.columns[3] = v70;
+  v92.columns[2] = v71;
+  *(double *)&v62 = UMMul(v88, v92);
+  self->_state.viewport.width = width;
+  self->_state.viewport.height = height;
+  self->_state.cameraRoll = v11;
+  self->_state.aspect = v33;
+  self->_state.fovY = v35;
+  *(_DWORD *)self->_anon_f4 = 0;
+  *(_QWORD *)&self->_anon_f4[4] = v76;
+  *(float32x4_t *)&self->_anon_f4[12] = v83;
+  *(float32x4_t *)&self->_anon_f4[28] = v77;
+  *(float32x4_t *)&self->_anon_f4[44] = v74;
+  *(int32x4_t *)&self->_anon_f4[60] = v75;
+  *(float32x4_t *)&self->_anon_f4[76] = v84;
+  *(simd_float4 *)&self->_anon_f4[92] = v82;
+  *(simd_float4 *)&self->_anon_f4[108] = v80;
+  *(simd_float4 *)&self->_anon_f4[124] = v79;
+  *(simd_float4 *)&self->_anon_f4[140] = v78;
+  *(simd_float4 *)&self->_anon_f4[156] = v73;
+  *(simd_float4 *)&self->_anon_f4[172] = v72;
+  *(simd_float4 *)&self->_anon_f4[188] = v71;
+  *(simd_float4 *)&self->_anon_f4[204] = v70;
+  *(_OWORD *)&self->_anon_f4[220] = v62;
+  *(_OWORD *)&self->_anon_f4[236] = v63;
+  *(_OWORD *)&self->_anon_f4[252] = v64;
+  *(_OWORD *)&self->_anon_f4[268] = v65;
+}
+
+- (void)_updateBaseUniformsForViewport:(NUNIViewport)a3
+{
+  int width;
+  int height;
+  unsigned int v6;
+  uint64_t v7;
+  __CFString *v8;
+  void *v9;
+  void *v10;
+  double v11;
+  NSObject *v18;
+  NUNIAegirResourceManager *resourceManager;
+  __int128 v21;
+  __int128 v22;
+  uint64_t v23;
+  float aspect;
+  float v25;
+  float v27;
+  float v30;
+  float v32;
+  __int32 v33;
+  float16x4_t v34;
+  float32x4_t v35;
+  int v36;
+  uint64_t v37;
+  _BYTE buf[32];
+  __int128 v39;
+  _BYTE v40[22];
+  uint64_t v41;
+
+  width = a3.width;
+  v41 = *MEMORY[0x24BDAC8D0];
+  height = a3.height;
+  if (__ROR8__(0xEEEEEEEEEEEEEEEFLL * self->_frame, 2) <= 0x444444444444444uLL)
+  {
+    v6 = -[NUNIRendererOptions changeSequence](self->_rendererOptions, "changeSequence");
+    if (v6 != self->_rendererOptionsChangeSequence)
+    {
+      v36 = height;
+      v7 = 0;
+      self->_rendererOptionsChangeSequence = v6;
+      do
+      {
+        v8 = _updateBaseUniformsForViewport__optionKeys_0[v7];
+        -[NUNIRendererOptions fractionValueForOption:](self->_rendererOptions, "fractionValueForOption:", v8);
+        v9 = (void *)objc_claimAutoreleasedReturnValue();
+        v10 = v9;
+        if (v9)
+        {
+          objc_msgSend(v9, "doubleValue");
+          *(float *)&v11 = v11;
+          _H1 = *(_WORD *)&self->_anon_3c4[2 * v7];
+          __asm { FCVT            S1, H1 }
+          if (*(float *)&v11 != _S1)
+          {
+            NUNILoggingObjectForDomain(0);
+            v18 = objc_claimAutoreleasedReturnValue();
+            if (os_log_type_enabled(v18, OS_LOG_TYPE_DEBUG))
+            {
+              *(_DWORD *)buf = 138543618;
+              *(_QWORD *)&buf[4] = v8;
+              *(_WORD *)&buf[12] = 2114;
+              *(_QWORD *)&buf[14] = v10;
+              _os_log_debug_impl(&dword_2134A1000, v18, OS_LOG_TYPE_DEBUG, "Overriding option %{public}@ with value %{public}@", buf, 0x16u);
+            }
+
+            objc_msgSend(v10, "doubleValue");
+            __asm { FCVT            H0, D0 }
+            *(_WORD *)&self->_anon_3c4[2 * v7] = _D0;
+          }
+        }
+
+        ++v7;
+      }
+      while (v7 != 35);
+      resourceManager = self->_resourceManager;
+      v21 = *(_OWORD *)&self->_anon_3c4[48];
+      v39 = *(_OWORD *)&self->_anon_3c4[32];
+      *(_OWORD *)v40 = v21;
+      *(_QWORD *)&v40[14] = *(_QWORD *)&self->_anon_3c4[62];
+      v22 = *(_OWORD *)&self->_anon_3c4[16];
+      *(_OWORD *)buf = *(_OWORD *)self->_anon_3c4;
+      *(_OWORD *)&buf[16] = v22;
+      -[NUNIAegirResourceManager setPipelineConstants:](resourceManager, "setPipelineConstants:", buf);
+      height = v36;
+    }
+  }
+  v23 = *(_QWORD *)&self->_anon_f4[4];
+  aspect = self->_state.aspect;
+  if (height <= width)
+  {
+    v25 = (float)height;
+    __asm { FMOV            V2.2S, #1.0 }
+    *(float *)&_D2 = (float)width / (float)height;
+  }
+  else
+  {
+    v25 = (float)width;
+    __asm { FMOV            V2.2S, #1.0 }
+    *((float *)&_D2 + 1) = (float)height / (float)width;
+  }
+  v37 = _D2;
+  v27 = tanf(self->_state.fovY * 0.5);
+  _H4 = *(_WORD *)&self->_anon_3c4[10];
+  __asm { FCVT            S4, H4 }
+  v30 = (float)(_S4 * 5.0) + 1.0;
+  LOWORD(_S4) = *(_WORD *)&self->_anon_3c4[12];
+  __asm { FCVT            S4, H4 }
+  v32 = _S4 * -10.0;
+  v33 = *(_DWORD *)&self->_anon_3c4[6];
+  *(_OWORD *)&self->_baseUniforms.var5 = 0u;
+  *(_OWORD *)&self->_baseUniforms.var9 = 0u;
+  *(_OWORD *)&self->_baseUniforms.var13 = 0u;
+  *(_OWORD *)&self->_baseUniforms.var17 = 0u;
+  *(_OWORD *)&self->_baseUniforms.var21 = 0u;
+  *(_OWORD *)self->_anon_260 = 0u;
+  *(_OWORD *)&self->_anon_260[16] = 0u;
+  *(_OWORD *)&self->_anon_260[32] = 0u;
+  v34.i32[0] = v33;
+  *(_OWORD *)&self->_anon_260[48] = 0u;
+  *(_OWORD *)&self->_anon_260[64] = 0u;
+  *(_OWORD *)&self->_anon_260[80] = 0u;
+  *(_OWORD *)&self->_anon_260[96] = 0u;
+  v35 = vcvtq_f32_f16(v34);
+  *(_OWORD *)&self->_anon_260[112] = 0u;
+  *(_OWORD *)&self->_anon_260[128] = 0u;
+  *(_OWORD *)&self->_anon_260[144] = 0u;
+  *(_OWORD *)&self->_anon_260[160] = 0u;
+  *(_OWORD *)&self->_anon_260[176] = 0u;
+  *(_OWORD *)&self->_anon_260[192] = 0u;
+  *(_OWORD *)&self->_anon_260[208] = 0u;
+  *(_OWORD *)&self->_anon_260[224] = 0u;
+  *(_OWORD *)&self->_anon_260[240] = 0u;
+  *(_QWORD *)&self->_anon_260[256] = v23;
+  *(_QWORD *)&self->_anon_260[264] = v37;
+  *(float *)&self->_anon_260[272] = 1.0 / v25;
+  *(float *)&self->_anon_260[276] = (float)(-1.0 / v27) / aspect;
+  *(_QWORD *)&self->_anon_260[280] = 0x3E31D0D400000000;
+  *(_DWORD *)&self->_anon_260[288] = 0;
+  *(float *)&self->_anon_260[292] = v32;
+  *(float *)&self->_anon_260[296] = (float)((float)(-1.0 / v30) * v32) - v32;
+  *(_QWORD *)&self->_anon_260[300] = vcvtq_f32_f16(vcvt_f16_f32(vmulq_f32(v35, v35))).u64[0];
+  *(float *)&self->_anon_260[308] = v30;
+  *(_OWORD *)&self->_anon_260[312] = 0u;
+  *(_OWORD *)&self->_anon_260[328] = 0u;
+  *(_QWORD *)&self->_anon_260[344] = 0;
+}
+
+- (id)getOrCreateUniformBufferforFrameBufferIndex:(unint64_t)a3
+{
+  NSMutableArray *v5;
+  unint64_t v6;
+  void *v7;
+
+  v5 = self->_renderUniformsBuffers[a3];
+  v6 = self->_renderUniformBuffersCounts[a3];
+  self->_renderUniformBuffersCounts[a3] = v6 + 1;
+  if (-[NSMutableArray count](v5, "count") <= v6)
+  {
+    v7 = (void *)-[MTLDevice newBufferWithLength:options:](self->_device, "newBufferWithLength:options:", 432, 1);
+    -[NSMutableArray addObject:](v5, "addObject:", v7);
+  }
+  else
+  {
+    -[NSMutableArray objectAtIndexedSubscript:](v5, "objectAtIndexedSubscript:", v6);
+    v7 = (void *)objc_claimAutoreleasedReturnValue();
+  }
+
+  return v7;
+}
+
+- (void)_renderOffscreenBackgroundWithRenderEncoder:(id)a3 frameBufferIndex:(unint64_t)a4
+{
+  id v6;
+  uint64_t v7;
+  simd_float4 v8;
+  simd_float4 v9;
+  simd_float4 v10;
+  simd_float4 v11;
+  __int128 v12;
+  __int128 v13;
+  __int128 v14;
+  __int128 v15;
+  void *v16;
+  void *v17;
+  void *v18;
+  void *v19;
+  void *v20;
+  void *v21;
+  id v22;
+  simd_float4x4 v23;
+
+  v6 = a3;
+  -[NUNIAegirRenderer getOrCreateUniformBufferforFrameBufferIndex:](self, "getOrCreateUniformBufferforFrameBufferIndex:", a4);
+  v22 = objc_retainAutorelease((id)objc_claimAutoreleasedReturnValue());
+  v7 = objc_msgSend(v22, "contents");
+  memcpy((void *)v7, &self->_baseUniforms, 0x1B0uLL);
+  *(simd_float4x4 *)(v7 + 144) = __invert_f4(*(simd_float4x4 *)&self->_anon_f4[156]);
+  *(double *)v8.i64 = UMFloat4x4MakeTranslate();
+  v23.columns[0] = v8;
+  v23.columns[1] = v9;
+  v23.columns[2] = v10;
+  v23.columns[3] = v11;
+  *(double *)&v12 = UMMul(*(simd_float4x4 *)&self->_anon_f4[220], v23);
+  *(_OWORD *)(v7 + 272) = v12;
+  *(_OWORD *)(v7 + 288) = v13;
+  *(_OWORD *)(v7 + 304) = v14;
+  *(_OWORD *)(v7 + 320) = v15;
+  objc_msgSend(v6, "setVertexBuffer:offset:atIndex:", v22, 0, 1);
+  -[NUNIAegirResourceManager rectVerticesBuffer](self->_resourceManager, "rectVerticesBuffer");
+  v16 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(v6, "setVertexBuffer:offset:atIndex:", v16, 0, 0);
+
+  -[NUNIAegirResourceManager renderOffscreenPipelineForStarfield](self->_resourceManager, "renderOffscreenPipelineForStarfield");
+  v17 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(v6, "setLabel:", CFSTR("Ægir Starfield"));
+  objc_msgSend(v6, "setRenderPipelineState:", v17);
+  objc_msgSend(v6, "setFragmentBuffer:offset:atIndex:", v22, 0, 0);
+  -[NUNIAegirTextureGroup starfield](self->_textureGroup, "starfield");
+  v18 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(v18, "atlas");
+  v19 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(v19, "bind:slot:", v6, 1);
+
+  objc_msgSend(v6, "drawPrimitives:vertexStart:vertexCount:", 4, 0, 4);
+  -[NUNIAegirResourceManager starVerticesBuffer](self->_resourceManager, "starVerticesBuffer");
+  v20 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(v6, "setVertexBuffer:offset:atIndex:", v20, 0, 0);
+
+  -[NUNIAegirResourceManager renderOffscreenPipelineForStar](self->_resourceManager, "renderOffscreenPipelineForStar");
+  v21 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(v6, "setLabel:", CFSTR("Ægir Star"));
+  objc_msgSend(v6, "setRenderPipelineState:", v21);
+  objc_msgSend(v6, "setFragmentBuffer:offset:atIndex:", v22, 0, 0);
+  objc_msgSend(v6, "drawPrimitives:vertexStart:vertexCount:", 3, 0, 4212);
+
+}
+
+- (void)_renderRaytraceSpheroid:(id)a3 uniPtr:(NUNIAegirRenderUniforms *)a4 renderEncoder:(id)a5
+{
+  id v8;
+  uint64_t v9;
+  float v10;
+  float v11;
+  float v12;
+  float v13;
+  float v14;
+  float v15;
+  simd_float4 v16;
+  simd_float4 v17;
+  simd_float4 v18;
+  simd_float4 v19;
+  simd_float4 v20;
+  simd_float4 v21;
+  simd_float4 v22;
+  simd_float4 v23;
+  simd_float4 v24;
+  simd_float4 v25;
+  simd_float4 v26;
+  simd_float4 v27;
+  simd_float4 v28;
+  simd_float4 v29;
+  simd_float4 v30;
+  simd_float4 v31;
+  simd_float4 v32;
+  simd_float4 v33;
+  simd_float4 v34;
+  simd_float4 v35;
+  float16x4_t v36;
+  float16x4_t v44;
+  float16x4_t v45;
+  __int32 v47;
+  float v48;
+  __float2 v49;
+  __float2 v50;
+  float32x4_t v51;
+  __int128 v52;
+  __int128 v53;
+  uint64_t v54;
+  uint64_t v55;
+  _BOOL8 v56;
+  float v59;
+  float v60;
+  BOOL v61;
+  float v62;
+  float32x2_t v63;
+  float v64;
+  float v65;
+  void *v66;
+  void *v67;
+  void *v68;
+  void *v69;
+  void *v70;
+  void *v71;
+  void *v72;
+  void *v73;
+  void *v74;
+  void *v75;
+  void *v76;
+  void *v77;
+  void *v78;
+  void *v79;
+  void *v80;
+  void *v81;
+  void *v82;
+  void *v83;
+  void *v84;
+  void *v85;
+  void *v86;
+  simd_float4 v87;
+  simd_float4 v88;
+  simd_float4 v89;
+  simd_float4 v90;
+  float32x4_t v91;
+  float32x4_t v92;
+  float32x4_t v93;
+  float v94;
+  simd_float4 v95;
+  float32x4_t v96;
+  simd_float4 v97;
+  float32x4_t v98;
+  simd_float4 v99;
+  float32x4_t v100;
+  simd_float4 v101;
+  float32x4_t v102;
+  id v103;
+  simd_float4x4 v104;
+  simd_float4x4 v105;
+  simd_float4x4 v106;
+  simd_float4x4 v107;
+  simd_float4x4 v108;
+  simd_float4x4 v109;
+  simd_float4x4 v110;
+  simd_float4x4 v111;
+  simd_float4x4 v112;
+
+  v103 = a3;
+  v8 = a5;
+  v9 = objc_msgSend(v103, "type");
+  objc_msgSend(v103, "opacity");
+  a4[4].var15 = v10;
+  objc_msgSend(v103, "equatorRotation");
+  v12 = v11;
+  objc_msgSend(v103, "radius");
+  v14 = v13;
+  objc_msgSend(v103, "radiusScale");
+  v94 = v14 * v15;
+  UMFloat4x4MakeScale(v14 * v15);
+  v99 = v17;
+  v101 = v16;
+  v95 = v19;
+  v97 = v18;
+  if (v12 != 0.0)
+  {
+    *(double *)v20.i64 = UMFloat4x4MakeRotateZ(v12 + 1.5708);
+    v109.columns[0] = v20;
+    v109.columns[1] = v21;
+    v109.columns[2] = v22;
+    v109.columns[3] = v23;
+    v104.columns[1] = v99;
+    v104.columns[0] = v101;
+    v104.columns[3] = v95;
+    v104.columns[2] = v97;
+    *(double *)v24.i64 = UMMul(v104, v109);
+    v99 = v25;
+    v101 = v24;
+    v95 = v27;
+    v97 = v26;
+  }
+  objc_msgSend(v103, "position");
+  *(double *)v28.i64 = UMFloat4x4MakeTranslate();
+  v89 = v29;
+  v90 = v28;
+  v87 = v31;
+  v88 = v30;
+  v110.columns[1] = v99;
+  v110.columns[0] = v101;
+  v110.columns[3] = v95;
+  v110.columns[2] = v97;
+  *(double *)v105.columns[0].i64 = UMMul(*(simd_float4x4 *)&self->_anon_f4[92], v110);
+  v106 = __invert_f4(v105);
+  v91 = (float32x4_t)v106.columns[0];
+  v92 = (float32x4_t)v106.columns[1];
+  v93 = (float32x4_t)v106.columns[2];
+  v106.columns[1] = v89;
+  v106.columns[0] = v90;
+  v106.columns[3] = v87;
+  v106.columns[2] = v88;
+  v111.columns[1] = v99;
+  v111.columns[0] = v101;
+  v111.columns[3] = v95;
+  v111.columns[2] = v97;
+  *(double *)v32.i64 = UMMul(v106, v111);
+  v112.columns[0] = v32;
+  v112.columns[1] = v33;
+  v112.columns[2] = v34;
+  v112.columns[3] = v35;
+  *(double *)v107.columns[0].i64 = UMMul(*(simd_float4x4 *)&self->_anon_f4[156], v112);
+  v100 = (float32x4_t)v107.columns[1];
+  v102 = (float32x4_t)v107.columns[0];
+  v96 = (float32x4_t)v107.columns[3];
+  v98 = (float32x4_t)v107.columns[2];
+  v108 = __invert_f4(v107);
+  v36 = vcvt_f16_f32(v91);
+  _S5 = v91.i32[2];
+  __asm { FCVT            H5, S5 }
+  v36.i16[2] = _S5;
+  _D5 = vcvt_f16_f32(v92);
+  _S6 = v92.i32[2];
+  __asm { FCVT            H6, S6 }
+  _D5.i16[2] = _S6;
+  *(float16x4_t *)&a4[1].var13 = v36;
+  *(float16x4_t *)&a4[1].var15 = _D5;
+  v44 = vcvt_f16_f32(v93);
+  _D5.i32[0] = v93.i32[2];
+  __asm { FCVT            H5, S5 }
+  v44.i16[2] = _D5.i16[0];
+  v45 = vcvt_f16_f32((float32x4_t)v108.columns[3]);
+  _S6 = v108.columns[3].i32[2];
+  __asm { FCVT            H6, S6 }
+  v45.i16[2] = _S6;
+  *(float16x4_t *)&a4[1].var17 = v44;
+  *(float16x4_t *)&a4[1].var19 = v45;
+  *(simd_float4x4 *)&a4[1].var21 = v108;
+  *(float32x4_t *)&a4[2].var17 = v102;
+  *(float32x4_t *)&a4[2].var21 = v100;
+  *(float32x4_t *)&a4[3].var5 = v98;
+  *(float32x4_t *)&a4[3].var9 = v96;
+  objc_msgSend(v103, "light");
+  v92.i32[0] = v47;
+  v49 = __sincosf_stret(v48);
+  v50 = __sincosf_stret(v92.f32[0]);
+  v51.f32[0] = v50.__cosval * v49.__sinval;
+  v51.f32[1] = v50.__sinval * v49.__sinval;
+  v51.i64[1] = LODWORD(v49.__cosval);
+  *(double *)&v52 = UMMul(*(float32x4_t *)&self->_anon_f4[156], *(float32x4_t *)&self->_anon_f4[172], *(float32x4_t *)&self->_anon_f4[188], *(float32x4_t *)&self->_anon_f4[204], v51);
+  *(_OWORD *)&a4->var13 = v52;
+  *(double *)&v53 = UMMul(v102, v100, v98, v96, (float32x4_t)xmmword_2134DBE40);
+  *((float *)&v53 + 3) = v94 * v94;
+  *(_OWORD *)&a4->var9 = v53;
+  if (v9 == 3)
+  {
+    if (a4->var15 < 0.0 && self->_supportsMTLGPUFamilyApple6)
+    {
+      *(float32x2_t *)&a4[4].var23 = vmul_f32(vmul_n_f32((float32x2_t)0x42DA000046B73E00, v94), *(float32x2_t *)&a4[4].var20);
+      v54 = 2;
+    }
+    else
+    {
+      v54 = 0;
+    }
+    _H0 = *(_WORD *)&self->_anon_3c4[46];
+    __asm { FCVT            S8, H0 }
+    objc_msgSend(v103, "cloudOpacity", *(_OWORD *)&v87, *(_OWORD *)&v88, *(_OWORD *)&v89, *(_OWORD *)&v90);
+    v60 = v59 * _S8;
+    a4[5].var10 = v60;
+    v61 = v60 <= 0.00001;
+    v56 = v60 > 0.00001;
+    v55 = v54 | v56;
+    v62 = v94 * 0.98;
+    if (!v61)
+    {
+      a4[5].var6 = v94 * v94;
+      v63 = vcvt_f32_f64(vmulq_n_f64((float64x2_t)xmmword_2134F9BE0, v94));
+      *(float32x2_t *)&a4[5].var7 = vmul_f32(v63, v63);
+      a4[5].var9 = v94 * 0.02;
+    }
+    v64 = v62 * 1.125;
+    a4[5].var5 = v62 * v62;
+    v65 = v62 * 0.95;
+    a4[5].var11 = v64;
+    a4[5].var12 = v65;
+  }
+  else
+  {
+    v55 = 0;
+    LODWORD(v56) = 0;
+  }
+  -[NUNIAegirResourceManager renderOffscreenPipelineForSpheroid:config:](self->_resourceManager, "renderOffscreenPipelineForSpheroid:config:", v9, v55, *(_OWORD *)&v87, *(_OWORD *)&v88, *(_OWORD *)&v89, *(_OWORD *)&v90);
+  v66 = (void *)objc_claimAutoreleasedReturnValue();
+  if (v66)
+  {
+    objc_msgSend(v8, "setLabel:", CFSTR("Ægir RaytraceSpheroid"));
+    objc_msgSend(v8, "setRenderPipelineState:", v66);
+    -[NUNIAegirTextureGroup albedos](self->_textureGroup, "albedos");
+    v67 = (void *)objc_claimAutoreleasedReturnValue();
+    objc_msgSend(v67, "objectAtIndexedSubscript:", v9);
+    v68 = (void *)objc_claimAutoreleasedReturnValue();
+
+    objc_msgSend(v68, "atlas");
+    v69 = (void *)objc_claimAutoreleasedReturnValue();
+    objc_msgSend(v69, "bind:slot:", v8, 1);
+
+    -[NUNIAegirTextureGroup normals](self->_textureGroup, "normals");
+    v70 = (void *)objc_claimAutoreleasedReturnValue();
+    objc_msgSend(v70, "objectAtIndexedSubscript:", v9);
+    v71 = (void *)objc_claimAutoreleasedReturnValue();
+
+    objc_msgSend(v71, "atlas");
+    v72 = (void *)objc_claimAutoreleasedReturnValue();
+    objc_msgSend(v72, "bind:slot:", v8, 2);
+
+    -[NUNIAegirTextureGroup emissives](self->_textureGroup, "emissives");
+    v73 = (void *)objc_claimAutoreleasedReturnValue();
+    objc_msgSend(v73, "objectAtIndexedSubscript:", v9);
+    v74 = (void *)objc_claimAutoreleasedReturnValue();
+
+    objc_msgSend(v74, "atlas");
+    v75 = (void *)objc_claimAutoreleasedReturnValue();
+    objc_msgSend(v75, "bind:slot:", v8, 3);
+
+    if (v56)
+    {
+      -[NUNIAegirTextureGroup cloudsLo](self->_textureGroup, "cloudsLo");
+      v76 = (void *)objc_claimAutoreleasedReturnValue();
+      objc_msgSend(v76, "objectAtIndexedSubscript:", v9);
+      v77 = (void *)objc_claimAutoreleasedReturnValue();
+
+      objc_msgSend(v77, "atlas");
+      v78 = (void *)objc_claimAutoreleasedReturnValue();
+      objc_msgSend(v78, "bind:slot:", v8, 5);
+
+      -[NUNIAegirTextureGroup cloudsMd](self->_textureGroup, "cloudsMd");
+      v79 = (void *)objc_claimAutoreleasedReturnValue();
+      objc_msgSend(v79, "objectAtIndexedSubscript:", v9);
+      v80 = (void *)objc_claimAutoreleasedReturnValue();
+
+      objc_msgSend(v80, "atlas");
+      v81 = (void *)objc_claimAutoreleasedReturnValue();
+      objc_msgSend(v81, "bind:slot:", v8, 6);
+
+      -[NUNIAegirTextureGroup cloudsHi](self->_textureGroup, "cloudsHi");
+      v82 = (void *)objc_claimAutoreleasedReturnValue();
+      objc_msgSend(v82, "objectAtIndexedSubscript:", v9);
+      v74 = (void *)objc_claimAutoreleasedReturnValue();
+
+      objc_msgSend(v74, "atlas");
+      v83 = (void *)objc_claimAutoreleasedReturnValue();
+      objc_msgSend(v83, "bind:slot:", v8, 7);
+
+    }
+    -[NUNIAegirTextureGroup gradients](self->_textureGroup, "gradients");
+    v84 = (void *)objc_claimAutoreleasedReturnValue();
+    objc_msgSend(v84, "objectAtIndexedSubscript:", v9);
+    v85 = (void *)objc_claimAutoreleasedReturnValue();
+
+    objc_msgSend(v85, "atlas");
+    v86 = (void *)objc_claimAutoreleasedReturnValue();
+    objc_msgSend(v86, "bind:slot:", v8, 4);
+
+    objc_msgSend(v8, "drawPrimitives:vertexStart:vertexCount:", 4, 0, 4);
+  }
+
+}
+
+- (void)_renderLocationDot:(id)a3 uniPtr:(NUNIAegirRenderUniforms *)a4 viewport:(NUNIViewport)a5 renderEncoder:(id)a6
+{
+  id v10;
+  void *v11;
+  NUNIAegirRendererState *p_state;
+  simd_float4 v13;
+  simd_float4 v14;
+  simd_float4 v15;
+  simd_float4 v16;
+  simd_float4 v17;
+  simd_float4 v18;
+  simd_float4 v19;
+  simd_float4 v20;
+  double v21;
+  double v22;
+  double v23;
+  simd_float4 v24;
+  simd_float4 v25;
+  simd_float4 v26;
+  simd_float4 v27;
+  simd_float4 v28;
+  simd_float4 v29;
+  simd_float4 v30;
+  simd_float4 v31;
+  simd_float4 v32;
+  simd_float4 v33;
+  simd_float4 v34;
+  simd_float4 v35;
+  simd_float4 v36;
+  simd_float4 v37;
+  simd_float4 v38;
+  simd_float4 v39;
+  float v40;
+  float v41;
+  float v42;
+  float v43;
+  float v44;
+  simd_float4 v45;
+  float v46;
+  simd_float4 v47;
+  simd_float4 v48;
+  simd_float4 v49;
+  simd_float4 v50;
+  simd_float4 v51;
+  simd_float4 v52;
+  simd_float4 v53;
+  simd_float4 v54;
+  simd_float4 v55;
+  simd_float4 v56;
+  simd_float4 v57;
+  simd_float4 v58;
+  simd_float4 v59;
+  simd_float4 v60;
+  simd_float4 v61;
+  float32x4_t v62;
+  float32x4_t v63;
+  float32x4_t v64;
+  float32x4_t v65;
+  int32x4_t v66;
+  int32x4_t v67;
+  int32x4_t v68;
+  float32x2_t v69;
+  float32x2_t v70;
+  float32x2_t v71;
+  float32x2_t v72;
+  int32x2_t v73;
+  float32x2_t v74;
+  float v75;
+  void *v76;
+  float v77;
+  float v78;
+  simd_float4 v79;
+  simd_float4 v80;
+  simd_float4 v81;
+  simd_float4 v82;
+  simd_float4 v83;
+  simd_float4 v84;
+  simd_float4 v85;
+  simd_float4 v86;
+  simd_float4 v87;
+  simd_float4 v88;
+  simd_float4 v89;
+  simd_float4 v90;
+  simd_float4 v91;
+  simd_float4 v92;
+  simd_float4 v93;
+  simd_float4 v94;
+  simd_float4 v95;
+  simd_float4 v96;
+  simd_float4 v97;
+  simd_float4 v98;
+  simd_float4x4 v99;
+  simd_float4 v100;
+  simd_float4 v101;
+  simd_float4 v102;
+  simd_float4 v103;
+  simd_float4 v104;
+  simd_float4 v105;
+  simd_float4 v106;
+  simd_float4 v107;
+  float32x4_t v108;
+  float32x4_t v109;
+  float32x4_t v110;
+  float32x4_t v111;
+  simd_float4 v112;
+  simd_float4 v113;
+  simd_float4 v114;
+  simd_float4 v115;
+  simd_float4 v116;
+  simd_float4 v117;
+  simd_float4 v118;
+  simd_float4 v119;
+  simd_float4 v120;
+  simd_float4 v121;
+  simd_float4 v122;
+  simd_float4 v123;
+  simd_float4 v124;
+  simd_float4 v125;
+  simd_float4 v126;
+  simd_float4 v127;
+  simd_float4 v128;
+  simd_float4 v129;
+  simd_float4 v130;
+  simd_float4 v131;
+  int32x4_t v132;
+  int32x4_t v133;
+  simd_float4 v134;
+  simd_float4 v135;
+  simd_float4 v136;
+  simd_float4 v137;
+  simd_float4 v138;
+  simd_float4 v139;
+  simd_float4 v140;
+  simd_float4 v141;
+  simd_float4 v142;
+  simd_float4 v143;
+  simd_float4 v144;
+  simd_float4 v145;
+  float32x4_t v146;
+  simd_float4 v147;
+  simd_float4 v148;
+  simd_float4 v149;
+  simd_float4 v150;
+  float32x4_t v151;
+  simd_float4 v152;
+  simd_float4 v153;
+  simd_float4 v154;
+  simd_float4 v155;
+  float32x4_t v156;
+  simd_float4 v157;
+  simd_float4 v158;
+  simd_float4 v159;
+  simd_float4 v160;
+  float32x4_t v161;
+  id v162;
+  simd_float4x4 v163;
+  simd_float4x4 v164;
+  simd_float4x4 v165;
+  simd_float4x4 v166;
+  simd_float4x4 v167;
+  simd_float4x4 v168;
+  simd_float4x4 v169;
+  simd_float4x4 v170;
+  simd_float4x4 v171;
+  simd_float4x4 v172;
+  simd_float4x4 v173;
+  simd_float4x4 v174;
+  simd_float4x4 v175;
+  simd_float4x4 v176;
+  simd_float4x4 v177;
+  simd_float4x4 v178;
+  simd_float4x4 v179;
+  simd_float4x4 v180;
+  simd_float4x4 v181;
+  simd_float4x4 v182;
+  simd_float4x4 v183;
+  simd_float4x4 v184;
+  simd_float4x4 v185;
+  simd_float4x4 v186;
+
+  v162 = a3;
+  v10 = a6;
+  -[NUNIAegirResourceManager renderOffscreenPipelineForLocationDot](self->_resourceManager, "renderOffscreenPipelineForLocationDot");
+  v11 = (void *)objc_claimAutoreleasedReturnValue();
+  if (v11)
+  {
+    p_state = &self->_state;
+    objc_msgSend(v10, "setLabel:", CFSTR("Ægir LocationDot"));
+    objc_msgSend(v10, "setRenderPipelineState:", v11);
+    UMFloat4x4MakeScale(0.11);
+    v152 = v14;
+    v157 = v13;
+    v142 = v16;
+    v147 = v15;
+    *(double *)v163.columns[0].i64 = UMFloat4x4MakeTranslate();
+    v126 = v163.columns[1];
+    v127 = v163.columns[0];
+    v124 = v163.columns[3];
+    v125 = v163.columns[2];
+    v175.columns[1] = v152;
+    v175.columns[0] = v157;
+    v175.columns[3] = v142;
+    v175.columns[2] = v147;
+    *(double *)v17.i64 = UMMul(v163, v175);
+    v153 = v18;
+    v158 = v17;
+    v143 = v20;
+    v148 = v19;
+    objc_msgSend(v162, "homeCoordinate");
+    v22 = v21;
+    *(float *)&v23 = v23;
+    *(double *)v24.i64 = UMFloat4x4MakeRotateX(*(float *)&v23 * -0.017453);
+    v136 = v25;
+    v137 = v24;
+    v134 = v27;
+    v135 = v26;
+    v24.f32[0] = v22;
+    *(double *)v28.i64 = UMFloat4x4MakeRotateZ(v24.f32[0] * 0.017453);
+    v140 = v29;
+    v141 = v28;
+    v138 = v31;
+    v139 = v30;
+    v164.columns[1] = v136;
+    v164.columns[0] = v137;
+    v164.columns[3] = v134;
+    v164.columns[2] = v135;
+    v176.columns[1] = v153;
+    v176.columns[0] = v158;
+    v176.columns[3] = v143;
+    v176.columns[2] = v148;
+    *(double *)v32.i64 = UMMul(v164, v176);
+    v177.columns[0] = v32;
+    v177.columns[1] = v33;
+    v177.columns[2] = v34;
+    v177.columns[3] = v35;
+    v165.columns[1] = v140;
+    v165.columns[0] = v141;
+    v165.columns[3] = v138;
+    v165.columns[2] = v139;
+    *(double *)v36.i64 = UMMul(v165, v177);
+    v154 = v37;
+    v159 = v36;
+    v144 = v39;
+    v149 = v38;
+    objc_msgSend(v162, "equatorRotation");
+    v41 = v40;
+    objc_msgSend(v162, "radius");
+    v43 = v42;
+    objc_msgSend(v162, "radiusScale");
+    UMFloat4x4MakeScale(v43 * v44);
+    v122 = v166.columns[1];
+    v123 = v166.columns[0];
+    v120 = v166.columns[3];
+    v121 = v166.columns[2];
+    v178.columns[1] = v154;
+    v178.columns[0] = v159;
+    v178.columns[3] = v144;
+    v178.columns[2] = v149;
+    *(double *)v45.i64 = UMMul(v166, v178);
+    v46 = fabsf(v41);
+    v155 = v47;
+    v160 = v45;
+    v145 = v49;
+    v150 = v48;
+    if (v46 <= 0.00001)
+    {
+      UMFloat4x4MakeScale(1.0);
+      v116 = v55;
+      v118 = v54;
+      v112 = v57;
+      v114 = v56;
+    }
+    else
+    {
+      *(double *)v167.columns[0].i64 = UMFloat4x4MakeRotateZ(v41 + 1.5708);
+      v116 = v167.columns[1];
+      v118 = v167.columns[0];
+      v112 = v167.columns[3];
+      v114 = v167.columns[2];
+      v179.columns[1] = v155;
+      v179.columns[0] = v160;
+      v179.columns[3] = v145;
+      v179.columns[2] = v150;
+      *(double *)v50.i64 = UMMul(v167, v179);
+      v155 = v51;
+      v160 = v50;
+      v145 = v53;
+      v150 = v52;
+    }
+    objc_msgSend(v162, "position", *(_OWORD *)&v112, *(_OWORD *)&v114, *(_OWORD *)&v116, *(_OWORD *)&v118);
+    *(double *)v168.columns[0].i64 = UMFloat4x4MakeTranslate();
+    v130 = v168.columns[1];
+    v131 = v168.columns[0];
+    v128 = v168.columns[3];
+    v129 = v168.columns[2];
+    v180.columns[1] = v155;
+    v180.columns[0] = v160;
+    v180.columns[3] = v145;
+    v180.columns[2] = v150;
+    *(double *)v58.i64 = UMMul(v168, v180);
+    v181.columns[0] = v58;
+    v181.columns[1] = v59;
+    v181.columns[2] = v60;
+    v181.columns[3] = v61;
+    *(double *)v62.i64 = UMMul(*(simd_float4x4 *)&p_state[12].viewport.width, v181);
+    v156 = v63;
+    v161 = v62;
+    v146 = v65;
+    v151 = v64;
+    *(double *)v66.i64 = UMMul(v62, v63, v64, v65, (float32x4_t)xmmword_2134DC4F0);
+    v133 = v66;
+    *(double *)v67.i64 = UMMul(v161, v156, v151, v146, (float32x4_t)xmmword_2134DC500);
+    v132 = v67;
+    *(double *)v68.i64 = UMMul(v161, v156, v151, v146, (float32x4_t)xmmword_2134DBE40);
+    v69.f32[0] = (float)a5.width;
+    v69.f32[1] = (float)a5.height;
+    v70 = vmul_f32(v69, (float32x2_t)0x3F0000003F000000);
+    v71 = vdiv_f32(vmul_f32(v70, *(float32x2_t *)v132.i8), (float32x2_t)vdup_laneq_s32(v132, 3));
+    *(float32x2_t *)v68.i8 = vdiv_f32(vmul_f32(v70, *(float32x2_t *)v68.i8), (float32x2_t)vdup_laneq_s32(v68, 3));
+    v72 = vsub_f32(vdiv_f32(vmul_f32(v70, *(float32x2_t *)v133.i8), (float32x2_t)vdup_laneq_s32(v133, 3)), *(float32x2_t *)v68.i8);
+    v73 = (int32x2_t)vmul_f32(v72, v72);
+    *(float32x2_t *)v68.i8 = vsub_f32(v71, *(float32x2_t *)v68.i8);
+    *(float32x2_t *)v68.i8 = vmul_f32(*(float32x2_t *)v68.i8, *(float32x2_t *)v68.i8);
+    v74 = vsqrt_f32(vadd_f32((float32x2_t)vzip1_s32(v73, *(int32x2_t *)v68.i8), (float32x2_t)vzip2_s32(v73, *(int32x2_t *)v68.i8)));
+    if (v74.f32[0] >= v74.f32[1])
+      v74.f32[0] = v74.f32[1];
+    v75 = v74.f32[0] * 0.23077;
+    objc_msgSend(v162, "scene");
+    v76 = (void *)objc_claimAutoreleasedReturnValue();
+    objc_msgSend(v76, "locationDotMaximumRadius");
+    v78 = v77;
+
+    if (v75 <= v78)
+    {
+      v109 = v156;
+      v108 = v161;
+      v111 = v146;
+      v110 = v151;
+    }
+    else
+    {
+      UMFloat4x4MakeScale((float)(v78 * 0.11) / v75);
+      v182.columns[0] = v79;
+      v182.columns[1] = v80;
+      v182.columns[2] = v81;
+      v182.columns[3] = v82;
+      v169.columns[1] = v126;
+      v169.columns[0] = v127;
+      v169.columns[3] = v124;
+      v169.columns[2] = v125;
+      *(double *)v83.i64 = UMMul(v169, v182);
+      v183.columns[0] = v83;
+      v183.columns[1] = v84;
+      v183.columns[2] = v85;
+      v183.columns[3] = v86;
+      v170.columns[1] = v136;
+      v170.columns[0] = v137;
+      v170.columns[3] = v134;
+      v170.columns[2] = v135;
+      *(double *)v87.i64 = UMMul(v170, v183);
+      v184.columns[0] = v87;
+      v184.columns[1] = v88;
+      v184.columns[2] = v89;
+      v184.columns[3] = v90;
+      v171.columns[1] = v140;
+      v171.columns[0] = v141;
+      v171.columns[3] = v138;
+      v171.columns[2] = v139;
+      *(double *)v91.i64 = UMMul(v171, v184);
+      v185.columns[0] = v91;
+      v185.columns[1] = v92;
+      v185.columns[2] = v93;
+      v185.columns[3] = v94;
+      v172.columns[1] = v122;
+      v172.columns[0] = v123;
+      v172.columns[3] = v120;
+      v172.columns[2] = v121;
+      *(double *)v95.i64 = UMMul(v172, v185);
+      v99.columns[0] = v95;
+      v99.columns[1] = v96;
+      v99.columns[2] = v97;
+      v99.columns[3] = v98;
+      if (v46 > 0.00001)
+      {
+        v173.columns[1] = v117;
+        v173.columns[0] = v119;
+        v173.columns[3] = v113;
+        v173.columns[2] = v115;
+        *(double *)v100.i64 = UMMul(v173, v99);
+        v99.columns[0] = v100;
+        v99.columns[1] = v101;
+        v99.columns[2] = v102;
+        v99.columns[3] = v103;
+      }
+      v174.columns[1] = v130;
+      v174.columns[0] = v131;
+      v174.columns[3] = v128;
+      v174.columns[2] = v129;
+      *(double *)v104.i64 = UMMul(v174, v99);
+      v186.columns[0] = v104;
+      v186.columns[1] = v105;
+      v186.columns[2] = v106;
+      v186.columns[3] = v107;
+      *(double *)v108.i64 = UMMul(*(simd_float4x4 *)&p_state[12].viewport.width, v186);
+    }
+    *(float32x4_t *)&a4[3].var13 = v108;
+    *(float32x4_t *)&a4[3].var17 = v109;
+    *(float32x4_t *)&a4[3].var21 = v110;
+    *(float32x4_t *)&a4[4].var5 = v111;
+    objc_msgSend(v10, "setCullMode:", 1);
+    objc_msgSend(v10, "drawPrimitives:vertexStart:vertexCount:", 4, 0, 4);
+    objc_msgSend(v10, "setCullMode:", 0);
+  }
+
+}
+
+- (void)_renderSpriteSpheroid:(id)a3 uniPtr:(NUNIAegirRenderUniforms *)a4 renderEncoder:(id)a5
+{
+  id v8;
+  uint64_t v9;
+  void *v10;
+  NUNIAegirRendererState *p_state;
+  float v12;
+  float32x4_t v13;
+  float32x4_t v15;
+  int32x4_t v22;
+  float32x4_t v23;
+  float32x4_t v24;
+  int32x4_t v25;
+  float32x4_t v26;
+  float v27;
+  float v28;
+  float v29;
+  float v30;
+  simd_float4 v31;
+  simd_float4 v32;
+  simd_float4 v33;
+  simd_float4 v34;
+  simd_float4 v35;
+  simd_float4 v36;
+  simd_float4 v37;
+  simd_float4 v38;
+  __int128 v39;
+  __int128 v40;
+  __int128 v41;
+  __int128 v42;
+  void *v43;
+  void *v44;
+  void *v45;
+  simd_float4 v46;
+  simd_float4 v47;
+  simd_float4 v48;
+  simd_float4 v49;
+  id v50;
+  simd_float4x4 v51;
+  simd_float4x4 v52;
+  simd_float4x4 v53;
+
+  v50 = a3;
+  v8 = a5;
+  v9 = objc_msgSend(v50, "type");
+  -[NUNIAegirResourceManager renderOffscreenPipelineForSpheroid:config:](self->_resourceManager, "renderOffscreenPipelineForSpheroid:config:", v9, 0);
+  v10 = (void *)objc_claimAutoreleasedReturnValue();
+  if (v10)
+  {
+    p_state = &self->_state;
+    objc_msgSend(v8, "setLabel:", CFSTR("Ægir SpriteSpheroid"));
+    objc_msgSend(v8, "setRenderPipelineState:", v10);
+    *(_OWORD *)&a4->var5 = s_sprites_1[objc_msgSend(v50, "spriteType")];
+    objc_msgSend(v50, "opacity");
+    a4[4].var15 = v12;
+    objc_msgSend(v50, "position");
+    _Q3 = vsubq_f32(*(float32x4_t *)&self->_anon_f4[12], v13);
+    v15 = v13;
+    _Q1 = vmulq_f32(_Q3, _Q3);
+    _S2 = _Q3.i32[2];
+    __asm { FMLA            S1, S2, V3.S[2] }
+    _Q1.f32[0] = sqrtf(_Q1.f32[0]);
+    v22 = (int32x4_t)vdivq_f32(_Q3, (float32x4_t)vdupq_lane_s32(*(int32x2_t *)_Q1.f32, 0));
+    v23 = (float32x4_t)vextq_s8((int8x16_t)vuzp1q_s32(v22, v22), (int8x16_t)v22, 0xCuLL);
+    v24 = (float32x4_t)vextq_s8(vextq_s8((int8x16_t)v22, (int8x16_t)v22, 0xCuLL), (int8x16_t)v22, 8uLL);
+    v25 = (int32x4_t)vmlaq_f32(vmulq_f32(v24, vnegq_f32((float32x4_t)vextq_s8((int8x16_t)vuzp1q_s32(*(int32x4_t *)&p_state[3].viewport.height, *(int32x4_t *)&p_state[3].viewport.height), *(int8x16_t *)&p_state[3].viewport.height, 0xCuLL))), v23, (float32x4_t)vextq_s8(vextq_s8(*(int8x16_t *)&p_state[3].viewport.height, *(int8x16_t *)&p_state[3].viewport.height, 0xCuLL), *(int8x16_t *)&p_state[3].viewport.height, 8uLL));
+    v26 = vmlaq_f32(vmulq_f32((float32x4_t)vextq_s8(vextq_s8((int8x16_t)v25, (int8x16_t)v25, 0xCuLL), (int8x16_t)v25, 8uLL), vnegq_f32(v23)), (float32x4_t)vextq_s8((int8x16_t)vuzp1q_s32(v25, v25), (int8x16_t)v25, 0xCuLL), v24);
+    v25.i32[3] = 0;
+    v26.i32[3] = 0;
+    v48 = (simd_float4)v26;
+    v49 = (simd_float4)v25;
+    v22.i32[3] = 0;
+    v15.i32[3] = 1.0;
+    v46 = (simd_float4)v15;
+    v47 = (simd_float4)v22;
+    objc_msgSend(v50, "radius");
+    v28 = v27;
+    objc_msgSend(v50, "radiusScale");
+    v30 = v28 * v29;
+    if (v9 == 14)
+      v30 = v30 + v30;
+    UMFloat4x4MakeScale(v30);
+    v52.columns[0] = v31;
+    v52.columns[1] = v32;
+    v52.columns[2] = v33;
+    v52.columns[3] = v34;
+    v51.columns[1] = v48;
+    v51.columns[0] = v49;
+    v51.columns[3] = v46;
+    v51.columns[2] = v47;
+    *(double *)v35.i64 = UMMul(v51, v52);
+    v53.columns[0] = v35;
+    v53.columns[1] = v36;
+    v53.columns[2] = v37;
+    v53.columns[3] = v38;
+    *(double *)&v39 = UMMul(*(simd_float4x4 *)&self->_anon_f4[220], v53);
+    *(_OWORD *)&a4[3].var13 = v39;
+    *(_OWORD *)&a4[3].var17 = v40;
+    *(_OWORD *)&a4[3].var21 = v41;
+    *(_OWORD *)&a4[4].var5 = v42;
+    -[NUNIAegirTextureGroup gradients](self->_textureGroup, "gradients");
+    v43 = (void *)objc_claimAutoreleasedReturnValue();
+    objc_msgSend(v43, "objectAtIndexedSubscript:", v9);
+    v44 = (void *)objc_claimAutoreleasedReturnValue();
+
+    objc_msgSend(v44, "atlas");
+    v45 = (void *)objc_claimAutoreleasedReturnValue();
+    objc_msgSend(v45, "bind:slot:", v8, 4);
+
+    objc_msgSend(v8, "drawPrimitives:vertexStart:vertexCount:", 4, 0, 4);
+  }
+
+}
+
+- (void)_renderOffscreenSceneWithScene:(id)a3 viewport:(NUNIViewport)a4 commandBuffer:(id)a5 frameBufferIndex:(unint64_t)a6 drawableTexture:(id)a7
+{
+  uint64_t height;
+  id v13;
+  id v14;
+  id *v15;
+  NUNAegirOffscreen *v16;
+  NUNAegirOffscreen *v17;
+  void *v18;
+  void *v19;
+  void *v20;
+  uint64_t v21;
+  uint64_t v22;
+  void *v23;
+  IOSurface *v24;
+  IOSurface *v25;
+  MTLDevice *device;
+  IOSurface *v27;
+  MTLTexture *v28;
+  MTLTexture *v29;
+  MTLTexture *v30;
+  NUNAegirOffscreen *v31;
+  void *v32;
+  void *v33;
+  void *v34;
+  uint64_t v35;
+  uint64_t v36;
+  int v37;
+  uint64_t v38;
+  uint64_t i;
+  void *v40;
+  float v41;
+  float v42;
+  int v43;
+  float32x4_t v45;
+  int *v51;
+  void *v52;
+  int *v53;
+  uint64_t v54;
+  uint64_t v55;
+  id v56;
+  int v57;
+  void *v58;
+  id v59;
+  void *v60;
+  float v61;
+  float v62;
+  float v63;
+  float v64;
+  void *v65;
+  id v66;
+  uint64_t v67;
+  float v68;
+  int v69;
+  uint64_t j;
+  NUNAegirOffscreen *v71;
+  uint64_t v72;
+  void *v73;
+  void *v74;
+  NUNIViewport v75;
+  void *v76;
+  float32x4_t v77;
+  id v78;
+  unint64_t v79;
+  _QWORD v80[4];
+  __int128 v81;
+  __int128 v82;
+  __int128 v83;
+  __int128 v84;
+  __int128 v85;
+  _BYTE v86[128];
+  _BYTE __base[4];
+  int v88;
+  _OWORD v89[12];
+  _QWORD v90[4];
+  _QWORD v91[6];
+
+  v91[4] = *MEMORY[0x24BDAC8D0];
+  height = a4.height;
+  v78 = a3;
+  v13 = a5;
+  v14 = a7;
+  v79 = a6;
+  v15 = (id *)&self->_offscreenScenes[a6];
+  v16 = (NUNAegirOffscreen *)*v15;
+  v17 = v16;
+  v73 = v14;
+  v74 = v13;
+  v75 = a4;
+  v72 = height;
+  if (!v16
+    || -[NUNAegirOffscreen width](v16, "width") != a4.width
+    || -[NUNAegirOffscreen height](v17, "height") != (_DWORD)height)
+  {
+    objc_msgSend(MEMORY[0x24BE16F48], "sharedNilTexture2D");
+    v76 = (void *)objc_claimAutoreleasedReturnValue();
+    v18 = (void *)objc_opt_new();
+    objc_msgSend(v18, "setTextureType:", 2);
+    objc_msgSend(v18, "setWidth:", a4.width);
+    objc_msgSend(v18, "setHeight:", *(uint64_t *)&a4 >> 32);
+    objc_msgSend(v18, "setDepth:", 1);
+    objc_msgSend(v18, "setPixelFormat:", 10);
+    objc_msgSend(v18, "setUsage:", 5);
+    objc_msgSend(v18, "setResourceOptions:", 0);
+    v90[0] = *MEMORY[0x24BDD8D90];
+    objc_msgSend(MEMORY[0x24BDD16E0], "numberWithInt:", a4);
+    v19 = (void *)objc_claimAutoreleasedReturnValue();
+    v91[0] = v19;
+    v90[1] = *MEMORY[0x24BDD8D58];
+    objc_msgSend(MEMORY[0x24BDD16E0], "numberWithInt:", height);
+    v20 = (void *)objc_claimAutoreleasedReturnValue();
+    v21 = *MEMORY[0x24BDD8D60];
+    v91[1] = v20;
+    v91[2] = &unk_24CFE3720;
+    v22 = *MEMORY[0x24BDD8D38];
+    v90[2] = v21;
+    v90[3] = v22;
+    v91[3] = &unk_24CFE3738;
+    objc_msgSend(MEMORY[0x24BDBCE70], "dictionaryWithObjects:forKeys:count:", v91, v90, 4);
+    v23 = (void *)objc_claimAutoreleasedReturnValue();
+
+    v24 = (IOSurface *)objc_msgSend(objc_alloc(MEMORY[0x24BDD8DE8]), "initWithProperties:", v23);
+    v25 = self->_contentMaskSurfaces[v79];
+    self->_contentMaskSurfaces[v79] = v24;
+
+    device = self->_device;
+    v27 = v24;
+    v28 = (MTLTexture *)-[MTLDevice newTextureWithDescriptor:iosurface:plane:](device, "newTextureWithDescriptor:iosurface:plane:", v18, v27, 0);
+    v29 = self->_contentMaskTextures[v79];
+    self->_contentMaskTextures[v79] = v28;
+
+    v30 = v28;
+    v31 = -[NUNAegirOffscreen initWithDevice:width:height:texture0:texture1:loadAction:clearColor0:clearColor1:]([NUNAegirOffscreen alloc], "initWithDevice:width:height:texture0:texture1:loadAction:clearColor0:clearColor1:", self->_device, a4, v72, v76, v30, 2, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0, 1.0);
+
+    objc_storeStrong(v15, v31);
+    v13 = v74;
+
+    v14 = v73;
+    v17 = v31;
+  }
+  -[NUNAegirOffscreen setTexture0:](v17, "setTexture0:", v14);
+  v71 = v17;
+  -[NUNAegirOffscreen renderPassDescriptor](v17, "renderPassDescriptor");
+  v32 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(v13, "renderCommandEncoderWithDescriptor:", v32);
+  v33 = (void *)objc_claimAutoreleasedReturnValue();
+
+  memset(v89, 0, sizeof(v89));
+  v82 = 0u;
+  v83 = 0u;
+  v84 = 0u;
+  v85 = 0u;
+  objc_msgSend(v78, "spheroids");
+  v34 = (void *)objc_claimAutoreleasedReturnValue();
+  v35 = objc_msgSend(v34, "countByEnumeratingWithState:objects:count:", &v82, v86, 16);
+  if (v35)
+  {
+    v36 = v35;
+    v37 = 0;
+    v38 = *(_QWORD *)v83;
+    do
+    {
+      for (i = 0; i != v36; ++i)
+      {
+        if (*(_QWORD *)v83 != v38)
+          objc_enumerationMutation(v34);
+        v40 = *(void **)(*((_QWORD *)&v82 + 1) + 8 * i);
+        objc_msgSend(v40, "radiusScale");
+        if (v41 > 0.00001)
+        {
+          objc_msgSend(v40, "opacity");
+          if (v42 > 0.00001)
+          {
+            if (objc_msgSend(v40, "isVisible"))
+            {
+              v43 = objc_msgSend(v40, "type");
+              if (v43 == 10)
+              {
+                _S0 = 1258291200;
+              }
+              else if (v43 == 13)
+              {
+                _S0 = 1258291194;
+              }
+              else
+              {
+                _S0 = 1258291196;
+                if (((1 << v43) & 0xFFC000) == 0)
+                {
+                  _S0 = 1258291198;
+                  if (v43 != 12)
+                  {
+                    v77 = *(float32x4_t *)&self->_anon_f4[12];
+                    objc_msgSend(v40, "position");
+                    _S2 = vsubq_f32(v77, v45).i32[2];
+                    __asm { FMLA            S0, S2, V1.S[2] }
+                  }
+                }
+              }
+              v51 = (int *)&__base[8 * v37];
+              *v51 = _S0;
+              v51[1] = v37;
+              objc_storeStrong((id *)v89 + v37++, v40);
+            }
+          }
+        }
+      }
+      v36 = objc_msgSend(v34, "countByEnumeratingWithState:objects:count:", &v82, v86, 16);
+    }
+    while (v36);
+  }
+  else
+  {
+    v37 = 0;
+  }
+
+  qsort(__base, v37, 8uLL, (int (__cdecl *)(const void *, const void *))_NUNIAegirRenderCompareObject);
+  objc_msgSend(v33, "setLabel:", CFSTR("Ægir Offscreen Scene"));
+  v80[0] = 0;
+  v80[1] = 0;
+  *(double *)&v80[2] = (double)a4.width;
+  *(double *)&v80[3] = (double)(int)v72;
+  v81 = xmmword_2134DC520;
+  objc_msgSend(v33, "setViewport:", v80);
+  objc_msgSend(v33, "setCullMode:", 0);
+  -[NUNIAegirRenderer _renderOffscreenBackgroundWithRenderEncoder:frameBufferIndex:](self, "_renderOffscreenBackgroundWithRenderEncoder:frameBufferIndex:", v33, v79);
+  -[NUNIAegirResourceManager rectVerticesBuffer](self->_resourceManager, "rectVerticesBuffer");
+  v52 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(v33, "setVertexBuffer:offset:atIndex:", v52, 0, 0);
+
+  if (v37 >= 1)
+  {
+    v53 = &v88;
+    v54 = v37;
+    do
+    {
+      v55 = *v53;
+      v53 += 2;
+      v56 = *((id *)v89 + v55);
+      v57 = 1 << objc_msgSend(v56, "type");
+      -[NUNIAegirRenderer getOrCreateUniformBufferforFrameBufferIndex:](self, "getOrCreateUniformBufferforFrameBufferIndex:", v79);
+      v58 = (void *)objc_claimAutoreleasedReturnValue();
+      objc_msgSend(v33, "setVertexBuffer:offset:atIndex:", v58, 0, 1);
+      objc_msgSend(v33, "setFragmentBuffer:offset:atIndex:", v58, 0, 0);
+      v59 = objc_retainAutorelease(v58);
+      v60 = (void *)objc_msgSend(v59, "contents");
+      memcpy(v60, &self->_baseUniforms, 0x1B0uLL);
+      if ((*(_QWORD *)&v57 & 0xFBF400) != 0)
+      {
+        -[NUNIAegirRenderer _renderSpriteSpheroid:uniPtr:renderEncoder:](self, "_renderSpriteSpheroid:uniPtr:renderEncoder:", v56, v60, v33);
+      }
+      else if ((v57 & 0x3FE) != 0)
+      {
+        -[NUNIAegirRenderer _renderRaytraceSpheroid:uniPtr:renderEncoder:](self, "_renderRaytraceSpheroid:uniPtr:renderEncoder:", v56, v60, v33);
+      }
+
+      if ((v57 & 8) != 0)
+      {
+        objc_msgSend(v78, "locationDotAlpha");
+        if (v61 > 0.00001)
+        {
+          v62 = v61;
+          objc_msgSend(v78, "locationDotPulse");
+          v64 = v63;
+          -[NUNIAegirRenderer getOrCreateUniformBufferforFrameBufferIndex:](self, "getOrCreateUniformBufferforFrameBufferIndex:", v79);
+          v65 = (void *)objc_claimAutoreleasedReturnValue();
+          objc_msgSend(v33, "setVertexBuffer:offset:atIndex:", v65, 0, 1);
+          objc_msgSend(v33, "setFragmentBuffer:offset:atIndex:", v65, 0, 0);
+          v66 = objc_retainAutorelease(v65);
+          v67 = objc_msgSend(v66, "contents");
+          memcpy((void *)v67, &self->_baseUniforms, 0x1B0uLL);
+          objc_msgSend(v56, "opacity");
+          *(float *)(v67 + 360) = v62 * v68;
+          *(float *)(v67 + 364) = v64 - floorf(v64);
+          objc_msgSend(v78, "locationDotPulseOverrideAlpha");
+          *(_DWORD *)(v67 + 368) = v69;
+          -[NUNIAegirRenderer _renderLocationDot:uniPtr:viewport:renderEncoder:](self, "_renderLocationDot:uniPtr:viewport:renderEncoder:", v56, v67, v75, v33);
+
+        }
+      }
+
+      --v54;
+    }
+    while (v54);
+  }
+  objc_msgSend(v33, "endEncoding");
+  for (j = 184; j != -8; j -= 8)
+
+}
+
+- (void)_renderOffscreenBloomWithScene:(id)a3 viewport:(NUNIViewport)a4 commandBuffer:(id)a5 frameBufferIndex:(unint64_t)a6
+{
+  NUNAegirOffscreen *v10;
+  NUNAegirOffscreen *v11;
+  id v12;
+  id v13;
+  int v14;
+  uint64_t v15;
+  NUNAegirOffscreen *v16;
+  void *v17;
+  void *v18;
+  void *v19;
+  void *v20;
+  void *v21;
+  void *v22;
+  void *v23;
+  _QWORD v24[4];
+  __int128 v25;
+
+  v10 = self->_offscreenScenes[a6];
+  v11 = self->_offscreenBlooms;
+  v12 = a5;
+  -[NUNIAegirRenderer getOrCreateUniformBufferforFrameBufferIndex:](self, "getOrCreateUniformBufferforFrameBufferIndex:", a6);
+  v13 = objc_retainAutorelease((id)objc_claimAutoreleasedReturnValue());
+  memcpy((void *)objc_msgSend(v13, "contents"), &self->_baseUniforms, 0x1B0uLL);
+  v14 = a4.width >> 1;
+  v15 = *(uint64_t *)&a4 >> 33;
+  if (!v11
+    || -[NUNAegirOffscreen width](v11, "width") != v14
+    || -[NUNAegirOffscreen height](v11, "height") != (_DWORD)v15)
+  {
+    v16 = -[NUNAegirOffscreen initWithDevice:width:height:pixelFormat0:pixelFormat1:mipmaps:loadAction:clearColor0:clearColor1:]([NUNAegirOffscreen alloc], "initWithDevice:width:height:pixelFormat0:pixelFormat1:mipmaps:loadAction:clearColor0:clearColor1:", self->_device, (a4.width >> 1), *(uint64_t *)&a4 >> 33, 10, 0, 3, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0, 1.0, 2);
+
+    objc_storeStrong((id *)&self->_offscreenBlooms, v16);
+    v11 = v16;
+  }
+  -[NUNAegirOffscreen renderPassDescriptor](v11, "renderPassDescriptor");
+  v17 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(v12, "renderCommandEncoderWithDescriptor:", v17);
+  v18 = (void *)objc_claimAutoreleasedReturnValue();
+
+  -[NUNIAegirResourceManager renderOffscreenPipelineForThreshold](self->_resourceManager, "renderOffscreenPipelineForThreshold");
+  v19 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(v18, "setLabel:", CFSTR("Ægir Threshold"));
+  v24[0] = 0;
+  v24[1] = 0;
+  *(double *)&v24[2] = (double)v14;
+  *(double *)&v24[3] = (double)(int)v15;
+  v25 = xmmword_2134DC520;
+  objc_msgSend(v18, "setViewport:", v24);
+  objc_msgSend(v18, "setCullMode:", 0);
+  objc_msgSend(v18, "setRenderPipelineState:", v19);
+  -[NUNIAegirResourceManager rectVerticesBuffer](self->_resourceManager, "rectVerticesBuffer");
+  v20 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(v18, "setVertexBuffer:offset:atIndex:", v20, 0, 0);
+
+  objc_msgSend(v18, "setVertexBuffer:offset:atIndex:", v13, 0, 1);
+  objc_msgSend(v18, "setFragmentBuffer:offset:atIndex:", v13, 0, 0);
+  -[NUNAegirOffscreen texture0](v10, "texture0");
+  v21 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(v18, "setFragmentTexture:atIndex:", v21, 1);
+
+  objc_msgSend(v18, "drawPrimitives:vertexStart:vertexCount:", 4, 0, 4);
+  objc_msgSend(v18, "endEncoding");
+  objc_msgSend(v12, "blitCommandEncoder");
+  v22 = (void *)objc_claimAutoreleasedReturnValue();
+
+  -[NUNAegirOffscreen texture0](v11, "texture0");
+  v23 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(v22, "generateMipmapsForTexture:", v23);
+
+  objc_msgSend(v22, "endEncoding");
+}
+
+- (void)_renderOffscreenPostWithScene:(id)a3 viewport:(NUNIViewport)a4 commandBuffer:(id)a5 frameBufferIndex:(unint64_t)a6
+{
+  NUNIViewport v8;
+  uint64_t height;
+  NUNAegirOffscreen *v11;
+  NUNAegirOffscreen *v12;
+  NUNAegirOffscreen *v13;
+  id v14;
+  id v15;
+  void *v16;
+  NUNIViewport v17;
+  NUNAegirOffscreen *v18;
+  NUNAegirOffscreen *v19;
+  MTLDevice *device;
+  NUNAegirOffscreen *v21;
+  void *v22;
+  NUNAegirOffscreen *v23;
+  NUNAegirOffscreen *v24;
+  void *v25;
+  void *v26;
+  void *v27;
+  void *v28;
+  void *v29;
+  void *v30;
+  NUNAegirOffscreen *v31;
+  id v32;
+  _QWORD v33[4];
+  __int128 v34;
+
+  v8 = a4;
+  height = a4.height;
+  v11 = self->_offscreenScenes[a6];
+  v12 = self->_offscreenBlooms;
+  v13 = self->_offscreenPosts;
+  v14 = a5;
+  -[NUNIAegirRenderer getOrCreateUniformBufferforFrameBufferIndex:](self, "getOrCreateUniformBufferforFrameBufferIndex:", a6);
+  v15 = objc_retainAutorelease((id)objc_claimAutoreleasedReturnValue());
+  memcpy((void *)objc_msgSend(v15, "contents"), &self->_baseUniforms, 0x1B0uLL);
+  if (!v13
+    || -[NUNAegirOffscreen width](v13, "width") != v8.width
+    || -[NUNAegirOffscreen height](v13, "height") != (_DWORD)height)
+  {
+    objc_msgSend(MEMORY[0x24BE16F48], "sharedNilTexture2D");
+    v31 = v13;
+    v16 = (void *)objc_claimAutoreleasedReturnValue();
+    v17 = v8;
+    v8 = (NUNIViewport)v15;
+    v18 = v12;
+    v19 = [NUNAegirOffscreen alloc];
+    device = self->_device;
+    -[NUNAegirOffscreen texture1](v11, "texture1");
+    v32 = v14;
+    v21 = v11;
+    v22 = (void *)objc_claimAutoreleasedReturnValue();
+    v23 = v19;
+    v12 = v18;
+    v15 = (id)v8;
+    v8.width = v17.width;
+    v24 = -[NUNAegirOffscreen initWithDevice:width:height:texture0:texture1:loadAction:clearColor0:clearColor1:](v23, "initWithDevice:width:height:texture0:texture1:loadAction:clearColor0:clearColor1:", device, v17, height, v16, v22, 1, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0, 1.0);
+
+    objc_storeStrong((id *)&self->_offscreenPosts, v24);
+    v11 = v21;
+    v14 = v32;
+
+    v13 = v24;
+  }
+  -[NUNAegirOffscreen texture0](v11, "texture0");
+  v25 = (void *)objc_claimAutoreleasedReturnValue();
+  -[NUNAegirOffscreen setTexture0:](v13, "setTexture0:", v25);
+
+  -[NUNAegirOffscreen renderPassDescriptor](v13, "renderPassDescriptor");
+  v26 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(v14, "renderCommandEncoderWithDescriptor:", v26);
+  v27 = (void *)objc_claimAutoreleasedReturnValue();
+
+  -[NUNIAegirResourceManager renderOffscreenPipelineForPost](self->_resourceManager, "renderOffscreenPipelineForPost");
+  v28 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(v27, "setLabel:", CFSTR("Ægir Post"));
+  objc_msgSend(v27, "setRenderPipelineState:", v28);
+  v33[0] = 0;
+  v33[1] = 0;
+  *(double *)&v33[2] = (double)v8.width;
+  *(double *)&v33[3] = (double)(int)height;
+  v34 = xmmword_2134DC520;
+  objc_msgSend(v27, "setViewport:", v33);
+  objc_msgSend(v27, "setCullMode:", 0);
+  -[NUNIAegirResourceManager rectVerticesBuffer](self->_resourceManager, "rectVerticesBuffer");
+  v29 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(v27, "setVertexBuffer:offset:atIndex:", v29, 0, 0);
+
+  objc_msgSend(v27, "setVertexBuffer:offset:atIndex:", v15, 0, 1);
+  objc_msgSend(v27, "setFragmentBuffer:offset:atIndex:", v15, 0, 0);
+  -[NUNAegirOffscreen texture0](v12, "texture0");
+  v30 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(v27, "setFragmentTexture:atIndex:", v30, 1);
+
+  objc_msgSend(v27, "drawPrimitives:vertexStart:vertexCount:", 4, 0, 4);
+  objc_msgSend(v27, "endEncoding");
+
+}
+
+- (void)renderOffscreenWithScene:(id)a3 viewport:(NUNIViewport)a4 commandBuffer:(id)a5
+{
+  -[NUNIAegirRenderer _updateStateWithScene:viewport:](self, "_updateStateWithScene:viewport:", a3, a4, a5);
+  -[NUNIAegirRenderer _updateBaseUniformsForViewport:](self, "_updateBaseUniformsForViewport:", a4);
+}
+
+- (void)renderWithScene:(id)a3 viewport:(NUNIViewport)a4 commandBuffer:(id)a5 passDescriptor:(id)a6
+{
+  id v10;
+  id v11;
+  void *v12;
+  void *v13;
+  unint64_t v14;
+  id v15;
+
+  v10 = a5;
+  v11 = a3;
+  objc_msgSend(a6, "colorAttachments");
+  v12 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(v12, "objectAtIndexedSubscript:", 0);
+  v15 = (id)objc_claimAutoreleasedReturnValue();
+
+  objc_msgSend(v15, "texture");
+  v13 = (void *)objc_claimAutoreleasedReturnValue();
+  v14 = self->_frame % 3;
+  self->_renderUniformBuffersCounts[v14] = 0;
+  -[NUNIAegirRenderer _renderOffscreenSceneWithScene:viewport:commandBuffer:frameBufferIndex:drawableTexture:](self, "_renderOffscreenSceneWithScene:viewport:commandBuffer:frameBufferIndex:drawableTexture:", v11, a4, v10, v14, v13);
+  -[NUNIAegirRenderer _renderOffscreenBloomWithScene:viewport:commandBuffer:frameBufferIndex:](self, "_renderOffscreenBloomWithScene:viewport:commandBuffer:frameBufferIndex:", v11, a4, v10, v14);
+  -[NUNIAegirRenderer _renderOffscreenPostWithScene:viewport:commandBuffer:frameBufferIndex:](self, "_renderOffscreenPostWithScene:viewport:commandBuffer:frameBufferIndex:", v11, a4, v10, v14);
+
+  -[CALayer setContents:](self->_contentMaskLayer, "setContents:", self->_contentMaskSurfaces[v14]);
+  ++self->_frame;
+
+}
+
+- (NUNIAegirResourceManager)resourceManager
+{
+  return self->_resourceManager;
+}
+
+- (NUNIRendererOptions)rendererOptions
+{
+  return self->_rendererOptions;
+}
+
+- (void).cxx_destruct
+{
+  uint64_t i;
+  uint64_t j;
+  uint64_t k;
+  uint64_t m;
+
+  objc_storeStrong((id *)&self->_rendererOptions, 0);
+  objc_storeStrong((id *)&self->_contentMaskLayer, 0);
+  for (i = 2; i != -1; --i)
+    objc_storeStrong((id *)&self->_contentMaskSurfaces[i], 0);
+  for (j = 2; j != -1; --j)
+    objc_storeStrong((id *)&self->_contentMaskTextures[j], 0);
+  objc_storeStrong((id *)&self->_offscreenPosts, 0);
+  objc_storeStrong((id *)&self->_offscreenBlooms, 0);
+  for (k = 2; k != -1; --k)
+    objc_storeStrong((id *)&self->_offscreenScenes[k], 0);
+  for (m = 2; m != -1; --m)
+    objc_storeStrong((id *)&self->_renderUniformsBuffers[m], 0);
+  objc_storeStrong((id *)&self->_textureGroup, 0);
+  objc_storeStrong((id *)&self->_resourceManager, 0);
+  objc_storeStrong((id *)&self->_device, 0);
+}
+
+@end

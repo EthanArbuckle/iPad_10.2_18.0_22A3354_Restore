@@ -1,0 +1,135 @@
+@implementation SGMAutocompleteUserSelectedContact
+
+- (SGMAutocompleteUserSelectedContact)init
+{
+  SGMAutocompleteUserSelectedContact *v2;
+  void *v3;
+  void *v4;
+  void *v5;
+  id v6;
+  void *v7;
+  uint64_t v8;
+  PETScalarEventTracker *tracker;
+  objc_super v11;
+  _QWORD v12[4];
+
+  v12[3] = *MEMORY[0x1E0C80C00];
+  v11.receiver = self;
+  v11.super_class = (Class)SGMAutocompleteUserSelectedContact;
+  v2 = -[SGMAutocompleteUserSelectedContact init](&v11, sel_init);
+  if (v2)
+  {
+    objc_msgSend(MEMORY[0x1E0D80F20], "freeValuedPropertyWithName:", CFSTR("WasSuggestedContact"));
+    v3 = (void *)objc_claimAutoreleasedReturnValue();
+    objc_msgSend(MEMORY[0x1E0D80F20], "freeValuedPropertyWithName:", CFSTR("WasKnownContact"));
+    v4 = (void *)objc_claimAutoreleasedReturnValue();
+    objc_msgSend(MEMORY[0x1E0D80F20], "freeValuedPropertyWithName:", CFSTR("App"));
+    v5 = (void *)objc_claimAutoreleasedReturnValue();
+    v6 = objc_alloc(MEMORY[0x1E0D80F38]);
+    v12[0] = v3;
+    v12[1] = v4;
+    v12[2] = v5;
+    objc_msgSend(MEMORY[0x1E0C99D20], "arrayWithObjects:count:", v12, 3);
+    v7 = (void *)objc_claimAutoreleasedReturnValue();
+    v8 = objc_msgSend(v6, "initWithFeatureId:event:registerProperties:propertySubsets:", CFSTR("Found"), CFSTR("AutocompleteUserSelectedContact"), v7, MEMORY[0x1E0C9AA60]);
+    tracker = v2->_tracker;
+    v2->_tracker = (PETScalarEventTracker *)v8;
+
+  }
+  return v2;
+}
+
+- (void)trackEventWithScalar:(unint64_t)a3 wasSuggestedContact:(SGMTypeSafeBool_)a4 wasKnownContact:(SGMTypeSafeBool_)a5 app:(SGMContactDetailUsedApp_)a6
+{
+  const __CFString *v11;
+  const __CFString *v12;
+  void *v13;
+  void *v14;
+  void *v15;
+  void *v16;
+  const __CFString *v17;
+  void *v18;
+  void *v19;
+  PETScalarEventTracker *tracker;
+  void *v21;
+  _QWORD v22[4];
+
+  v22[3] = *MEMORY[0x1E0C80C00];
+  if (a4.var0)
+  {
+    if (a4.var0 == 1)
+    {
+      v11 = CFSTR("1");
+      if (!a5.var0)
+        goto LABEL_9;
+LABEL_6:
+      if (a5.var0 == 1)
+      {
+        v12 = CFSTR("1");
+      }
+      else
+      {
+        objc_msgSend(MEMORY[0x1E0CB3488], "currentHandler");
+        v15 = (void *)objc_claimAutoreleasedReturnValue();
+        objc_msgSend(MEMORY[0x1E0CB3940], "stringWithUTF8String:", "NSString * _Nonnull SGMTypeSafeBool_toString(SGMTypeSafeBool)");
+        v16 = (void *)objc_claimAutoreleasedReturnValue();
+        objc_msgSend(v15, "handleFailureInFunction:file:lineNumber:description:", v16, CFSTR("SGMetricsDefines.h"), 12, CFSTR("unrecognized tag %lu on SGMTypeSafeBool"), a5.var0);
+
+        v12 = CFSTR("ERR_UNMATCHED_TAG");
+      }
+      goto LABEL_11;
+    }
+    objc_msgSend(MEMORY[0x1E0CB3488], "currentHandler");
+    v13 = (void *)objc_claimAutoreleasedReturnValue();
+    objc_msgSend(MEMORY[0x1E0CB3940], "stringWithUTF8String:", "NSString * _Nonnull SGMTypeSafeBool_toString(SGMTypeSafeBool)");
+    v14 = (void *)objc_claimAutoreleasedReturnValue();
+    objc_msgSend(v13, "handleFailureInFunction:file:lineNumber:description:", v14, CFSTR("SGMetricsDefines.h"), 12, CFSTR("unrecognized tag %lu on SGMTypeSafeBool"), a4.var0);
+
+    v11 = CFSTR("ERR_UNMATCHED_TAG");
+    if (a5.var0)
+      goto LABEL_6;
+  }
+  else
+  {
+    v11 = CFSTR("0");
+    if (a5.var0)
+      goto LABEL_6;
+  }
+LABEL_9:
+  v12 = CFSTR("0");
+LABEL_11:
+  if (a6.var0 >= 0xC)
+  {
+    objc_msgSend(MEMORY[0x1E0CB3488], "currentHandler");
+    v18 = (void *)objc_claimAutoreleasedReturnValue();
+    objc_msgSend(MEMORY[0x1E0CB3940], "stringWithUTF8String:", "NSString * _Nonnull SGMContactDetailUsedApp_toString(SGMContactDetailUsedApp)");
+    v19 = (void *)objc_claimAutoreleasedReturnValue();
+    objc_msgSend(v18, "handleFailureInFunction:file:lineNumber:description:", v19, CFSTR("SGMetricsDefines.h"), 94, CFSTR("unrecognized tag %lu on SGMContactDetailUsedApp"), a6.var0);
+
+    v17 = CFSTR("ERR_UNMATCHED_TAG");
+  }
+  else
+  {
+    v17 = off_1E47615F0[a6.var0];
+  }
+  tracker = self->_tracker;
+  v22[0] = v11;
+  v22[1] = v12;
+  v22[2] = v17;
+  objc_msgSend(MEMORY[0x1E0C99D20], "arrayWithObjects:count:", v22, 3);
+  v21 = (void *)objc_claimAutoreleasedReturnValue();
+  -[PETScalarEventTracker trackEventWithPropertyValues:value:](tracker, "trackEventWithPropertyValues:value:", v21, a3);
+
+}
+
+- (PETScalarEventTracker)tracker
+{
+  return self->_tracker;
+}
+
+- (void).cxx_destruct
+{
+  objc_storeStrong((id *)&self->_tracker, 0);
+}
+
+@end

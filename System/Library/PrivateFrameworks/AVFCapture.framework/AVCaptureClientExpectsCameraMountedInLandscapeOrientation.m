@@ -1,0 +1,8 @@
+@implementation AVCaptureClientExpectsCameraMountedInLandscapeOrientation
+
+void __AVCaptureClientExpectsCameraMountedInLandscapeOrientation_block_invoke()
+{
+  AVCaptureClientExpectsCameraMountedInLandscapeOrientation_sAnswer = 1;
+}
+
+@end

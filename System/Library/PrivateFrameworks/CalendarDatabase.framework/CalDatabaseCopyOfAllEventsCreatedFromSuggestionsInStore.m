@@ -1,0 +1,19 @@
+@implementation CalDatabaseCopyOfAllEventsCreatedFromSuggestionsInStore
+
+const __CFString *___CalDatabaseCopyOfAllEventsCreatedFromSuggestionsInStore_block_invoke(uint64_t a1, uint64_t a2)
+{
+  const __CFString *result;
+  sqlite3_stmt *v3;
+  const char *CStringFromCFString;
+
+  result = *(const __CFString **)(a1 + 32);
+  if (result)
+  {
+    v3 = *(sqlite3_stmt **)(a2 + 8);
+    CStringFromCFString = (const char *)CalCreateCStringFromCFString(result);
+    return (const __CFString *)sqlite3_bind_text(v3, 1, CStringFromCFString, -1, (void (__cdecl *)(void *))MEMORY[0x1E0C834A8]);
+  }
+  return result;
+}
+
+@end

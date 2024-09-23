@@ -1,0 +1,49 @@
+@implementation TimeAndLatencyAbm
+
+- (void).cxx_destruct
+{
+  objc_storeStrong((id *)&self->_time, 0);
+}
+
+- (double)latency
+{
+  return self->_latency;
+}
+
+- (TimeAndLatencyAbm)initWithTime:(id)a3 andLatency:(double)a4
+{
+  id v7;
+  TimeAndLatencyAbm *v8;
+  TimeAndLatencyAbm *v9;
+  objc_super v11;
+
+  v7 = a3;
+  v11.receiver = self;
+  v11.super_class = (Class)TimeAndLatencyAbm;
+  v8 = -[TimeAndLatencyAbm init](&v11, sel_init);
+  v9 = v8;
+  if (v8)
+  {
+    objc_storeStrong((id *)&v8->_time, a3);
+    v9->_latency = a4;
+  }
+
+  return v9;
+}
+
+- (NSDate)time
+{
+  return (NSDate *)objc_getProperty(self, a2, 8, 1);
+}
+
+- (void)setTime:(id)a3
+{
+  objc_setProperty_atomic(self, a2, a3, 8);
+}
+
+- (void)setLatency:(double)a3
+{
+  self->_latency = a3;
+}
+
+@end

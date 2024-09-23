@@ -1,0 +1,9 @@
+@implementation FigNetworkInterfaceReporterGetPredictedWirelessThroughput
+
+intptr_t __FigNetworkInterfaceReporterGetPredictedWirelessThroughput_block_invoke(uint64_t a1, int a2)
+{
+  *(_DWORD *)(*(_QWORD *)(*(_QWORD *)(a1 + 40) + 8) + 24) = a2;
+  return dispatch_semaphore_signal(*(dispatch_semaphore_t *)(a1 + 32));
+}
+
+@end

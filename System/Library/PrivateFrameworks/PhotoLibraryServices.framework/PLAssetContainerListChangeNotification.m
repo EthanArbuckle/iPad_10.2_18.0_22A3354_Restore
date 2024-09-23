@@ -1,0 +1,139 @@
+@implementation PLAssetContainerListChangeNotification
+
+- (id)name
+{
+  __CFString *v2;
+
+  v2 = CFSTR("PLAssetContainerListDidChangeNotification");
+  return CFSTR("PLAssetContainerListDidChangeNotification");
+}
+
+- (id)userInfo
+{
+  NSDictionary *userInfo;
+  NSDictionary *v4;
+  void *v5;
+  uint64_t v6;
+  void *v7;
+  void *v8;
+  uint64_t v9;
+  void *v10;
+  void *v11;
+  uint64_t v12;
+  void *v13;
+  NSDictionary *v14;
+
+  userInfo = self->_userInfo;
+  if (!userInfo)
+  {
+    objc_msgSend(MEMORY[0x1E0C99E08], "dictionary");
+    v4 = (NSDictionary *)objc_claimAutoreleasedReturnValue();
+    -[PLContainerChangeNotification deletedIndexes](self, "deletedIndexes");
+    v5 = (void *)objc_claimAutoreleasedReturnValue();
+    v6 = objc_msgSend(v5, "count");
+
+    if (v6)
+    {
+      -[PLContainerChangeNotification deletedIndexes](self, "deletedIndexes");
+      v7 = (void *)objc_claimAutoreleasedReturnValue();
+      -[NSDictionary setObject:forKey:](v4, "setObject:forKey:", v7, CFSTR("DeletedItemsIndexesKey"));
+
+    }
+    -[PLContainerChangeNotification insertedIndexes](self, "insertedIndexes");
+    v8 = (void *)objc_claimAutoreleasedReturnValue();
+    v9 = objc_msgSend(v8, "count");
+
+    if (v9)
+    {
+      -[PLContainerChangeNotification insertedIndexes](self, "insertedIndexes");
+      v10 = (void *)objc_claimAutoreleasedReturnValue();
+      -[NSDictionary setObject:forKey:](v4, "setObject:forKey:", v10, CFSTR("AddedItemsIndexesKey"));
+
+    }
+    -[PLContainerChangeNotification changedIndexes](self, "changedIndexes");
+    v11 = (void *)objc_claimAutoreleasedReturnValue();
+    v12 = objc_msgSend(v11, "count");
+
+    if (v12)
+    {
+      -[PLContainerChangeNotification changedIndexes](self, "changedIndexes");
+      v13 = (void *)objc_claimAutoreleasedReturnValue();
+      -[NSDictionary setObject:forKey:](v4, "setObject:forKey:", v13, CFSTR("ChangedItemsIndexesKey"));
+
+    }
+    v14 = self->_userInfo;
+    self->_userInfo = v4;
+
+    userInfo = self->_userInfo;
+  }
+  return userInfo;
+}
+
+- (id)description
+{
+  void *v3;
+  void *v4;
+  uint64_t v5;
+  void *v6;
+  void *v7;
+  void *v8;
+  void *v9;
+  void *v10;
+  void *v11;
+
+  v3 = (void *)MEMORY[0x19AEC1554](self, a2);
+  v4 = (void *)MEMORY[0x1E0CB37A0];
+  v5 = objc_opt_class();
+  -[PLAssetContainerListChangeNotification albumList](self, "albumList");
+  v6 = (void *)objc_claimAutoreleasedReturnValue();
+  -[PLAssetContainerListChangeNotification albumList](self, "albumList");
+  v7 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(v7, "_typeDescription");
+  v8 = (void *)objc_claimAutoreleasedReturnValue();
+  -[PLContainerChangeNotification snapshot](self, "snapshot");
+  v9 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(v4, "stringWithFormat:", CFSTR("<%@: %p> container list: %p (%@), snapshot: %p"), v5, self, v6, v8, v9);
+  v10 = (void *)objc_claimAutoreleasedReturnValue();
+
+  -[PLContainerChangeNotification _diffDescription](self, "_diffDescription");
+  v11 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(v10, "appendString:", v11);
+
+  objc_autoreleasePoolPop(v3);
+  return v10;
+}
+
+- (void).cxx_destruct
+{
+  objc_storeStrong((id *)&self->_userInfo, 0);
+}
+
+- (id)_contentRelationshipName
+{
+  void *v2;
+  void *v3;
+
+  -[PLAssetContainerListChangeNotification assetContainerList](self, "assetContainerList");
+  v2 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(v2, "containersRelationshipName");
+  v3 = (void *)objc_claimAutoreleasedReturnValue();
+
+  return v3;
+}
+
++ (id)notificationWithContainerList:(id)a3 snapshot:(id)a4 changedContainers:(id)a5
+{
+  id v8;
+  id v9;
+  id v10;
+  void *v11;
+
+  v8 = a5;
+  v9 = a4;
+  v10 = a3;
+  v11 = (void *)objc_msgSend(objc_alloc((Class)a1), "_initWithObject:snapshot:changedObjects:", v10, v9, v8);
+
+  return v11;
+}
+
+@end

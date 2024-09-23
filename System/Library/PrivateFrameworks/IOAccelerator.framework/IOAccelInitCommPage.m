@@ -1,0 +1,18 @@
+@implementation IOAccelInitCommPage
+
+_DWORD *__IOAccelInitCommPage_block_invoke()
+{
+  _DWORD *result;
+
+  result = (_DWORD *)IOSurfaceGetGraphicsCommPageAddress();
+  __globalCommPage = (uint64_t)result;
+  if (!result)
+  {
+    result = malloc_type_malloc(4uLL, 0x100004052888210uLL);
+    __globalCommPage = (uint64_t)result;
+    *result = 0;
+  }
+  return result;
+}
+
+@end

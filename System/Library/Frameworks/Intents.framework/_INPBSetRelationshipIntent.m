@@ -1,0 +1,440 @@
+@implementation _INPBSetRelationshipIntent
+
+- (void)setContactIdentifiers:(id)a3
+{
+  NSArray *v4;
+  NSArray *contactIdentifiers;
+
+  v4 = (NSArray *)objc_msgSend(a3, "mutableCopy");
+  contactIdentifiers = self->_contactIdentifiers;
+  self->_contactIdentifiers = v4;
+
+}
+
+- (void)clearContactIdentifiers
+{
+  -[NSArray removeAllObjects](self->_contactIdentifiers, "removeAllObjects");
+}
+
+- (void)addContactIdentifiers:(id)a3
+{
+  id v4;
+  NSArray *contactIdentifiers;
+  NSArray *v6;
+  NSArray *v7;
+  id v8;
+
+  v4 = a3;
+  contactIdentifiers = self->_contactIdentifiers;
+  v8 = v4;
+  if (!contactIdentifiers)
+  {
+    objc_msgSend(MEMORY[0x1E0C99DE8], "array");
+    v6 = (NSArray *)objc_claimAutoreleasedReturnValue();
+    v7 = self->_contactIdentifiers;
+    self->_contactIdentifiers = v6;
+
+    v4 = v8;
+    contactIdentifiers = self->_contactIdentifiers;
+  }
+  -[NSArray addObject:](contactIdentifiers, "addObject:", v4);
+
+}
+
+- (unint64_t)contactIdentifiersCount
+{
+  return -[NSArray count](self->_contactIdentifiers, "count");
+}
+
+- (id)contactIdentifiersAtIndex:(unint64_t)a3
+{
+  return -[NSArray objectAtIndexedSubscript:](self->_contactIdentifiers, "objectAtIndexedSubscript:", a3);
+}
+
+- (void)setIntentMetadata:(id)a3
+{
+  objc_storeStrong((id *)&self->_intentMetadata, a3);
+}
+
+- (BOOL)hasIntentMetadata
+{
+  return self->_intentMetadata != 0;
+}
+
+- (void)setTargetRelationship:(id)a3
+{
+  objc_storeStrong((id *)&self->_targetRelationship, a3);
+}
+
+- (BOOL)hasTargetRelationship
+{
+  return self->_targetRelationship != 0;
+}
+
+- (BOOL)readFrom:(id)a3
+{
+  return _INPBSetRelationshipIntentReadFrom(self, (uint64_t)a3);
+}
+
+- (void)writeTo:(id)a3
+{
+  id v4;
+  NSArray *v5;
+  uint64_t v6;
+  uint64_t v7;
+  uint64_t v8;
+  uint64_t v9;
+  void *v10;
+  void *v11;
+  void *v12;
+  void *v13;
+  __int128 v14;
+  __int128 v15;
+  __int128 v16;
+  __int128 v17;
+  _BYTE v18[128];
+  uint64_t v19;
+
+  v19 = *MEMORY[0x1E0C80C00];
+  v4 = a3;
+  v14 = 0u;
+  v15 = 0u;
+  v16 = 0u;
+  v17 = 0u;
+  v5 = self->_contactIdentifiers;
+  v6 = -[NSArray countByEnumeratingWithState:objects:count:](v5, "countByEnumeratingWithState:objects:count:", &v14, v18, 16);
+  if (v6)
+  {
+    v7 = v6;
+    v8 = *(_QWORD *)v15;
+    do
+    {
+      v9 = 0;
+      do
+      {
+        if (*(_QWORD *)v15 != v8)
+          objc_enumerationMutation(v5);
+        PBDataWriterWriteSubmessage();
+        ++v9;
+      }
+      while (v7 != v9);
+      v7 = -[NSArray countByEnumeratingWithState:objects:count:](v5, "countByEnumeratingWithState:objects:count:", &v14, v18, 16);
+    }
+    while (v7);
+  }
+
+  -[_INPBSetRelationshipIntent intentMetadata](self, "intentMetadata", v14);
+  v10 = (void *)objc_claimAutoreleasedReturnValue();
+
+  if (v10)
+  {
+    -[_INPBSetRelationshipIntent intentMetadata](self, "intentMetadata");
+    v11 = (void *)objc_claimAutoreleasedReturnValue();
+    PBDataWriterWriteSubmessage();
+
+  }
+  -[_INPBSetRelationshipIntent targetRelationship](self, "targetRelationship");
+  v12 = (void *)objc_claimAutoreleasedReturnValue();
+
+  if (v12)
+  {
+    -[_INPBSetRelationshipIntent targetRelationship](self, "targetRelationship");
+    v13 = (void *)objc_claimAutoreleasedReturnValue();
+    PBDataWriterWriteSubmessage();
+
+  }
+}
+
+- (_INPBSetRelationshipIntent)initWithCoder:(id)a3
+{
+  id v4;
+  void *v5;
+  _INPBSetRelationshipIntent *v6;
+  uint64_t v7;
+  void *v8;
+
+  v4 = a3;
+  NSStringFromSelector(sel_bytes);
+  v5 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(v4, "if_decodeBytesNoCopyForKey:", v5);
+  v6 = (_INPBSetRelationshipIntent *)objc_claimAutoreleasedReturnValue();
+
+  if (v6
+    || (v7 = objc_opt_class(),
+        NSStringFromSelector(sel_data),
+        v8 = (void *)objc_claimAutoreleasedReturnValue(),
+        objc_msgSend(v4, "decodeObjectOfClass:forKey:", v7, v8),
+        v6 = (_INPBSetRelationshipIntent *)objc_claimAutoreleasedReturnValue(),
+        v8,
+        v6))
+  {
+    self = -[_INPBSetRelationshipIntent initWithData:](self, "initWithData:", v6);
+
+    v6 = self;
+  }
+
+  return v6;
+}
+
+- (void)encodeWithCoder:(id)a3
+{
+  id v4;
+  void *v5;
+  id v6;
+
+  v4 = a3;
+  -[_INPBSetRelationshipIntent data](self, "data");
+  v6 = (id)objc_claimAutoreleasedReturnValue();
+  NSStringFromSelector(sel_bytes);
+  v5 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(v4, "if_encodeBytesNoCopy:forKey:", v6, v5);
+
+}
+
+- (id)copyWithZone:(_NSZone *)a3
+{
+  _INPBSetRelationshipIntent *v5;
+  void *v6;
+  id v7;
+  id v8;
+
+  v5 = -[_INPBSetRelationshipIntent init](+[_INPBSetRelationshipIntent allocWithZone:](_INPBSetRelationshipIntent, "allocWithZone:"), "init");
+  v6 = (void *)-[NSArray copyWithZone:](self->_contactIdentifiers, "copyWithZone:", a3);
+  -[_INPBSetRelationshipIntent setContactIdentifiers:](v5, "setContactIdentifiers:", v6);
+
+  v7 = -[_INPBIntentMetadata copyWithZone:](self->_intentMetadata, "copyWithZone:", a3);
+  -[_INPBSetRelationshipIntent setIntentMetadata:](v5, "setIntentMetadata:", v7);
+
+  v8 = -[_INPBModifyRelationship copyWithZone:](self->_targetRelationship, "copyWithZone:", a3);
+  -[_INPBSetRelationshipIntent setTargetRelationship:](v5, "setTargetRelationship:", v8);
+
+  return v5;
+}
+
+- (BOOL)isEqual:(id)a3
+{
+  id v4;
+  void *v5;
+  void *v6;
+  uint64_t v7;
+  void *v8;
+  void *v9;
+  void *v10;
+  int v11;
+  uint64_t v12;
+  void *v13;
+  void *v14;
+  void *v15;
+  int v16;
+  uint64_t v17;
+  void *v18;
+  void *v19;
+  void *v20;
+  char v21;
+  BOOL v22;
+
+  v4 = a3;
+  if (!objc_msgSend(v4, "isMemberOfClass:", objc_opt_class()))
+    goto LABEL_17;
+  -[_INPBSetRelationshipIntent contactIdentifiers](self, "contactIdentifiers");
+  v5 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(v4, "contactIdentifiers");
+  v6 = (void *)objc_claimAutoreleasedReturnValue();
+  if ((v5 == 0) == (v6 != 0))
+    goto LABEL_16;
+  -[_INPBSetRelationshipIntent contactIdentifiers](self, "contactIdentifiers");
+  v7 = objc_claimAutoreleasedReturnValue();
+  if (v7)
+  {
+    v8 = (void *)v7;
+    -[_INPBSetRelationshipIntent contactIdentifiers](self, "contactIdentifiers");
+    v9 = (void *)objc_claimAutoreleasedReturnValue();
+    objc_msgSend(v4, "contactIdentifiers");
+    v10 = (void *)objc_claimAutoreleasedReturnValue();
+    v11 = objc_msgSend(v9, "isEqual:", v10);
+
+    if (!v11)
+      goto LABEL_17;
+  }
+  else
+  {
+
+  }
+  -[_INPBSetRelationshipIntent intentMetadata](self, "intentMetadata");
+  v5 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(v4, "intentMetadata");
+  v6 = (void *)objc_claimAutoreleasedReturnValue();
+  if ((v5 == 0) == (v6 != 0))
+    goto LABEL_16;
+  -[_INPBSetRelationshipIntent intentMetadata](self, "intentMetadata");
+  v12 = objc_claimAutoreleasedReturnValue();
+  if (v12)
+  {
+    v13 = (void *)v12;
+    -[_INPBSetRelationshipIntent intentMetadata](self, "intentMetadata");
+    v14 = (void *)objc_claimAutoreleasedReturnValue();
+    objc_msgSend(v4, "intentMetadata");
+    v15 = (void *)objc_claimAutoreleasedReturnValue();
+    v16 = objc_msgSend(v14, "isEqual:", v15);
+
+    if (!v16)
+      goto LABEL_17;
+  }
+  else
+  {
+
+  }
+  -[_INPBSetRelationshipIntent targetRelationship](self, "targetRelationship");
+  v5 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(v4, "targetRelationship");
+  v6 = (void *)objc_claimAutoreleasedReturnValue();
+  if ((v5 == 0) != (v6 != 0))
+  {
+    -[_INPBSetRelationshipIntent targetRelationship](self, "targetRelationship");
+    v17 = objc_claimAutoreleasedReturnValue();
+    if (!v17)
+    {
+
+LABEL_20:
+      v22 = 1;
+      goto LABEL_18;
+    }
+    v18 = (void *)v17;
+    -[_INPBSetRelationshipIntent targetRelationship](self, "targetRelationship");
+    v19 = (void *)objc_claimAutoreleasedReturnValue();
+    objc_msgSend(v4, "targetRelationship");
+    v20 = (void *)objc_claimAutoreleasedReturnValue();
+    v21 = objc_msgSend(v19, "isEqual:", v20);
+
+    if ((v21 & 1) != 0)
+      goto LABEL_20;
+  }
+  else
+  {
+LABEL_16:
+
+  }
+LABEL_17:
+  v22 = 0;
+LABEL_18:
+
+  return v22;
+}
+
+- (unint64_t)hash
+{
+  uint64_t v3;
+  unint64_t v4;
+
+  v3 = -[NSArray hash](self->_contactIdentifiers, "hash");
+  v4 = -[_INPBIntentMetadata hash](self->_intentMetadata, "hash") ^ v3;
+  return v4 ^ -[_INPBModifyRelationship hash](self->_targetRelationship, "hash");
+}
+
+- (id)dictionaryRepresentation
+{
+  void *v3;
+  void *v4;
+  NSArray *v5;
+  uint64_t v6;
+  uint64_t v7;
+  uint64_t v8;
+  uint64_t v9;
+  void *v10;
+  void *v11;
+  void *v12;
+  void *v13;
+  void *v14;
+  __int128 v16;
+  __int128 v17;
+  __int128 v18;
+  __int128 v19;
+  _BYTE v20[128];
+  uint64_t v21;
+
+  v21 = *MEMORY[0x1E0C80C00];
+  objc_msgSend(MEMORY[0x1E0C99E08], "dictionary");
+  v3 = (void *)objc_claimAutoreleasedReturnValue();
+  if (-[NSArray count](self->_contactIdentifiers, "count"))
+  {
+    objc_msgSend(MEMORY[0x1E0C99DE8], "array");
+    v4 = (void *)objc_claimAutoreleasedReturnValue();
+    v16 = 0u;
+    v17 = 0u;
+    v18 = 0u;
+    v19 = 0u;
+    v5 = self->_contactIdentifiers;
+    v6 = -[NSArray countByEnumeratingWithState:objects:count:](v5, "countByEnumeratingWithState:objects:count:", &v16, v20, 16);
+    if (v6)
+    {
+      v7 = v6;
+      v8 = *(_QWORD *)v17;
+      do
+      {
+        v9 = 0;
+        do
+        {
+          if (*(_QWORD *)v17 != v8)
+            objc_enumerationMutation(v5);
+          objc_msgSend(*(id *)(*((_QWORD *)&v16 + 1) + 8 * v9), "dictionaryRepresentation", (_QWORD)v16);
+          v10 = (void *)objc_claimAutoreleasedReturnValue();
+          objc_msgSend(v4, "addObject:", v10);
+
+          ++v9;
+        }
+        while (v7 != v9);
+        v7 = -[NSArray countByEnumeratingWithState:objects:count:](v5, "countByEnumeratingWithState:objects:count:", &v16, v20, 16);
+      }
+      while (v7);
+    }
+
+    objc_msgSend(v3, "setObject:forKeyedSubscript:", v4, CFSTR("contactIdentifiers"));
+  }
+  -[_INPBSetRelationshipIntent intentMetadata](self, "intentMetadata", (_QWORD)v16);
+  v11 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(v11, "dictionaryRepresentation");
+  v12 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(v3, "setObject:forKeyedSubscript:", v12, CFSTR("intentMetadata"));
+
+  -[_INPBSetRelationshipIntent targetRelationship](self, "targetRelationship");
+  v13 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(v13, "dictionaryRepresentation");
+  v14 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(v3, "setObject:forKeyedSubscript:", v14, CFSTR("targetRelationship"));
+
+  return v3;
+}
+
+- (NSArray)contactIdentifiers
+{
+  return self->_contactIdentifiers;
+}
+
+- (_INPBIntentMetadata)intentMetadata
+{
+  return self->_intentMetadata;
+}
+
+- (_INPBModifyRelationship)targetRelationship
+{
+  return self->_targetRelationship;
+}
+
+- (void).cxx_destruct
+{
+  objc_storeStrong((id *)&self->_targetRelationship, 0);
+  objc_storeStrong((id *)&self->_intentMetadata, 0);
+  objc_storeStrong((id *)&self->_contactIdentifiers, 0);
+}
+
++ (Class)contactIdentifiersType
+{
+  return (Class)objc_opt_class();
+}
+
++ (BOOL)supportsSecureCoding
+{
+  return 1;
+}
+
+@end

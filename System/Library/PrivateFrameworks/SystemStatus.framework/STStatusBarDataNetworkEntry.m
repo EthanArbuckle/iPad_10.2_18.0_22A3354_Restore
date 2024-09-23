@@ -1,0 +1,191 @@
+@implementation STStatusBarDataNetworkEntry
+
++ (id)entryWithStatus:(int64_t)a3 lowDataMode:(BOOL)a4 rawValue:(int64_t)a5 displayValue:(int64_t)a6 displayRawValue:(BOOL)a7
+{
+  id result;
+
+  result = (id)objc_msgSend(a1, "entryWithRawValue:displayValue:displayRawValue:", a5, a6, a7);
+  *((_QWORD *)result + 5) = a3;
+  *((_BYTE *)result + 32) = a4;
+  return result;
+}
+
+- (id)_equalsBuilderWithObject:(id)a3
+{
+  id v4;
+  void *v5;
+  id v6;
+  int64_t v7;
+  uint64_t v8;
+  id v9;
+  id v10;
+  _BOOL8 v11;
+  id v12;
+  id v13;
+  _QWORD v15[4];
+  id v16;
+  _QWORD v17[4];
+  id v18;
+  objc_super v19;
+
+  v4 = a3;
+  v19.receiver = self;
+  v19.super_class = (Class)STStatusBarDataNetworkEntry;
+  -[STStatusBarDataIntegerEntry _equalsBuilderWithObject:](&v19, sel__equalsBuilderWithObject_, v4);
+  v5 = (void *)objc_claimAutoreleasedReturnValue();
+  v6 = v4;
+  v7 = -[STStatusBarDataNetworkEntry status](self, "status");
+  v8 = MEMORY[0x1E0C809B0];
+  v17[0] = MEMORY[0x1E0C809B0];
+  v17[1] = 3221225472;
+  v17[2] = __56__STStatusBarDataNetworkEntry__equalsBuilderWithObject___block_invoke;
+  v17[3] = &unk_1E91E58B0;
+  v9 = v6;
+  v18 = v9;
+  v10 = (id)objc_msgSend(v5, "appendInteger:counterpart:", v7, v17);
+  v11 = -[STStatusBarDataNetworkEntry lowDataModeActive](self, "lowDataModeActive");
+  v15[0] = v8;
+  v15[1] = 3221225472;
+  v15[2] = __56__STStatusBarDataNetworkEntry__equalsBuilderWithObject___block_invoke_2;
+  v15[3] = &unk_1E91E4B28;
+  v16 = v9;
+  v12 = v9;
+  v13 = (id)objc_msgSend(v5, "appendBool:counterpart:", v11, v15);
+
+  return v5;
+}
+
+- (int64_t)status
+{
+  return *(_QWORD *)&self->_lowDataModeActive;
+}
+
+- (BOOL)lowDataModeActive
+{
+  return self->super._displayValue;
+}
+
+uint64_t __56__STStatusBarDataNetworkEntry__equalsBuilderWithObject___block_invoke_2(uint64_t a1)
+{
+  return objc_msgSend(*(id *)(a1 + 32), "lowDataModeActive");
+}
+
+uint64_t __56__STStatusBarDataNetworkEntry__equalsBuilderWithObject___block_invoke(uint64_t a1)
+{
+  return objc_msgSend(*(id *)(a1 + 32), "status");
+}
+
++ (BOOL)supportsSecureCoding
+{
+  return 1;
+}
+
+- (void)encodeWithCoder:(id)a3
+{
+  id v4;
+  objc_super v5;
+
+  v5.receiver = self;
+  v5.super_class = (Class)STStatusBarDataNetworkEntry;
+  v4 = a3;
+  -[STStatusBarDataIntegerEntry encodeWithCoder:](&v5, sel_encodeWithCoder_, v4);
+  objc_msgSend(v4, "encodeInteger:forKey:", *(_QWORD *)&self->_lowDataModeActive, CFSTR("status"), v5.receiver, v5.super_class);
+  objc_msgSend(v4, "encodeBool:forKey:", LOBYTE(self->super._displayValue), CFSTR("lowDataModeActive"));
+
+}
+
+- (STStatusBarDataNetworkEntry)initWithCoder:(id)a3
+{
+  id v3;
+  STStatusBarDataNetworkEntry *v4;
+  char v5;
+  objc_super v7;
+
+  v7.receiver = self;
+  v7.super_class = (Class)STStatusBarDataNetworkEntry;
+  v3 = a3;
+  v4 = -[STStatusBarDataIntegerEntry initWithCoder:](&v7, sel_initWithCoder_, v3);
+  *(_QWORD *)&v4->_lowDataModeActive = objc_msgSend(v3, "decodeIntegerForKey:", CFSTR("status"), v7.receiver, v7.super_class);
+  v5 = objc_msgSend(v3, "decodeBoolForKey:", CFSTR("lowDataModeActive"));
+
+  LOBYTE(v4->super._displayValue) = v5;
+  return v4;
+}
+
+- (id)succinctDescriptionBuilder
+{
+  void *v3;
+  unint64_t v4;
+  const __CFString *v5;
+  id v6;
+  objc_super v8;
+
+  v8.receiver = self;
+  v8.super_class = (Class)STStatusBarDataNetworkEntry;
+  -[STStatusBarDataIntegerEntry succinctDescriptionBuilder](&v8, sel_succinctDescriptionBuilder);
+  v3 = (void *)objc_claimAutoreleasedReturnValue();
+  v4 = -[STStatusBarDataNetworkEntry status](self, "status");
+  if (v4 > 5)
+    v5 = CFSTR("(unknown)");
+  else
+    v5 = off_1E91E5988[v4];
+  objc_msgSend(v3, "appendString:withName:", v5, CFSTR("status"));
+  v6 = (id)objc_msgSend(v3, "appendBool:withName:", -[STStatusBarDataNetworkEntry lowDataModeActive](self, "lowDataModeActive"), CFSTR("lowDataModeActive"));
+  return v3;
+}
+
+- (id)_hashBuilder
+{
+  void *v3;
+  id v4;
+  id v5;
+  objc_super v7;
+
+  v7.receiver = self;
+  v7.super_class = (Class)STStatusBarDataNetworkEntry;
+  -[STStatusBarDataIntegerEntry _hashBuilder](&v7, sel__hashBuilder);
+  v3 = (void *)objc_claimAutoreleasedReturnValue();
+  v4 = (id)objc_msgSend(v3, "appendInteger:", -[STStatusBarDataNetworkEntry status](self, "status"));
+  v5 = (id)objc_msgSend(v3, "appendBool:", -[STStatusBarDataNetworkEntry lowDataModeActive](self, "lowDataModeActive"));
+  return v3;
+}
+
++ (BOOL)supportsBSXPCSecureCoding
+{
+  return 1;
+}
+
+- (void)encodeWithBSXPCCoder:(id)a3
+{
+  id v4;
+  objc_super v5;
+
+  v5.receiver = self;
+  v5.super_class = (Class)STStatusBarDataNetworkEntry;
+  v4 = a3;
+  -[STStatusBarDataIntegerEntry encodeWithBSXPCCoder:](&v5, sel_encodeWithBSXPCCoder_, v4);
+  objc_msgSend(v4, "encodeInt64:forKey:", *(_QWORD *)&self->_lowDataModeActive, CFSTR("status"), v5.receiver, v5.super_class);
+  objc_msgSend(v4, "encodeBool:forKey:", LOBYTE(self->super._displayValue), CFSTR("lowDataModeActive"));
+
+}
+
+- (STStatusBarDataNetworkEntry)initWithBSXPCCoder:(id)a3
+{
+  id v4;
+  STStatusBarDataNetworkEntry *v5;
+  objc_super v7;
+
+  v4 = a3;
+  v7.receiver = self;
+  v7.super_class = (Class)STStatusBarDataNetworkEntry;
+  v5 = -[STStatusBarDataIntegerEntry initWithBSXPCCoder:](&v7, sel_initWithBSXPCCoder_, v4);
+  if (v5)
+  {
+    *(_QWORD *)&v5->_lowDataModeActive = objc_msgSend(v4, "decodeInt64ForKey:", CFSTR("status"));
+    LOBYTE(v5->super._displayValue) = objc_msgSend(v4, "decodeBoolForKey:", CFSTR("lowDataModeActive"));
+  }
+
+  return v5;
+}
+
+@end

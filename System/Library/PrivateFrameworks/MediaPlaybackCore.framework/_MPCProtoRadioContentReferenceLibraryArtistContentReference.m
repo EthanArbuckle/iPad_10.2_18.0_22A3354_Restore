@@ -1,0 +1,185 @@
+@implementation _MPCProtoRadioContentReferenceLibraryArtistContentReference
+
+- (id)description
+{
+  void *v3;
+  void *v4;
+  void *v5;
+  void *v6;
+  objc_super v8;
+
+  v3 = (void *)MEMORY[0x24BDD17C8];
+  v8.receiver = self;
+  v8.super_class = (Class)_MPCProtoRadioContentReferenceLibraryArtistContentReference;
+  -[_MPCProtoRadioContentReferenceLibraryArtistContentReference description](&v8, sel_description);
+  v4 = (void *)objc_claimAutoreleasedReturnValue();
+  -[_MPCProtoRadioContentReferenceLibraryArtistContentReference dictionaryRepresentation](self, "dictionaryRepresentation");
+  v5 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(v3, "stringWithFormat:", CFSTR("%@ %@"), v4, v5);
+  v6 = (void *)objc_claimAutoreleasedReturnValue();
+
+  return v6;
+}
+
+- (id)dictionaryRepresentation
+{
+  void *v3;
+  void *v4;
+  NSString *artistName;
+  char has;
+  void *v7;
+  void *v8;
+
+  objc_msgSend(MEMORY[0x24BDBCED8], "dictionary");
+  v3 = (void *)objc_claimAutoreleasedReturnValue();
+  v4 = v3;
+  artistName = self->_artistName;
+  if (artistName)
+    objc_msgSend(v3, "setObject:forKey:", artistName, CFSTR("artistName"));
+  has = (char)self->_has;
+  if ((has & 1) != 0)
+  {
+    objc_msgSend(MEMORY[0x24BDD16E0], "numberWithLongLong:", self->_representativeItemCloudID);
+    v7 = (void *)objc_claimAutoreleasedReturnValue();
+    objc_msgSend(v4, "setObject:forKey:", v7, CFSTR("representativeItemCloudID"));
+
+    has = (char)self->_has;
+  }
+  if ((has & 2) != 0)
+  {
+    objc_msgSend(MEMORY[0x24BDD16E0], "numberWithLongLong:", self->_storeAdamID);
+    v8 = (void *)objc_claimAutoreleasedReturnValue();
+    objc_msgSend(v4, "setObject:forKey:", v8, CFSTR("storeAdamID"));
+
+  }
+  return v4;
+}
+
+- (BOOL)readFrom:(id)a3
+{
+  return _MPCProtoRadioContentReferenceLibraryArtistContentReferenceReadFrom((uint64_t)self, (uint64_t)a3);
+}
+
+- (void)writeTo:(id)a3
+{
+  id v4;
+  char has;
+  id v6;
+
+  v4 = a3;
+  v6 = v4;
+  if (self->_artistName)
+  {
+    PBDataWriterWriteStringField();
+    v4 = v6;
+  }
+  has = (char)self->_has;
+  if ((has & 1) != 0)
+  {
+    PBDataWriterWriteInt64Field();
+    v4 = v6;
+    has = (char)self->_has;
+  }
+  if ((has & 2) != 0)
+  {
+    PBDataWriterWriteInt64Field();
+    v4 = v6;
+  }
+
+}
+
+- (id)copyWithZone:(_NSZone *)a3
+{
+  uint64_t v5;
+  uint64_t v6;
+  void *v7;
+  char has;
+
+  v5 = objc_msgSend((id)objc_msgSend((id)objc_opt_class(), "allocWithZone:", a3), "init");
+  v6 = -[NSString copyWithZone:](self->_artistName, "copyWithZone:", a3);
+  v7 = *(void **)(v5 + 24);
+  *(_QWORD *)(v5 + 24) = v6;
+
+  has = (char)self->_has;
+  if ((has & 1) != 0)
+  {
+    *(_QWORD *)(v5 + 8) = self->_representativeItemCloudID;
+    *(_BYTE *)(v5 + 32) |= 1u;
+    has = (char)self->_has;
+  }
+  if ((has & 2) != 0)
+  {
+    *(_QWORD *)(v5 + 16) = self->_storeAdamID;
+    *(_BYTE *)(v5 + 32) |= 2u;
+  }
+  return (id)v5;
+}
+
+- (BOOL)isEqual:(id)a3
+{
+  id v4;
+  NSString *artistName;
+  BOOL v6;
+
+  v4 = a3;
+  if (!objc_msgSend(v4, "isMemberOfClass:", objc_opt_class()))
+    goto LABEL_13;
+  artistName = self->_artistName;
+  if ((unint64_t)artistName | *((_QWORD *)v4 + 3))
+  {
+    if (!-[NSString isEqual:](artistName, "isEqual:"))
+      goto LABEL_13;
+  }
+  if ((*(_BYTE *)&self->_has & 1) != 0)
+  {
+    if ((*((_BYTE *)v4 + 32) & 1) == 0 || self->_representativeItemCloudID != *((_QWORD *)v4 + 1))
+      goto LABEL_13;
+  }
+  else if ((*((_BYTE *)v4 + 32) & 1) != 0)
+  {
+LABEL_13:
+    v6 = 0;
+    goto LABEL_14;
+  }
+  v6 = (*((_BYTE *)v4 + 32) & 2) == 0;
+  if ((*(_BYTE *)&self->_has & 2) != 0)
+  {
+    if ((*((_BYTE *)v4 + 32) & 2) == 0 || self->_storeAdamID != *((_QWORD *)v4 + 2))
+      goto LABEL_13;
+    v6 = 1;
+  }
+LABEL_14:
+
+  return v6;
+}
+
+- (unint64_t)hash
+{
+  NSUInteger v3;
+  uint64_t v4;
+  uint64_t v5;
+
+  v3 = -[NSString hash](self->_artistName, "hash");
+  if ((*(_BYTE *)&self->_has & 1) != 0)
+  {
+    v4 = 2654435761 * self->_representativeItemCloudID;
+    if ((*(_BYTE *)&self->_has & 2) != 0)
+      goto LABEL_3;
+LABEL_5:
+    v5 = 0;
+    return v4 ^ v3 ^ v5;
+  }
+  v4 = 0;
+  if ((*(_BYTE *)&self->_has & 2) == 0)
+    goto LABEL_5;
+LABEL_3:
+  v5 = 2654435761 * self->_storeAdamID;
+  return v4 ^ v3 ^ v5;
+}
+
+- (void).cxx_destruct
+{
+  objc_storeStrong((id *)&self->_artistName, 0);
+}
+
+@end

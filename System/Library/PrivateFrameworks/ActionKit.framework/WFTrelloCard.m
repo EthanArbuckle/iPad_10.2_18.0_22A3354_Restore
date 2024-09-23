@@ -1,0 +1,85 @@
+@implementation WFTrelloCard
+
++ (BOOL)supportsSecureCoding
+{
+  return 1;
+}
+
++ (id)JSONKeyPathsByPropertyKey
+{
+  void *v2;
+  void *v3;
+  void *v4;
+  objc_super v6;
+  _QWORD v7[4];
+  _QWORD v8[5];
+
+  v8[4] = *MEMORY[0x24BDAC8D0];
+  v6.receiver = a1;
+  v6.super_class = (Class)&OBJC_METACLASS___WFTrelloCard;
+  objc_msgSendSuper2(&v6, sel_JSONKeyPathsByPropertyKey);
+  v2 = (void *)objc_claimAutoreleasedReturnValue();
+  v3 = (void *)objc_msgSend(v2, "mutableCopy");
+
+  v7[0] = CFSTR("itemDescription");
+  v7[1] = CFSTR("creationPosition");
+  v8[0] = CFSTR("desc");
+  v8[1] = CFSTR("pos");
+  v7[2] = CFSTR("dueDate");
+  v7[3] = CFSTR("URL");
+  v8[2] = CFSTR("due");
+  v8[3] = CFSTR("shortUrl");
+  objc_msgSend(MEMORY[0x24BDBCE70], "dictionaryWithObjects:forKeys:count:", v8, v7, 4);
+  v4 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(v3, "addEntriesFromDictionary:", v4);
+
+  return v3;
+}
+
++ (id)dueDateJSONTransformer
+{
+  void *v2;
+  void *v3;
+  void *v4;
+  void *v5;
+
+  v2 = (void *)MEMORY[0x24BDD1970];
+  objc_msgSend(MEMORY[0x24BDBCEA0], "localeWithLocaleIdentifier:", CFSTR("en_US_POSIX"));
+  v3 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(MEMORY[0x24BDBCF38], "timeZoneWithName:", CFSTR("UTC"));
+  v4 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(v2, "mtl_dateTransformerWithDateFormat:calendar:locale:timeZone:defaultDate:", CFSTR("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"), 0, v3, v4, 0);
+  v5 = (void *)objc_claimAutoreleasedReturnValue();
+
+  return v5;
+}
+
+- (NSString)itemDescription
+{
+  return self->_itemDescription;
+}
+
+- (NSNumber)creationPosition
+{
+  return self->_creationPosition;
+}
+
+- (NSDate)dueDate
+{
+  return self->_dueDate;
+}
+
+- (NSURL)URL
+{
+  return self->_URL;
+}
+
+- (void).cxx_destruct
+{
+  objc_storeStrong((id *)&self->_URL, 0);
+  objc_storeStrong((id *)&self->_dueDate, 0);
+  objc_storeStrong((id *)&self->_creationPosition, 0);
+  objc_storeStrong((id *)&self->_itemDescription, 0);
+}
+
+@end

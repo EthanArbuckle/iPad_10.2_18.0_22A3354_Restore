@@ -1,0 +1,8 @@
+@implementation MusicKitPlaybackSupport_FinalClass
+
+- (_TtC23MusicKitPlaybackSupportP33_30DEEFC56FE4284229059B29E1D3259C34MusicKitPlaybackSupport_FinalClass)init
+{
+  return (_TtC23MusicKitPlaybackSupportP33_30DEEFC56FE4284229059B29E1D3259C34MusicKitPlaybackSupport_FinalClass *)sub_242940CF4();
+}
+
+@end

@@ -1,0 +1,8 @@
+@implementation WBSSetUpAccessToAppDataContainerWithIdentifier
+
+void __WBSSetUpAccessToAppDataContainerWithIdentifier_block_invoke()
+{
+  os_unfair_lock_unlock((os_unfair_lock_t)&WBSSetUpAccessToAppDataContainerWithIdentifier_lock);
+}
+
+@end

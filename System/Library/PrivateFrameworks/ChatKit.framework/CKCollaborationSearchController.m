@@ -1,0 +1,1168 @@
+@implementation CKCollaborationSearchController
+
+- (unint64_t)searchTokenContentType
+{
+  return 1;
+}
+
+- (id)fetchAttributes
+{
+  uint64_t v2;
+  uint64_t v3;
+  uint64_t v4;
+  uint64_t v5;
+  uint64_t v6;
+  uint64_t v7;
+  _QWORD v9[15];
+
+  v9[14] = *MEMORY[0x1E0C80C00];
+  v2 = *MEMORY[0x1E0CA67C0];
+  v9[0] = *MEMORY[0x1E0CA67D8];
+  v9[1] = v2;
+  v3 = *MEMORY[0x1E0CA6018];
+  v9[2] = *MEMORY[0x1E0CA6048];
+  v9[3] = v3;
+  v4 = *MEMORY[0x1E0CA6108];
+  v9[4] = *MEMORY[0x1E0CA60D0];
+  v9[5] = v4;
+  v5 = *MEMORY[0x1E0CA6510];
+  v9[6] = *MEMORY[0x1E0CA68B8];
+  v9[7] = v5;
+  v6 = *MEMORY[0x1E0CA63E0];
+  v9[8] = *MEMORY[0x1E0CA5F30];
+  v9[9] = v6;
+  v9[10] = *MEMORY[0x1E0CA6488];
+  v9[11] = CFSTR("com_apple_mobilesms_lpPluginPaths");
+  v7 = *MEMORY[0x1E0CA6408];
+  v9[12] = *MEMORY[0x1E0CA6970];
+  v9[13] = v7;
+  objc_msgSend(MEMORY[0x1E0C99D20], "arrayWithObjects:count:", v9, 14);
+  return (id)objc_claimAutoreleasedReturnValue();
+}
+
+- (id)queryAttributesForText:(id)a3
+{
+  uint64_t v3;
+  uint64_t v4;
+  uint64_t v5;
+  void *v6;
+  const __CFString **v7;
+  uint64_t v8;
+  uint64_t v9;
+  uint64_t v11;
+  uint64_t v12;
+  const __CFString *v13;
+  uint64_t v14;
+  uint64_t v15;
+  uint64_t v16;
+  uint64_t v17;
+  uint64_t v18;
+  uint64_t v19;
+  uint64_t v20;
+
+  v20 = *MEMORY[0x1E0C80C00];
+  if (objc_msgSend(a3, "length"))
+  {
+    v3 = *MEMORY[0x1E0CA6970];
+    v13 = CFSTR("com_apple_mobilesms_lpDescription");
+    v14 = v3;
+    v4 = *MEMORY[0x1E0CA6048];
+    v15 = *MEMORY[0x1E0CA67D8];
+    v16 = v4;
+    v5 = *MEMORY[0x1E0CA6408];
+    v17 = *MEMORY[0x1E0CA6910];
+    v18 = v5;
+    v19 = *MEMORY[0x1E0CA5F30];
+    v6 = (void *)MEMORY[0x1E0C99D20];
+    v7 = &v13;
+    v8 = 7;
+  }
+  else
+  {
+    v9 = *MEMORY[0x1E0CA6970];
+    v11 = *MEMORY[0x1E0CA6910];
+    v12 = v9;
+    v6 = (void *)MEMORY[0x1E0C99D20];
+    v7 = (const __CFString **)&v11;
+    v8 = 2;
+  }
+  objc_msgSend(v6, "arrayWithObjects:count:", v7, v8, v11, v12, v13, v14, v15, v16, v17, v18, v19);
+  return (id)objc_claimAutoreleasedReturnValue();
+}
+
+- (id)filterQueries
+{
+  void *v2;
+  void *v3;
+  void *v4;
+  _QWORD v6[2];
+
+  v6[1] = *MEMORY[0x1E0C80C00];
+  objc_msgSend(MEMORY[0x1E0CB3940], "stringWithFormat:", CFSTR("%tu"), 4);
+  v2 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(MEMORY[0x1E0CB3940], "stringWithFormat:", CFSTR("%@ == \"%@\" && %@ > \"0\"cwd && %@ != \"%@\"), *MEMORY[0x1E0CA6488], CFSTR("lnk"), *MEMORY[0x1E0CA6408], *MEMORY[0x1E0CA6900], v2);
+  v3 = (void *)objc_claimAutoreleasedReturnValue();
+  v6[0] = v3;
+  objc_msgSend(MEMORY[0x1E0C99D20], "arrayWithObjects:count:", v6, 1);
+  v4 = (void *)objc_claimAutoreleasedReturnValue();
+
+  return v4;
+}
+
+- (id)detailsFilterQueriesForChatGUIDs:(id)a3
+{
+  id v3;
+  void *v4;
+  id v5;
+  uint64_t v6;
+  uint64_t v7;
+  uint64_t v8;
+  void *v9;
+  void *v10;
+  _QWORD v12[5];
+  uint64_t v13;
+  uint64_t *v14;
+  uint64_t v15;
+  uint64_t (*v16)(uint64_t, uint64_t);
+  void (*v17)(uint64_t);
+  id v18;
+  __int128 v19;
+  __int128 v20;
+  __int128 v21;
+  __int128 v22;
+  uint64_t v23;
+  _BYTE v24[128];
+  uint64_t v25;
+
+  v25 = *MEMORY[0x1E0C80C00];
+  v3 = a3;
+  v4 = (void *)objc_msgSend(objc_alloc(MEMORY[0x1E0C99DE8]), "initWithCapacity:", objc_msgSend(v3, "count"));
+  v19 = 0u;
+  v20 = 0u;
+  v21 = 0u;
+  v22 = 0u;
+  v5 = v3;
+  v6 = objc_msgSend(v5, "countByEnumeratingWithState:objects:count:", &v19, v24, 16);
+  if (v6)
+  {
+    v7 = *(_QWORD *)v20;
+    do
+    {
+      v8 = 0;
+      do
+      {
+        if (*(_QWORD *)v20 != v7)
+          objc_enumerationMutation(v5);
+        objc_msgSend(MEMORY[0x1E0CB3940], "stringWithFormat:", CFSTR("_kMDItemDomainIdentifier == \"%@\"), *(_QWORD *)(*((_QWORD *)&v19 + 1) + 8 * v8));
+        v9 = (void *)objc_claimAutoreleasedReturnValue();
+        objc_msgSend(v4, "addObject:", v9);
+
+        ++v8;
+      }
+      while (v6 != v8);
+      v6 = objc_msgSend(v5, "countByEnumeratingWithState:objects:count:", &v19, v24, 16);
+    }
+    while (v6);
+  }
+
+  v13 = 0;
+  v14 = &v13;
+  v15 = 0x3032000000;
+  v16 = __Block_byref_object_copy__12;
+  v17 = __Block_byref_object_dispose__12;
+  v18 = 0;
+  objc_msgSend(MEMORY[0x1E0CB3940], "string");
+  v18 = (id)objc_claimAutoreleasedReturnValue();
+  v12[0] = MEMORY[0x1E0C809B0];
+  v12[1] = 3221225472;
+  v12[2] = __68__CKCollaborationSearchController_detailsFilterQueriesForChatGUIDs___block_invoke;
+  v12[3] = &unk_1E274B9A0;
+  v12[4] = &v13;
+  objc_msgSend(v4, "enumerateObjectsUsingBlock:", v12);
+  v23 = v14[5];
+  objc_msgSend(MEMORY[0x1E0C99D20], "arrayWithObjects:count:", &v23, 1);
+  v10 = (void *)objc_claimAutoreleasedReturnValue();
+  _Block_object_dispose(&v13, 8);
+
+  return v10;
+}
+
+void __68__CKCollaborationSearchController_detailsFilterQueriesForChatGUIDs___block_invoke(uint64_t a1, uint64_t a2, uint64_t a3)
+{
+  uint64_t v4;
+  void *v5;
+  uint64_t v6;
+  uint64_t v7;
+  void *v8;
+  void *v9;
+  uint64_t v10;
+  uint64_t v11;
+  uint64_t v12;
+
+  v4 = *(_QWORD *)(*(_QWORD *)(a1 + 32) + 8);
+  v5 = *(void **)(v4 + 40);
+  if (a3)
+  {
+    objc_msgSend(MEMORY[0x1E0CB3940], "stringWithFormat:", CFSTR(" || %@"), a2);
+    v12 = objc_claimAutoreleasedReturnValue();
+    objc_msgSend(v5, "stringByAppendingString:", v12);
+    v6 = objc_claimAutoreleasedReturnValue();
+    v7 = *(_QWORD *)(*(_QWORD *)(a1 + 32) + 8);
+    v8 = *(void **)(v7 + 40);
+    *(_QWORD *)(v7 + 40) = v6;
+
+    v9 = (void *)v12;
+  }
+  else
+  {
+    objc_msgSend(*(id *)(v4 + 40), "stringByAppendingString:", a2);
+    v10 = objc_claimAutoreleasedReturnValue();
+    v11 = *(_QWORD *)(*(_QWORD *)(a1 + 32) + 8);
+    v9 = *(void **)(v11 + 40);
+    *(_QWORD *)(v11 + 40) = v10;
+  }
+
+}
+
++ (BOOL)supportsQuicklookForResult:(id)a3
+{
+  void *v3;
+  void *v4;
+  void *v5;
+  void *v6;
+
+  objc_msgSend(a3, "item");
+  v3 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(v3, "attributeSet");
+  v4 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(v4, "__ck_spotlightItemSnippet");
+  v5 = (void *)objc_claimAutoreleasedReturnValue();
+
+  IMUTITypeForFilename();
+  v6 = (void *)objc_claimAutoreleasedReturnValue();
+  LOBYTE(v4) = IMUTTypeWantsQuicklook();
+
+  return (char)v4;
+}
+
++ (id)sectionTitle
+{
+  void *v2;
+  void *v3;
+
+  CKFrameworkBundle();
+  v2 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(v2, "localizedStringForKey:value:table:", CFSTR("SEARCH_COLLABORATION_TITLE"), &stru_1E276D870, CFSTR("ChatKit"));
+  v3 = (void *)objc_claimAutoreleasedReturnValue();
+
+  return v3;
+}
+
++ (id)sectionIdentifier
+{
+  return CFSTR("CollaborationSearchController");
+}
+
+- (id)reuseIdentifierForIndex:(int64_t)a3
+{
+  void *v4;
+  void *v5;
+  void *v6;
+  __objc2_class **v7;
+  void *v8;
+
+  -[CKSearchController results](self, "results");
+  v4 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(v4, "objectAtIndexedSubscript:", a3);
+  v5 = (void *)objc_claimAutoreleasedReturnValue();
+  +[CKSpotlightQueryResultUtilities indexItemTypeForResult:](CKSpotlightQueryResultUtilities, "indexItemTypeForResult:", v5);
+  v6 = (void *)objc_claimAutoreleasedReturnValue();
+
+  v7 = off_1E27333A0;
+  if ((objc_msgSend(v6, "isEqualToString:", CFSTR("lnk")) & 1) == 0
+    && objc_msgSend(v6, "isEqualToString:", CFSTR("at")))
+  {
+    v7 = off_1E2732C30;
+  }
+  -[__objc2_class reuseIdentifier](*v7, "reuseIdentifier");
+  v8 = (void *)objc_claimAutoreleasedReturnValue();
+
+  return v8;
+}
+
++ (id)indexingString
+{
+  void *v2;
+  void *v3;
+
+  CKFrameworkBundle();
+  v2 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(v2, "localizedStringForKey:value:table:", CFSTR("COLLABORATION_INDEXING_MESSAGE"), &stru_1E276D870, CFSTR("ChatKit"));
+  v3 = (void *)objc_claimAutoreleasedReturnValue();
+
+  return v3;
+}
+
++ (id)supportedCellClasses
+{
+  void *v2;
+  int v3;
+  uint64_t v4;
+  void *v5;
+  uint64_t *v6;
+  uint64_t v7;
+  uint64_t v9;
+  uint64_t v10;
+  uint64_t v11;
+  uint64_t v12;
+
+  v12 = *MEMORY[0x1E0C80C00];
+  objc_msgSend(MEMORY[0x1E0D39840], "sharedFeatureFlags");
+  v2 = (void *)objc_claimAutoreleasedReturnValue();
+  v3 = objc_msgSend(v2, "isSWYAttachmentsEnabled");
+
+  v4 = objc_opt_class();
+  if (v3)
+  {
+    v10 = v4;
+    v11 = objc_opt_class();
+    v5 = (void *)MEMORY[0x1E0C99D20];
+    v6 = &v10;
+    v7 = 2;
+  }
+  else
+  {
+    v9 = v4;
+    v5 = (void *)MEMORY[0x1E0C99D20];
+    v6 = &v9;
+    v7 = 1;
+  }
+  objc_msgSend(v5, "arrayWithObjects:count:", v6, v7, v9, v10, v11);
+  return (id)objc_claimAutoreleasedReturnValue();
+}
+
+- (double)interGroupSpacing
+{
+  void *v2;
+  double v3;
+  double v4;
+
+  +[CKUIBehavior sharedBehaviors](CKUIBehavior, "sharedBehaviors");
+  v2 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(v2, "searchCollaborationInterItemSpacing");
+  v4 = v3;
+
+  return v4;
+}
+
+- (BOOL)applyLayoutMarginsToLayoutGroup
+{
+  return 1;
+}
+
+- (id)layoutGroupWithEnvironment:(id)a3
+{
+  void *v4;
+  void *v5;
+  double v6;
+  void *v7;
+  double v8;
+  void *v9;
+  void *v10;
+  void *v11;
+  void *v12;
+  void *v13;
+  void *v14;
+  void *v15;
+  uint64_t v16;
+  uint64_t v17;
+  double v18;
+  void *v19;
+  void *v20;
+  void *v21;
+  void *v22;
+  void *v23;
+  void *v24;
+  void *v25;
+  void *v26;
+  void *v27;
+  void *v28;
+  void *v29;
+  void *v30;
+  uint64_t v32;
+  double v33;
+  _QWORD v34[2];
+
+  v34[1] = *MEMORY[0x1E0C80C00];
+  v32 = 0;
+  v33 = 0.0;
+  -[CKCollaborationSearchController fractionalWidth:count:forLayoutWidth:](self, "fractionalWidth:count:forLayoutWidth:", &v33, &v32, -[CKSearchController layoutWidth](self, "layoutWidth", a3));
+  objc_msgSend(MEMORY[0x1E0CEA1C0], "fractionalWidthDimension:", v33);
+  v4 = (void *)objc_claimAutoreleasedReturnValue();
+  v5 = (void *)MEMORY[0x1E0CEA1C0];
+  v6 = v33;
+  +[CKUIBehavior sharedBehaviors](CKUIBehavior, "sharedBehaviors");
+  v7 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(v7, "searchLinksFractionalHeightScale");
+  objc_msgSend(v5, "fractionalWidthDimension:", v6 * v8);
+  v9 = (void *)objc_claimAutoreleasedReturnValue();
+
+  objc_msgSend(MEMORY[0x1E0CEA1F0], "sizeWithWidthDimension:heightDimension:", v4, v9);
+  v10 = (void *)objc_claimAutoreleasedReturnValue();
+  if (-[CKSearchController suppressAvatars](self, "suppressAvatars"))
+  {
+    objc_msgSend(MEMORY[0x1E0CEA1E0], "itemWithLayoutSize:", v10);
+    v11 = (void *)objc_claimAutoreleasedReturnValue();
+  }
+  else
+  {
+    v12 = (void *)MEMORY[0x1E0CEA1C0];
+    +[CKUIBehavior sharedBehaviors](CKUIBehavior, "sharedBehaviors");
+    v13 = (void *)objc_claimAutoreleasedReturnValue();
+    objc_msgSend(v13, "searchResultAvatarSize");
+    objc_msgSend(v12, "absoluteDimension:");
+    v14 = (void *)objc_claimAutoreleasedReturnValue();
+
+    objc_msgSend(MEMORY[0x1E0CEA1F0], "sizeWithWidthDimension:heightDimension:", v14, v14);
+    v15 = (void *)objc_claimAutoreleasedReturnValue();
+    v16 = objc_msgSend((id)*MEMORY[0x1E0CEB258], "userInterfaceLayoutDirection");
+    if (v16 == 1)
+      v17 = 3;
+    else
+      v17 = 9;
+    v18 = -8.0;
+    if (v16 == 1)
+      v18 = 8.0;
+    objc_msgSend(MEMORY[0x1E0CEA1A8], "layoutAnchorWithEdges:absoluteOffset:", v17, v18);
+    v19 = (void *)objc_claimAutoreleasedReturnValue();
+    v20 = (void *)MEMORY[0x1E0CEA200];
+    +[CKSearchAvatarSupplementryView supplementaryViewType](CKSearchAvatarSupplementryView, "supplementaryViewType");
+    v21 = (void *)objc_claimAutoreleasedReturnValue();
+    objc_msgSend(v20, "supplementaryItemWithLayoutSize:elementKind:containerAnchor:", v15, v21, v19);
+    v22 = (void *)objc_claimAutoreleasedReturnValue();
+
+    v23 = (void *)MEMORY[0x1E0CEA1E0];
+    v34[0] = v22;
+    objc_msgSend(MEMORY[0x1E0C99D20], "arrayWithObjects:count:", v34, 1);
+    v24 = (void *)objc_claimAutoreleasedReturnValue();
+    objc_msgSend(v23, "itemWithLayoutSize:supplementaryItems:", v10, v24);
+    v11 = (void *)objc_claimAutoreleasedReturnValue();
+
+  }
+  v25 = (void *)MEMORY[0x1E0CEA1F0];
+  objc_msgSend(MEMORY[0x1E0CEA1C0], "fractionalWidthDimension:", 1.0);
+  v26 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(v25, "sizeWithWidthDimension:heightDimension:", v26, v9);
+  v27 = (void *)objc_claimAutoreleasedReturnValue();
+
+  objc_msgSend(MEMORY[0x1E0CEA1D0], "horizontalGroupWithLayoutSize:subitem:count:", v27, v11, v32);
+  v28 = (void *)objc_claimAutoreleasedReturnValue();
+  v29 = (void *)MEMORY[0x1E0CEA1F8];
+  -[CKCollaborationSearchController interGroupSpacing](self, "interGroupSpacing");
+  objc_msgSend(v29, "fixedSpacing:");
+  v30 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(v28, "setInterItemSpacing:", v30);
+
+  return v28;
+}
+
+- (void)fractionalWidth:(double *)a3 count:(unint64_t *)a4 forLayoutWidth:(unint64_t)a5
+{
+  objc_super v9;
+
+  if (CKIsRunningInMacCatalyst())
+  {
+    if (a3)
+      *a3 = 0.5;
+    if (a4)
+      *a4 = 2;
+  }
+  else
+  {
+    v9.receiver = self;
+    v9.super_class = (Class)CKCollaborationSearchController;
+    -[CKMessageTypeSearchController fractionalWidth:count:forLayoutWidth:](&v9, sel_fractionalWidth_count_forLayoutWidth_, a3, a4, a5);
+  }
+}
+
+- (id)cellForItemInCollectionView:(id)a3 atIndexPath:(id)a4 withIdentifier:(id)a5
+{
+  id v8;
+  id v9;
+  id v10;
+  void *v11;
+  void *v12;
+  void *v13;
+  void *v14;
+  void *v15;
+  objc_super v17;
+  objc_super v18;
+  objc_super v19;
+
+  v8 = a3;
+  v9 = a4;
+  v10 = a5;
+  -[CKSearchController results](self, "results");
+  v11 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(v11, "objectAtIndexedSubscript:", objc_msgSend(v9, "row"));
+  v12 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(v12, "item");
+  v13 = (void *)objc_claimAutoreleasedReturnValue();
+
+  +[CKSpotlightQueryResultUtilities indexItemTypeForItem:](CKSpotlightQueryResultUtilities, "indexItemTypeForItem:", v13);
+  v14 = (void *)objc_claimAutoreleasedReturnValue();
+  if (objc_msgSend(v14, "isEqualToString:", CFSTR("lnk")))
+  {
+    v19.receiver = self;
+    v19.super_class = (Class)CKCollaborationSearchController;
+    -[CKSearchController cellForItemInCollectionView:atIndexPath:withIdentifier:](&v19, sel_cellForItemInCollectionView_atIndexPath_withIdentifier_, v8, v9, v10, v17.receiver, v17.super_class);
+LABEL_6:
+    v15 = (void *)objc_claimAutoreleasedReturnValue();
+    goto LABEL_7;
+  }
+  if (!objc_msgSend(v14, "isEqualToString:", CFSTR("at")))
+  {
+    -[CKSearchController cellForItemInCollectionView:atIndexPath:withIdentifier:](&v17, sel_cellForItemInCollectionView_atIndexPath_withIdentifier_, v8, v9, v10, self, CKCollaborationSearchController);
+    goto LABEL_6;
+  }
+  v18.receiver = self;
+  v18.super_class = (Class)CKCollaborationSearchController;
+  -[CKSearchController cellForItemInCollectionView:atIndexPath:withIdentifier:](&v18, sel_cellForItemInCollectionView_atIndexPath_withIdentifier_, v8, v9, v10);
+  v15 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(v15, "setSuppressAvatars:", -[CKSearchController suppressAvatars](self, "suppressAvatars"));
+LABEL_7:
+
+  return v15;
+}
+
+- (id)cellForSupplementaryItemInCollectionView:(id)a3 atIndexPath:(id)a4 supplementaryViewKind:(id)a5
+{
+  id v8;
+  id v9;
+  id v10;
+  void *v11;
+  int v12;
+  void *v13;
+  void *v14;
+  void *v15;
+  void *v16;
+  void *v17;
+  void *v18;
+  void *v19;
+  void *v20;
+  uint64_t v21;
+  __CFString *v22;
+  void *v23;
+  void *v24;
+  void *v25;
+  int v26;
+  void *v27;
+  void *v28;
+  unint64_t v29;
+  void *v30;
+  unint64_t v31;
+  void *v32;
+  void *v33;
+
+  v8 = a3;
+  v9 = a4;
+  v10 = a5;
+  +[CKDetailsSearchResultsFooterCell supplementaryViewType](CKDetailsSearchResultsFooterCell, "supplementaryViewType");
+  v11 = (void *)objc_claimAutoreleasedReturnValue();
+  v12 = objc_msgSend(v10, "isEqualToString:", v11);
+
+  if (v12)
+  {
+    +[CKDetailsSearchResultsFooterCell supplementaryViewType](CKDetailsSearchResultsFooterCell, "supplementaryViewType");
+    v13 = (void *)objc_claimAutoreleasedReturnValue();
+    +[CKDetailsSearchResultsFooterCell reuseIdentifier](CKDetailsSearchResultsFooterCell, "reuseIdentifier");
+    v14 = (void *)objc_claimAutoreleasedReturnValue();
+    objc_msgSend(v8, "dequeueReusableSupplementaryViewOfKind:withReuseIdentifier:forIndexPath:", v13, v14, v9);
+    v15 = (void *)objc_claimAutoreleasedReturnValue();
+
+    v16 = (void *)MEMORY[0x1E0CB3940];
+    CKFrameworkBundle();
+    v17 = (void *)objc_claimAutoreleasedReturnValue();
+    objc_msgSend(v17, "localizedStringForKey:value:table:", CFSTR("SEE_ALL_LINKS_TITLE"), &stru_1E276D870, CFSTR("ChatKit"));
+    v18 = (void *)objc_claimAutoreleasedReturnValue();
+    objc_msgSend(v16, "stringWithFormat:", v18);
+    v19 = (void *)objc_claimAutoreleasedReturnValue();
+
+    objc_msgSend(MEMORY[0x1E0CEA2F8], "sharedApplication");
+    v20 = (void *)objc_claimAutoreleasedReturnValue();
+    v21 = objc_msgSend(v20, "userInterfaceLayoutDirection");
+
+    if (v21 == 1)
+      v22 = CFSTR("\u200F");
+    else
+      v22 = CFSTR("\u200E");
+    -[__CFString stringByAppendingString:](v22, "stringByAppendingString:", v19);
+    v23 = (void *)objc_claimAutoreleasedReturnValue();
+
+    objc_msgSend(v15, "setTitle:", v23);
+    objc_msgSend((id)objc_opt_class(), "sectionIdentifier");
+    v24 = (void *)objc_claimAutoreleasedReturnValue();
+    objc_msgSend(v15, "setSectionIdentifier:", v24);
+    goto LABEL_9;
+  }
+  +[CKSearchAvatarSupplementryView supplementaryViewType](CKSearchAvatarSupplementryView, "supplementaryViewType");
+  v25 = (void *)objc_claimAutoreleasedReturnValue();
+  v26 = objc_msgSend(v10, "isEqualToString:", v25);
+
+  if (!v26)
+  {
+    v15 = 0;
+    goto LABEL_11;
+  }
+  +[CKSearchAvatarSupplementryView supplementaryViewType](CKSearchAvatarSupplementryView, "supplementaryViewType");
+  v27 = (void *)objc_claimAutoreleasedReturnValue();
+  +[CKSearchAvatarSupplementryView reuseIdentifier](CKSearchAvatarSupplementryView, "reuseIdentifier");
+  v28 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(v8, "dequeueReusableSupplementaryViewOfKind:withReuseIdentifier:forIndexPath:", v27, v28, v9);
+  v15 = (void *)objc_claimAutoreleasedReturnValue();
+
+  v29 = objc_msgSend(v9, "row");
+  -[CKSearchController results](self, "results");
+  v30 = (void *)objc_claimAutoreleasedReturnValue();
+  v31 = objc_msgSend(v30, "count");
+
+  if (v29 < v31)
+  {
+    -[CKSearchController results](self, "results");
+    v32 = (void *)objc_claimAutoreleasedReturnValue();
+    objc_msgSend(v32, "objectAtIndex:", objc_msgSend(v9, "row"));
+    v24 = (void *)objc_claimAutoreleasedReturnValue();
+
+    +[CKSpotlightQueryResultUtilities contactForResult:](CKSpotlightQueryResultUtilities, "contactForResult:", v24);
+    v33 = (void *)objc_claimAutoreleasedReturnValue();
+    objc_msgSend(v15, "setContact:", v33);
+    objc_msgSend(v15, "setAssociatedResult:", v24);
+    objc_msgSend(v15, "setParentContentType:", 2);
+
+LABEL_9:
+  }
+LABEL_11:
+
+  return v15;
+}
+
+- (void)updateSupplementryViewIfNeeded:(id)a3 atIndexPath:(id)a4
+{
+  id v6;
+  id v7;
+  unint64_t v8;
+  void *v9;
+  unint64_t v10;
+  void *v11;
+  void *v12;
+  void *v13;
+  char v14;
+  void *v15;
+  id v16;
+
+  v6 = a3;
+  v7 = a4;
+  v16 = v6;
+  v8 = objc_msgSend(v7, "row");
+  -[CKSearchController results](self, "results");
+  v9 = (void *)objc_claimAutoreleasedReturnValue();
+  v10 = objc_msgSend(v9, "count");
+
+  if (v8 >= v10)
+  {
+    v12 = 0;
+  }
+  else
+  {
+    -[CKSearchController results](self, "results");
+    v11 = (void *)objc_claimAutoreleasedReturnValue();
+    objc_msgSend(v11, "objectAtIndex:", objc_msgSend(v7, "row"));
+    v12 = (void *)objc_claimAutoreleasedReturnValue();
+
+    objc_msgSend(v16, "associatedResult");
+    v13 = (void *)objc_claimAutoreleasedReturnValue();
+    v14 = objc_msgSend(v12, "isEqual:", v13);
+
+    if ((v14 & 1) == 0)
+    {
+      +[CKSpotlightQueryResultUtilities contactForResult:](CKSpotlightQueryResultUtilities, "contactForResult:", v12);
+      v15 = (void *)objc_claimAutoreleasedReturnValue();
+      objc_msgSend(v16, "setContact:", v15);
+      objc_msgSend(v16, "setAssociatedResult:", v12);
+      objc_msgSend(v16, "setNeedsLayout");
+
+    }
+  }
+
+}
+
+- (id)itemProviderForSearchResult:(id)a3
+{
+  id v4;
+  void *v5;
+  void *v6;
+  void *v7;
+  NSObject *v8;
+  uint8_t v10[16];
+
+  v4 = a3;
+  if (v4)
+  {
+    +[CKSpotlightQueryResultUtilities indexItemTypeForResult:](CKSpotlightQueryResultUtilities, "indexItemTypeForResult:", v4);
+    v5 = (void *)objc_claimAutoreleasedReturnValue();
+    if (objc_msgSend(v5, "isEqualToString:", CFSTR("lnk")))
+    {
+      -[CKCollaborationSearchController linksController](self, "linksController");
+      v6 = (void *)objc_claimAutoreleasedReturnValue();
+      objc_msgSend(v6, "itemProviderForSearchResult:", v4);
+      v7 = (void *)objc_claimAutoreleasedReturnValue();
+
+    }
+    else
+    {
+      v7 = 0;
+    }
+
+  }
+  else
+  {
+    if (IMOSLoggingEnabled())
+    {
+      OSLogHandleForIMFoundationCategory();
+      v8 = objc_claimAutoreleasedReturnValue();
+      if (os_log_type_enabled(v8, OS_LOG_TYPE_INFO))
+      {
+        *(_WORD *)v10 = 0;
+        _os_log_impl(&dword_18DFCD000, v8, OS_LOG_TYPE_INFO, "Unexpected nil search result when trying to create NSItemProvider for link", v10, 2u);
+      }
+
+    }
+    v7 = 0;
+  }
+
+  return v7;
+}
+
+- (id)_activityItemProviderForResult:(id)a3
+{
+  id v4;
+  void *v5;
+  void *v6;
+  void *v7;
+
+  v4 = a3;
+  +[CKSpotlightQueryResultUtilities indexItemTypeForResult:](CKSpotlightQueryResultUtilities, "indexItemTypeForResult:", v4);
+  v5 = (void *)objc_claimAutoreleasedReturnValue();
+  if (objc_msgSend(v5, "isEqualToString:", CFSTR("lnk")))
+  {
+    -[CKCollaborationSearchController linksController](self, "linksController");
+    v6 = (void *)objc_claimAutoreleasedReturnValue();
+    objc_msgSend(v6, "_activityItemProviderForResult:", v4);
+    v7 = (void *)objc_claimAutoreleasedReturnValue();
+
+  }
+  else
+  {
+    v7 = 0;
+  }
+
+  return v7;
+}
+
+- (BOOL)handleSelectionForResult:(id)a3
+{
+  id v4;
+  void *v5;
+  void *v6;
+  char v7;
+
+  v4 = a3;
+  +[CKSpotlightQueryResultUtilities indexItemTypeForResult:](CKSpotlightQueryResultUtilities, "indexItemTypeForResult:", v4);
+  v5 = (void *)objc_claimAutoreleasedReturnValue();
+  if (objc_msgSend(v5, "isEqualToString:", CFSTR("lnk")))
+  {
+    -[CKCollaborationSearchController linksController](self, "linksController");
+    v6 = (void *)objc_claimAutoreleasedReturnValue();
+    v7 = objc_msgSend(v6, "handleSelectionForResult:", v4);
+
+  }
+  else
+  {
+    v7 = 0;
+  }
+
+  return v7;
+}
+
+- (id)createFoundItemsHandler
+{
+  void *v2;
+  _QWORD v4[4];
+  id v5;
+  id location;
+
+  location = 0;
+  objc_initWeak(&location, self);
+  v4[0] = MEMORY[0x1E0C809B0];
+  v4[1] = 3221225472;
+  v4[2] = __58__CKCollaborationSearchController_createFoundItemsHandler__block_invoke;
+  v4[3] = &unk_1E274DBB0;
+  objc_copyWeak(&v5, &location);
+  v2 = _Block_copy(v4);
+  objc_destroyWeak(&v5);
+  objc_destroyWeak(&location);
+  return v2;
+}
+
+void __58__CKCollaborationSearchController_createFoundItemsHandler__block_invoke(uint64_t a1, void *a2)
+{
+  id v3;
+  id *v4;
+  id WeakRetained;
+  char v6;
+  id v7;
+  id v8;
+  uint64_t v9;
+  uint64_t v10;
+  void *v11;
+  uint64_t v12;
+  uint64_t i;
+  uint64_t v14;
+  void *v15;
+  id v16;
+  void *v17;
+  id v18;
+  void *v19;
+  void *v20;
+  id v21;
+  id *location;
+  __int128 v23;
+  __int128 v24;
+  __int128 v25;
+  __int128 v26;
+  _BYTE v27[128];
+  uint64_t v28;
+
+  v28 = *MEMORY[0x1E0C80C00];
+  v3 = a2;
+  v4 = (id *)(a1 + 32);
+  WeakRetained = objc_loadWeakRetained(v4);
+  v6 = objc_msgSend(WeakRetained, "searchTerminated");
+
+  if ((v6 & 1) == 0)
+  {
+    location = v4;
+    v7 = objc_loadWeakRetained(v4);
+    objc_msgSend(v7, "setGotResults:", 1);
+
+    v25 = 0u;
+    v26 = 0u;
+    v23 = 0u;
+    v24 = 0u;
+    v8 = v3;
+    v9 = objc_msgSend(v8, "countByEnumeratingWithState:objects:count:", &v23, v27, 16);
+    if (v9)
+    {
+      v10 = v9;
+      v11 = 0;
+      v12 = *(_QWORD *)v24;
+      do
+      {
+        for (i = 0; i != v10; ++i)
+        {
+          if (*(_QWORD *)v24 != v12)
+            objc_enumerationMutation(v8);
+          v14 = *(_QWORD *)(*((_QWORD *)&v23 + 1) + 8 * i);
+          +[CKSpotlightQueryResultUtilities indexItemTypeForItem:](CKSpotlightQueryResultUtilities, "indexItemTypeForItem:", v14, location);
+          v15 = (void *)objc_claimAutoreleasedReturnValue();
+          if ((objc_msgSend(v15, "isEqualToString:", CFSTR("lnk")) & 1) != 0
+            || objc_msgSend(v15, "isEqualToString:", CFSTR("at")))
+          {
+            if (!v11)
+            {
+              objc_msgSend(MEMORY[0x1E0C99DE8], "array");
+              v11 = (void *)objc_claimAutoreleasedReturnValue();
+            }
+            objc_msgSend(v11, "addObject:", v14);
+          }
+
+        }
+        v10 = objc_msgSend(v8, "countByEnumeratingWithState:objects:count:", &v23, v27, 16);
+      }
+      while (v10);
+    }
+    else
+    {
+      v11 = 0;
+    }
+
+    v16 = objc_loadWeakRetained(location);
+    objc_msgSend(v16, "intermediaryResults");
+    v17 = (void *)objc_claimAutoreleasedReturnValue();
+    if (v17)
+    {
+      v18 = objc_loadWeakRetained(location);
+      objc_msgSend(v18, "intermediaryResults");
+      v19 = (void *)objc_claimAutoreleasedReturnValue();
+
+    }
+    else
+    {
+      objc_msgSend(MEMORY[0x1E0C99E60], "set");
+      v19 = (void *)objc_claimAutoreleasedReturnValue();
+    }
+
+    objc_msgSend(v19, "setByAddingObjectsFromArray:", v11);
+    v20 = (void *)objc_claimAutoreleasedReturnValue();
+
+    v21 = objc_loadWeakRetained(location);
+    objc_msgSend(v21, "setIntermediaryResults:", v20);
+
+  }
+}
+
+- (id)_additionalMenuElementsForResult:(id)a3
+{
+  id v4;
+  void *v5;
+  void *v6;
+  void *v7;
+  void *v8;
+  void *v9;
+  void *v10;
+  void *v11;
+  id v12;
+  void *v13;
+  void *v14;
+  void *v15;
+  void *v16;
+  _QWORD v18[4];
+  id v19;
+  id v20;
+  id location;
+
+  v4 = a3;
+  +[CKSpotlightQueryResultUtilities indexItemTypeForResult:](CKSpotlightQueryResultUtilities, "indexItemTypeForResult:", v4);
+  v5 = (void *)objc_claimAutoreleasedReturnValue();
+  if (objc_msgSend(v5, "isEqualToString:", CFSTR("lnk")))
+  {
+    -[CKCollaborationSearchController linksController](self, "linksController");
+    v6 = (void *)objc_claimAutoreleasedReturnValue();
+    objc_msgSend(v6, "_additionalMenuElementsForResult:", v4);
+    v7 = (void *)objc_claimAutoreleasedReturnValue();
+
+  }
+  else
+  {
+    v7 = (void *)MEMORY[0x1E0C9AA60];
+  }
+  location = 0;
+  objc_initWeak(&location, self);
+  v8 = (void *)MEMORY[0x1E0CEA2A8];
+  CKFrameworkBundle();
+  v9 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(v9, "localizedStringForKey:value:table:", CFSTR("HIDE_DETAILS"), &stru_1E276D870, CFSTR("ChatKit"));
+  v10 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(MEMORY[0x1E0CEA638], "systemImageNamed:", CFSTR("minus.circle"));
+  v11 = (void *)objc_claimAutoreleasedReturnValue();
+  v18[0] = MEMORY[0x1E0C809B0];
+  v18[1] = 3221225472;
+  v18[2] = __68__CKCollaborationSearchController__additionalMenuElementsForResult___block_invoke;
+  v18[3] = &unk_1E274B010;
+  objc_copyWeak(&v20, &location);
+  v12 = v4;
+  v19 = v12;
+  objc_msgSend(v8, "actionWithTitle:image:identifier:handler:", v10, v11, CFSTR("ckHideMenuItem"), v18);
+  v13 = (void *)objc_claimAutoreleasedReturnValue();
+
+  CKFrameworkBundle();
+  v14 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(v14, "localizedStringForKey:value:table:", CFSTR("HIDE_DETAILS"), &stru_1E276D870, CFSTR("ChatKit"));
+  v15 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(v13, "setTitle:", v15);
+
+  objc_msgSend(v7, "arrayByAddingObject:", v13);
+  v16 = (void *)objc_claimAutoreleasedReturnValue();
+
+  objc_destroyWeak(&v20);
+  objc_destroyWeak(&location);
+
+  return v16;
+}
+
+void __68__CKCollaborationSearchController__additionalMenuElementsForResult___block_invoke(uint64_t a1)
+{
+  id WeakRetained;
+
+  WeakRetained = objc_loadWeakRetained((id *)(a1 + 40));
+  objc_msgSend(WeakRetained, "sendSyndicationActionForResult:actionType:", *(_QWORD *)(a1 + 32), 16);
+
+}
+
+- (void)deleteAttachmentForResult:(id)a3
+{
+  id v4;
+  void *v5;
+  void *v6;
+  void *v7;
+  id v8;
+  _QWORD v9[5];
+  id v10;
+
+  v4 = a3;
+  objc_msgSend(v4, "item");
+  v5 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(v5, "uniqueIdentifier");
+  v6 = (void *)objc_claimAutoreleasedReturnValue();
+
+  objc_msgSend(MEMORY[0x1E0D35788], "sharedInstance");
+  v7 = (void *)objc_claimAutoreleasedReturnValue();
+  v9[0] = MEMORY[0x1E0C809B0];
+  v9[1] = 3221225472;
+  v9[2] = __61__CKCollaborationSearchController_deleteAttachmentForResult___block_invoke;
+  v9[3] = &unk_1E274B9F0;
+  v9[4] = self;
+  v10 = v4;
+  v8 = v4;
+  objc_msgSend(v7, "loadMessageItemWithGUID:completionBlock:", v6, v9);
+
+}
+
+void __61__CKCollaborationSearchController_deleteAttachmentForResult___block_invoke(uint64_t a1, void *a2)
+{
+  void *v3;
+  uint64_t v4;
+  id v5;
+  void *v6;
+  id v7;
+
+  v3 = *(void **)(a1 + 32);
+  v4 = *(_QWORD *)(a1 + 40);
+  v5 = a2;
+  objc_msgSend(v3, "removeResult:", v4);
+  objc_msgSend(*(id *)(a1 + 32), "delegate");
+  v6 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(v6, "searchControllerContentsDidChange:", *(_QWORD *)(a1 + 32));
+
+  objc_msgSend(*(id *)(a1 + 32), "delegate");
+  v7 = (id)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(v7, "deleteMessageItem:", v5);
+
+}
+
+- (BOOL)shouldStartMenuInteractionForResult:(id)a3
+{
+  void *v3;
+  void *v4;
+  id v5;
+  void *v6;
+  void *v7;
+  uint64_t v8;
+  void *v9;
+  uint64_t v10;
+  void *v11;
+  uint64_t v12;
+  void *v13;
+  uint64_t v14;
+  void *v15;
+  BOOL v16;
+
+  objc_msgSend(a3, "item");
+  v3 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(v3, "attributeSet");
+  v4 = (void *)objc_claimAutoreleasedReturnValue();
+
+  objc_msgSend(v4, "URL");
+  v5 = (id)objc_claimAutoreleasedReturnValue();
+  if (v5)
+  {
+    v6 = (void *)objc_msgSend(objc_alloc(MEMORY[0x1E0CB3998]), "initWithURL:resolvingAgainstBaseURL:", v5, 0);
+    objc_msgSend(v6, "host");
+    v7 = (void *)objc_claimAutoreleasedReturnValue();
+    v8 = objc_msgSend(v7, "caseInsensitiveCompare:", CFSTR("itunes.apple.com"));
+
+    if (!v8)
+      goto LABEL_7;
+    objc_msgSend(v6, "host");
+    v9 = (void *)objc_claimAutoreleasedReturnValue();
+    v10 = objc_msgSend(v9, "caseInsensitiveCompare:", CFSTR("itunes.com"));
+
+    if (!v10)
+      goto LABEL_7;
+    objc_msgSend(v6, "host");
+    v11 = (void *)objc_claimAutoreleasedReturnValue();
+    v12 = objc_msgSend(v11, "caseInsensitiveCompare:", CFSTR("itun.es"));
+
+    if (!v12)
+      goto LABEL_7;
+    objc_msgSend(v6, "host");
+    v13 = (void *)objc_claimAutoreleasedReturnValue();
+    v14 = objc_msgSend(v13, "caseInsensitiveCompare:", CFSTR("appsto.re"));
+
+    if (v14)
+    {
+      objc_msgSend(v5, "iCloudSharingURL_noFragment");
+      v15 = (void *)objc_claimAutoreleasedReturnValue();
+
+      v16 = v15 != 0;
+    }
+    else
+    {
+LABEL_7:
+      v16 = 1;
+    }
+
+  }
+  else
+  {
+    v16 = 0;
+  }
+
+  return !v16;
+}
+
+- (id)previewViewControllerForResult:(id)a3
+{
+  id v4;
+  void *v5;
+  void *v6;
+  void *v7;
+
+  v4 = a3;
+  +[CKSpotlightQueryResultUtilities indexItemTypeForResult:](CKSpotlightQueryResultUtilities, "indexItemTypeForResult:", v4);
+  v5 = (void *)objc_claimAutoreleasedReturnValue();
+  if (objc_msgSend(v5, "isEqualToString:", CFSTR("lnk")))
+  {
+    -[CKCollaborationSearchController linksController](self, "linksController");
+    v6 = (void *)objc_claimAutoreleasedReturnValue();
+    objc_msgSend(v6, "previewViewControllerForResult:", v4);
+    v7 = (void *)objc_claimAutoreleasedReturnValue();
+
+  }
+  else
+  {
+    v7 = 0;
+  }
+
+  return v7;
+}
+
+- (id)linksController
+{
+  return objc_alloc_init(CKLinkSearchController);
+}
+
+- (id)chatGUIDForSearchableItem:(id)a3
+{
+  void *v3;
+  void *v4;
+
+  objc_msgSend(a3, "attributeSet");
+  v3 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(v3, "domainIdentifier");
+  v4 = (void *)objc_claimAutoreleasedReturnValue();
+
+  return v4;
+}
+
+@end

@@ -1,0 +1,66 @@
+@implementation EmojiGreyscaleReplicatorViewController
+
+- (void)viewDidLoad
+{
+  _TtC11EmojiPoster38EmojiGreyscaleReplicatorViewController *v2;
+
+  v2 = self;
+  sub_1DD2F8468();
+
+}
+
+- (void)adjustScaleWithGesture:(id)a3
+{
+  id v4;
+  _TtC11EmojiPoster38EmojiGreyscaleReplicatorViewController *v5;
+
+  v4 = a3;
+  v5 = self;
+  sub_1DD2F939C(v4);
+
+}
+
+- (_TtC11EmojiPoster38EmojiGreyscaleReplicatorViewController)initWithNibName:(id)a3 bundle:(id)a4
+{
+  uint64_t v5;
+  uint64_t v6;
+  uint64_t v7;
+  id v8;
+
+  if (a3)
+  {
+    v5 = sub_1DD2F9DE4();
+    v7 = v6;
+  }
+  else
+  {
+    v5 = 0;
+    v7 = 0;
+  }
+  v8 = a4;
+  return (_TtC11EmojiPoster38EmojiGreyscaleReplicatorViewController *)EmojiGreyscaleReplicatorViewController.init(nibName:bundle:)(v5, v7, a4);
+}
+
+- (_TtC11EmojiPoster38EmojiGreyscaleReplicatorViewController)initWithCoder:(id)a3
+{
+  return (_TtC11EmojiPoster38EmojiGreyscaleReplicatorViewController *)EmojiGreyscaleReplicatorViewController.init(coder:)(a3);
+}
+
+- (void).cxx_destruct
+{
+  swift_bridgeObjectRelease();
+  objc_release(*(id *)((char *)&self->super.super.super.isa
+                     + OBJC_IVAR____TtC11EmojiPoster38EmojiGreyscaleReplicatorViewController_emojiLayer));
+  objc_release(*(id *)((char *)&self->super.super.super.isa
+                     + OBJC_IVAR____TtC11EmojiPoster38EmojiGreyscaleReplicatorViewController_secondaryEmojiLayer));
+  objc_release(*(id *)((char *)&self->super.super.super.isa
+                     + OBJC_IVAR____TtC11EmojiPoster38EmojiGreyscaleReplicatorViewController_horizontalReplicatorLayer));
+  objc_release(*(id *)((char *)&self->super.super.super.isa
+                     + OBJC_IVAR____TtC11EmojiPoster38EmojiGreyscaleReplicatorViewController_offsetHorizontalReplicatorLayer));
+  objc_release(*(id *)((char *)&self->super.super.super.isa
+                     + OBJC_IVAR____TtC11EmojiPoster38EmojiGreyscaleReplicatorViewController_verticalReplicatorLayer));
+  objc_release(*(id *)((char *)&self->super.super.super.isa
+                     + OBJC_IVAR____TtC11EmojiPoster38EmojiGreyscaleReplicatorViewController_offsetVerticalReplicatorLayer));
+}
+
+@end

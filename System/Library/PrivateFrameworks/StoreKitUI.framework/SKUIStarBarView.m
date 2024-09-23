@@ -1,0 +1,377 @@
+@implementation SKUIStarBarView
+
+- (SKUIStarBarView)initWithFrame:(CGRect)a3
+{
+  double height;
+  double width;
+  double y;
+  double x;
+  SKUIStarBarView *v8;
+  uint64_t v9;
+  UIColor *emptyColor;
+  uint64_t v11;
+  UIColor *filledColor;
+  objc_super v14;
+
+  height = a3.size.height;
+  width = a3.size.width;
+  y = a3.origin.y;
+  x = a3.origin.x;
+  if (os_variant_has_internal_content()
+    && _os_feature_enabled_impl()
+    && os_log_type_enabled(MEMORY[0x1E0C81028], OS_LOG_TYPE_FAULT))
+  {
+    -[SKUIStarBarView initWithFrame:].cold.1();
+  }
+  v14.receiver = self;
+  v14.super_class = (Class)SKUIStarBarView;
+  v8 = -[SKUIStarBarView initWithFrame:](&v14, sel_initWithFrame_, x, y, width, height);
+  if (v8)
+  {
+    objc_msgSend(MEMORY[0x1E0DC3658], "colorWithWhite:alpha:", 0.0, 0.05);
+    v9 = objc_claimAutoreleasedReturnValue();
+    emptyColor = v8->_emptyColor;
+    v8->_emptyColor = (UIColor *)v9;
+
+    objc_msgSend(MEMORY[0x1E0DC3658], "colorWithWhite:alpha:", 0.517647059, 1.0);
+    v11 = objc_claimAutoreleasedReturnValue();
+    filledColor = v8->_filledColor;
+    v8->_filledColor = (UIColor *)v11;
+
+    -[SKUIStarBarView setContentMode:](v8, "setContentMode:", 3);
+  }
+  return v8;
+}
+
+- (void)setColoringUsingStyle:(id)a3
+{
+  id v4;
+  void *v5;
+  void *v6;
+  void *v7;
+  unint64_t v8;
+  void *v9;
+  void *v10;
+  void *v11;
+  id v12;
+
+  v4 = a3;
+  objc_msgSend(v4, "ikBackgroundColor");
+  v5 = (void *)objc_claimAutoreleasedReturnValue();
+  objc_msgSend(v5, "color");
+  v12 = (id)objc_claimAutoreleasedReturnValue();
+
+  objc_msgSend(v4, "ikColor");
+  v6 = (void *)objc_claimAutoreleasedReturnValue();
+
+  objc_msgSend(v6, "color");
+  v7 = (void *)objc_claimAutoreleasedReturnValue();
+
+  if (v12 && v7)
+  {
+    -[SKUIStarBarView setEmptyColor:](self, "setEmptyColor:", v12);
+  }
+  else
+  {
+    if (!v7)
+    {
+      objc_msgSend(MEMORY[0x1E0DC3658], "colorWithWhite:alpha:", 0.0, 0.05);
+      v10 = (void *)objc_claimAutoreleasedReturnValue();
+      -[SKUIStarBarView setEmptyColor:](self, "setEmptyColor:", v10);
+
+      objc_msgSend(MEMORY[0x1E0DC3658], "colorWithWhite:alpha:", 0.517647059, 1.0);
+      v11 = (void *)objc_claimAutoreleasedReturnValue();
+      -[SKUIStarBarView setFilledColor:](self, "setFilledColor:", v11);
+
+      goto LABEL_8;
+    }
+    v8 = SKUIColorSchemeStyleForColor(v7);
+    if (v8 <= 3)
+    {
+      objc_msgSend(v7, "colorWithAlphaComponent:", dbl_1BBED2420[v8]);
+      v9 = (void *)objc_claimAutoreleasedReturnValue();
+      -[SKUIStarBarView setEmptyColor:](self, "setEmptyColor:", v9);
+
+    }
+  }
+  -[SKUIStarBarView setFilledColor:](self, "setFilledColor:", v7);
+LABEL_8:
+
+}
+
+- (void)setEmptyColor:(id)a3
+{
+  UIColor *v4;
+  UIColor *emptyColor;
+  UIImage *emptyStarImage;
+  UIImage *filledStarImage;
+
+  if (self->_emptyColor != a3)
+  {
+    v4 = (UIColor *)objc_msgSend(a3, "copy");
+    emptyColor = self->_emptyColor;
+    self->_emptyColor = v4;
+
+    emptyStarImage = self->_emptyStarImage;
+    self->_emptyStarImage = 0;
+
+    filledStarImage = self->_filledStarImage;
+    self->_filledStarImage = 0;
+
+    -[SKUIStarBarView setNeedsDisplay](self, "setNeedsDisplay");
+  }
+}
+
+- (void)setFilledColor:(id)a3
+{
+  UIColor *v4;
+  UIColor *filledColor;
+  UIImage *emptyStarImage;
+  UIImage *filledStarImage;
+
+  if (self->_filledColor != a3)
+  {
+    v4 = (UIColor *)objc_msgSend(a3, "copy");
+    filledColor = self->_filledColor;
+    self->_filledColor = v4;
+
+    emptyStarImage = self->_emptyStarImage;
+    self->_emptyStarImage = 0;
+
+    filledStarImage = self->_filledStarImage;
+    self->_filledStarImage = 0;
+
+    -[SKUIStarBarView setNeedsDisplay](self, "setNeedsDisplay");
+  }
+}
+
+- (void)setNumberOfStars:(int64_t)a3
+{
+  if (self->_numberOfStars != a3)
+  {
+    self->_numberOfStars = a3;
+    -[SKUIStarBarView setNeedsDisplay](self, "setNeedsDisplay");
+  }
+}
+
+- (void)setValue:(double)a3
+{
+  if (self->_value != a3)
+  {
+    self->_value = a3;
+    -[SKUIStarBarView setNeedsDisplay](self, "setNeedsDisplay");
+  }
+}
+
+- (void)drawRect:(CGRect)a3
+{
+  double v4;
+  CGFloat v5;
+  double v6;
+  CGFloat v7;
+  double v8;
+  double v9;
+  double v10;
+  double v11;
+  int ShouldReverseLayoutDirection;
+  UIColor *emptyColor;
+  UIColor *v14;
+  UIColor *filledColor;
+  UIColor *v16;
+  UIColor *v17;
+  void *v18;
+  void *v19;
+  void *v20;
+  UIImage *v21;
+  UIImage *emptyStarImage;
+  UIImage *v23;
+  UIImage *filledStarImage;
+  double v25;
+  double Width;
+  double v27;
+  uint64_t v28;
+  UIImage *v29;
+  UIImage *v30;
+  double v31;
+  double v32;
+  double v33;
+  double v35;
+  double v36;
+  double v37;
+  double v38;
+  float v39;
+  double v40;
+  void *v41;
+  CGContext *CurrentContext;
+  double value;
+  double v44;
+  double v45;
+  double v46;
+  double v47;
+  UIColor *v48;
+  CGRect v49;
+
+  -[SKUIStarBarView bounds](self, "bounds", a3.origin.x, a3.origin.y, a3.size.width, a3.size.height);
+  v5 = v4;
+  v7 = v6;
+  v9 = v8;
+  v11 = v10;
+  ShouldReverseLayoutDirection = storeShouldReverseLayoutDirection();
+  emptyColor = self->_emptyColor;
+  if (emptyColor)
+  {
+    v14 = emptyColor;
+  }
+  else
+  {
+    objc_msgSend(MEMORY[0x1E0DC3658], "colorWithWhite:alpha:", 0.0, 0.05);
+    v14 = (UIColor *)objc_claimAutoreleasedReturnValue();
+  }
+  v48 = v14;
+  filledColor = self->_filledColor;
+  if (filledColor)
+  {
+    v16 = filledColor;
+  }
+  else
+  {
+    objc_msgSend(MEMORY[0x1E0DC3658], "colorWithWhite:alpha:", 0.517647059, 1.0);
+    v16 = (UIColor *)objc_claimAutoreleasedReturnValue();
+  }
+  v17 = v16;
+  if (!self->_emptyStarImage)
+  {
+    v18 = (void *)MEMORY[0x1E0DC3870];
+    SKUIBundle();
+    v19 = (void *)objc_claimAutoreleasedReturnValue();
+    objc_msgSend(v18, "imageNamed:inBundle:", CFSTR("SmallStarFull"), v19);
+    v20 = (void *)objc_claimAutoreleasedReturnValue();
+
+    objc_msgSend(v20, "_flatImageWithColor:", v48);
+    v21 = (UIImage *)objc_claimAutoreleasedReturnValue();
+    emptyStarImage = self->_emptyStarImage;
+    self->_emptyStarImage = v21;
+
+    objc_msgSend(v20, "_flatImageWithColor:", v17);
+    v23 = (UIImage *)objc_claimAutoreleasedReturnValue();
+    filledStarImage = self->_filledStarImage;
+    self->_filledStarImage = v23;
+
+  }
+  v25 = 0.0;
+  if (ShouldReverseLayoutDirection)
+  {
+    v49.origin.x = v5;
+    v49.origin.y = v7;
+    v49.size.width = v9;
+    v49.size.height = v11;
+    Width = CGRectGetWidth(v49);
+    -[UIImage size](self->_emptyStarImage, "size");
+    v25 = Width - v27;
+  }
+  v28 = -5;
+  do
+  {
+    v29 = self->_emptyStarImage;
+    if (v28 + 6 > 5 - self->_numberOfStars)
+    {
+      v30 = self->_filledStarImage;
+
+      v29 = v30;
+    }
+    -[UIImage size](v29, "size");
+    v32 = v31;
+    *(float *)&v31 = (v11 - v33) * 0.5;
+    -[UIImage drawAtPoint:](v29, "drawAtPoint:", v25, floorf(*(float *)&v31));
+    if (__CFADD__(v28++, 1))
+      v35 = 0.0;
+    else
+      v35 = v32;
+    v36 = -v35;
+    if (!ShouldReverseLayoutDirection)
+      v36 = v32;
+    v25 = v25 + v36;
+
+  }
+  while (v28);
+  v37 = 0.0;
+  if (ShouldReverseLayoutDirection)
+  {
+    v38 = v25 + -9.0;
+  }
+  else
+  {
+    v37 = v25 + 9.0;
+    v38 = v9 - (v25 + 9.0);
+  }
+  v39 = (v11 + -2.0) * 0.5;
+  v40 = floorf(v39);
+  objc_msgSend(MEMORY[0x1E0DC3508], "bezierPathWithRoundedRect:cornerRadius:", v37, v40, v38, 2.0, 2.0);
+  v41 = (void *)objc_claimAutoreleasedReturnValue();
+  -[UIColor set](v48, "set");
+  objc_msgSend(v41, "fill");
+  CurrentContext = UIGraphicsGetCurrentContext();
+  CGContextSaveGState(CurrentContext);
+  value = self->_value;
+  v44 = v25 + -9.0 - (v25 + -9.0) * value;
+  if (!ShouldReverseLayoutDirection)
+    v44 = v25 + 9.0;
+  v45 = v38 * value;
+  v46 = 2.0;
+  v47 = v40;
+  CGContextClipToRect(CurrentContext, *(CGRect *)&v44);
+  -[UIColor set](v17, "set");
+  objc_msgSend(v41, "fill");
+  CGContextRestoreGState(CurrentContext);
+
+}
+
+- (CGSize)sizeThatFits:(CGSize)result
+{
+  double v3;
+
+  v3 = 14.0;
+  result.height = v3;
+  return result;
+}
+
+- (UIColor)emptyColor
+{
+  return self->_emptyColor;
+}
+
+- (int64_t)numberOfStars
+{
+  return self->_numberOfStars;
+}
+
+- (double)value
+{
+  return self->_value;
+}
+
+- (UIColor)filledColor
+{
+  return self->_filledColor;
+}
+
+- (void).cxx_destruct
+{
+  objc_storeStrong((id *)&self->_filledStarImage, 0);
+  objc_storeStrong((id *)&self->_filledColor, 0);
+  objc_storeStrong((id *)&self->_emptyStarImage, 0);
+  objc_storeStrong((id *)&self->_emptyColor, 0);
+}
+
+- (void)initWithFrame:.cold.1()
+{
+  int v0;
+  const char *v1;
+  uint64_t v2;
+
+  v2 = *MEMORY[0x1E0C80C00];
+  v0 = 136446210;
+  v1 = "-[SKUIStarBarView initWithFrame:]";
+}
+
+@end

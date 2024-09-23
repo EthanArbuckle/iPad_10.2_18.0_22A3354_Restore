@@ -1,0 +1,8 @@
+@implementation SBAccessibilityWindowHostingControllerServerTargetThreadDictionaryKey
+
+uint64_t ___SBAccessibilityWindowHostingControllerServerTargetThreadDictionaryKey_block_invoke()
+{
+  return pthread_key_create((pthread_key_t *)&_SBAccessibilityWindowHostingControllerServerTargetThreadDictionaryKey_sSBAccessibilityWindowHostingControllerServerTargetThreadDictionaryKey, 0);
+}
+
+@end
